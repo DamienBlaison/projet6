@@ -1,0 +1,49 @@
+<?php
+
+namespace Kalaweit\View\Member\Member;
+
+class Member_info
+{
+    public function render($param){
+
+        $member_info  = '';
+        $member_info .= '<form name="member" class="container-fluid" action="" method="post" style="min-height: 1100px;">';
+        $member_info .=    '</br>';
+        $member_info .=    '<input type="text" name="num_form" value="1" class="hidden">';
+        $member_info .=    '<div class="row">';
+        $member_info .=       ' <div class="col-md-6">';
+        $member_info .=            '<div class="col-md-12">';
+        $member_info .=                 ($param["box_info_member"])->render();
+        $member_info .=            '</div>';
+        $member_info .=            '<div class="col-md-12">';
+        $member_info .=                 ($param["box_info_donator"])->render();
+        $member_info .=            '</div>';
+        $member_info .=            '<div class="col-md-12">';
+        $member_info .=                ($param["box_other_info"])->render();
+        $member_info .=           ' </div>';
+        $member_info .=        '</div>';
+        $member_info .=        '<div class="col-md-6">';
+        $member_info .=            ($param["box_cli_data"])->render();
+        $member_info .=       ' </div>';
+        $member_info .=       ' <div class="col-md-12">';
+        $member_info .=            '<div class="col-md-12">';
+        $member_info .=                ($param["box_cli_comment"])->render();
+        $member_info .=            '</div>';
+        $member_info .=            '<div class="col-md-4">';
+        $member_info .=               ' <button type="submit" class="btn btn-block btn-success btn-lg">Enregistrer</button>';
+        $member_info .=           '</div>';
+        $member_info .=           '<div class="col-md-4">';
+        $member_info .=                '<a href="http://localhost:8888/www/Kalaweit/member/add"><button type="button" class="btn btn-block btn-primary btn-lg">Nouveau</button></a>';
+        $member_info .=            '</div>';
+        $member_info .=            '<div class="col-md-4">';
+        $member_info .=               ' <a href="indexphp"><button type="button" class="btn btn-block btn-danger btn-lg">Annuler</button></a>';
+        $member_info .=            '</div>';
+        $member_info .=        '</div>';
+        $member_info .=    '</div>';
+        $member_info .='</form>';
+
+        return $member_info;
+
+    }
+
+}

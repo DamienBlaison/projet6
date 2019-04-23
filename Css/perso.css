@@ -1,0 +1,16 @@
+*
+{
+    -webkit-appearance: none;"
+}
+
+.avatar_user_admin
+{
+    width: 100%;
+    margin-top:10px;
+    margin-bottom: 8px;
+    margin-leff:50px;
+    padding: 3px;
+    border: 4px solid #d2d6de;
+    border-radius: 50%;
+
+}

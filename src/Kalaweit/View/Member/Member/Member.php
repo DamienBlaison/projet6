@@ -1,0 +1,57 @@
+<?php
+
+namespace Kalaweit\View\Member\Member;
+
+/**
+ *
+ */
+class Member
+{
+
+    function render($p_render){
+
+        require_once( __DIR__ .'/../../head.php');
+
+        $render  = '';
+        $render .= '<div class="container-fluid" style="padding-left:0px;">';
+        $render .= '<section class="content">';
+        $render .= '<div class="nav-tabs-custom">';
+        $render .= '    <ul class="nav nav-tabs">';
+        $render .= '        <li id="tab_pane_1" class="active"><a href="#tab1" data-toggle="tab" aria-expanded="true">Informations générales</a></li>';
+        $render .= '        <li id="tab_pane_2" class=""><a href="#tab2" data-toggle="tab" aria-expanded="false">Dons</a></li>';
+        $render .= '        <li id="tab_pane_3" class=""><a href="#tab3" data-toggle="tab" aria-expanded="false">Divers</a></li>';
+        $render .= '    </ul>';
+        $render .= '<div class="tab-content col-md-12">';
+        $render .= '    <div class="tab-pane active" id="tab1">'.$p_render["content_tab1"].' </div>';
+        $render .= '    <div class="tab-pane " id="tab2">';
+        $render .=          $p_render["content_tab2"];
+        $render .= '    </div>';
+        $render .= '    <div class="tab-pane " id="tab3">'.$p_render["content_tab3"].'</div>';
+        $render .= '</div>';
+        $render .= '</section>';
+        $render .= '</div>';
+
+        echo $render;
+
+        require_once( __DIR__ .'/../../footer.php');
+
+        echo '<script src="/src/Kalaweit/View/Member/Member/Member.js"></script>';
+
+        $previous_url = explode('?',$_SERVER['HTTP_REFERER']);
+
+        if ( ($previous_url[0] == 'http://localhost:8888/www/Kalaweit/asso_donation/update') || ($previous_url[0] == 'http://localhost:8888/www/Kalaweit/member/get') )
+
+            {
+
+                echo "<script>
+
+                    document.getElementById('tab_pane_1').className = \" \";
+                    document.getElementById('tab_pane_2').className = \"active\";
+                    document.getElementById('tab1').className = \"tab-pane\";
+                    document.getElementById('tab2').className = \"tab-pane active\";
+                </script>";
+
+            }
+    }
+
+}
