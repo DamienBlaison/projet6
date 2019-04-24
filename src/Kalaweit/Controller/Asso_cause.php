@@ -13,6 +13,7 @@ class Asso_cause
         $p_render = [
 
         "content_tab1" => $content_tab1 = (new  \Kalaweit\Controller\Component\Asso_cause\Asso_cause_info)->render(),
+        "content_tab2" => $content_tab2 = (new  \Kalaweit\Controller\Component\Asso_cause\Asso_cause_donation)->render()
 
 
     ];

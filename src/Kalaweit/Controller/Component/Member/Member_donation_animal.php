@@ -34,9 +34,11 @@ class Member_donation_animal
             $update = 'http://localhost:8888/www/Kalaweit/asso_donation/update?don_id=';
             $delete = 'http://localhost:8888/www/Kalaweit/asso_donation/delete?don_id=';
             $add = 'http://localhost:8888/www/Kalaweit/asso_donation/add?cli_id='.$_GET["cli_id"];
+            $nb_by_page = 5;
 
 
-            $return = (new \Kalaweit\htmlElement\Table($box_title,$data,$id,$link,$update,$delete,$add))->render();
+
+            $return = (new \Kalaweit\htmlElement\Table($box_title,$data,$id,$link,$update,$delete,$add,$nb_by_page))->render();
 
         return $return;
 

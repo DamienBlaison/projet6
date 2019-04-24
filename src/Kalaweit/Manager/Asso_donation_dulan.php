@@ -72,11 +72,11 @@ class Asso_donation_dulan
 
             LEFT JOIN crm_client as P2 ON P2.cli_id = asso_donation.cli_id
 
-            WHERE asso_donation.cau_id = '700';
+            WHERE asso_donation.cau_id = 700
 
             ORDER BY
 
-            asso_don.donation_ts DESC
+            asso_donation.don_ts DESC
 
             LIMIT 0,9
             ");
@@ -118,7 +118,7 @@ class Asso_donation_dulan
 
                 WHERE P2.cli_id = :cli_id
 
-                AND asso_doantion.cau_id='700'
+                AND asso_donation.cau_id = 700
 
                 ORDER BY
 
@@ -134,7 +134,7 @@ class Asso_donation_dulan
 
                 $reqprep->execute($prepare);
 
-                $count_reqprep = $this->bdd->prepare("SELECT COUNT(donation_id) FROM asso_donation_ WHERE cau_id='700' and cli_id = :cli_id ");
+                $count_reqprep = $this->bdd->prepare("SELECT COUNT(don_id) FROM asso_donation WHERE cau_id= 700 and cli_id = :cli_id ");
 
                 $count_prepare = [
                     ":cli_id" => $_GET['cli_id']

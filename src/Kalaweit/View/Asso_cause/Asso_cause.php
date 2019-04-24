@@ -22,7 +22,7 @@ class Asso_cause
             $render .= '    </ul>';
             $render .= '<div class="tab-content col-md-12">';
             $render .= '    <div class="tab-pane active" id="tab1">'.$p_render["content_tab1"].' </div>';
-            //$render .= '    <div class="tab-pane " id="tab2">'.$p_render["content_tab2"].'</div>';
+            $render .= '    <div class="tab-pane " id="tab2">'.$p_render["content_tab2"].'</div>';
             //$render .= '    <div class="tab-pane " id="tab3">'.$p_render["content_tab3"].'</div>';
             $render .= '</div>';
             $render .= '</section>';
@@ -31,6 +31,8 @@ class Asso_cause
             echo $render;
 
             require_once( __DIR__ .'/../footer.php');
+
+            echo '<script src="/src/Kalaweit/View/Asso_cause/Asso_cause_donation.js"></script>';
 
         }
 

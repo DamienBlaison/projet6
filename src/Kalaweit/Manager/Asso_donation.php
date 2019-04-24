@@ -96,6 +96,26 @@ class Asso_donation
 
     }
 
+    function get_donation_by_cause($p_nb_by_page){
+
+        $reqprep = $this->bdd->prepare("SELECT * FROM asso_donation WHERE cau_id = :cau_id ORDER BY don_ts DESC LIMIT 0, $p_nb_by_page");
+        $prepare = [":cau_id" => $_GET["cau_id"]];
+        $reqprep->execute($prepare);
+
+        $count = $this->bdd->prepare("SELECT count(*) FROM asso_donation WHERE cau_id = :cau_id ORDER BY don_ts DESC");
+        $count->execute($prepare);
+
+        $count_return = $count->fetch(\PDO::FETCH_NUM);
+
+        $data = [
+            "content" => $reqprep->fetchAll(\PDO::FETCH_NUM),
+            "head" => ["id","Donateur", "Montant","Date du don"],
+            "count" => $count_return[0]
+        ];
+
+        return $data;
+    }
+
     function get_donation_by_member(){
 
         if( isset($_GET['p']) )
@@ -120,7 +140,7 @@ class Asso_donation
         LEFT JOIN asso_cause as P1 ON P1.cau_id = asso_donation.cau_id
         LEFT JOIN crm_client as P2 ON P2.cli_id = asso_donation.cli_id
 
-        WHERE P2.cli_id = :cli_id
+        WHERE P2.cli_id = :cli_id AND P1.cau_id != 703 AND P1.cau_id != 700
 
         ORDER BY
 
@@ -136,7 +156,7 @@ class Asso_donation
 
         $reqprep->execute($prepare);
 
-        $count_reqprep = $this->bdd->prepare("SELECT COUNT(don_id) FROM asso_donation WHERE 1=1 and cli_id = :cli_id ");
+        $count_reqprep = $this->bdd->prepare("SELECT COUNT(don_id) FROM asso_donation WHERE 1=1 and cli_id = :cli_id AND cau_id != 703 AND cau_id != 700");
 
         $count_prepare = [
             ":cli_id" => $_GET['cli_id']

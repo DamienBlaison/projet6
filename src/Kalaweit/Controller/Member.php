@@ -10,8 +10,6 @@ class Member
 
     function get(){
 
-
-
         $p_render = [
 
         "content_tab1" => $content_tab1 = (new  \Kalaweit\Controller\Component\Member\Member_info)->render(),
@@ -23,9 +21,9 @@ class Member
         (new  \Kalaweit\Controller\Component\Member\Member_donation_forest)->render().
         (new  \Kalaweit\Controller\Component\Member\Member_donation_dulan)->render(),
 
+        "content_tab3" => $content_tab3 =
 
-
-        "content_tab3" => $content_tab3 = ''
+        (new \Kalaweit\Controller\Component\Member\Member_send_mail)->render()
 
     ];
 

@@ -72,11 +72,11 @@ class Asso_donation_forest
 
             LEFT JOIN crm_client as P2 ON P2.cli_id = asso_donation.cli_id
 
-            WHERE asso_donation.cau_id = '703';
+            WHERE asso_donation.cau_id = 703;
 
             ORDER BY
 
-            asso_don.donation_ts DESC
+            asso_donaation.donation_ts DESC
 
             LIMIT 0,9
             ");
@@ -118,7 +118,7 @@ class Asso_donation_forest
 
                 WHERE P2.cli_id = :cli_id
 
-                AND asso_doantion.cau_id='703'
+                AND asso_donation.cau_id = 703
 
                 ORDER BY
 
@@ -134,7 +134,7 @@ class Asso_donation_forest
 
                 $reqprep->execute($prepare);
 
-                $count_reqprep = $this->bdd->prepare("SELECT COUNT(donation_id) FROM asso_donation_ WHERE cau_id='703' and cli_id = :cli_id ");
+                $count_reqprep = $this->bdd->prepare("SELECT COUNT(don_id) FROM asso_donation WHERE cau_id = 703 and cli_id = :cli_id ");
 
                 $count_prepare = [
                     ":cli_id" => $_GET['cli_id']

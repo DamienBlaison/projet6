@@ -14,7 +14,8 @@ class Table
         $p_link,
         $p_update,
         $p_delete,
-        $p_add
+        $p_add,
+        $p_nb_by_page
 
 
         )
@@ -28,6 +29,7 @@ class Table
         $this->update = $p_update;
         $this->delete = $p_delete;
         $this->add = $p_add;
+        $this->nb_by_page = $p_nb_by_page;
 
 
         }
@@ -48,7 +50,7 @@ class Table
 
 
 
-    $head .= '<table id="table_'.$this->id.'" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="table_info">';
+    $head .= '<table class="table table-bordered table-striped dataTable" role="grid" aria-describedby="table_info">';
     $head .= '<thead>';
     $head .= '<tr role="row">';
 
@@ -64,7 +66,7 @@ class Table
 
     $body ='';
 
-    $body .= "<tbody id='$this->id'>";
+    $body .= '<tbody id="table_'.$this->id.'">';
 
     foreach ($this->data['content'] as $key => $value) {
 
@@ -96,7 +98,7 @@ class Table
 
     $pagination .=   '<div id="nav_'.$this->id.'" style="display:flex;justify-content:space-between;">';
     $pagination .=       '<ul class="pagination">';
-    $pagination .=            '<li class="page-item disabled" id="previous_'.$this->id.'"><a class="page-link" >Previous</a></li>';
+    $pagination .=            '<li class="page-item " id="previous_'.$this->id.'"><a class="page-link" >Previous</a></li>';
     $pagination .=            '<li class="page-item" id="ad_'.$this->id.'"><a class="page-link" href="'.$this->add.'"><i class="fa fa-plus"></i></a></li>';
     $pagination .=            '<li class="page-item" id="next_'.$this->id.'"><a class="page-link" >Next</a></li>';
     $pagination .=        '</ul>';
@@ -105,12 +107,12 @@ class Table
     $pagination .=                  '<li class="page-item"><a class="page-link">Page </a></li>';
     $pagination .=                  '<li class="page-item"><a class="page-link" id="current_'.$this->id.'">1</a></li>';
     $pagination .=                  '<li class="page-item"><a class="page-link">/</a></li>';
-    $pagination .=                  '<li class="page-item"><a class="page-link">'.ceil(intval($this->data["count"]) / 5).'</a></li>';
+    $pagination .=                  '<li class="page-item"><a class="page-link" id="nb_'.$this->id.'">'.ceil(intval($this->data["count"]) / $this->nb_by_page).'</a></li>';
     $pagination .=              '</ul>';
 
     $pagination .=              '<ul class="pagination">';
     $pagination .=                  '<li class="page-item"><a class="page-link">Nombre de resultat :  </a></li>';
-    $pagination .=                  '<li class="page-item"><a class="page-link" >'.$this->data["count"].'</a></li>';
+    $pagination .=                  '<li class="page-item"><a class="page-link" id= "nb_page_'.$this->id.'" >'.$this->data["count"].'</a></li>';
     $pagination .=              '</ul>';
     $pagination .=     '</div>';
 

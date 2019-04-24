@@ -19,7 +19,7 @@ class Member
         $render .= '    <ul class="nav nav-tabs">';
         $render .= '        <li id="tab_pane_1" class="active"><a href="#tab1" data-toggle="tab" aria-expanded="true">Informations générales</a></li>';
         $render .= '        <li id="tab_pane_2" class=""><a href="#tab2" data-toggle="tab" aria-expanded="false">Dons</a></li>';
-        $render .= '        <li id="tab_pane_3" class=""><a href="#tab3" data-toggle="tab" aria-expanded="false">Divers</a></li>';
+        $render .= '        <li id="tab_pane_3" class=""><a href="#tab3" data-toggle="tab" aria-expanded="false">Envoyer un Email</a></li>';
         $render .= '    </ul>';
         $render .= '<div class="tab-content col-md-12">';
         $render .= '    <div class="tab-pane active" id="tab1">'.$p_render["content_tab1"].' </div>';
@@ -33,9 +33,8 @@ class Member
 
         echo $render;
 
-        require_once( __DIR__ .'/../../footer.php');
-
         echo '<script src="/src/Kalaweit/View/Member/Member/Member.js"></script>';
+        require_once( __DIR__ .'/../../footer.php');
 
         $previous_url = explode('?',$_SERVER['HTTP_REFERER']);
 

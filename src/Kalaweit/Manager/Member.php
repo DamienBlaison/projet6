@@ -10,6 +10,7 @@ namespace Kalaweit\Manager;
 class Member
 {
     use \Kalaweit\Transverse\Get_param_request;
+    use \Kalaweit\Transverse\Get_param_post;
     /**
     * définition des variables de classe
     */
@@ -255,5 +256,14 @@ class Member
                     return $count_member;
 
 
+                }
+
+                function get_mail(){
+
+                    $reqprep = $this->bdd->prepare("SELECT cld_valc from crm_client_data WHERE cli_id = :cli_id and clitd_id = 3 ");
+                    $prepare =[ ":cli_id" => $_GET["cli_id"]];
+                    $reqprep->execute($prepare);
+                    $return = $reqprep->fetch();
+                    return $return;
                 }
             }

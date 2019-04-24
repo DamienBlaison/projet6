@@ -37,8 +37,9 @@ class Member_donation_dulan
             $update = 'http://localhost:8888/www/Kalaweit/asso_donation_dulan/update?don_id=';
             $delete = 'http://localhost:8888/www/Kalaweit/asso_donation_dulan/delete?don_id=';
             $add = 'http://localhost:8888/www/Kalaweit/asso_donation_dulan/add?cli_id='.$_GET["cli_id"];
+            $nb_by_page = 5;
 
-        return (new \Kalaweit\htmlElement\Table($box_title,$data,$id,$link,$update,$delete,$add))->render();
+        return (new \Kalaweit\htmlElement\Table($box_title,$data,$id,$link,$update,$delete,$add,$nb_by_page))->render();
 
 
 }
