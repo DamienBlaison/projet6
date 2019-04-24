@@ -37,7 +37,7 @@ class Member_donation_forest
             $update = 'http://localhost:8888/www/Kalaweit/asso_donation_forest/update?don_id=';
             $delete = 'http://localhost:8888/www/Kalaweit/asso_donation_forest/delete?don_id=';
             $add = 'http://localhost:8888/www/Kalaweit/asso_donation_forest/add?cli_id='.$_GET["cli_id"];
-            $nb_by_page = 15;
+            $nb_by_page = 5;
 
         return (new \Kalaweit\htmlElement\Table($box_title,$data,$id,$link,$update,$delete,$add,$nb_by_page))->render();
 

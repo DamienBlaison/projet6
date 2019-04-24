@@ -163,6 +163,21 @@ class Application
                             if (method_exists($obj, 'donation_animal_by_member')){
                                 echo $obj->donation_animal_by_member();
                             };
+                            break;
+
+                            case 'donation_forest_by_member':
+
+                            if (method_exists($obj, 'donation_forest_by_member')){
+                                echo $obj->donation_forest_by_member();
+                            };
+
+                            break;
+
+                            case 'donation_dulan_by_member':
+
+                            if (method_exists($obj, 'donation_dulan_by_member')){
+                                echo $obj->donation_dulan_by_member();
+                            };
 
                             break;
 

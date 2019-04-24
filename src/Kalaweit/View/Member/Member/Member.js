@@ -1,91 +1,81 @@
+function go_next(target_next,nb_result_by_page_next){
 
+    let current_page_next = document.getElementById('current_'+ target_next).textContent;
 
-const target = 'donation_animal_by_member';
+    let current_nb_page_next = document.getElementById('nb_'+ target_next).textContent;
 
-var next = 'next_';
-var previous = 'previous_';
-var current = 'current_';
-var table = 'table_';
-var nb_page = 'nb_';
+    if (Number(current_page_next) < Number(current_nb_page_next)) {
 
-const nb_result_by_page = '5';
+        let start_next = Number(Number(current_page_next)* Number(nb_result_by_page_next));
 
-let current_page = document.getElementById(current+target).textContent;
+        document.getElementById('current_'+target_next).textContent = Number(current_page_next) + 1;
 
-let current_nb_page = document.getElementById(nb_page+target).textContent;
-
-function go_next(){
-
-    if (Number(current_page) < Number(current_nb_page)) {
-
-        let start = Number(Number(current_page)* Number(nb_result_by_page));
-
-        document.getElementById(current+target).textContent = Number(current_page) + 1;
-
-        let    xhttp = new XMLHttpRequest();
+        var    xhttp = new XMLHttpRequest();
 
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                document.getElementById(table+target).innerHTML = this.responseText;
+                document.getElementById('table_'+ target_next).innerHTML = this.responseText;
 
             }
         };
 
-        let search = window.location.search;
+        let search_next = window.location.search;
 
-        let cli_id = search.replace("?cli_id=", " ");
+        let cli_id_next = search_next.replace("?cli_id=", "");
 
-        var url = 'http://localhost:8888/www/Kalaweit/ajax_get/'+target+'?cli_id='+cli_id+'&p='+start;
+        let url_next = 'http://localhost:8888/www/Kalaweit/ajax_get/'+target_next+'?cli_id='+cli_id_next+'&p='+start_next;
 
-        xhttp.open("GET", url, true);
+        xhttp.open("GET", url_next, true);
 
         xhttp.send();
 
     };
 
-
-
-
-
-
 };
 
-function go_previous(){
+function go_previous(target,nb_result_by_page){
 
-    console.log(current_page);
+    let current_page_previous = document.getElementById('current_' + target).textContent;
 
-    if (document.getElementById(current+target).textContent > 1) {
+    let current_nb_page_previous = document.getElementById('nb_' + target).textContent;
 
+    if (document.getElementById('current_'+ target).textContent > 1) {
 
-        let start_previous = (Number(current_page) - 1) * Number(nb_result_by_page);
+        let start_previous = ((Number(current_page_previous) - 1) * Number(nb_result_by_page))- Number(nb_result_by_page);
 
         console.log(start_previous);
 
-        document.getElementById(current+target).textContent = document.getElementById(current+target).textContent - 1;
+        document.getElementById('current_'+ target).textContent = document.getElementById('current_'+ target).textContent - 1;
 
-        let    xhttp = new XMLHttpRequest();
+        var    xhttp = new XMLHttpRequest();
 
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                document.getElementById(table+target).innerHTML = this.responseText;
+
+                document.getElementById('table_'+ target).innerHTML = this.responseText;
 
             }
         };
 
-        let search = window.location.search;
+        let search_previous = window.location.search;
 
-        let cli_id = search.replace("?cli_id=", " ");
+        let cli_id_previous = search_previous.replace("?cli_id=", "");
 
-        var url = 'http://localhost:8888/www/Kalaweit/ajax_get/'+target+'?cli_id='+cli_id+'&p='+start_previous;
+        let url_previous = 'http://localhost:8888/www/Kalaweit/ajax_get/'+target+'?cli_id='+cli_id_previous+'&p='+start_previous;
 
-        xhttp.open("GET", url, true);
+        console.log(url_previous);
+
+        xhttp.open("GET", url_previous, true);
 
         xhttp.send();
 
-    }
+    };
 
 };
 
-
-    document.getElementById(next+target).addEventListener('click', go_next);
-    document.getElementById(previous+target).addEventListener('click', go_previous);
+document.getElementById('next_donation_animal_by_member').addEventListener('click', function () {go_next("donation_animal_by_member",5);});
+document.getElementById('previous_donation_animal_by_member').addEventListener('click', function () {go_previous("donation_animal_by_member",5);});
+document.getElementById('next_donation_forest_by_member').addEventListener('click', function () {go_next("donation_forest_by_member",5);});
+document.getElementById('previous_donation_forest_by_member').addEventListener('click', function () {go_previous("donation_forest_by_member",5);});
+document.getElementById('next_donation_dulan_by_member').addEventListener('click', function () {go_next("donation_dulan_by_member",5);});
+document.getElementById('previous_donation_dulan_by_member').addEventListener('click', function () {go_previous("donation_dulan_by_member",5);});
