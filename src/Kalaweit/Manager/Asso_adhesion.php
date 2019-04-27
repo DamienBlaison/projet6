@@ -86,7 +86,7 @@ class Asso_adhesion
 
             $data = [
                 "content"     => $reqprep->fetchAll(\PDO::FETCH_NUM),
-                "head"              => ["Id","Id_membre","Prénom","Nom","Montant","Date enregistrement"],
+                "head"              => ["Id","Id_membre","Prénom","Nom","Montant","Date enregistrement","Action"],
             ];
 
             return $data;

@@ -21,17 +21,17 @@ class Box_add
         $donation_mnt = (new \Kalaweit\htmlElement\Form_group_input('donation_mnt','montant du don','','fa fa-euro'));
         $devise  = (new \Kalaweit\htmlElement\Form_group_select('ptyp_id',$payment_type,'','fa fa-internet-explorer',"ptyp_code"));
         $donator = (new \Kalaweit\htmlElement\Form_group_select('cli_id',$cli,$cli_id,'fa fa-user',"cli_identity" ));
+        $donator_view ='';
         $cause     = (new \Kalaweit\htmlElement\Form_group_select('cau_id',$cau,"",'fa fa-paw',"cau_name" ));
 
         $submit  = '';
         $submit .=                      '<div class="form-group">';
-        $submit .=                          '<!--<label style="color:white;" for="submit"> test</label>-->';
         $submit .=                          '<button id="submit" type="submit" class="form-control btn btn-primary"><i class="fa fa-save"></i></button>';
         $submit .=                      '</div>';
 
-
         $box_donation_content = [
             $donator->render(),
+
             $cause->render(),
             $donation_mnt->render(),
             $devise->render(),

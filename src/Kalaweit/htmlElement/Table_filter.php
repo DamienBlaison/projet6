@@ -74,6 +74,7 @@ class Table_filter
         $header .=                          '<a id="reset" class="form-control btn btn-danger" href="'.$init[0].'"><i class="fa fa-minus"></i></a>';
         $header .=                      '</div>';
         $header .=                  '</div>';
+
         $header .=              '</form>';
         $header .=            '</div>';
         $header .=            '</div>';
@@ -90,7 +91,15 @@ class Table_filter
 
         foreach ($data["head"] as $key => $value) {
 
-            $table .= '<th tabindex="'.$key.'" aria-controls="control'.$key.'" rowspan="1" colspan="1" aria-sort="ascending">'.$value.'</th>';
+            if($key < 1)
+            {
+                $table .= '<th style="display:none;" tabindex="'.$key.'" aria-controls="control'.$key.'" rowspan="1" colspan="1" aria-sort="ascending">'.$value.'</th>';
+            }
+
+            else
+            {
+                $table .= '<th tabindex="'.$key.'" aria-controls="control'.$key.'" rowspan="1" colspan="1" aria-sort="ascending">'.$value.'</th>';}
+            ;
         };
 
         $table .= '<th class="" style="text-align:center;">Action</th>';
@@ -106,6 +115,7 @@ class Table_filter
             $link = 'http://localhost:8888/www/Kalaweit/'.$url['3'].'/get?'.$key.'=';
             $update = 'http://localhost:8888/www/Kalaweit/member/get?cli_id=';
             $delete = 'http://localhost:8888/www/Kalaweit/member/delete?cli_id=';
+
 
 
 
@@ -157,7 +167,7 @@ class Table_filter
             break;
         }
 
-        $table .= '<tbody id="table_member">';
+        $table .= '<tbody id="table">';
 
         foreach ($data["table"] as $d_k => $d_v) {
 
@@ -170,21 +180,18 @@ class Table_filter
 
             foreach ($d_v as $key => $value) {
 
-                if ($url[3] == 'asso_donation' || $url[3] == 'asso_donation_dulan' || $url[3] == 'asso_donation_forest') {
+                if($key < 1){
+                    $table .= '<td style = " display:none;">'.$value.'</td>';
+                }else{
+                    $table .= '<td>'.$value.'</td>';
+                }
 
-                    //$table .= '<td><a href='.$link.$d_v[1].'>'.$value.'</a></td>';
-                    $table .= '<td>'.$value.'</td>';
-                }
-                else{
-                    //$table .= '<td><a href='.$link.$d_v[0].'>'.$value.'</a></td>';
-                    $table .= '<td>'.$value.'</td>';
-                }
 
             }
 
-
             $table .= '<td style = "width:140px; text-align:center;">';
-            $table .=    '<a style="margin-right:5px;" href="'.$update.$d_v[0].'" class="btn btn-primary" id="update_'.$d_v[0].'" onclick ="return confirm(\'Etes vous sur de vouloir modifier cet enregistrement ?\')"><i class="fa fa-edit"></i></a>';
+            $table .=    '<a style="margin-right:5px;" href="'.$update.$d_v[0].'" class="btn btn-primary" id="update_'.$d_v[0].'"><i class="fa fa-edit"></i></a>';
+
             $table .=    '<a style="margin-right:5px;" href="'.$delete.$d_v[0].'" class="btn btn-danger" id="delete_'.$d_v[0].'" onclick ="return confirm(\'Etes vous sur de vouloir supprimer cet enregistrement? \')"><i class="fa  fa-trash"></i></a>';
 
 
@@ -222,23 +229,27 @@ class Table_filter
         $content .= $table;
 
         $content .='<div class="container-fluid">';
-        $content .=   '<div id="nav1"aria-label="Page navigation example" class="col-sm-9">';
+        $content .=   '<div id="nav1"aria-label="Page navigation example" class="col-sm-4">';
         $content .=       '<ul class="pagination">';
         $content .=            '<li class="page-item disabled" id="previous_member"><a href = " '.$url_previous.'" class="page-link" >Previous</a></li>';
         $content .=            '<li class="page-item"><a class="page-link" id="current_member">'.$page_current.'</a></li>';
         $content .=            '<li class="page-item" id="next_member"><a href = " '.$url_next.'" class="page-link" >Next</a></li>';
         $content .=        '</ul>';
         $content .=    '</div>';
-        $content .=    '<div class="col-sm-3" style="margin-top: 30px;">';
+        $content .=    '<div class="col-sm-5" style="margin-top: 30px;">';
         $content .=         'Nombre de résultats : '.$data["count"].' soit '.ceil($data["count"]/10).' pages';
         $content .=   '</div>';
+        $content .=    '<div class="col-sm-3 " style="margin-top: 30px;">';
+        $content .=    '<button id="export_table_'.$url[3].'" class="btn btn-success pull-right fa fa-bar-chart" style="margin-top:-10px;"> <b> Export Excel</button></b>';
+        $content .=    '</div>';
+        $content .=    '</div>';
         $content .=' </div>';
         $content .=  '</div>';
         $content .=  '</div>';
 
         $result = $header.$content;
 
-        return $result;
+        return  $result;
 
     }
 }

@@ -5,8 +5,6 @@ document.getElementById('previous_member').addEventListener('click', memberPrevi
 
 function memberNext(url) {
 
-    console.log(url);
-
     if (document.getElementById('next_member').className != 'page-item disabled'){
 
         let maxPage = '<?php echo ceil($count[0]/15) ?>';
@@ -23,12 +21,7 @@ function memberNext(url) {
         };
 
         var adresseActuelle = window.location;
-
-
-
         var url = adresseActuelle + '?p=' + start;
-
-        console.log(url);
 
         xhttp.open("GET", url, true);
 

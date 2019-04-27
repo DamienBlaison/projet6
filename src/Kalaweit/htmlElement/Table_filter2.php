@@ -139,7 +139,7 @@ class Table_filter
                 }
 
                 $table .= '<td style = "width:85px;">';
-                $table .=    '<a style="margin-right:5px;" href="'.$update.$d_v[0].'" class="btn btn-primary" id="update_'.$d_v[0].'" onclick ="return confirm(\'Etes vous sur de vouloir modifier cet enregistrement\')"><i class="fa fa-edit"></i></a>';
+                $table .=    '<a style="margin-right:5px;" href="'.$update.$d_v[0].'" class="btn btn-primary" id="update_'.$d_v[0].'" ><i class="fa fa-edit"></i></a>';
                 $table .=    '<a href="'.$delete.$d_v[0].'" class="btn btn-danger" id="delete_'.$d_v[0].'" onclick ="return confirm(\'Etes vous sur de vouloir supprimer cet enregistrement\')"><i class="fa  fa-trash"></i></a>';
                 $table .= '</td>';
 

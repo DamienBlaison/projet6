@@ -8,8 +8,11 @@ namespace Kalaweit\Manager;
 * blaison Kalaweit
 */
 
+
 class Asso_cause
 {
+    use \Kalaweit\Transverse\Get_param_request;
+    use \Kalaweit\Transverse\Get_param_post;
 
     /**
     * définition des variables de classe
@@ -32,6 +35,94 @@ class Asso_cause
 
     public function set_bdd(PDO $bdd){
         $this->bdd = $bdd;
+    }
+
+    public function get_list_export(){
+
+        $param_request = $this->get_param_request();
+
+        $where = '';
+        $prepare = [];
+
+        foreach ($param_request[0] as $key => $value) {
+
+            if($value != ''&& $key !='export_name'){
+
+                switch ($key) {
+                    case 'ac_name':
+                    $key = 'asso_cause.cau_name';
+                    break;
+                    case 'actd_2':
+                    $key = 'P2.caud_vals';
+                    break;
+                    case 'actd_1':
+                    $key = 'P1.caud_vals';
+                    break;
+                    case 'actd_4':
+                    $key = 'P4.caud_vals';
+                    break;
+                    case 'actd_3':
+                    $key = 'P3.caud_vals';
+                    break;
+                    case 'ac_site':
+                    $key = 'asso_cause.cau_site';
+                    break;
+                    case 'actd_8':
+                    $key = 'P8.caud_vals';
+                    break;
+                    case 'actd_9':
+                    $key = 'P9.caud_vals';
+                    break;
+                    case 'actd_7':
+                    $key = 'P7.caud_vals';
+                    break;
+                }
+
+                $where .= 'AND '.$key.' LIKE :'.strtr ($key , '.' , '_' ).' ' ;
+
+                $prepare_loop = array(':'.strtr ($key , '.' , '_' ) => $value );
+
+                $prepare = array_merge($prepare,$prepare_loop);
+
+            }
+
+
+
+        }
+
+        $reqprep = $this->bdd->prepare(
+
+            "SELECT asso_cause.cau_id , asso_cause.cau_name,  P2.caud_vals as sexe,P4.caud_vals as naissance, P3.caud_vals as espece, P1.caud_vals as ile, asso_cause.cau_site
+
+            FROM asso_cause
+
+            LEFT JOIN asso_cause_data as P1 on P1.cau_id = asso_cause.cau_id and P1.cautd_id = 1
+            LEFT JOIN asso_cause_data as P2 on P2.cau_id = asso_cause.cau_id and P2.cautd_id = 2
+            LEFT JOIN asso_cause_data as P3 on P3.cau_id = asso_cause.cau_id and P3.cautd_id = 3
+            LEFT JOIN asso_cause_data as P4 on P4.cau_id = asso_cause.cau_id and P4.cautd_id = 4
+
+            LEFT JOIN asso_cause_data as P7 on P7.cau_id = asso_cause.cau_id and P7.cautd_id = 7
+            LEFT JOIN asso_cause_data as P8 on P8.cau_id = asso_cause.cau_id and P8.cautd_id = 8
+            LEFT JOIN asso_cause_data as P9 on P9.cau_id = asso_cause.cau_id and P9.cautd_id = 9
+
+            WHERE 1=1
+
+            $where
+
+            ORDER BY asso_cause.cau_name
+
+            "
+        );
+
+        $reqprep->execute($prepare);
+
+        $data = [
+            "content"   => $reqprep->fetchAll(\PDO::FETCH_NUM),
+            "head"          => ["Id","Nom","Sexe","Date de naissance","Espèce","Localisation","Visible sur le site"],
+        ];
+
+        return $data;
+
     }
 
 

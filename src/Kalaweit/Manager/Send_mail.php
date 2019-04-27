@@ -1,9 +1,7 @@
 <?php
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-
+//use PHPMailer\PHPMailer\PHPMailer;
+//use PHPMailer\PHPMailer\Exception;
 
 function send_mail($p_to,$p_subject,$p_body){
 // Import PHPMailer classes into the global namespace
@@ -11,7 +9,7 @@ function send_mail($p_to,$p_subject,$p_body){
 //Load Composer's autoloader
 require '../vendor/autoload.php';
 
-$mail = new PHPMailer(true);                                 // Passing `true` enables exceptions
+$mail = new \PHPMailer\PHPMailer\PHPMailer(true);                                 // Passing `true` enables exceptions
 
 $mail->setLanguage($langcode = 'fr', $lang_path = '../vendor/phpmailer/phpmailer/language/');
 
@@ -54,7 +52,7 @@ try {
 
     $mail->send();
     echo '<script>alert("Le message a bien été envoyé")</script>';
-} catch (Exception $e) {
+} catch ( \PHPMailer\PHPMailer\Exception $e) {
     echo '<script> alert("Le Message n\'a pas pu être envoyé. \nErreur:\n'. $mail->ErrorInfo.'")</script>';
 }
 }

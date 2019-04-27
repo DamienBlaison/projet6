@@ -6,7 +6,13 @@
 <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=z3qrbn82jvuqr9727jayyaywqeq57qc2tzvidct7bzzrnt6t"></script>
 <script> tinymce.init({ selector:'.mytextarea' }); </script>
 
-<script type="text/javascript">
+<?php
 
+if(isset($_SESSION["info"]) && $_SESSION["info"] != ''){
 
-</script>
+    echo '<script>alert("'.$_SESSION["info"].'")</script>';
+
+    $_SESSION["info"] = '';
+}
+
+?>

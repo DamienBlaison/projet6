@@ -1,80 +1,79 @@
+function go_next(target_next,nb_result){
 
-document.getElementById('next_table_donator').addEventListener('click', Next);
-document.getElementById('previous_table_donator').addEventListener('click', Previous);
+    let current_page_next = document.getElementById('current_'+ target_next).textContent;
+
+    let current_nb_page_next = document.getElementById('nb_'+ target_next).textContent;
+
+    if (Number(current_page_next) < Number(current_nb_page_next)) {
+
+        //let start_next = Number(Number(current_page_next)* Number(nb_result));
+        let start_next = Number(current_page_next)+1;
 
 
-function Next() {
+        document.getElementById('current_'+target_next).textContent = Number(current_page_next) + 1;
 
-    if (document.getElementById('next_table_donator').className != 'page-item disabled'){
-
-        let maxPage = '<?php echo ceil($count[0]/15) ?>';
-
-    console.log(maxPage);
-
-        let    xhttp = new XMLHttpRequest();
-        let     currentPage = document.getElementById('current_table_donator').textContent;
-        let     start = (Number(currentPage)*15 + 1) ;
+        var    xhttp = new XMLHttpRequest();
 
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("table_table_donator").innerHTML = this.responseText;
+
+                document.getElementById('table_'+ target_next).innerHTML = this.responseText;
 
             }
         };
 
-        var url = 'http://localhost:8888/www/Kalaweit/ajax_get/table_table_donator?cau_id=6311&p='+start;
+        let search_next = window.location.search;
 
-        console.log(url);
+        let cau_id_next = search_next.replace("?cau_id=", "");
 
-        xhttp.open("GET", url, true);
+        let url_next = 'http://localhost:8888/www/Kalaweit/ajax_get/'+target_next+'?cau_id='+cau_id_next+'&p='+start_next+'&nb_by_page='+nb_result;
+
+        xhttp.open("GET", url_next, true);
 
         xhttp.send();
 
-        document.getElementById('current_table_donator').innerHTML = Number(currentPage)+1;
-        document.getElementById('previous_table_donator').className = 'page-item';
+    };
 
-        if(document.getElementById('current_table_donator').innerHTML == maxPage ){
+};
 
-            document.getElementById('next_table_donator').className = 'page-item disabled';
+function go_previous(target,nb_result_by_page){
 
-        }
+    let current_page_previous = document.getElementById('current_' + target).textContent;
 
-    }
+    let current_nb_page_previous = document.getElementById('nb_' + target).textContent;
 
-}
+    if (document.getElementById('current_'+ target).textContent > 1) {
 
-function Previous() {
+        //let start_previous = ((Number(current_page_previous) - 1) * Number(nb_result_by_page))- Number(nb_result_by_page);
 
-    if (document.getElementById('previous_donation_animal_by_member').className != 'page-item disabled'){
+        let start_previous = Number(current_page_previous) - 1;
 
-        let    xhttp = new XMLHttpRequest();
-        let     currentPage = document.getElementById('current_donation_animal_by_member').textContent;
+        document.getElementById('current_'+ target).textContent = document.getElementById('current_'+ target).textContent - 1;
 
-        var    start_previous = ((Number(currentPage)-1)*5)-5;
+        var    xhttp = new XMLHttpRequest();
 
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("donation_animal_by_member").innerHTML = this.responseText;
+
+                document.getElementById('table_'+ target).innerHTML = this.responseText;
 
             }
-        }
+        };
 
-        var url = 'http://localhost:8888/www/Kalaweit/ajax_get/donation_animal_by_member?cli_id=6311&p='+start_previous;
+        let search_previous = window.location.search;
 
-        xhttp.open("GET", url, true);
+        let cau_id_previous = search_previous.replace("?cau_id=", "");
+
+        let url_previous = 'http://localhost:8888/www/Kalaweit/ajax_get/'+target+'?cau_id='+cau_id_previous+'&p='+start_previous+'&nb_by_page='+ nb_result_by_page;
+
+        xhttp.open("GET", url_previous, true);
 
         xhttp.send();
 
-        document.getElementById('current_donation_animal_by_member').innerHTML = Number(currentPage)-1;
-
-        if (document.getElementById('current_donation_animal_by_member').innerHTML == 1){
-
-            document.getElementById('previous_donation_animal_by_member').className = 'page-item disabled' ;
-
-        }
-
-        document.getElementById('next_donation_animal_by_member').className = 'page-item';
-
-
     };
-}
+
+};
+
+
+document.getElementById('next_asso_cause_donation').addEventListener('click', function () {go_next("asso_cause_donation",5);});
+document.getElementById('previous_asso_cause_donation').addEventListener('click', function () {go_previous("asso_cause_donation",5);});

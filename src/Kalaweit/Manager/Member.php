@@ -58,6 +58,8 @@ class Member
         if(isset($param_request[0])){
 
           foreach ($param_request[0] as $key => $value) {
+
+
                 if($value != ''){
                     $where .= ' AND '.$key.' LIKE :'.$key ;
                     $prepare = array_merge($prepare,[':'.$key => '%'.$_GET["$key"].'%']);
@@ -97,6 +99,51 @@ class Member
             return $data;
 
         }
+
+        public function get_list_export(){
+
+            $param_request = $this->get_param_request();
+
+            $where = '';
+            $prepare =[];
+
+            if(isset($param_request[0])){
+
+              foreach ($param_request[0] as $key => $value) {
+
+                    if($value != '' && $key != 'export_name'){
+                        $where .= ' AND '.$key.' LIKE :'.$key ;
+                        $prepare = array_merge($prepare,[':'.$key => '%'.$_GET["$key"].'%']);
+
+                    }
+                }
+
+            }
+
+            $reqprep = $this->bdd->prepare(
+
+                "SELECT cli_id,cli_lastname,cli_firstname,cli_cp,cli_town
+                FROM crm_client
+                WHERE 1=1 $where
+                ORDER BY cli_lastname
+
+                ");
+
+                    $reqprep->execute($prepare);
+
+                    //$data = [
+                    //    "list_member"   => $reqprep->fetchAll(\PDO::FETCH_NUM),
+                    //    "head"          => ["Id","Nom","Prénom","Cp","Ville"],
+                    //];
+
+                    $data = [
+                        "content"   => $reqprep->fetchAll(\PDO::FETCH_NUM),
+                        "head"          => ["Id","Nom","Prénom","Cp","Ville"]
+                    ];
+
+                return $data;
+
+            }
 
             function add($member){
 
@@ -140,6 +187,45 @@ class Member
 
                 }
             }
+
+            function delete(){
+
+                $checkprep = $this->bdd->prepare("SELECT COUNT(*) FROM asso_adhesion WHERE cli_id = :cli_id");
+
+                $checkdataprep = $this->bdd->prepare("DELETE FROM crm_client_data WHERE cli_id = :cli_id");
+
+                $reqprep = $this->bdd->prepare("DELETE FROM crm_client WHERE cli_id = :cli_id");
+
+                $prepare = [
+                    ":cli_id" => $_GET["cli_id"]
+                ];
+
+                $check = $checkprep->execute($prepare);
+
+                $count = $checkprep->fetch(\PDO::FETCH_NUM);
+
+
+                if($count[0] == 0) {
+
+                    $checkdataprep->execute($prepare);
+                    $reqprep->execute($prepare);
+
+                    $_SESSION["info"] = 'L\'utilisateur a bien été supprimé.';
+
+                    header("Location: ".$_SERVER['HTTP_REFERER']);
+
+                }
+                else {
+
+                    $error = 'Impossible de supprimer l\'utilisateur, des mouvements sont associés.';
+
+                    $_SESSION["info"] = $error;
+
+                    header("Location: ".$_SERVER['HTTP_REFERER']);
+
+                }
+
+         }
 
             function update($member){
 

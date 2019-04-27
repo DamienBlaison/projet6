@@ -7,40 +7,25 @@ namespace Kalaweit\Controller\Component\Member;
  */
 class Member_donation_forest
 {
-    use \Kalaweit\Transverse\Get_param_request;
 
     function render(){
 
-            //$list = explode('/',$_SERVER['REQUEST_URI']);
-            //$menu = explode('?',$list[4]);
+        $bdd = (new \Kalaweit\Manager\Connexion())->getBdd();
 
-            $param_request = $this->Get_param_request();
+        $p_nb_by_page = 5;
+        $page = 1;
 
-            $bddM = new \Kalaweit\Manager\Connexion();
-            $bddM = $bddM->getBdd();
+        $p_data = (new \Kalaweit\Manager\Asso_donation_forest($bdd))->get_donation_forest_by_member($p_nb_by_page,$page);
 
-            //$asso_donation         = new \Kalaweit\Model\Asso_donation();
-            $asso_donationM        = new \Kalaweit\Manager\Asso_donation_forest($bddM);
+        $p_name = "Les dons Forets";
+        $p_id = "donation_forest_by_member";
+        $p_update = "www/Kalaweit/asso_donation_forest/update?don_id=";
+        $p_delete = "www/Kalaweit/asso_donation_forest/delete?don_id=";
+        $p_add = "www/Kalaweit/asso_donation_forest/add?cli_id=".$_GET["cli_id"];
 
-            $list = $asso_donationM->get_donation_forest_by_member($param_request);
-
-                $data =[
-                "content"             => $list["list_donation_forest"],
-                "head"              => $list["head"],
-                "count"             => $list["count"][0],
-                "page"              => ceil(($list["count"][0])/15)
-            ];
-
-            $box_title = 'Dons pour les Forets';
-            $id = 'donation_forest_by_member';
-            $link = '/www/Kalaweit/asso_cause/get?id=';
-            $update = 'http://localhost:8888/www/Kalaweit/asso_donation_forest/update?don_id=';
-            $delete = 'http://localhost:8888/www/Kalaweit/asso_donation_forest/delete?don_id=';
-            $add = 'http://localhost:8888/www/Kalaweit/asso_donation_forest/add?cli_id='.$_GET["cli_id"];
-            $nb_by_page = 5;
-
-        return (new \Kalaweit\htmlElement\Table($box_title,$data,$id,$link,$update,$delete,$add,$nb_by_page))->render();
+        return (new \Kalaweit\htmlElement\Table($p_name,$p_data,$p_id,$p_update,$p_delete,$p_add,$p_nb_by_page))->render();
 
 
-}
+
+    }
 }

@@ -25,7 +25,7 @@ class Table_filter
         $render .= '</div>';
 
         echo $render;
-
+        echo '<script src="/src/Kalaweit/View/Member/Table/Member_list.js"></script>';
         require_once( __DIR__ .'/../../footer.php');
 
     }

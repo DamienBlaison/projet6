@@ -30,9 +30,10 @@ class Asso_cause
 
             echo $render;
 
+            echo '<script src="/src/Kalaweit/View/Asso_cause/Asso_cause_donation.js"></script>';
             require_once( __DIR__ .'/../footer.php');
 
-            echo '<script src="/src/Kalaweit/View/Asso_cause/Asso_cause_donation.js"></script>';
+
 
         }
 

@@ -34,6 +34,7 @@ class Member
         echo $render;
 
         echo '<script src="/src/Kalaweit/View/Member/Member/Member.js"></script>';
+
         require_once( __DIR__ .'/../../footer.php');
 
         $previous_url = explode('?',$_SERVER['HTTP_REFERER']);

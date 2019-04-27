@@ -1,110 +1,22 @@
-6 rue Saint Barthelemy 82340 Donzac
-France
-Paris, le 27 février 2019
-N° D7839
-Reçu dons aux oeuvres année 2018
-Articles 200-5 et 238 bis du Code Général des Impôts
 
-<p> Nous confirmons avoir reçu la somme de '.$this->content["tot_don_mnt"].'€, qui correspond au montant total des dons que vous avez effectués en notre faveur en '.$this->content["year"].', et nous vous en remercions.
-Ce reçu, établi sous modèle conforme et attestant de ces dons, vous permettra de bénécier d\'une réduction d\'impôts dans la limite des conditions prévues par la loi.
+<script type="text/javascript">
 
-Bénéficiaire des versements : Association Kalaweit - 69 rue Mouffetard - 75005 Paris
-Organisme d\'intérêt général concourant à la défense de l\'environnement
+function export_table(){
 
-Objet :
+    var    xhttp = new XMLHttpRequest();
 
-Programme de sauvegarde des gibbons et de leur habitat en Indonésie. Sensibilisation à la disparition des grands singes et de leur habitat.
+    let search= window.location.search;
 
-Nom et adresse du donateur : '.$this->content["firstname"].' '.$this->content["lastname"].' - '.$this->content["adress"].' '. $this->content["zip"].' '. $this->content["town"].'
+    let cau_id = search.replace("?cau_id=", "");
 
-Détail des dons : 13.50 € le 30 décembre 2018 - (Carte Bancaire)
+    let url = 'http://localhost:8888/www/Kalaweit/ajax_get/export_table_member?cau_id='+cau_id;
 
-Le bénéficiaire reconnaît avoir reçu en '.$this->content["year"].', au titre des versements ouvrant droits à la réduction d\'impôts la somme de '.$this->content["tot_don_mnt"].' €.
+    xhttp.open("GET", url, true);
 
-Constance Cluset
-Responsable bureau Kalaweit France
-Kalaweit : 69 rue Mouffetard - 75005 Paris Association loi 1901 Email : kalaweit.france@yahoo.fr / Tél : 07 86 01 18 87 Siret 449 804 053 000 30 - RCS Paris Site internet : www.kalaweit.org</p>'
-    );
+    xhttp.send();
 
+};
 
-    ob_start();
+document.getElementById("export_table").addEventListener('clic', export_table);
 
-    ?>
-
-    <!DOCTYPE html>
-    <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title></title>
-    </head>
-    <body class="hold-transition login-page">
-        <div class="login-box">
-            <div class="login-logo">
-                <a href="../../index2.html"><b>Admin</b>LTE</a>
-            </div>
-            <!-- /.login-logo -->
-            <div class="login-box-body">
-                <p class="login-box-msg">Sign in to start your session</p>
-
-                <form action="../../index2.html" method="post">
-                    <div class="form-group has-feedback">
-                        <input type="email" class="form-control" placeholder="Email">
-                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                    </div>
-                    <div class="form-group has-feedback">
-                        <input type="password" class="form-control" placeholder="Password">
-                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-8">
-                            <div class="checkbox icheck">
-                                <label>
-                                    <div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> Remember Me
-                                </label>
-                            </div>
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-xs-4">
-                            <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
-                        </div>
-                        <!-- /.col -->
-                    </div>
-                </form>
-
-                <div class="social-auth-links text-center">
-                    <p>- OR -</p>
-                    <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using
-                        Facebook</a>
-                        <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using
-                            Google+</a>
-                        </div>
-                        <!-- /.social-auth-links -->
-
-                        <a href="#">I forgot my password</a><br>
-                        <a href="register.html" class="text-center">Register a new membership</a>
-
-                    </div>
-                    <!-- /.login-box-body -->
-                </div>
-                <!-- /.login-box -->
-
-                <!-- jQuery 3 -->
-                <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
-                <!-- Bootstrap 3.3.7 -->
-                <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-                <!-- iCheck -->
-                <script src="../../plugins/iCheck/icheck.min.js"></script>
-                <script>
-                $(function () {
-                    $('input').iCheck({
-                        checkboxClass: 'icheckbox_square-blue',
-                        radioClass: 'iradio_square-blue',
-                        increaseArea: '20%' /* optional */
-                    });
-                });
-            </script>
-
-
-        </body>
-
-        <?php echo ob_get_clean() ;
+</script>

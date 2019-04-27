@@ -11,8 +11,6 @@ function memberNext() {
 
         alert('tu as cliqué');
 
-    console.log(maxPage);
-
         let    xhttp = new XMLHttpRequest();
         let     currentPage = document.getElementById('current_donation_animal_by_member').textContent;
         let     start = (Number(currentPage)*5 + 1) ;
@@ -27,9 +25,7 @@ function memberNext() {
         var cli_id = '<?php echo $_GET["cli_id"] ; ?>'
 
         var url = 'http://localhost:8888/www/Kalaweit/ajax_get/donation_animal_by_member?cli_id='+cli_id+'&p='+start;
-
-        console.log(url);
-
+        
         xhttp.open("GET", url, true);
 
         xhttp.send();

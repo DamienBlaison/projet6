@@ -52,7 +52,15 @@ class Table_without_pagination
 
     for ($i = 0; $i < count($this->data['head']); $i++) {
 
-        $head .= '<th class="" tabindex="'.$i.'" aria-controls="control'.$i.'" rowspan="1" colspan="1" aria-sort="ascending">'.$this->data['head'][$i].'</th>';
+        if($i < 2){
+
+            $head .= '<th style="display:none;" class="" tabindex="'.$i.'" aria-controls="control'.$i.'" rowspan="1" colspan="1" aria-sort="ascending">'.$this->data['head'][$i].'</th>';
+
+        } else {
+
+            $head .= '<th class="" tabindex="'.$i.'" aria-controls="control'.$i.'" rowspan="1" colspan="1" aria-sort="ascending">'.$this->data['head'][$i].'</th>';
+        };
+
     };
 
     $head .= '</tr>';
@@ -70,12 +78,20 @@ class Table_without_pagination
 
         foreach ($value as $k => $v) {
 
-            $body .= '<td><a href="'.$this->link.$value[1].'">'.$v.'</a></td>';
-            // code...
+            if($k < 2)
+
+            {
+                $body .= '<td style = "display:none;">'.$v.'</a></td>';
+            }
+
+            else
+            {
+                $body .= '<td>'.$v.'</a></td>';
+            }
         }
 
         $body .= '<td style = "width:85px;">';
-        $body .=    '<a style="margin-right:5px;" href="'.$this->update.$value[0].'&from='.$from.'" class="btn btn-primary" id="update_'.$value[0].'" onclick ="return confirm(\'Etes vous sur de vouloir modifier cet enregistrement\')"><i class="fa fa-edit"></i></a>';
+        $body .=    '<a style="margin-right:5px;" href="'.$this->update.$value[0].'&from='.$from.'" class="btn btn-primary" id="update_'.$value[0].'"><i class="fa fa-edit"></i></a>';
         $body .=    '<a href="'.$this->delete.$value[0].'" class="btn btn-danger" id="delete_'.$value[0].'" onclick ="return confirm(\'Etes vous sur de vouloir supprimer cet enregistrement\')"><i class="fa  fa-trash"></i></a>';
         $body .= '</td>';
 

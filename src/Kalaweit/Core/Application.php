@@ -158,10 +158,10 @@ class Application
 
                             break;
 
-                            case 'donation_animal_by_member':
+                            case 'donation_by_member':
 
-                            if (method_exists($obj, 'donation_animal_by_member')){
-                                echo $obj->donation_animal_by_member();
+                            if (method_exists($obj, 'donation_by_member')){
+                                echo $obj->donation_by_member();
                             };
                             break;
 
@@ -179,6 +179,16 @@ class Application
                                 echo $obj->donation_dulan_by_member();
                             };
 
+                            case 'asso_cause_donation':
+
+                            if (method_exists($obj, 'asso_cause_donation')){
+                                echo $obj->asso_cause_donation();
+                            };
+                            case 'export_excel':
+
+                            if (method_exists($obj, 'export_excel')){
+                                echo $obj->export_excel();
+                            };
                             break;
 
                             default:
@@ -203,7 +213,7 @@ class Application
 
         {
             header("location:http://localhost:8888/www/Kalaweit/app_connexion/log_in");
-            echo '404.0';
+            //echo '404.0';
         }
 
     }

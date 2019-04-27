@@ -5,9 +5,8 @@ include ('../vendor/autoload.php');
  * Le but de l'autoloader est de ne plus avoir besoin de faie de include, require
  * Par contre il faut préfixer les classes par le chemin
  */
- 
-session_start();
 
+session_start();
 
 /**
  * Récupération de la configuration

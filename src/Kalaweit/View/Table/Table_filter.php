@@ -24,8 +24,11 @@ class Table_filter
         $render .= '</section>';
         $render .= '</div>';
 
-        echo $render;
+        echo $render ;
+
+        echo '<script src="/src/Kalaweit/View/Table/Table_filter.js"></script>';
 
         require_once( __DIR__ .'/../footer.php');
+
     }
 }
