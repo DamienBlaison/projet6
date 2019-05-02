@@ -69,8 +69,6 @@ class Users
     }
 
     function update(){
-        //(new \Kalaweit\Manager\Send_mail())->send_mail();
-
 
         if(isset($_POST)) {
 
@@ -79,6 +77,8 @@ class Users
             switch ($save_submit) {
 
                 case 'Enregistrer':
+
+                echo '<script> alert("je suis bien ici");</script>';
 
                 $p_dir = '/Documents/Avatar/';
                 $p_file_to_upload = 'avatar';

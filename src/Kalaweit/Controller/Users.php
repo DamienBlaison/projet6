@@ -102,11 +102,7 @@ class Users
             $box_download_avatar_content =
             [
                 $avatar_img = (new \Kalaweit\htmlElement\Img($user["user_avatar"],$user["user_first_name"],'avatar_user_admin'))->render(),
-
-                $avatar = (new \Kalaweit\htmlElement\Form_group_input_file("avatar","btn btn-default col-md-12", "20"))->render(),
-                $avatar_submit = (new \Kalaweit\htmlElement\Form_group_btn("submit","btn btn-primary col-md-12","new_avatar","Enregistrer"))->render()
-
-
+                $avatar_link = '<a href="http://localhost:8888/www/Kalaweit/users/crop?user_id='.$_GET['user_id'].'" class="btn btn-primary col-md-12">Modifier l\'Avatar</a>'
             ];
 
             $box_avatar_img_content = [
@@ -152,6 +148,12 @@ class Users
             $bdd = (new \Kalaweit\Manager\Connexion())->getBdd();
 
             (new \Kalaweit\Manager\Users($bdd))->delete();
+
+        }
+
+        function crop(){
+
+            (new \Kalaweit\View\Users\Crop_avatar())->render();
 
         }
 

@@ -89,7 +89,29 @@
          $box_asso_cause_autres_infos = new \Kalaweit\htmlElement\Box('Autres infos','box-primary',$content_box_autres_infos,$bootstrap_info_2);
 
          /**
-         *      boxs desciption
+         *      box photos
+         */
+
+         $picture1 = (new \Kalaweit\Manager\Asso_cause_media())->get_picture_1($bddM);
+         $picture2 = (new \Kalaweit\Manager\Asso_cause_media())->get_picture_2($bddM);
+
+         $pictures1 = new \Kalaweit\htmlElement\Img('/Documents/Asso_cause/'.$picture1["caum_file"],$picture1["caum_file"],"col-md-12 img_cau",$p_style ="");
+         $pictures2 = new \Kalaweit\htmlElement\Img('/Documents/Asso_cause/'.$picture2["caum_file"],$picture2["caum_file"],"col-md-12 img_cau",$p_style ="");
+
+         $content_box_pictures = [
+             $pictures1->render(),
+             '<a href="http://localhost:8888/www/Kalaweit/asso_cause/crop?cau_id='.$_GET["cau_id"].'&picture=1" class="btn btn-primary col-md-12">Modifier photo 1</a>',
+             $pictures2->render(),
+             '<a href="http://localhost:8888/www/Kalaweit/asso_cause/crop?cau_id='.$_GET["cau_id"].'&picture=2" class="btn btn-primary col-md-12">Modifier photo 2</a>',
+             ];
+
+         $bootstrap_pictures = [12,12,12,12];
+
+         $box_pictures = new \Kalaweit\htmlElement\Box('Photos','box-primary',$content_box_pictures,$bootstrap_pictures);
+
+
+         /**
+         *      boxs description
          */
 
         //francais
@@ -130,6 +152,7 @@
 
              "info_générale" => $box_asso_cause_info,
              "autres_infos"  => $box_asso_cause_autres_infos,
+             "pictures"      => $box_pictures,
              "description_fr" => $box_description_fr,
              "description_en" => $box_description_en,
              "description_es" => $box_description_es,

@@ -34,6 +34,10 @@ $user = (new \Kalaweit\Manager\Users($bdd))->get_id_from_Login($_SESSION['user_l
     <link rel="stylesheet" href="<?php echo $adminlte ?>/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
     <link rel="stylesheet" href="<?php echo $adminlte ?>/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+    <link  href="/../node_modules/Croppie-2.6-2.4/croppie.css" rel="stylesheet">
+
+
     <link rel="stylesheet" href="/Css/perso.css">
 
 </head>

@@ -22,8 +22,8 @@ try {
     $mail->SMTPAuth = true;                                 // Enable SMTP authentication
     $mail->Username = 'kalaweit.backoffice@gmail.com';      // SMTP username
     //$mail->Username ='damien.blaison@projet-bd-open-classroom.fr';
-    $mail->Password = 'KaLaWeIt2019!';                      // SMTP password
-    //$mail->Password = '1And157100!';                      // SMTP password
+    $mail->Password = '**************';                      // SMTP password
+    //$mail->Password = '**************';                      // SMTP password
 
     $mail->SMTPSecure = 'ssl';                              // Enable TLS encryption, `ssl` also accepted
     //$mail->SMTPSecure = 'tls';                              // Enable TLS encryption, `ssl` also accepted

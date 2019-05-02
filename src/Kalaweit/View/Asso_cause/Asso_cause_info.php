@@ -10,21 +10,33 @@ class Asso_cause_info
         $asso_cause_info .=    '</br>';
         $asso_cause_info .=    '<input type="text" name="num_form" value="1" class="hidden">';
         $asso_cause_info .=    '<div class="row">';
-        $asso_cause_info .=       ' <div class="col-md-6">';
+
+        $asso_cause_info .=       ' <div class="col-md-9">';
+        $asso_cause_info .=       ' <div class="col-md-12">';
         $asso_cause_info .=                 ($param["info_générale"])->render();
         $asso_cause_info .=         '</div>';
-        $asso_cause_info .=       ' <div class="col-md-6">';
+
+        $asso_cause_info .=       ' <div class="col-md-12">';
         $asso_cause_info .=                 ($param["autres_infos"])->render();
         $asso_cause_info .=         '</div>';
+        $asso_cause_info .=         '</div>';
+
+        $asso_cause_info .=       ' <div class="col-md-3">';
+        $asso_cause_info .=                 ($param["pictures"])->render();
+        $asso_cause_info .=         '</div>';
+
         $asso_cause_info .=       ' <div class="col-md-12">';
         $asso_cause_info .=                 ($param["description_fr"])->render();
         $asso_cause_info .=         '</div>';
+
         $asso_cause_info .=       ' <div class="col-md-12">';
         $asso_cause_info .=                 ($param["description_en"])->render();
         $asso_cause_info .=         '</div>';
+
         $asso_cause_info .=       ' <div class="col-md-12">';
         $asso_cause_info .=                 ($param["description_es"])->render();
         $asso_cause_info .=         '</div>';
+
         $asso_cause_info .=    '</div>';
         $asso_cause_info .=            '<div class="col-md-4">';
         $asso_cause_info .=               ' <button type="submit" class="btn btn-block btn-success btn-lg">Enregistrer</button>';

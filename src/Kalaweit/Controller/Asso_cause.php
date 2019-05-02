@@ -44,6 +44,12 @@ class Asso_cause
 
     }
 
+    function crop(){
+
+            (new \Kalaweit\View\Asso_cause\Crop_photo())->render($_GET["picture"]);
+
+    }
+
 
 }
 

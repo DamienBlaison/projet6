@@ -21,4 +21,22 @@ class Asso_cause_media
 
         return $config_media;
     }
+
+    public function get_picture_1($bdd){
+
+        $reqprep = $bdd->prepare("SELECT * FROM asso_cause_media WHERE cau_id= :cau_id && caum_code = 'PHOTO1' ");
+        $prepare = [":cau_id" => $_GET["cau_id"]];
+        $reqprep->execute($prepare);
+        return $data = $reqprep->fetch(\PDO::FETCH_ASSOC);
+
+    }
+
+    public function get_picture_2($bdd){
+
+        $reqprep = $bdd->prepare("SELECT * FROM asso_cause_media WHERE cau_id= :cau_id && caum_code = 'PHOTO2' ");
+        $prepare = [":cau_id" => $_GET["cau_id"]];
+        $reqprep->execute($prepare);
+        return $data = $reqprep->fetch(\PDO::FETCH_ASSOC);
+
+    }
 }

@@ -88,7 +88,7 @@ class Application
                             break;
                             default:
 
-                            header("location:http://localhost:8888/www/Kalaweit/app_connexion/log_in");
+                            //header("location:http://localhost:8888/www/Kalaweit/app_connexion/log_in");
                             //echo '404';
 
                             break;
@@ -191,9 +191,37 @@ class Application
                             };
                             break;
 
+                            case 'crop':
+
+                            if (method_exists($obj, 'crop')){
+                                echo $obj->crop();
+                            };
+                            break;
+
+                            case 'upload_avatar':
+
+                            if (method_exists($obj, 'upload_avatar')){
+                                echo $obj->upload_avatar();
+                            };
+                            break;
+
+                            case 'upload_photo1':
+
+                            if (method_exists($obj, 'upload_photo1')){
+                                echo $obj->upload_photo1();
+                            };
+                            break;
+                            
+                            case 'upload_photo2':
+
+                            if (method_exists($obj, 'upload_photo2')){
+                                echo $obj->upload_photo2();
+                            };
+                            break;
+
                             default:
-                            header("location:http://localhost:8888/www/Kalaweit/app_connexion/log_in");
-                            //echo '404';
+                        //header("location:http://localhost:8888/www/Kalaweit/app_connexion/log_in");
+                            echo '404';
 
                             break;
                         };
@@ -203,8 +231,8 @@ class Application
                 break;
 
                 default:
-                header("location:http://localhost:8888/www/Kalaweit/app_connexion/log_in");
-                //echo '404.1';
+                //header("location:http://localhost:8888/www/Kalaweit/app_connexion/log_in");
+                echo '404.1';
                 break;
             }
         }
@@ -213,7 +241,7 @@ class Application
 
         {
             header("location:http://localhost:8888/www/Kalaweit/app_connexion/log_in");
-            //echo '404.0';
+            echo '404.0';
         }
 
     }
