@@ -184,11 +184,13 @@ class Application
                             if (method_exists($obj, 'asso_cause_donation')){
                                 echo $obj->asso_cause_donation();
                             };
+
                             case 'export_excel':
 
                             if (method_exists($obj, 'export_excel')){
-                                echo $obj->export_excel();
+                                echo $obj->export_excel($parts[3]);
                             };
+
                             break;
 
                             case 'crop':
@@ -211,7 +213,7 @@ class Application
                                 echo $obj->upload_photo1();
                             };
                             break;
-                            
+
                             case 'upload_photo2':
 
                             if (method_exists($obj, 'upload_photo2')){

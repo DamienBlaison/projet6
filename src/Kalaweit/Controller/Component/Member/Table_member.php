@@ -41,18 +41,6 @@ class Table_member
 
             [
                 "type_balise"   => 'input',
-                "id"            => 'cli_id',
-                "type"          => 'text',
-                "name"          => 'cli_id',
-                "placeholder"   => 'Id',
-                "class"         => '1',
-                "value"         =>  $cli_id
-            ]
-
-            ,
-
-            [
-                "type_balise"   => 'input',
                 "id"            => 'cli_firstname',
                 "type"          => 'text',
                 "name"          => 'cli_firstname',
@@ -81,7 +69,7 @@ class Table_member
                 "type"          => 'text',
                 "name"          => 'cli_cp',
                 "placeholder"   => 'Zip',
-                "class"         => '1',
+                "class"         => '2',
                 "value"         =>  $cli_cp
             ]
 

@@ -31,6 +31,20 @@ class Annual_report
 
         ////////////////////////////////////////////////////////////
 
+        //         recuperation donnees des cards            //
+
+        ////////////////////////////////////////////////////////////
+
+        $card1_data = (new \Kalaweit\Manager\Asso_donation($bdd))->get_year_count($year);
+        $card2_data = (new \Kalaweit\Manager\Asso_donation_dulan($bdd))->get_year_count($year);
+        $card3_data = (new \Kalaweit\Manager\Asso_donation_forest($bdd))->get_year_count($year);
+
+        $card4_data = (new \Kalaweit\Manager\Asso_donation($bdd))->get_year_sum($year);
+        $card5_data = (new \Kalaweit\Manager\Asso_donation_dulan($bdd))->get_year_sum($year);
+        $card6_data = (new \Kalaweit\Manager\Asso_donation_forest($bdd))->get_year_sum($year);
+
+        ////////////////////////////////////////////////////////////
+
         //         recuperation donnees des graphiques            //
 
         ////////////////////////////////////////////////////////////
@@ -79,6 +93,13 @@ class Annual_report
 
         ////////////////////////////////////////////////////////////
 
+        $card1 = (new \Kalaweit\htmlElement\Box_info($card1_data[0], 'Dons Animaux', 'fa fa-paw'))->render();
+        $card2 = (new \Kalaweit\htmlElement\Box_info($card2_data[0], 'Dons Dulan', 'fa fa-map','bg-yellow'))->render();
+        $card3 = (new \Kalaweit\htmlElement\Box_info($card3_data[0], 'Dons Foret', 'fa fa-tree','bg-green'))->render();
+        $card4 = (new \Kalaweit\htmlElement\Box_info($card4_data[0].' €', 'Dons animaux', 'fa fa-paw'))->render();
+        $card5 = (new \Kalaweit\htmlElement\Box_info($card5_data[0].' €', 'Dons Dulan', 'fa fa-map','bg-yellow'))->render();
+        $card6 = (new \Kalaweit\htmlElement\Box_info($card6_data[0].' €', 'Dons Foret', 'fa fa-tree','bg-green'))->render();
+
         $chart1 = (new \Kalaweit\View\Annual_report\Component\Donation_one_shot)->render('donation_one_shot_animal_count','Nombre de dons animaux',$data1);
         $chart2 = (new \Kalaweit\View\Annual_report\Component\Donation_one_shot)->render('donation_one_shot_dulan_count','Nombre de dons dulan',$data2);
         $chart3 = (new \Kalaweit\View\Annual_report\Component\Donation_one_shot)->render('donation_one_shot_foret_count','Nombre de dons forêt',$data3);
@@ -110,10 +131,27 @@ class Annual_report
 
         $render .=              '<input value="Actualiser" type="submit" class="btn btn-primary btn-sm"></input>';
 
-        //$render .=                  '<a class="btn btn-primary btn-sm" href="http://localhost:8888/www/Kalaweit/Annual_report/list?y='.$select.'">Actualiser</a>';
         $render .=              '</div>';
         $render .=          '</form>';
         $render .=      '</div>';
+
+        $render .=      '<div class="row">';
+        $render  .=         '<div class="container-fluid">';
+        $render .=              '<div class="col-md-4">';
+        $render .=                  $card1;
+        $render .=              '</div>';
+        $render .=              '<div class="col-md-4">';
+        $render .=                  $card2;
+        $render .=              '</div>';
+        $render .=              '<div class="col-md-4">';
+        $render .=                  $card3;
+        $render .=              '</div>';
+        $render .=          '</div>';
+        $render .=      '</div>';
+
+
+
+
 
         $render .=      '<div class="row">';
         $render  .=     '<div class="container-fluid">';
@@ -129,6 +167,20 @@ class Annual_report
 
         $render .=      '</div>';
 
+        $render .=      '<div class="row">';
+        $render  .=         '<div class="container-fluid">';
+        $render .=              '<div class="col-md-4">';
+        $render .=                  $card4;
+        $render .=              '</div>';
+        $render .=              '<div class="col-md-4">';
+        $render .=                  $card5;
+        $render .=              '</div>';
+        $render .=              '<div class="col-md-4">';
+        $render .=                  $card6;
+        $render .=              '</div>';
+        $render .=          '</div>';
+        $render .=      '</div>';
+
         $render .=      '<div>';
         $render .=          $chart4;
         $render .=          $chart5;
@@ -142,6 +194,13 @@ class Annual_report
         $render .=      '</div>';
 
         echo $render;
+
+
+
+
+
+
+
 
         require_once( __DIR__ .'/../footer.php');
 

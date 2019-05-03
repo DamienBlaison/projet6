@@ -25,6 +25,19 @@ class Member_info
         $member_info .=        '<div class="col-md-6">';
         $member_info .=            ($param["box_cli_data"])->render();
         $member_info .=       ' </div>';
+
+        $member_info .=       ' <div class="col-md-12">';
+        $member_info .=         ' <div class="col-md-4">';
+        $member_info .=             $param["card1"];
+        $member_info .=         ' </div>';
+        $member_info .=         ' <div class="col-md-4">';
+        $member_info .=              $param["card2"];
+        $member_info .=         ' </div>';
+        $member_info .=         ' <div class="col-md-4">';
+        $member_info .=              $param["card3"];
+        $member_info .=         ' </div>';
+        $member_info .=       ' </div>';
+
         $member_info .=       ' <div class="col-md-12">';
         $member_info .=            '<div class="col-md-12">';
         $member_info .=                ($param["box_cli_comment"])->render();

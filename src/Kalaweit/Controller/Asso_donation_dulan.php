@@ -28,7 +28,7 @@ class Asso_donation_dulan
         $bdd = new \Kalaweit\Manager\Connexion();
         $bdd = $bdd->getBdd();
 
-            (new \Kalaweit\Manager\Asso_donation_dulan($bdd))->delete($_GET['donation_dulan_id']);
+            (new \Kalaweit\Manager\Asso_donation_dulan($bdd))->delete($_GET['don_id']);
 
     }
 

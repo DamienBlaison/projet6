@@ -75,7 +75,7 @@ class Asso_adhesion
 
             asso_adhesion.adhesion_ts DESC
 
-            LIMIT 0,9
+            LIMIT 0,10
             ");
 
 
@@ -282,11 +282,11 @@ class Asso_adhesion
 
                             switch ($_GET["from"]) {
                                 case 'add':
-                                    header("Location: http://localhost:8888/www/Kalaweit/asso_adhesion/add");
+                                header("Location: http://localhost:8888/www/Kalaweit/asso_adhesion/add");
                                 break;
 
                                 default:
-                                    header("Location: http://localhost:8888/www/Kalaweit/asso_adhesion/list/1");
+                                header("Location: http://localhost:8888/www/Kalaweit/asso_adhesion/list/1");
                                 break;
                             }
 
@@ -394,6 +394,83 @@ class Asso_adhesion
 
                         }
 
+                        public function get_list_export(){
+
+                            $where = '';
+
+                            $param_request = $this->Get_param_request();
+
+                            foreach ($param_request[0] as $key => $value) {
+                                if($value != ''){
+
+                                    switch (substr($key,0,3)) {
+
+                                        case 'adh':
+                                        $key_table = 'asso_adhesion.'.$key;// code...
+                                        break;
+                                        case 'cli':
+                                        $key_table = 'P2.'.$key;// code...
+                                        break;
+
+                                    }
+
+                                    $where .= ' AND '.$key_table.' LIKE :'.$key ;
 
 
-                    }
+                                }
+                            }
+
+                            $reqprep = $this->bdd->prepare(
+                                "SELECT
+
+                                asso_adhesion.adhesion_id as Id_adhesion,
+
+                                asso_adhesion.cli_id as Id_Parrain,
+                                P2.cli_firstname as Prénom,
+                                P2.cli_lastname as Nom,
+
+                                asso_adhesion.adhesion_mnt as Montant,
+                                asso_adhesion.adhesion_ts as Date_creation
+
+                                FROM
+
+                                asso_adhesion
+
+                                LEFT JOIN crm_client as P2 ON P2.cli_id = asso_adhesion.cli_id
+
+                                WHERE
+
+                                1=1
+
+                                $where
+
+                                ORDER BY
+
+                                asso_adhesion.adhesion_ts DESC
+
+                                ");
+
+                                if($param_request[0] != []){
+
+                                    foreach ($param_request[0] as $key => $value) {
+                                        if($value != ''){
+
+                                            $reqprep->bindValue(":".$key,$value);
+
+
+                                        }
+                                    }
+                                }
+
+                                $reqprep->execute();
+
+                                $data = [
+                                    "content"     => $reqprep->fetchAll(\PDO::FETCH_NUM),
+                                    "head"              => ["Id","Id_membre","Prénom","Nom","Montant","Date enregistrement"],
+
+                                ];
+
+                                return $data;
+                            }
+
+                        }

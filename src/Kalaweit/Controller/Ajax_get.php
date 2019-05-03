@@ -220,65 +220,98 @@ class Ajax_get
 
             $reqprep_insert = $bdd->prepare(
                 "INSERT INTO asso_cause_media (cau_id,caum_code,caum_type,caum_file,caum_lang)
-                 VALUES (:cau_id,'PHOTO1','PHOTO',:caum_file,'__')");
+                VALUES (:cau_id,'PHOTO1','PHOTO',:caum_file,'__')");
 
 
-            $prepare_delete = [
-                ":cau_id" => $_GET["cau_id"],
-            ];
+                $prepare_delete = [
+                    ":cau_id" => $_GET["cau_id"],
+                ];
 
-            $prepare_insert = [
-                ":cau_id" => $_GET["cau_id"],
-                ":caum_file"=> 'p1_'.$_GET['cau_id'].'.png'
-            ];
+                $prepare_insert = [
+                    ":cau_id" => $_GET["cau_id"],
+                    ":caum_file"=> 'p1_'.$_GET['cau_id'].'.png'
+                ];
 
-            $reqprep_delete->execute($prepare_delete);
+                $reqprep_delete->execute($prepare_delete);
 
-            $reqprep_insert->execute($prepare_insert);
+                $reqprep_insert->execute($prepare_insert);
 
+            }
         }
-    }
 
-    function upload_photo2(){
+        function upload_photo2(){
 
-        if(isset($_POST["image"]))
-        {
+            if(isset($_POST["image"]))
+            {
 
-            $recup = $_POST["image"]; // image encodée en base 64;
+                $recup = $_POST["image"]; // image encodée en base 64;
 
-            $image_array_1 = explode(";" , $recup);
-            $image_array_2 = explode("," , $image_array_1[1]);
+                $image_array_1 = explode(";" , $recup);
+                $image_array_2 = explode("," , $image_array_1[1]);
 
-            $data = base64_decode($image_array_2[1]);
-            $target_file = '/Documents/Asso_cause/p2_'.$_GET['cau_id'].'.png';
-            $imageName = "..".$target_file;
+                $data = base64_decode($image_array_2[1]);
+                $target_file = '/Documents/Asso_cause/p2_'.$_GET['cau_id'].'.png';
+                $imageName = "..".$target_file;
 
-            file_put_contents($imageName, $data);
+                file_put_contents($imageName, $data);
 
-            $bddM = new \Kalaweit\Manager\Connexion();
-            $bdd = $bddM->getBdd();
+                $bddM = new \Kalaweit\Manager\Connexion();
+                $bdd = $bddM->getBdd();
 
-            $reqprep_delete = $bdd->prepare( "DELETE FROM asso_cause_media WHERE cau_id = :cau_id and caum_code = 'PHOTO2'");
+                $reqprep_delete = $bdd->prepare( "DELETE FROM asso_cause_media WHERE cau_id = :cau_id and caum_code = 'PHOTO2'");
 
-            $reqprep_insert = $bdd->prepare(
-                "INSERT INTO asso_cause_media (cau_id,caum_code,caum_type,caum_file,caum_lang)
-                 VALUES (:cau_id,'PHOTO2','PHOTO',:caum_file,'__')");
+                $reqprep_insert = $bdd->prepare(
+                    "INSERT INTO asso_cause_media (cau_id,caum_code,caum_type,caum_file,caum_lang)
+                    VALUES (:cau_id,'PHOTO2','PHOTO',:caum_file,'__')");
 
 
-            $prepare_delete = [
-                ":cau_id" => $_GET["cau_id"],
-            ];
+                    $prepare_delete = [
+                        ":cau_id" => $_GET["cau_id"],
+                    ];
 
-            $prepare_insert = [
-                ":cau_id" => $_GET["cau_id"],
-                ":caum_file"=> 'p2_'.$_GET['cau_id'].'.png'
-            ];
+                    $prepare_insert = [
+                        ":cau_id" => $_GET["cau_id"],
+                        ":caum_file"=> 'p2_'.$_GET['cau_id'].'.png'
+                    ];
 
-            $reqprep_delete->execute($prepare_delete);
+                    $reqprep_delete->execute($prepare_delete);
 
-            $reqprep_insert->execute($prepare_insert);
+                    $reqprep_insert->execute($prepare_insert);
 
+                }
+            }
+            function export_excel($uri){
+
+                $bddM = new \Kalaweit\Manager\Connexion();
+                $bdd = $bddM->getBdd();
+
+                switch ($uri) {
+                    case 'member':
+                    $export = (new \Kalaweit\Manager\Member($bdd))->get_list_export();
+                    break;
+
+                    case 'asso_cause':
+                    $export = (new \Kalaweit\Manager\Asso_cause($bdd))->get_list_export();
+                    break;
+
+                    case 'asso_adhesion':
+                    $export = (new \Kalaweit\Manager\Asso_adhesion($bdd))->get_list_export();
+                    break;
+
+                    case 'asso_donation':
+                    $export = (new \Kalaweit\Manager\Asso_donation($bdd))->get_list_export();
+                    break;
+
+                    case 'asso_donation_dulan':
+                    $export = (new \Kalaweit\Manager\Asso_donation_dulan($bdd))->get_list_export();
+                    break;
+
+                    case 'asso_donation_forest':
+                    $export = (new \Kalaweit\Manager\Asso_donation_forest($bdd))->get_list_export();
+                    break;
+                }
+
+                (new \Kalaweit\Export\Export_Excel())->render($export);
+
+            }
         }
-    }
-
-}

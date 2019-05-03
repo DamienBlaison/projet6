@@ -26,7 +26,7 @@ class Crop_photo
 
                                     <div id="image_demo" class=""></div>
 
-                                </div>`
+                                </div>
                                 <div class="">
                                     <label for="upload_image" class="btn btn-default ">Choisir un fichier</label>
 

@@ -28,7 +28,7 @@ class Asso_donation_forest
         $bdd = new \Kalaweit\Manager\Connexion();
         $bdd = $bdd->getBdd();
 
-            (new \Kalaweit\Manager\Asso_donation_forest($bdd))->delete($_GET['donation_forest_id']);
+            (new \Kalaweit\Manager\Asso_donation_forest($bdd))->delete();
 
     }
 

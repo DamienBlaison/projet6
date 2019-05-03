@@ -39,35 +39,11 @@ class Table_list_adhesion
 
             [
                 "type_balise"   => 'input',
-                "id"            => 'adhesion_id',
-                "type"          => 'text',
-                "name"          => 'adhesion_id',
-                "placeholder"   => 'Id_adhesion',
-                "class"         => '2',
-                "value"         =>  $adhesion_id
-            ]
-
-            ,
-
-            [
-                "type_balise"   => 'input',
-                "id"            => 'cli_id',
-                "type"          => 'text',
-                "name"          => 'cli_id',
-                "placeholder"   => 'Membre_Id',
-                "class"         => '2',
-                "value"         =>  $cli_id
-            ]
-
-            ,
-
-            [
-                "type_balise"   => 'input',
                 "id"            => 'cli_firstname',
                 "type"          => 'text',
                 "name"          => 'cli_firstname',
                 "placeholder"   => 'Prénom',
-                "class"         => '2',
+                "class"         => '5',
                 "value"         =>  $cli_firstname
             ]
 
@@ -79,7 +55,7 @@ class Table_list_adhesion
                 "type"          => 'text',
                 "name"          => 'cli_lastname',
                 "placeholder"   => 'Nom',
-                "class"         => '2',
+                "class"         => '5',
                 "value"         =>  $cli_lastname
             ]
 
@@ -90,6 +66,7 @@ class Table_list_adhesion
             "table"             => $list["list_adhesion"],
             "head"              => $list["head"],
             "count"             => $list["count"][0],
+            "title"             => 'Liste des adhésions'
 
         ];
 

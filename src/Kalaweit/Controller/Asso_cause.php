@@ -27,7 +27,7 @@ class Asso_cause
         $p_render = (new \Kalaweit\Controller\Component\Asso_cause\Table_asso_cause)->render();
 
 
-        return (new \Kalaweit\View\Member\Table\Table_filter)->render($p_render);
+        return (new \Kalaweit\View\Table\Table_filter)->render($p_render);
 
     }
 

@@ -46,7 +46,7 @@ class Asso_cause
 
         foreach ($param_request[0] as $key => $value) {
 
-            if($value != ''&& $key !='export_name'){
+            if($value != '' && $key !='export_name'){
 
                 switch ($key) {
                     case 'ac_name':

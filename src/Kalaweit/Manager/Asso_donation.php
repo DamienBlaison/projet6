@@ -77,6 +77,8 @@ class Asso_donation
         LEFT JOIN asso_cause as P1 ON P1.cau_id = asso_donation.cau_id
         LEFT JOIN crm_client as P2 ON P2.cli_id = asso_donation.cli_id
 
+        WHERE asso_donation.cau_id != '703' and asso_donation.cau_id!= '700'
+
         ORDER BY
 
         asso_donation.don_ts DESC
@@ -115,6 +117,8 @@ class Asso_donation
             LEFT JOIN crm_client ON crm_client.cli_id=asso_donation.cli_id
 
             WHERE asso_donation.cau_id = :cau_id
+
+            and cau_id != '703' and cau_id!= '700'
 
             ORDER BY asso_donation.don_ts DESC
 
@@ -202,9 +206,35 @@ class Asso_donation
 
     }
 
+    function get_donation_by_member_card(){
+
+        $reqprep = $this->bdd->prepare(
+        "SELECT SUM(don_mnt)
+
+        FROM
+
+        asso_donation
+
+        WHERE cli_id = :cli_id AND cau_id != 703 AND cau_id != 700 AND YEAR(don_ts) = YEAR(NOW())
+
+
+        ");
+
+        $prepare = [
+            ":cli_id" => $_GET['cli_id'],
+        ];
+
+        $reqprep->execute($prepare);
+
+        $return = $reqprep->fetch(\Pdo::FETCH_NUM);
+
+    return $return ;
+
+    }
+
     function get_list(){
 
-        $where = '';
+        $where = " ";
 
         $param_request = $this->Get_param_request();
 
@@ -226,7 +256,6 @@ class Asso_donation
                 }
 
                 $where .= ' AND '.$key_table.' LIKE :'.$key ;
-
 
             }
         }
@@ -262,6 +291,8 @@ class Asso_donation
         WHERE
 
         1=1
+
+        AND P1.cau_id != '703' AND P1.cau_id!= '700'
 
         $where
 
@@ -331,7 +362,6 @@ class Asso_donation
 
                 $where .= ' AND '.$key_table.' LIKE :'.$key ;
 
-
             }
         }
 
@@ -367,6 +397,8 @@ class Asso_donation
 
         $where
 
+        and asso_donation.cau_id != '703' and asso_donation.cau_id != '700'
+
         ORDER BY
 
         asso_donation.don_ts DESC
@@ -380,19 +412,15 @@ class Asso_donation
 
                     $reqprep->bindValue(":".$key,$value);
 
-
                 }
             }
         }
 
         $reqprep->execute();
 
-        $result = $reqprep->fetchAll(\PDO::FETCH_NUM);
-
-
             $data = [
-                "content"     => $result,
-                "head"              => ["Id","Id_membre","Prénom","Nom","Animal","Montant","Date enregistrement"],
+                "content"     =>  $reqprep->fetchAll(\PDO::FETCH_NUM),
+                "head"        => ["Id","Id_membre","Prénom","Nom","Animal","Montant","Date enregistrement"],
             ];
 
             return $data;
@@ -485,7 +513,7 @@ class Asso_donation
 
         for ($i=1; $i < 13; $i++) {
 
-            $sum = $this->bdd->query("SELECT COUNT(don_mnt) FROM asso_donation WHERE YEAR(don_ts)= $year and MONTH(don_ts)= $i ");
+            $sum = $this->bdd->query("SELECT COUNT(don_mnt) FROM asso_donation WHERE YEAR(don_ts)= $year and MONTH(don_ts)= $i and cau_id != '703' and cau_id!= '700'");
 
             array_push($data,$sum->fetch(\PDO::FETCH_NUM ));
 
@@ -503,7 +531,7 @@ class Asso_donation
 
         for ($i=1; $i < 13; $i++) {
 
-            $sum = $this->bdd->query("SELECT SUM(don_mnt) FROM asso_donation WHERE YEAR(don_ts)= $year and MONTH(don_ts)= $i ");
+            $sum = $this->bdd->query("SELECT SUM(don_mnt) FROM asso_donation WHERE YEAR(don_ts)= $year and MONTH(don_ts)= $i and cau_id != '703' and cau_id!= '700'");
 
             array_push($data,$sum->fetch(\PDO::FETCH_NUM ));
 
@@ -528,7 +556,7 @@ class Asso_donation
 
         for ($i=1; $i < 13; $i++) {
 
-            $sum = $this->bdd->query("SELECT SUM(don_mnt) FROM asso_donation WHERE YEAR(don_ts)= $year and MONTH(don_ts)= $i ");
+            $sum = $this->bdd->query("SELECT SUM(don_mnt) FROM asso_donation WHERE YEAR(don_ts)= $year and MONTH(don_ts)= $i and cau_id != '703' and cau_id!= '700'");
 
             $temp = $sum->fetch(\PDO::FETCH_NUM );
 
@@ -548,7 +576,7 @@ class Asso_donation
 
         for ($i=1; $i < 13; $i++) {
 
-            $sum = $this->bdd->query("SELECT COUNT(don_mnt) FROM asso_donation WHERE YEAR(don_ts)= $year and MONTH(don_ts)= $i ");
+            $sum = $this->bdd->query("SELECT COUNT(don_mnt) FROM asso_donation WHERE YEAR(don_ts)= $year and MONTH(don_ts)= $i and cau_id != '703' and cau_id!= '700'");
 
             $temp = $sum->fetch(\PDO::FETCH_NUM );
 
@@ -556,6 +584,28 @@ class Asso_donation
         }
 
         return $data;
+
+    }
+
+    public function get_year_count($year){
+
+        $sum = $this->bdd->query("SELECT COUNT(don_mnt) FROM asso_donation WHERE YEAR(don_ts)= $year and cau_id != '703' and cau_id!= '700'");
+
+        $return = $sum->fetch(\PDO::FETCH_NUM);
+        if ($return[0] == NULL){ $return[0] = '0';}
+
+        return $return;
+
+    }
+
+    public function get_year_sum($year){
+
+        $sum = $this->bdd->query("SELECT SUM(don_mnt) FROM asso_donation WHERE YEAR(don_ts)= $year and cau_id != '703' and cau_id!= '700'");
+
+        $return = $sum->fetch(\PDO::FETCH_NUM);
+        if ($return[0] == NULL){ $return[0] = '0';}
+
+        return $return;
 
     }
 

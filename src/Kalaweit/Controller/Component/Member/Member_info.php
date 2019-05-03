@@ -70,13 +70,28 @@ class Member_info
 
         $box_cli_comment        = new \Kalaweit\htmlElement\Box('Commentaire','box-primary',[$cli_comment->render()],[12]);
 
+        $card1_data = (new \Kalaweit\Manager\Asso_donation($bddM))->get_donation_by_member_card();
+        $card2_data = (new \Kalaweit\Manager\Asso_donation_dulan($bddM))->get_donation_dulan_by_member_card();
+        $card3_data = (new \Kalaweit\Manager\Asso_donation_forest($bddM))->get_donation_forest_by_member_card();
+
+
+
+
+        $card1 = (new \Kalaweit\htmlElement\Box_info($card1_data[0]. ' €', 'Dons Animaux', 'fa fa-paw'))->render();
+        $card2 = (new \Kalaweit\htmlElement\Box_info($card2_data[0]. ' €', 'Dons Dulan', 'fa fa-map','bg-yellow'))->render();
+        $card3 = (new \Kalaweit\htmlElement\Box_info($card3_data[0]. ' €', 'Dons Foret', 'fa fa-tree','bg-green'))->render();
+
         $param = [
 
             "box_info_member"   => $box_info_member,
             "box_info_donator"  => $box_info_donator,
             "box_other_info"    => $box_other_info,
             "box_cli_data"      => $box_cli_data,
-            "box_cli_comment"   => $box_cli_comment
+            "box_cli_comment"   => $box_cli_comment,
+            "card1"             => $card1,
+            "card2"             => $card2,
+            "card3"             => $card3,
+
 
         ];
 

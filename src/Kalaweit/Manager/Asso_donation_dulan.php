@@ -154,6 +154,32 @@ class Asso_donation_dulan
 
                 }
 
+                function get_donation_dulan_by_member_card(){
+
+                    $reqprep = $this->bdd->prepare(
+                    "SELECT SUM(don_mnt)
+
+                    FROM
+
+                    asso_donation
+
+                    WHERE cli_id = :cli_id AND cau_id = 700 AND YEAR(don_ts) = YEAR(NOW())
+
+
+                    ");
+
+                    $prepare = [
+                        ":cli_id" => $_GET['cli_id'],
+                    ];
+
+                    $reqprep->execute($prepare);
+
+                    $return = $reqprep->fetch(\Pdo::FETCH_NUM);
+
+                return $return ;
+
+                }
+
 
 
                 function get_list(){
@@ -315,27 +341,38 @@ class Asso_donation_dulan
 
                             ");
 
+                            if($param_request[0] != []){
+
+                                foreach ($param_request[0] as $key => $value) {
+                                    if($value != '' && $key != 'export_name' ){
+
+                                        $reqprep->bindValue(":".$key,$value);
+
+                                    }
+                                }
+                            }
+
 
                             $reqprep->execute();
 
                             $data = [
                                 "content"     => $reqprep->fetchAll(\PDO::FETCH_NUM),
-                                "head"              => ["Id","Id_membre","Prénom","Nom","Montant","Date enregistrement"],
+                                "head"        => ["Id","Id_membre","Prénom","Nom","Montant","Date enregistrement"],
                                                         ];
 
                             return $data;
                         }
 
-                    public function delete()
-                    {
-                        $reqprep = $this->bdd->prepare(
-                            "DELETE FROM asso_donation
-                            WHERE don_id = :don_id ");
-                            $prepare = [":don_id" => $_GET["donation_dulan_id"]];
+                        public function delete()
+                        {
+                            $reqprep = $this->bdd->prepare(
+                                "DELETE FROM asso_donation
+                                 WHERE don_id = :don_id ");
+                            $prepare = [":don_id" => $_GET["don_id"]];
 
                             $reqprep->execute($prepare);
 
-                            header("Location: ".$_SERVER['HTTP_REFERER']);
+                        header("Location: ".$_SERVER['HTTP_REFERER']);
 
                         }
 
@@ -478,6 +515,28 @@ class Asso_donation_dulan
                             }
 
                             return $data;
+
+                        }
+                        public function get_year_count($year){
+
+                            $sum = $this->bdd->query("SELECT COUNT(don_mnt) FROM asso_donation WHERE YEAR(don_ts)= $year and cau_id='700' ");
+
+                            $return = $sum->fetch(\PDO::FETCH_NUM);
+                            if ($return[0] == NULL){ $return[0] = '0';}
+
+                            return $return;
+
+                        }
+
+                        public function get_year_sum($year){
+
+                            $sum = $this->bdd->query("SELECT SUM(don_mnt) FROM asso_donation WHERE YEAR(don_ts)= $year and cau_id='700' ");
+
+                            $return = $sum->fetch(\PDO::FETCH_NUM);
+
+                            if ($return[0] == NULL){ $return[0] = '0';}
+
+                            return $return;
 
                         }
 

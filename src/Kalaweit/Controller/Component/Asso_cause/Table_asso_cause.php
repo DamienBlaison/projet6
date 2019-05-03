@@ -152,7 +152,8 @@ class Table_asso_cause
 
         return $p_render = [
             "fields"     => $fields ,
-            "data"       => $data
+            "data"       => $data,
+            "id"         =>  'asso_cause'
         ];
 
 
