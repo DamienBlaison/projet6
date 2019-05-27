@@ -1,31 +1,36 @@
 <?php
+/* classe permetttant de récupérer les informations relatives au au cause sous forme de liste paginée via l'url */
+
 namespace Kalaweit\Controller\Component\Asso_cause;
 
-/**
- *
- */
 class Table_asso_cause
 {
     use \Kalaweit\Transverse\Get_param_request;
 
     function render(){
 
+        /* instanciation des recupération des elements de filtre via le trait Get_param_request*/
+
         $param_request = $this->Get_param_request();
+
+        /* instanciation de la connexion a la bdd */
 
         $bddM = new \Kalaweit\Manager\Connexion();
         $bddM = $bddM->getBdd();
 
+        /* instanciation de l'objet asso_cause_media */
+
         $asso_causeM        = new \Kalaweit\Manager\Asso_cause($bddM);
+
+        /* application de la methode get_list pour récupération des infos de la liste des causes*/
 
         $list = $asso_causeM->get_list($param_request);
 
+        /* initialisation de la variable $requet en chaine caractere vide */
+
         $request = '';
 
-        if(isset($list[5])){
-            $page = $list[5];
-        }else{
-            $page = 1;
-        }
+        /* vérifcaition si des param de request sont passés dans l'url , si oui on initialise les variables pour les afficher dans le formulaire */
 
         if(isset($_GET['cau_id'])){$cau_id = $_GET['cau_id']; } else { $cau_id = '';};
         if(isset($_GET['ac_name'])){$ac_name = $_GET['ac_name']; } else { $ac_name = '';};
@@ -38,6 +43,8 @@ class Table_asso_cause
         if(isset($_GET['actd_7'])){$actd_7 = $_GET['actd_7']; } else { $actd_7 = '';};
         if(isset($_GET['actd_8'])){$actd_8 = $_GET['actd_8']; } else { $actd_8 = '';};
         if(isset($_GET['actd_9'])){$actd_9 = $_GET['actd_9']; } else { $actd_9 = '';};
+
+        /* définition des champs de recherches sous forme de tableaux que l'on pourra parcourrir*/
 
         $fields =
 
@@ -137,7 +144,7 @@ class Table_asso_cause
 
         ];
 
-        //($list);
+        /* définition des champs des infos à passées à la vue via un tableau de data */
 
         $data =[
 
@@ -148,15 +155,17 @@ class Table_asso_cause
 
         ];
 
+        /***************************************************************************************************************************/
 
+        /**     Synthese des elements à passer a la vue   **/
+
+        /***************************************************************************************************************************/
 
         return $p_render = [
             "fields"     => $fields ,
             "data"       => $data,
             "id"         =>  'asso_cause'
         ];
-
-
 
     }
 

@@ -2,9 +2,6 @@
 
 namespace Kalaweit\htmlElement;
 
-/** $boxcontent = ['<input type="text">input1</input>','<textarea></textarea>'];
-*   $box = new \Kalaweit\htmlElement\Box('Box test','box-danger',$boxcontent);
-*/
 class Form_group_textarea{
 
     protected $name;

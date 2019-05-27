@@ -2,37 +2,43 @@
 namespace Kalaweit\Controller\Component\Users;
 
 /**
- *
- */
+*
+*/
 class Table_users
 {
     use \Kalaweit\Transverse\Get_param_request;
 
     function render(){
 
+        /* instanciation des recupération des elements de filtre via le trait Get_param_request*/
+
         $param_request = $this->Get_param_request();
+
+        /* instanciation de la connexion a la bdd */
 
         $bddM = new \Kalaweit\Manager\Connexion();
         $bddM = $bddM->getBdd();
 
-        //$member         = new \Kalaweit\Model\Member();
+        /* instanciation de l'objet Users */
+
         $userM        = new \Kalaweit\Manager\Users($bddM);
+
+        /* application de la methode get_list pour récupération des infos de la liste des causes*/
 
         $list = $userM->get_list($param_request);
 
         $request = '';
 
-        if(isset($list[5])){
-            $page = $list[5];
-        }else{
-            $page = 1;
-        }
+        /* vérifcaition si des param de request sont passés dans l'url , si oui on initialise les variables pour les afficher dans le formulaire */
+
 
         if(isset($_GET['user_first_name'])){ $user_first_name = $_GET['user_first_name'];} else { $user_first_name = '';};
         if(isset($_GET['user_last_name'])){ $user_last_name = $_GET['user_last_name'];} else { $user_last_name = '';};
         if(isset($_GET['user_active'])){ $user_active = $_GET['user_active'];} else { $user_active = '';};
         if(isset($_GET['user_email'])){ $user_email = $_GET['user_email'];} else { $user_email = '';};
         if(isset($_GET['user_login'])){ $user_login = $_GET['user_login'];} else { $user_login = '';};
+
+        /* définition des champs de recherches sous forme de tableaux que l'on pourra parcourrir*/
 
         $fields =
 
@@ -98,6 +104,8 @@ class Table_users
 
         ];
 
+        /* définition des champs des infos à passées à la vue via un tableau de data */
+
         $data =[
             "table"             => $list["content"],
             "head"              => $list["head"],
@@ -106,6 +114,12 @@ class Table_users
         ];
 
         $id = "list_users_filtered";
+
+        /***************************************************************************************************************************/
+
+        /**     Synthese des elements à passer a la vue   **/
+
+        /***************************************************************************************************************************/
 
         return $p_render = [
             "fields"     => $fields ,

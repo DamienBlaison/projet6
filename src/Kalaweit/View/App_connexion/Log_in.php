@@ -45,9 +45,12 @@ class Log_in
                             <button type="submit" class="btn btn-primary btn-block btn-flat">Se connecter</button>
 
                     </form>
-                    <div class="social-auth-links text-center">
-                        <a href="#">Mot de passe oublié</a><br>
-                    </div>
+                    
+                    <!--
+                        <div class="social-auth-links text-center">
+                            <a href="#">Mot de passe oublié</a><br>
+                        </div>
+                    -->
                 </div>
 
                 <?php echo ob_get_clean() ;

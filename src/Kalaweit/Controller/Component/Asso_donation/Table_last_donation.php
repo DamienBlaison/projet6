@@ -1,26 +1,34 @@
 <?php
+/* classe permmetant d'afficher les derniers dons saisi, cela permet à l'utilisateur de vérifier que sa saisie à bien été enregistrée en BDD */
 
 namespace Kalaweit\Controller\Component\Asso_donation;
 
-/**
- *
- */
 class Table_last_donation
 {
 
     public function render(){
 
+    /* instanciation de la connexion à la BDD */
+
     $bdd = new \Kalaweit\Manager\Connexion();
     $bdd = $bdd->getBdd();
 
+    /* récupéraiton des données via le manager asso_donation dans un array */
+
     $data   = (new \Kalaweit\Manager\asso_donation($bdd))->get_last();
+
+    /* définition des éléménts de paramétrage à passer au composant TABLE WITHOUT PAGINATION */
+
     $link = '/www/Kalaweit/member/get?cli_id=';
     $update = 'http://localhost:8888/www/Kalaweit/asso_donation/update?don_id=';
     $delete = 'http://localhost:8888/www/Kalaweit/asso_donation/delete?don_id=';
     $add = 'http://localhost:8888/www/Kalaweit/asso_donation/add';
 
+    /* instanciation de l'objet Table_without_pagination en lui passant les elements précedement défini */
+
     $table_last_donation = (new \Kalaweit\htmlElement\Table_without_pagination("Les derniers dons",$data,'Table_last_donation',$link,$update,$delete,$add))->render();
 
+    /* renvoi de l'objet pour affichage */
 
     return $table_last_donation;
 

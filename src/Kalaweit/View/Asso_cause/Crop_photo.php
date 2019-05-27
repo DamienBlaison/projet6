@@ -103,6 +103,7 @@ class Crop_photo
                             type:'base64',
                             size: 'viewport'
                         }).then(function(response){
+
                             $.ajax({
 
                                 url: '/www/Kalaweit/Ajax_get/upload_photo'+num_picture[1]+cau_id,

@@ -419,7 +419,7 @@ class Asso_adhesion
 
                                 }
                             }
-
+                        
                             $reqprep = $this->bdd->prepare(
                                 "SELECT
 

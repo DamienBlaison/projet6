@@ -1,19 +1,23 @@
 <?php
+/* classe permettant la génaration du contenu de la page d informations des membres */
 
 namespace Kalaweit\Controller\Component\Member;
 
-/**
- *
- */
 class Member_info
 {
 
     function render(){
 
+        /* récupération des elements du fichier de config*/
+
         $config = \Kalaweit\Core\Config::getInstance();
+
+        /* instanciation de la connexion a la bdd */
 
         $bddM = new \Kalaweit\Manager\Connexion();
         $bddM = $bddM->getBdd();
+
+        /* initialisation des objets requis */
 
         $crm_countryM = new \Kalaweit\Manager\Crm_country();
         $cli_langM  = new \Kalaweit\Manager\Cli_lang();
@@ -30,16 +34,27 @@ class Member_info
                     $desc_member    = $memberM->get($member,$_GET['cli_id']);
         };
 
+        /* initialisation des compsants HTML */
+
+        /* info membre */
+
         $cli_lastname       = new \Kalaweit\htmlElement\Form_group_input('cli_lastname','Nom',$desc_member['cli_lastname'],'fa fa-user');
         $cli_firstname      = new \Kalaweit\htmlElement\Form_group_input('cli_firstname','Prénom', $desc_member['cli_firstname'],'fa fa-user');
+
         $box_info_member    = new \Kalaweit\htmlElement\Box('Informations membres','box-primary',[$cli_lastname->render(),$cli_firstname->render()],[12,12]);
+
+        /* info parrain */
 
         $clic_id            = new \Kalaweit\htmlElement\Form_group_select('clic_id',$crm_client_categoryM->getAll($bddM),$desc_member['clic_id'],'fa fa-user',"clic_name");
 
         $box_info_donator   = new \Kalaweit\htmlElement\Box('Type de donateur','box-primary',[$clic_id->render()],[12]);
 
+        /* autres infos */
+
         $cli_lang           = new \Kalaweit\htmlElement\Form_group_select('cli_lang',$cli_langM->getAll($bddM),$desc_member['cli_lang'],'fa fa-user',"config");
         $box_other_info     = new \Kalaweit\htmlElement\Box('Autres informations','box-primary',[$cli_lang->render()],[12]);
+
+        /* data client divers */
 
         $cli_address1       = new \Kalaweit\htmlElement\Form_group_input('cli_address1','Adresse', $desc_member['cli_address1'],'fa fa-map-marker');
         $cli_address2       = new \Kalaweit\htmlElement\Form_group_input('cli_address2','Complément adressse 1', $desc_member['cli_address2'],'fa fa-map-marker');
@@ -66,20 +81,25 @@ class Member_info
 
         $box_cli_data           = new \Kalaweit\htmlElement\Box('Coordonnées','box-primary',$box_cli_data_content,[12,12,12,4,8,12,6,6,12]);
 
+        /* commentaires */
+
         $cli_comment            = new \Kalaweit\htmlElement\Form_group_textarea('clitd_4',$desc_member['clitd_4']);
 
         $box_cli_comment        = new \Kalaweit\htmlElement\Box('Commentaire','box-primary',[$cli_comment->render()],[12]);
+
+        /*initilisation des doonees des cartes de résumes des dons du membre */
 
         $card1_data = (new \Kalaweit\Manager\Asso_donation($bddM))->get_donation_by_member_card();
         $card2_data = (new \Kalaweit\Manager\Asso_donation_dulan($bddM))->get_donation_dulan_by_member_card();
         $card3_data = (new \Kalaweit\Manager\Asso_donation_forest($bddM))->get_donation_forest_by_member_card();
 
-
-
+        /* initialisation des composant html box info */
 
         $card1 = (new \Kalaweit\htmlElement\Box_info($card1_data[0]. ' €', 'Dons Animaux', 'fa fa-paw'))->render();
         $card2 = (new \Kalaweit\htmlElement\Box_info($card2_data[0]. ' €', 'Dons Dulan', 'fa fa-map','bg-yellow'))->render();
         $card3 = (new \Kalaweit\htmlElement\Box_info($card3_data[0]. ' €', 'Dons Foret', 'fa fa-tree','bg-green'))->render();
+
+        /* synthes des elements à passer à la vue */
 
         $param = [
 

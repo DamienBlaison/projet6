@@ -222,7 +222,7 @@ class Application
                             break;
 
                             default:
-                        //header("location:http://localhost:8888/www/Kalaweit/app_connexion/log_in");
+                        header("location:http://localhost:8888/www/Kalaweit/app_connexion/log_in");
                             echo '404';
 
                             break;
@@ -233,7 +233,7 @@ class Application
                 break;
 
                 default:
-                //header("location:http://localhost:8888/www/Kalaweit/app_connexion/log_in");
+                header("location:http://localhost:8888/www/Kalaweit/app_connexion/log_in");
                 echo '404.1';
                 break;
             }

@@ -2,10 +2,6 @@
 
 namespace Kalaweit\htmlElement;
 
-/** $boxcontent = ['<input type="text">input1</input>','<textarea></textarea>'];
-*   $box = new \Kalaweit\htmlElement\Box('Box test','box-danger',$boxcontent);
-*/
-
 class Box
 {
 
@@ -62,80 +58,6 @@ class Box
         $box.='    </div>';
 
         return $box;
-    }
-
-
-    /**
-     * Get the value of Box Title
-     *
-     * @return mixed
-     */
-    public function getBoxTitle()
-    {
-        return $this->box_title;
-    }
-
-    /**
-     * Set the value of Box Title
-     *
-     * @param mixed box_title
-     *
-     * @return self
-     */
-    public function setBoxTitle($box_title)
-    {
-        $this->box_title = $box_title;
-
-        return $this;
-    }
-
-
-    /**
-     * Get the value of Box Statut
-     *
-     * @return mixed
-     */
-    public function getBoxStatut()
-    {
-        return $this->box_statut;
-    }
-
-    /**
-     * Set the value of Box Statut
-     *
-     * @param mixed box_statut
-     *
-     * @return self
-     */
-    public function setBoxStatut($box_statut)
-    {
-        $this->box_statut = $box_statut;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Box Content
-     *
-     * @return mixed
-     */
-    public function getBoxContent()
-    {
-        return $this->box_content;
-    }
-
-    /**
-     * Set the value of Box Content
-     *
-     * @param mixed box_content
-     *
-     * @return self
-     */
-    public function setBoxContent($box_content)
-    {
-        $this->box_content = $box_content;
-
-        return $this;
     }
 
 }

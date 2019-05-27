@@ -1,12 +1,11 @@
 <?php
-namespace Kalaweit\Controller;
 
-/**
- *
- */
+/**** classe permettant la gestion des infos liées au membres ****/
+namespace Kalaweit\Controller;
 
 class Member
 {
+    /** méthode de gestion d'un membre **/
 
     function get(){
 
@@ -30,6 +29,8 @@ class Member
         return     (new \Kalaweit\View\Member\Member\Member)->render($p_render);
     }
 
+    /** méthode de gestion liste des membres **/
+
     function get_list()
 
     {
@@ -38,6 +39,8 @@ class Member
         return (new \Kalaweit\View\Table\Table_filter)->render($p_render);
 
     }
+
+    /** méthode d ajout d'un membre **/
 
     function add(){
 
@@ -53,6 +56,8 @@ class Member
 
     }
 
+    /** méthode de suppression d'un membre **/
+
     function delete(){
 
         $bdd = (new \Kalaweit\Manager\Connexion)->getBdd();
@@ -61,17 +66,5 @@ class Member
 
     }
 
-    function ajax(){
-
-        $bdd = (new \Kalaweit\Manager\Connexion)->getBdd();
-
-        return (new \Kalaweit\ajax($bdd))->get_members();
-
-
-    }
 
 }
-
-
-
- ?>

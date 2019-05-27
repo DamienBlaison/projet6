@@ -86,6 +86,7 @@ class Donation_one_shot_table
         //////////////////////////////////////////////////////////////////////////////////
 
         return (new \Kalaweit\htmlElement\Box($title,'box-primary',[$table],''))->render();
+        
     }
 
 }

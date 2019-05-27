@@ -1,18 +1,24 @@
 <?php
+
+/** classe permettant de creer un don et de l'injecter en bdd **/
+
 namespace Kalaweit\Controller\Component\Asso_donation_dulan;
 
-/**
-*
-*/
 class Box_add
 
 {
     public function render(){
 
+        /* instanciation connexion à la bdd */
+
         $bdd = new \Kalaweit\Manager\Connexion();
         $bdd = $bdd->getBdd();
 
+        /* initialisation de la variable $cli_id */
+
         if( isset($_GET["cli_id"] ) ){ $cli_id = $_GET["cli_id"]; } else { $cli_id ='';}
+
+        /* creation des composant html */
 
         $payment_type = (new \Kalaweit\Manager\Asso_payment_type)->getAll($bdd);
         $cli = (new \Kalaweit\Manager\Member($bdd))->get_select();
@@ -27,6 +33,7 @@ class Box_add
         $submit .=                          '<button id="submit" type="submit" class="form-control btn btn-primary"><i class="fa fa-save"></i></button>';
         $submit .=                      '</div>';
 
+        /* tableau des différentes composants à passer à la vue */
 
         $box_donation_dulan_content = [
             $donator->render(),
@@ -35,12 +42,17 @@ class Box_add
             $submit
         ];
 
+        /* mise en forme des éléments à passer */
+
         $col_md = [12,12,12,12];
 
         $box_donation_dulan = (new \Kalaweit\htmlElement\Box('Ajouter un don Dulan','box-primary',$box_donation_dulan_content,$col_md))->render();
 
+        /* instanciation des composant BOX dans lequel le detail des dons sera affiché */
 
         $box_last_donation_dulan = (new \Kalaweit\Controller\Component\Asso_donation_dulan\Table_last_donation_dulan)->render();
+
+        /* passage des composants de la vue */
 
         $param = [
             "box_donation_dulan"=> $box_donation_dulan,

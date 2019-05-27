@@ -1,11 +1,12 @@
 <?php
+
+/** classe permettant de gérer le contenu d'un composant box adhesion **/
+
 namespace Kalaweit\Controller\Component\Asso_adhesion;
 
-/**
- *
- */
 class Asso_adhesion
 {
+
 
     public function update(){
 

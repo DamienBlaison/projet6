@@ -1,58 +1,73 @@
 <?php
+
+/** classe permettant de mettre à jour un don effectué **/
+
 namespace Kalaweit\Controller\Component\Asso_donation;
 
-/**
- *
- */
 class Asso_donation
 {
     public function update(){
 
+        /* instanciation connexion à la bdd */
+
         $bdd = new \Kalaweit\Manager\Connexion();
         $bdd = $bdd->getBdd();
 
-    if(isset($_POST["cli_id"])) {
+        /* vérification des informations dans la super variable POST pour MAJ des données en BDD*/
 
-        (new \Kalaweit\Manager\Asso_donation($bdd))->update();
+        if(isset($_POST["cli_id"])) {
 
-    }
+            (new \Kalaweit\Manager\Asso_donation($bdd))->update();
 
-    $donation = (new \Kalaweit\Manager\Asso_donation($bdd))->get();
+        }
 
-    $payment_type = (new \Kalaweit\Manager\Asso_payment_type)->getAll($bdd);
-    $cli = (new \Kalaweit\Manager\Member($bdd))->get_select();
-    $cau = (new \Kalaweit\Manager\Asso_cause($bdd))->get_select();
+        /* affichage des données , renvoi un arrray */
 
-    $don_mnt = (new \Kalaweit\htmlElement\Form_group_input('don_mnt','montant du don',$donation["don_mnt"],'fa fa-euro'));
-    $devise  = (new \Kalaweit\htmlElement\Form_group_select('ptyp_id',$payment_type,$donation["ptyp_id"],'fa fa-internet-explorer',"ptyp_code"));
-    $donator = (new \Kalaweit\htmlElement\Form_group_select('cli_id',$cli,$donation["cli_id"],'fa fa-user',"cli_identity" ));
-    $cause     = (new \Kalaweit\htmlElement\Form_group_select('cau_id',$cau,"",'fa fa-paw',"cau_name" ));
+        $donation = (new \Kalaweit\Manager\Asso_donation($bdd))->get();
 
+        /* creation des composant html */
 
-    $button  = '';
-    $button .=                      '<div class="form-group">';
-    $button .=                          '<!--<label style="color:white;" for="submit"> test</label>-->';
-    $button .=                          '<button id="submit" type="submit" class="form-control btn btn-primary"><i class="fa fa-save"></i></button>';
-    $button .=                      '</div>';
+        $payment_type = (new \Kalaweit\Manager\Asso_payment_type)->getAll($bdd);
+        $cli = (new \Kalaweit\Manager\Member($bdd))->get_select();
+        $cau = (new \Kalaweit\Manager\Asso_cause($bdd))->get_select();
 
-    $box_donation_content = [
-        $donator->render(),
-        $cause->render(),
-        $don_mnt->render(),
-        $devise->render(),
-        $button
-    ];
-
-    $col_md = [12,12,12,12,12];
-
-    $box_donation = (new \Kalaweit\htmlElement\Box('Modifier un don','box-primary',$box_donation_content,$col_md))->render();
+        $don_mnt = (new \Kalaweit\htmlElement\Form_group_input('don_mnt','montant du don',$donation["don_mnt"],'fa fa-euro'));
+        $devise  = (new \Kalaweit\htmlElement\Form_group_select('ptyp_id',$payment_type,$donation["ptyp_id"],'fa fa-internet-explorer',"ptyp_code"));
+        $donator = (new \Kalaweit\htmlElement\Form_group_select('cli_id',$cli,$donation["cli_id"],'fa fa-user',"cli_identity" ));
+        $cause     = (new \Kalaweit\htmlElement\Form_group_select('cau_id',$cau,"",'fa fa-paw',"cau_name" ));
 
 
-    $param = [
-        "box_donation"=>$box_donation,
-    ];
+        $button  = '';
+        $button .=                      '<div class="form-group">';
+        $button .=                          '<!--<label style="color:white;" for="submit"> test</label>-->';
+        $button .=                          '<button id="submit" type="submit" class="form-control btn btn-primary"><i class="fa fa-save"></i></button>';
+        $button .=                      '</div>';
 
-    return $param;
+        /* tableau des différentes composants à passer à la vue */
+
+        $box_donation_content = [
+            $donator->render(),
+            $cause->render(),
+            $don_mnt->render(),
+            $devise->render(),
+            $button
+        ];
+
+        /* mise en forme des éléments à passer */
+
+        $col_md = [12,12,12,12,12];
+
+        /* instanciation du composant BOX dans lequel le detail des dons sera affiché */
+
+        $box_donation = (new \Kalaweit\htmlElement\Box('Modifier un don','box-primary',$box_donation_content,$col_md))->render();
+
+        /* passage des composants de la vue */
+
+        $param = [
+            "box_donation"=>$box_donation,
+        ];
+
+        return $param;
 
     }
 

@@ -2,9 +2,6 @@
 
 namespace Kalaweit\htmlElement;
 
-/** $boxcontent = ['<input type="text">input1</input>','<textarea></textarea>'];
-*   $box = new \Kalaweit\htmlElement\Box('Box test','box-danger',$boxcontent);
-*/
 class Form_group_select{
 
 
@@ -81,103 +78,6 @@ class Form_group_select{
 
     return $form_group_select;
 
-    }
-
-
-    /**
-     * Get the value of Fontawesome
-     *
-     * @return mixed
-     */
-    public function getFontawesome()
-    {
-        return $this->fontawesome;
-    }
-
-    /**
-     * Set the value of Fontawesome
-     *
-     * @param mixed fontawesome
-     *
-     * @return self
-     */
-    public function setFontawesome($fontawesome)
-    {
-        $this->fontawesome = $fontawesome;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Name
-     *
-     * @return mixed
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set the value of Name
-     *
-     * @param mixed name
-     *
-     * @return self
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Option
-     *
-     * @return mixed
-     */
-    public function getOption()
-    {
-        return $this->option;
-    }
-
-    /**
-     * Set the value of Option
-     *
-     * @param mixed option
-     *
-     * @return self
-     */
-    public function setOption($option)
-    {
-        $this->option = $option;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Selected
-     *
-     * @return mixed
-     */
-    public function getSelected()
-    {
-        return $this->selected;
-    }
-
-    /**
-     * Set the value of Selected
-     *
-     * @param mixed selected
-     *
-     * @return self
-     */
-    public function setSelected($selected)
-    {
-        $this->selected = $selected;
-
-        return $this;
     }
 
 }

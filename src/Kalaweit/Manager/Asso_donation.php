@@ -103,6 +103,7 @@ class Asso_donation
         $start = ($p * $p_nb_by_page) - $p_nb_by_page ;
 
         $reqprep = $this->bdd->prepare(
+            
             "SELECT
             asso_donation.don_id,
             crm_client.cli_firstname,

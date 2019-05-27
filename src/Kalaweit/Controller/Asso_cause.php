@@ -1,12 +1,11 @@
 <?php
-namespace Kalaweit\Controller;
+/* classe permettant de gerer les différents traitement liés aux causes */
 
-/**
- *
- */
+namespace Kalaweit\Controller;
 
 class Asso_cause
 {
+    /* méthode d'appel pour la gestion d'une cause spécifique */
 
     function get(){
 
@@ -21,6 +20,8 @@ class Asso_cause
         return     (new \Kalaweit\View\Asso_cause\Asso_cause)->render($p_render);
     }
 
+    /* méthode d'appel pour la gestion de liste des causes */
+
     function get_list()
 
     {
@@ -31,11 +32,14 @@ class Asso_cause
 
     }
 
+    /* méthode d'appel pour l'ajout d'une cause */
+
     function add(){
 
         $p_render = [
 
         "content_tab1" => $content_tab1 = (new  \Kalaweit\Controller\Component\Asso_cause\Asso_cause_info)->render(),
+        "content_tab2" => ""
 
 
     ];
@@ -43,6 +47,8 @@ class Asso_cause
         return     (new \Kalaweit\View\Asso_cause\Asso_cause)->render($p_render);
 
     }
+
+    /* méthode d'appel pour l'ajout de photo sur une cause */
 
     function crop(){
 
