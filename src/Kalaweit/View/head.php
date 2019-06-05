@@ -20,7 +20,6 @@ $user = (new \Kalaweit\Manager\Users($bdd))->get_id_from_Login($_SESSION['user_l
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
 
-
     <link rel="stylesheet" href="<?php echo $adminlte ?>/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="<?php echo $adminlte ?>/bower_components/font-awesome/css/font-awesome.min.css">
@@ -163,10 +162,7 @@ $user = (new \Kalaweit\Manager\Users($bdd))->get_id_from_Login($_SESSION['user_l
                             </li>
                             <li class="treeview"><a href="index3.html"><i class="fa fa-file-text"></i> Reçus Fiscaux <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                                 <ul class="treeview-menu">
-                                    <li><a href="receipt_generation"><i class="fa fa-circle-o"></i> Génération des reçus</a></li>
-                                    <li><a href="receipt_print"><i class="fa fa-circle-o"></i> Impression des reçus</a></li>
-                                    <li><a href="receipt_email"><i class="fa fa-circle-o"></i> Email des reçus</a></li>
-                                    <li><a href="receipt_list"><i class="fa fa-circle-o"></i> Liste des reçus</a></li>
+                                    <li><a href="/www/Kalaweit/receipt/generate"><i class="fa fa-circle-o"></i> Génération des reçus</a></li>
                                 </ul>
                             </li>
                         </ul>

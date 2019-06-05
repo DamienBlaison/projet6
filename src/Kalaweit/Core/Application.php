@@ -108,6 +108,15 @@ class Application
                         $obj = new $class();
 
                         switch ($parts[2]) {
+
+                            case 'generate':
+
+                            if (method_exists($obj, 'generate')){
+                                echo $obj->generate();
+                            };
+
+                            break;
+
                             case 'add':
                             if (method_exists($obj, 'add')){
                                 echo $obj->add();

@@ -154,6 +154,8 @@ class Asso_donation_forest
 
                 function get_donation_forest_by_member_card(){
 
+                if(isset( $_GET['cli_id'])){
+
                     $reqprep = $this->bdd->prepare(
                     "SELECT SUM(don_mnt)
 
@@ -173,6 +175,8 @@ class Asso_donation_forest
                     $reqprep->execute($prepare);
 
                     $return = $reqprep->fetch(\Pdo::FETCH_NUM);
+
+                }else {$return = [0];}
 
                 return $return ;
 

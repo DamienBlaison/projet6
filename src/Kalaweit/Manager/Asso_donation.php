@@ -103,7 +103,7 @@ class Asso_donation
         $start = ($p * $p_nb_by_page) - $p_nb_by_page ;
 
         $reqprep = $this->bdd->prepare(
-            
+
             "SELECT
             asso_donation.don_id,
             crm_client.cli_firstname,
@@ -209,6 +209,8 @@ class Asso_donation
 
     function get_donation_by_member_card(){
 
+        if(isset($_GET['cli_id'])){
+
         $reqprep = $this->bdd->prepare(
         "SELECT SUM(don_mnt)
 
@@ -228,6 +230,8 @@ class Asso_donation
         $reqprep->execute($prepare);
 
         $return = $reqprep->fetch(\Pdo::FETCH_NUM);
+
+    } else { $return = [0]; }
 
     return $return ;
 
@@ -293,7 +297,7 @@ class Asso_donation
 
         1=1
 
-        AND P1.cau_id != '703' AND P1.cau_id!= '700'
+        AND P1.cau_id != '703' AND P1.cau_id != '700'
 
         $where
 
@@ -305,7 +309,7 @@ class Asso_donation
 
         ");
 
-        $count_reqprep = $this->bdd->prepare("SELECT COUNT(don_id) FROM asso_donation WHERE 1=1 $where ");
+        $count_reqprep = $this->bdd->prepare("SELECT COUNT(don_id) FROM asso_donation WHERE 1=1 $where and cau_id != '700' and cau_id != '703' ");
 
         if($param_request[0] != []){
 

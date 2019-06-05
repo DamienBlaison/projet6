@@ -115,11 +115,8 @@ class Table_filter
             $link = 'http://localhost:8888/www/Kalaweit/'.$url['3'].'/get?'.$key.'=';
             $update = 'http://localhost:8888/www/Kalaweit/member/get?cli_id=';
             $delete = 'http://localhost:8888/www/Kalaweit/member/delete?cli_id=';
-
-
-
-
             break;
+
             case 'asso_cause':
             $key = 'cau_id';
             $link = 'http://localhost:8888/www/Kalaweit/'.$url['3'].'/get?'.$key.'=';
@@ -143,6 +140,7 @@ class Table_filter
             $delete = 'http://localhost:8888/www/Kalaweit/asso_adhesion/delete?adhesion_id=';
             $print = 'http://localhost:8888/www/Kalaweit/receipt/get/?receipt_id=';
             break;
+
             case 'asso_donation_forest':
             $key = 'cli_id';
             $link = 'http://localhost:8888/www/Kalaweit/member/get?cli_id=';
@@ -160,6 +158,13 @@ class Table_filter
             break;
 
             case 'users':
+            $key = 'user_id';
+            $link = '';
+            $update = 'http://localhost:8888/www/Kalaweit/users/update?user_id=';
+            $delete = 'http://localhost:8888/www/Kalaweit/users/delete?user_id=';
+            break;
+
+            case 'receipt':
             $key = 'user_id';
             $link = '';
             $update = 'http://localhost:8888/www/Kalaweit/users/update?user_id=';
@@ -199,13 +204,13 @@ class Table_filter
 
                 $file = $receipt.'.pdf';
 
-                if (file_exists('../Documents/Receipt/'.$file)){
+                if($receipt != NULL){
 
                     $table .=    '<a href="http://localhost:8888/Documents/Receipt/'.$file.'" target="_blank" style="margin-right:5px;" class="btn btn-success" id="print_'.$d_v[0].'" ><i class="fa fa-print"></i></a>';
 
                 } else {
 
-                    $table .=    '<a href="" style="margin-right:5px;" class="btn btn-warning" id="print_'.$d_v[0].'" ><i class="fa fa-print"></i></a>';
+                    $table .=    '<a href="http://localhost:8888/www/Kalaweit/Receipt/add?don_id='.$d_v[0].'" style="margin-right:5px;" class="btn btn-warning" id="print_'.$d_v[0].'" ><i class="fa fa-print"></i></a>';
                 }
 
             }
@@ -238,6 +243,9 @@ class Table_filter
         $content .=    '</div>';
         $content .=    '<div class="col-sm-5" style="margin-top: 30px;">';
         $content .=         'Nombre de résultats : '.$data["count"].' soit '.ceil($data["count"]/10).' pages';
+        $content .=   '</div>';
+        $content .=    '<div id="nb_page" class="" style="display:none">';
+        $content .=        ceil($data["count"]/10);
         $content .=   '</div>';
         $content .=    '<div class="col-sm-3 " style="margin-top: 30px;">';
         $content .=    '<button id="export_table_'.$url[3].'" class="btn btn-success pull-right fa fa-bar-chart" style="margin-top:-10px;"> <b> Export Excel</button></b>';

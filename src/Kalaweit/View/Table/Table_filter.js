@@ -1,5 +1,11 @@
 
+
 let uri = window.location.pathname.split('/');
+
+go_previous();
+go_next();
+
+console.log(uri);
 
 let target = uri[3];
 
@@ -31,3 +37,31 @@ let target = uri[3];
     };
 
     document.getElementById('export_table_'+target).addEventListener('click' , tableXls );
+
+    function go_previous(){
+
+        console.log(uri[5]);
+
+        if (uri[5] < 2) {
+
+            document.getElementById("previous_member").firstChild.setAttribute('href', '');
+
+        };
+
+    };
+
+    function go_next(){
+
+        console.log(document.getElementById('nb_page').textContent);
+        console.log(uri[5]);
+
+        if (uri[5] >= (document.getElementById('nb_page').textContent)){
+
+            document.getElementById("next_member").firstChild.setAttribute('href', '');
+
+            document.getElementById("next_member").className = 'page-item disabled'
+
+            document.getElementById("previous_member").className = 'page-item'
+
+        };
+    };
