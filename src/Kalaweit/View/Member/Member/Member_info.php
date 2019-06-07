@@ -46,7 +46,7 @@ class Member_info
         $member_info .=               ' <button type="submit" class="btn btn-block btn-success btn-lg">Enregistrer</button>';
         $member_info .=           '</div>';
         $member_info .=           '<div class="col-md-4">';
-        $member_info .=                '<a href="http://localhost:8888/www/Kalaweit/member/add"><button type="button" class="btn btn-block btn-primary btn-lg">Nouveau</button></a>';
+        $member_info .=                '<a href="/www/Kalaweit/member/add"><button type="button" class="btn btn-block btn-primary btn-lg">Nouveau</button></a>';
         $member_info .=            '</div>';
         $member_info .=            '<div class="col-md-4">';
         $member_info .=               ' <a href="/www/Kalaweit/dashboard/get"><button type="button" class="btn btn-block btn-danger btn-lg">Annuler</button></a>';

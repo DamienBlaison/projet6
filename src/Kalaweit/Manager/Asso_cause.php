@@ -360,7 +360,7 @@ class Asso_cause
                             $reqprep_asso_cause_media->execute($prepare_media);
                         }
 
-                        $redirect = "Location: http://localhost:8888/www/Kalaweit/asso_cause/get?cau_id=".$recup_id;
+                        $redirect = "Location: /www/Kalaweit/asso_cause/get?cau_id=".$recup_id;
 
                         header($redirect);
                     }

@@ -56,7 +56,7 @@ class Users
 
             $new_user = $max_user->fetch();
 
-            header("Location: http://localhost:8888/www/Kalaweit/Users/update?user_id=".$new_user[0]);
+            header("Location: /www/Kalaweit/Users/update?user_id=".$new_user[0]);
 
         }
 

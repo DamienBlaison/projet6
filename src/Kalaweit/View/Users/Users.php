@@ -12,9 +12,9 @@ class Users
         $p_data     = (new \Kalaweit\Manager\Users($bdd))->get_list();
         $p_id       = "Users_table";
         $p_link     = "";
-        $p_update   = "http://localhost:8888/www/Kalaweit/Users/update?user_id=";
-        $p_delete   = "http://localhost:8888/www/Kalaweit/Users/delete?user_id=";
-        $p_add      = "http://localhost:8888/www/Kalaweit/Users/add";
+        $p_update   = "/www/Kalaweit/Users/update?user_id=";
+        $p_delete   = "/www/Kalaweit/Users/delete?user_id=";
+        $p_add      = "/www/Kalaweit/Users/add";
 
 
         $table_user = (new \Kalaweit\htmlElement\Table($p_name,$p_data,$p_id,$p_link,$p_update,$p_delete,$p_add))->render();

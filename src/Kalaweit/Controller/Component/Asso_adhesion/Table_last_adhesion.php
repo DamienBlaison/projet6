@@ -16,9 +16,9 @@ class Table_last_adhesion
     $data   = (new \Kalaweit\Manager\asso_adhesion($bdd))->get_last();
 
     $link = '/www/Kalaweit/member/get?cli_id=';
-    $update = 'http://localhost:8888/www/Kalaweit/asso_adhesion/update?adhesion_id=';
-    $delete = 'http://localhost:8888/www/Kalaweit/asso_adhesion/delete?adhesion_id=';
-    $add = 'http://localhost:8888/www/Kalaweit/asso_adhesion/add';
+    $update = '/www/Kalaweit/asso_adhesion/update?adhesion_id=';
+    $delete = '/www/Kalaweit/asso_adhesion/delete?adhesion_id=';
+    $add = '/www/Kalaweit/asso_adhesion/add';
 
 
     $table_last_adhesion = (new \Kalaweit\htmlElement\Table_without_pagination("Les dernieres adhésions",$data,'Table_last_adhesion',$link,$update,$delete,$add))->render();

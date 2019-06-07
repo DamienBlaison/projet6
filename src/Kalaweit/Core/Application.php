@@ -88,7 +88,7 @@ class Application
                             break;
                             default:
 
-                            //header("location:http://localhost:8888/www/Kalaweit/app_connexion/log_in");
+                            //header("location:/www/Kalaweit/app_connexion/log_in");
                             //echo '404';
 
                             break;
@@ -230,7 +230,7 @@ class Application
                             break;
 
                             default:
-                        header("location:http://localhost:8888/www/Kalaweit/app_connexion/log_in");
+                        header("location:/www/Kalaweit/app_connexion/log_in");
                             echo '404';
 
                             break;
@@ -241,7 +241,7 @@ class Application
                 break;
 
                 default:
-                header("location:http://localhost:8888/www/Kalaweit/app_connexion/log_in");
+                header("location:/www/Kalaweit/app_connexion/log_in");
                 echo '404.1';
                 break;
             }
@@ -250,7 +250,7 @@ class Application
         else
 
         {
-            header("location:http://localhost:8888/www/Kalaweit/app_connexion/log_in");
+            header("location:/www/Kalaweit/app_connexion/log_in");
             echo '404.0';
         }
 

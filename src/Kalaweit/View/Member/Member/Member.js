@@ -25,7 +25,7 @@ function go_next(target_next,nb_result){
 
         let cli_id_next = search_next.replace("?cli_id=", "");
 
-        let url_next = 'http://localhost:8888/www/Kalaweit/ajax_get/'+target_next+'?cli_id='+cli_id_next+'&p='+start_next+'&nb_by_page='+nb_result;
+        let url_next = '/www/Kalaweit/ajax_get/'+target_next+'?cli_id='+cli_id_next+'&p='+start_next+'&nb_by_page='+nb_result;
 
         xhttp.open("GET", url_next, true);
 
@@ -63,7 +63,7 @@ function go_previous(target,nb_result_by_page){
 
         let cli_id_previous = search_previous.replace("?cli_id=", "");
 
-        let url_previous = 'http://localhost:8888/www/Kalaweit/ajax_get/'+target+'?cli_id='+cli_id_previous+'&p='+start_previous+'&nb_by_page='+ nb_result_by_page;
+        let url_previous = '/www/Kalaweit/ajax_get/'+target+'?cli_id='+cli_id_previous+'&p='+start_previous+'&nb_by_page='+ nb_result_by_page;
 
         xhttp.open("GET", url_previous, true);
 

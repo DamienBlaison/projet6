@@ -181,7 +181,7 @@ class Member
                         $reqprep_data->execute($prepare_data);
                     }
 
-                    $redirect = "Location: http://localhost:8888/www/Kalaweit/member/get?cli_id=".$id_client;
+                    $redirect = "Location: /www/Kalaweit/member/get?cli_id=".$id_client;
 
                     header($redirect);
 

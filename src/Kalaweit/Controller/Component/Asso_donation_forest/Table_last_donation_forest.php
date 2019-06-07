@@ -22,9 +22,9 @@ class Table_last_donation_forest
         /* définition des éléménts de paramétrage à passer au composant TABLE WITHOUT PAGINATION */
 
         $link = '/www/Kalaweit/member/get?cli_id=';
-        $update = 'http://localhost:8888/www/Kalaweit/asso_donation_forest/update?donation_forest_id=';
-        $delete = 'http://localhost:8888/www/Kalaweit/asso_donation_forest/delete?donation_forest_id=';
-        $add = 'http://localhost:8888/www/Kalaweit/asso_donation_forest/add';
+        $update = '/www/Kalaweit/asso_donation_forest/update?donation_forest_id=';
+        $delete = '/www/Kalaweit/asso_donation_forest/delete?donation_forest_id=';
+        $add = '/www/Kalaweit/asso_donation_forest/add';
 
         /* instanciation de l'objet Table_without_pagination en lui passant les elements précedement défini */
 

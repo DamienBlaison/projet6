@@ -104,7 +104,7 @@ class Crop_avatar
                                 },
                                 success:function(data)
                                 {
-                                     window.location.href = "http://localhost:8888/www/Kalaweit/users/update"+user_id;
+                                     window.location.href = "/www/Kalaweit/users/update"+user_id;
                                 }
 
                             });

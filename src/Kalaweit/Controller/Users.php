@@ -140,7 +140,7 @@ class Users
             $box_download_avatar_content =
             [
                 $avatar_img = (new \Kalaweit\htmlElement\Img($user["user_avatar"],$user["user_first_name"],'avatar_user_admin'))->render(),
-                $avatar_link = '<a href="http://localhost:8888/www/Kalaweit/users/crop?user_id='.$_GET['user_id'].'" class="btn btn-primary col-md-12">Modifier l\'Avatar</a>'
+                $avatar_link = '<a href="/www/Kalaweit/users/crop?user_id='.$_GET['user_id'].'" class="btn btn-primary col-md-12">Modifier l\'Avatar</a>'
             ];
 
             /* création d'un tableau d'élément HTML à passer à la vue */

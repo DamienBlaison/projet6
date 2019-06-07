@@ -132,9 +132,9 @@ class Asso_cause_info
         if ($url[4]!=='add'){
             $content_box_pictures = [
                 $pictures1->render(),
-                '<a href="http://localhost:8888/www/Kalaweit/asso_cause/crop?cau_id='.$_GET["cau_id"].'&picture=1" class="btn btn-primary col-md-12">Modifier photo 1</a>',
+                '<a href="/www/Kalaweit/asso_cause/crop?cau_id='.$_GET["cau_id"].'&picture=1" class="btn btn-primary col-md-12">Modifier photo 1</a>',
                 $pictures2->render(),
-                '<a href="http://localhost:8888/www/Kalaweit/asso_cause/crop?cau_id='.$_GET["cau_id"].'&picture=2" class="btn btn-primary col-md-12">Modifier photo 2</a>',
+                '<a href="/www/Kalaweit/asso_cause/crop?cau_id='.$_GET["cau_id"].'&picture=2" class="btn btn-primary col-md-12">Modifier photo 2</a>',
             ];
 
             $bootstrap_pictures = [12,12,12,12];

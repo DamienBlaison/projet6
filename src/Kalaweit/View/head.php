@@ -3,9 +3,9 @@
 $bdd = new \Kalaweit\Manager\Connexion();
 $bdd = $bdd->getBdd();
 
-if (!isset($_SESSION["user_login"])){ header("location:http://localhost:8888/www/Kalaweit/app_connexion/log_in");};
+if (!isset($_SESSION["user_login"])){ header("location:/www/Kalaweit/app_connexion/log_in");};
 
-if ( (new \Kalaweit\Manager\Users($bdd))->get_id_from_Login($_SESSION['user_login']) == false){header("location:http://localhost:8888/www/Kalaweit/app_connexion/log_in");}
+if ( (new \Kalaweit\Manager\Users($bdd))->get_id_from_Login($_SESSION['user_login']) == false){header("location:/www/Kalaweit/app_connexion/log_in");}
 
 $user = (new \Kalaweit\Manager\Users($bdd))->get_id_from_Login($_SESSION['user_login']);
     ?>

@@ -92,7 +92,7 @@ class Table
 
         } else {
 
-            $body .=    '<a href="http://localhost:8888/www/Kalaweit/receipt/add?don_id='.$value[0].'" target="_blank" style="margin-right:5px;" class="btn btn-warning" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
+            $body .=    '<a href="/www/Kalaweit/receipt/add?don_id='.$value[0].'" target="_blank" style="margin-right:5px;" class="btn btn-warning" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
         }
 
 

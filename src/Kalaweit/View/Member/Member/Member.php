@@ -39,7 +39,7 @@ class Member
 
         $previous_url = explode('?',$_SERVER['HTTP_REFERER']);
 
-        if ( ($previous_url[0] == 'http://localhost:8888/www/Kalaweit/asso_donation/update') || ($previous_url[0] == 'http://localhost:8888/www/Kalaweit/member/get') )
+        if ( ($previous_url[0] == '/www/Kalaweit/asso_donation/update') || ($previous_url[0] == '/www/Kalaweit/member/get') )
 
             {
 

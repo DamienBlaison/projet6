@@ -403,15 +403,15 @@ class Asso_donation_forest
 
                             switch ($_GET["from"]) {
                                 case 'add':
-                                    header("Location: http://localhost:8888/www/Kalaweit/asso_donation_forest/add");
+                                    header("Location: /www/Kalaweit/asso_donation_forest/add");
                                 break;
 
                                 case 'get':
-                                    header( "Location: http://localhost:8888/www/Kalaweit/member/get?cli_id=".$_POST['cli_id']);
+                                    header( "Location: /www/Kalaweit/member/get?cli_id=".$_POST['cli_id']);
                             break;
 
                                 default:
-                                    header("Location: http://localhost:8888/www/Kalaweit/asso_donation_forest/list/1");
+                                    header("Location: /www/Kalaweit/asso_donation_forest/list/1");
                                 break;
                             }
 

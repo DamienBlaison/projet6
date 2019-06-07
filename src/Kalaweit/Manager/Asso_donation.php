@@ -49,7 +49,7 @@ class Asso_donation
 
         $insert = $reqprep->execute($prepare);
 
-        header("Location: http://localhost:8888/www/Kalaweit/asso_donation/add");
+        header("Location: /www/Kalaweit/asso_donation/add");
         //($reqprep->errorInfo());
         }
     }
@@ -474,14 +474,14 @@ class Asso_donation
         switch ($_GET["from"]) {
             case 'get':
 
-                header( "Location: http://localhost:8888/www/Kalaweit/member/get?cli_id=".$_POST['cli_id']);
+                header( "Location: /www/Kalaweit/member/get?cli_id=".$_POST['cli_id']);
 
             break;
 
             default:
                 //
 
-                header( "Location: http://localhost:8888/www/Kalaweit/member/get?cli_id=".$_POST['cli_id']);
+                header( "Location: /www/Kalaweit/member/get?cli_id=".$_POST['cli_id']);
                 break;
 
         }

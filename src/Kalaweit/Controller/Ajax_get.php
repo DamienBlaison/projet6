@@ -43,8 +43,8 @@ class Ajax_get
             }
 
             $body .= '<td style = "width:85px;">';
-            $body .=    '<a style="margin-right:5px;" href="http://localhost:8888/www/Kalaweit/asso_donation/update?don_id='.$value[0].'" class="btn btn-primary" id="update_'.$value[0].'"><i class="fa fa-edit"></i></a>';
-            $body .=    '<a href="http://localhost:8888/www/Kalaweit/asso_donation/delete?don_id='.$value[0].'" class="btn btn-danger" id="delete_'.$value[0].'" onclick ="return confirm(\'Etes vous sur de vouloir supprimer cet enregistrement\')"><i class="fa  fa-trash"></i></a>';
+            $body .=    '<a style="margin-right:5px;" href="/www/Kalaweit/asso_donation/update?don_id='.$value[0].'" class="btn btn-primary" id="update_'.$value[0].'"><i class="fa fa-edit"></i></a>';
+            $body .=    '<a href="/www/Kalaweit/asso_donation/delete?don_id='.$value[0].'" class="btn btn-danger" id="delete_'.$value[0].'" onclick ="return confirm(\'Etes vous sur de vouloir supprimer cet enregistrement\')"><i class="fa  fa-trash"></i></a>';
             $body .= '</td>';
 
             $body .= '</tr>';
@@ -90,8 +90,8 @@ class Ajax_get
             }
 
             $body .= '<td style = "width:85px;">';
-            $body .=    '<a style="margin-right:5px;" href="http://localhost:8888/www/Kalaweit/asso_donation/update?don_id='.$value[0].'" class="btn btn-primary" id="update_'.$value[0].'"><i class="fa fa-edit"></i></a>';
-            $body .=    '<a href="http://localhost:8888/www/Kalaweit/asso_donation/delete?don_id='.$value[0].'" class="btn btn-danger" id="delete_'.$value[0].'" onclick ="return confirm(\'Etes vous sur de vouloir supprimer cet enregistrement\')"><i class="fa  fa-trash"></i></a>';
+            $body .=    '<a style="margin-right:5px;" href="/www/Kalaweit/asso_donation/update?don_id='.$value[0].'" class="btn btn-primary" id="update_'.$value[0].'"><i class="fa fa-edit"></i></a>';
+            $body .=    '<a href="/www/Kalaweit/asso_donation/delete?don_id='.$value[0].'" class="btn btn-danger" id="delete_'.$value[0].'" onclick ="return confirm(\'Etes vous sur de vouloir supprimer cet enregistrement\')"><i class="fa  fa-trash"></i></a>';
             $body .= '</td>';
 
             $body .= '</tr>';
@@ -137,8 +137,8 @@ class Ajax_get
             }
 
             $body .= '<td style = "width:85px;">';
-            $body .=    '<a style="margin-right:5px;" href="http://localhost:8888/www/Kalaweit/asso_donation/update?don_id='.$value[0].'" class="btn btn-primary" id="update_'.$value[0].'"><i class="fa fa-edit"></i></a>';
-            $body .=    '<a href="http://localhost:8888/www/Kalaweit/asso_donation/delete?don_id='.$value[0].'" class="btn btn-danger" id="delete_'.$value[0].'" onclick ="return confirm(\'Etes vous sur de vouloir supprimer cet enregistrement\')"><i class="fa  fa-trash"></i></a>';
+            $body .=    '<a style="margin-right:5px;" href="/www/Kalaweit/asso_donation/update?don_id='.$value[0].'" class="btn btn-primary" id="update_'.$value[0].'"><i class="fa fa-edit"></i></a>';
+            $body .=    '<a href="/www/Kalaweit/asso_donation/delete?don_id='.$value[0].'" class="btn btn-danger" id="delete_'.$value[0].'" onclick ="return confirm(\'Etes vous sur de vouloir supprimer cet enregistrement\')"><i class="fa  fa-trash"></i></a>';
             $body .= '</td>';
 
             $body .= '</tr>';
@@ -189,8 +189,8 @@ class Ajax_get
             }
 
             $body .= '<td style = "width:85px;">';
-            $body .=    '<a style="margin-right:5px;" href="http://localhost:8888/www/Kalaweit/asso_donation/update?don_id='.$value[0].'" class="btn btn-primary" id="update_'.$value[0].'"><i class="fa fa-edit"></i></a>';
-            $body .=    '<a href="http://localhost:8888/www/Kalaweit/asso_donation/delete?don_id='.$value[0].'" class="btn btn-danger" id="delete_'.$value[0].'" onclick ="return confirm(\'Etes vous sur de vouloir supprimer cet enregistrement\')"><i class="fa  fa-trash"></i></a>';
+            $body .=    '<a style="margin-right:5px;" href="/www/Kalaweit/asso_donation/update?don_id='.$value[0].'" class="btn btn-primary" id="update_'.$value[0].'"><i class="fa fa-edit"></i></a>';
+            $body .=    '<a href="/www/Kalaweit/asso_donation/delete?don_id='.$value[0].'" class="btn btn-danger" id="delete_'.$value[0].'" onclick ="return confirm(\'Etes vous sur de vouloir supprimer cet enregistrement\')"><i class="fa  fa-trash"></i></a>';
             $body .= '</td>';
 
             $body .= '</tr>';

@@ -113,7 +113,7 @@ class Crop_photo
                                 },
                                 success:function()
                                 {
-                                     window.location.href = "http://localhost:8888/www/Kalaweit/asso_cause/get"+cau_id_return[0];
+                                     window.location.href = "/www/Kalaweit/asso_cause/get"+cau_id_return[0];
                                 }
 
                             });

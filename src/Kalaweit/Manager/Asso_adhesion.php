@@ -276,11 +276,11 @@ class Asso_adhesion
 
                             switch ($_GET["from"]) {
                                 case 'add':
-                                header("Location: http://localhost:8888/www/Kalaweit/asso_adhesion/add");
+                                header("Location: /www/Kalaweit/asso_adhesion/add");
                                 break;
 
                                 default:
-                                header("Location: http://localhost:8888/www/Kalaweit/asso_adhesion/list/1");
+                                header("Location: /www/Kalaweit/asso_adhesion/list/1");
                                 break;
                             }
 
