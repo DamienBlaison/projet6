@@ -60,24 +60,19 @@ $user = (new \Kalaweit\Manager\Users($bdd))->get_id_from_Login($_SESSION['user_l
                         <a href="/www/Kalaweit/app_connexion/log_out" id="log_out"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
                 </div>
-                <form action="#" method="get" class="sidebar-form">
-                    <div class="input-group">
-                        <input type="text" name="q" class="form-control" placeholder="Search...">
-                        <span class="input-group-btn">
-                            <button type="submit" name="search" id="search-btn" class="btn btn-flat">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </span>
-                    </div>
-                </form>
+
                 <ul class="sidebar-menu tree" data-widget="tree">
                     <li class="header">MENU
                     </li>
-                    <li class=" active treeview">
-                        <a href="/www/Kalaweit/home/">
+                    <li class=" active ">
+
+                        <a href="/www/Kalaweit/dashboard/get">
+
                             <i class="fa fa-home"></i> <span>Accueil</span>
+
                         </a>
                     </li>
+
                     <li class=" treeview " style="border-left:3px solid #3c8dbc;">
 
                         <a href="#">

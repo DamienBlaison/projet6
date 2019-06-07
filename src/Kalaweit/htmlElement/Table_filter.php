@@ -89,6 +89,8 @@ class Table_filter
         $table .= '<thead>';
         $table .= '<tr role="row">';
 
+
+
         foreach ($data["head"] as $key => $value) {
 
             if($key < 1)
@@ -181,6 +183,7 @@ class Table_filter
             if ($url[3] == 'asso_donation' || $url[3] == 'asso_donation_dulan' || $url[3] == 'asso_donation_forest') {
 
                 $receipt = array_pop($d_v);
+
             };
 
             foreach ($d_v as $key => $value) {

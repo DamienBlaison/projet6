@@ -45,7 +45,7 @@ class Asso_cause_info
         $asso_cause_info .=                '<a href="http://localhost:8888/www/Kalaweit/asso_cause/add"><button type="button" class="btn btn-block btn-primary btn-lg">Nouveau</button></a>';
         $asso_cause_info .=            '</div>';
         $asso_cause_info .=            '<div class="col-md-4">';
-        $asso_cause_info .=               ' <a href="indexphp"><button type="button" class="btn btn-block btn-danger btn-lg">Annuler</button></a>';
+        $asso_cause_info .=               ' <a href="/www/Kalaweit/dashboard/get"><button type="button" class="btn btn-block btn-danger btn-lg">Annuler</button></a>';
         $asso_cause_info .=            '</div>';
         $asso_cause_info .=    '</form>';
 

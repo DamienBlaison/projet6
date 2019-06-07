@@ -138,9 +138,8 @@ class Application
                                     case 'receipt':
                                     echo $obj->get();
                                     break;
-
-                                    default:
-
+                                    case 'dashboard':
+                                    echo $obj->get();
                                     break;
                                 };
                             };

@@ -95,10 +95,6 @@ class Asso_adhesion
 
         function get_adhesion_by_member(){
 
-            if( isset($_GET['p']) )
-
-            { $filter = $_GET['p'] ; } else { $filter = 0; };
-
             $reqprep = $this->bdd->prepare(
                 "SELECT
 
@@ -119,7 +115,7 @@ class Asso_adhesion
 
                 asso_adhesion.adhesion_ts DESC
 
-                LIMIT $filter,5
+                LIMIT 0,5
 
                 ");
 
@@ -142,9 +138,9 @@ class Asso_adhesion
                 $count_adhesion_member = $count_reqprep->fetch(\PDO::FETCH_NUM);
 
                 $return = [
-                    "list_adhesion" => $list_adhesion_member ,
-                    "count" => $count_adhesion_member,
-                    "head"=>["Id","Id_cause","Bénéficaire","Montant","Date création"]];
+                    "content" => $list_adhesion_member ,
+                    "count" => $count_adhesion_member[0],
+                    "head"=>["Id","Montant","Date création",'Action']];
 
                     return $return ;
 
@@ -185,9 +181,8 @@ class Asso_adhesion
 
                         asso_adhesion.adhesion_id as Id_adhesion,
 
-                        asso_adhesion.cli_id as Id_Parrain,
-                        P2.cli_firstname as Prénom,
                         P2.cli_lastname as Nom,
+                        P2.cli_firstname as Prénom,
 
                         asso_adhesion.adhesion_mnt as Montant,
                         asso_adhesion.adhesion_ts as Date_creation
@@ -208,7 +203,7 @@ class Asso_adhesion
 
                         asso_adhesion.adhesion_ts DESC
 
-                        LIMIT $filter,20
+                        LIMIT $filter,15
 
                         ");
 
@@ -231,12 +226,11 @@ class Asso_adhesion
                         $count_result   = $count_reqprep->execute();
                         $count_result   = $count_reqprep->fetch(\PDO::FETCH_NUM);
 
-                        $value = [];
 
 
                         $data = [
                             "list_adhesion"     => $reqprep->fetchAll(\PDO::FETCH_NUM),
-                            "head"              => ["Id","Id_membre","Prénom","Nom","Montant","Date enregistrement"],
+                            "head"              => ["Id","Nom","Prénom","Montant","Date enregistrement"],
                             "count"             => $count_result
                         ];
 
@@ -419,7 +413,7 @@ class Asso_adhesion
 
                                 }
                             }
-                        
+
                             $reqprep = $this->bdd->prepare(
                                 "SELECT
 

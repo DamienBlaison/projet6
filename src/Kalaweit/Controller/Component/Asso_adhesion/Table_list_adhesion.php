@@ -22,12 +22,6 @@ class Table_list_adhesion
 
         $request = '';
 
-        if(isset($list[5])){
-            $page = $list[5];
-        }else{
-            $page = 1;
-        }
-
         if(isset($_GET['adhesion_id'])){$adhesion_id = $_GET['adhesion_id']; } else { $adhesion_id = '';};
         if(isset($_GET['cli_id'])){$cli_id = $_GET['cli_id']; } else { $cli_id = '';};
         if(isset($_GET['cli_firstname'])){$cli_firstname = $_GET['cli_firstname']; } else { $cli_firstname = '';};
@@ -61,6 +55,7 @@ class Table_list_adhesion
 
         ];
 
+    
         $data =[
 
             "table"             => $list["list_adhesion"],

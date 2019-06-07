@@ -140,7 +140,7 @@ class Member
                         "content"   => $reqprep->fetchAll(\PDO::FETCH_NUM),
                         "head"          => ["Id","Nom","Prénom","Cp","Ville"]
                     ];
-        
+
                 return $data;
 
             }
@@ -190,7 +190,7 @@ class Member
 
             function delete(){
 
-                $checkprep = $this->bdd->prepare("SELECT COUNT(*) FROM asso_adhesion WHERE cli_id = :cli_id");
+                $checkprep = $this->bdd->prepare("SELECT COUNT(*) FROM asso_donation WHERE cli_id = :cli_id");
 
                 $checkdataprep = $this->bdd->prepare("DELETE FROM crm_client_data WHERE cli_id = :cli_id");
 
@@ -208,6 +208,7 @@ class Member
                 if($count[0] == 0) {
 
                     $checkdataprep->execute($prepare);
+                    
                     $reqprep->execute($prepare);
 
                     $_SESSION["info"] = 'L\'utilisateur a bien été supprimé.';

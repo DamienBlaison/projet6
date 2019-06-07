@@ -33,27 +33,33 @@ class Users
 
         /* verification de la présence des elements des données dans POST pour permettre la création del'utilsateur */
 
-        if
-        (
-            ((isset($_POST["user_login"]))&&($_POST["user_login"])!= '')&&
-            ((isset($_POST["user_password"]))&&($_POST["user_password"])!='')&&
-            ((isset($_POST["user_first_name"]))&&($_POST['user_first_name'])!='')&&
-            ((isset($_POST["user_last_name"]))&&($_POST['user_last_name'])!='')&&
-            ((isset($_POST["user_email"]))&&($_POST['user_email'])!='')
-        )
-            /* si toute les conditions sont remplies alors on crée l'utilsateur en bdd via la methode add() du manager */
+        if (count($_POST) != 0 ){
 
-            {
+            if
+            (
+                ((isset($_POST["user_login"]))&&($_POST["user_login"])!= '')&&
+                ((isset($_POST["user_password"]))&&($_POST["user_password"])!='')&&
+                ((isset($_POST["user_first_name"]))&&($_POST['user_first_name'])!='')&&
+                ((isset($_POST["user_last_name"]))&&($_POST['user_last_name'])!='')&&
+                ((isset($_POST["user_email"]))&&($_POST['user_email'])!='')
 
-                (new \Kalaweit\Manager\Users($bdd))->add();
 
-            }
+                )
+                /* si toute les conditions sont remplies alors on crée l'utilsateur en bdd via la methode add() du manager */
 
-            /* sinon on affiche une alerte */
+                {
 
-            else {
+                    (new \Kalaweit\Manager\Users($bdd))->add();
 
-                echo "<script> alert('au moins un des champs n\'est pas renseigné')</script>";
+                }
+
+                /* sinon on affiche une alerte */
+
+                else {
+
+                    echo "<script> alert('au moins un des champs n\'est pas renseigné')</script>";
+                }
+
             }
 
             /* récupéraiton des elements de config a passer dans le formaulaire*/
@@ -87,7 +93,7 @@ class Users
 
         }
 
-    /* methode  permettant la MAJ d'un utilisateur */
+        /* methode  permettant la MAJ d'un utilisateur */
 
         function update(){
 

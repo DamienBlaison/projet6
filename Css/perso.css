@@ -42,3 +42,15 @@ animation : none;
 
 
 }
+#title_home
+{
+    font-size:40px;
+    font-weight: bold;
+    margin-left : 20px;
+    margin-top:20px;
+}
+
+h4
+{
+    text-decoration: underline;
+}

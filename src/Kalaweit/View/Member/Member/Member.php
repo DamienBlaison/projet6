@@ -18,7 +18,7 @@ class Member
         $render .= '<div class="nav-tabs-custom">';
         $render .= '    <ul class="nav nav-tabs">';
         $render .= '        <li id="tab_pane_1" class="active"><a href="#tab1" data-toggle="tab" aria-expanded="true">Informations générales</a></li>';
-        $render .= '        <li id="tab_pane_2" class=""><a href="#tab2" data-toggle="tab" aria-expanded="false">Dons</a></li>';
+        $render .= '        <li id="tab_pane_2" class=""><a href="#tab2" data-toggle="tab" aria-expanded="false">Adhésion/Dons</a></li>';
         $render .= '        <li id="tab_pane_3" class=""><a href="#tab3" data-toggle="tab" aria-expanded="false">Envoyer un Email</a></li>';
         $render .= '    </ul>';
         $render .= '<div class="tab-content col-md-12">';

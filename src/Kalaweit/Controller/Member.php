@@ -16,6 +16,8 @@ class Member
 
         "content_tab2" => $content_tab2 =
 
+
+        (new  \Kalaweit\Controller\Component\Member\Member_adhesion)->render().
         (new  \Kalaweit\Controller\Component\Member\Member_donation)->render().
         (new  \Kalaweit\Controller\Component\Member\Member_donation_forest)->render().
         (new  \Kalaweit\Controller\Component\Member\Member_donation_dulan)->render(),
