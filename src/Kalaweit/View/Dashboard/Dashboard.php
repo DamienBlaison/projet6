@@ -21,7 +21,7 @@ class Dashboard
 
         $render .= ' <div class="box-header with-border">';
         $render .= ' <span class="info-box-icon bg-red"><i class="ion ion-ios-gear-outline"></i></span>';
-        $render .= '  <h1 id="title_home" class="box-title">Kalaweit Administration</h1>';
+        $render .= '  <h1 id="title_home" class="box-title">KALAWEIT Administration</h1>';
 
         $render .= '   <div class="box-tools pull-right">';
         $render .= ' <img src="/../Documents/Logo_Kalaweit_Home.jpg">';
