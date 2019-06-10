@@ -17,7 +17,8 @@
 
         "psr-4": {
 
-            "Kalaweit\\": "src/Kalaweit/"
+            "Kalaweit\\": "src/Kalaweit/",
+            "Site\\": "src/Site/"
 
 
     }

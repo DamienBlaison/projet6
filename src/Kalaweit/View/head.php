@@ -40,20 +40,19 @@ $user = (new \Kalaweit\Manager\Users($bdd))->get_id_from_Login($_SESSION['user_l
 
 </head>
 
-<?php
-
-
-
- ?>
-
 <body class="hold-transition skin-blue sidebar-mini" style="min-height:auto;">
     <div class="wrapper" style="height: auto; min-height:2000px;">
         <aside class="main-sidebar">
             <section class="sidebar" style="min-height: 100%; height:100%;">
+                <div class="">
+                    <img src="/../Documents/Front/logo-timbre.png" id="brand" alt="">
+                </div>
                 <div class="user-panel">
+
                     <div class="pull-left image">
-                        <img src="<?php echo $user['user_avatar'] ?>" class="img-circle" alt="User Image">
+                        <img src="<?php echo $user['user_avatar'] ?>" id="return" class="img-circle" alt="User Image" onclick="">
                     </div>
+
                     <div class="pull-left info">
                         <p><?php echo $user['user_first_name'].' '.$user['user_last_name'] ?></p>
                         <a href="/www/Kalaweit/app_connexion/log_out" id="log_out"><i class="fa fa-circle text-success"></i> Online</a>

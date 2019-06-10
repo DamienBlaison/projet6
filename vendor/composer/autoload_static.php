@@ -68,25 +68,26 @@ class ComposerStaticInit05019eedc9c74b58b085913005fe8d3e
     );
 
     public static $prefixLengthsPsr4 = array (
-        'S' => 
+        'S' =>
         array (
             'Spipu\\Html2Pdf\\' => 15,
+            'Site\\' => 5
         ),
-        'P' => 
+        'P' =>
         array (
             'Psr\\SimpleCache\\' => 16,
             'PhpOffice\\PhpSpreadsheet\\' => 25,
             'PHPMailer\\PHPMailer\\' => 20,
         ),
-        'M' => 
+        'M' =>
         array (
             'Matrix\\' => 7,
         ),
-        'K' => 
+        'K' =>
         array (
             'Kalaweit\\' => 9,
         ),
-        'C' => 
+        'C' =>
         array (
             'Composer\\Installers\\' => 20,
             'Complex\\' => 8,
@@ -94,35 +95,39 @@ class ComposerStaticInit05019eedc9c74b58b085913005fe8d3e
     );
 
     public static $prefixDirsPsr4 = array (
-        'Spipu\\Html2Pdf\\' => 
+        'Spipu\\Html2Pdf\\' =>
         array (
             0 => __DIR__ . '/..' . '/spipu/html2pdf/src',
         ),
-        'Psr\\SimpleCache\\' => 
+        'Psr\\SimpleCache\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/simple-cache/src',
         ),
-        'PhpOffice\\PhpSpreadsheet\\' => 
+        'PhpOffice\\PhpSpreadsheet\\' =>
         array (
             0 => __DIR__ . '/..' . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet',
         ),
-        'PHPMailer\\PHPMailer\\' => 
+        'PHPMailer\\PHPMailer\\' =>
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
-        'Matrix\\' => 
+        'Matrix\\' =>
         array (
             0 => __DIR__ . '/..' . '/markbaker/matrix/classes/src',
         ),
-        'Kalaweit\\' => 
+        'Kalaweit\\' =>
         array (
             0 => __DIR__ . '/../..' . '/src/Kalaweit',
         ),
-        'Composer\\Installers\\' => 
+        'Site\\' =>
+        array (
+            0 => __DIR__ . '/../..' . '/src/Site',
+        ),
+        'Composer\\Installers\\' =>
         array (
             0 => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers',
         ),
-        'Complex\\' => 
+        'Complex\\' =>
         array (
             0 => __DIR__ . '/..' . '/markbaker/complex/classes/src',
         ),

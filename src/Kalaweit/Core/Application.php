@@ -86,15 +86,21 @@ class Application
                             };
 
                             break;
+
                             default:
 
-                            //header("location:/www/Kalaweit/app_connexion/log_in");
+                            header("location:/www/Kalaweit/app_connexion/log_in");
                             //echo '404';
 
                             break;
 
 
                         };
+                    }
+
+                    else
+                    {
+                        header("location:/www/Kalaweit/app_connexion/log_in");
                     }
                 }
 
@@ -230,19 +236,161 @@ class Application
                             break;
 
                             default:
-                        header("location:/www/Kalaweit/app_connexion/log_in");
+
+                            header("location:/www/Kalaweit/app_connexion/log_in");
                             echo '404';
 
                             break;
                         };
+                    }
+
+                    else
+
+                    {
+                        header("location:/www/Kalaweit/app_connexion/log_in");
                     };
                 }
 
                 break;
 
                 default:
-                header("location:/www/Kalaweit/app_connexion/log_in");
-                echo '404.1';
+
+
+                $class = '\\Site\\Controller\\' . ucfirst($parts[0]);
+
+                if (class_exists($class))
+
+                {
+                    $obj = new $class();
+
+                    switch ($parts[0]) {
+
+                        case 'home';
+
+                        if (method_exists($obj, 'render')){
+                            echo $obj->render();
+                        };
+
+                        break;
+
+                        case 'Gibbon_gallery';
+
+                        if (method_exists($obj, 'render')){
+                            echo $obj->render();
+                        };
+
+                        break;
+
+                        case 'Gibbon';
+
+                        if (method_exists($obj, 'render')){
+                            echo $obj->render();
+                        };
+
+                        break;
+
+                        case 'Gibbons';
+
+                        if (method_exists($obj, 'render')){
+                            echo $obj->render();
+                        };
+
+                        break;
+                        case 'History';
+
+                        if (method_exists($obj, 'render')){
+                            echo $obj->render();
+                        };
+
+                        break;
+                        case 'Team';
+
+                        if (method_exists($obj, 'render')){
+                            echo $obj->render();
+                        };
+
+                        break;
+                        case 'Deforestation';
+
+                        if (method_exists($obj, 'render')){
+                            echo $obj->render();
+                        };
+
+                        break;
+
+                        case 'Context';
+
+                        if (method_exists($obj, 'render')){
+                            echo $obj->render();
+                        };
+
+                        break;
+
+                        case 'Palm_oil';
+
+                        if (method_exists($obj, 'render')){
+                            echo $obj->render();
+                        };
+
+                        break;
+                        case 'Borneo';
+
+                        if (method_exists($obj, 'render')){
+                            echo $obj->render();
+                        };
+
+                        break;
+                        case 'Sumatra';
+
+                        if (method_exists($obj, 'render')){
+                            echo $obj->render();
+                        };
+
+                        break;
+                        case 'Friends';
+
+                        if (method_exists($obj, 'render')){
+                            echo $obj->render();
+                        };
+
+                        break;
+
+                        case 'Gift';
+
+                        if (method_exists($obj, 'render')){
+                            echo $obj->render();
+                        };
+
+                        break;
+
+                        case 'Gift_forest';
+
+                        if (method_exists($obj, 'render')){
+                            echo $obj->render();
+                        };
+
+                        break;
+
+                        case 'Gift_dulan';
+
+                        if (method_exists($obj, 'render')){
+                            echo $obj->render();
+                        };
+
+                        break;
+
+
+                    }
+
+                }
+
+                else
+
+                {
+                    header("location:/www/home");
+                    echo '404.1';
+                };
+
                 break;
             }
         }
@@ -250,7 +398,7 @@ class Application
         else
 
         {
-            header("location:/www/Kalaweit/app_connexion/log_in");
+            header("location:/www/home");
             echo '404.0';
         }
 

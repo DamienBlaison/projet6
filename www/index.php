@@ -33,7 +33,7 @@ try {
      */
 
     $application->handle();
-    
+
 } catch (\Exception $ex) {
     ($ex);
 }

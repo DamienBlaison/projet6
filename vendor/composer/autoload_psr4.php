@@ -12,6 +12,7 @@ return array(
     'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
     'Matrix\\' => array($vendorDir . '/markbaker/matrix/classes/src'),
     'Kalaweit\\' => array($baseDir . '/src/Kalaweit'),
+    'Site\\' => array($baseDir . '/src/Site'),
     'Composer\\Installers\\' => array($vendorDir . '/composer/installers/src/Composer/Installers'),
     'Complex\\' => array($vendorDir . '/markbaker/complex/classes/src'),
 );
