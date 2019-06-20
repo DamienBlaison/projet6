@@ -123,6 +123,14 @@ class Application
 
                             break;
 
+                            case 'generate_adhesion':
+
+                            if (method_exists($obj, 'generate_adhesion')){
+                                echo $obj->generate_adhesion();
+                            };
+
+                            break;
+
                             case 'add':
                             if (method_exists($obj, 'add')){
                                 echo $obj->add();
@@ -265,6 +273,30 @@ class Application
 
                     switch ($parts[0]) {
 
+                        case 'Connexion':
+
+                        if (method_exists($obj, 'render')){
+                            echo $obj->render();
+                        };
+
+                        break;
+                        case 'Account_creation':
+
+                        if (method_exists($obj, 'render')){
+                            echo $obj->render();
+                        };
+
+                        break;
+
+                        case 'My_account':
+
+                        if (method_exists($obj, 'render')){
+                            echo $obj->render();
+                        };
+
+                        break;
+
+
                         case 'home';
 
                         if (method_exists($obj, 'render')){
@@ -273,7 +305,7 @@ class Application
 
                         break;
 
-                        case 'Gibbon_gallery';
+                        case 'Gibbon_gallery':
 
                         if (method_exists($obj, 'render')){
                             echo $obj->render();
@@ -281,7 +313,7 @@ class Application
 
                         break;
 
-                        case 'Gibbon';
+                        case 'Gibbon':
 
                         if (method_exists($obj, 'render')){
                             echo $obj->render();
@@ -289,28 +321,21 @@ class Application
 
                         break;
 
-                        case 'Gibbons';
+                        case 'Gibbons':
 
                         if (method_exists($obj, 'render')){
                             echo $obj->render();
                         };
 
                         break;
-                        case 'History';
+                        case 'History':
 
                         if (method_exists($obj, 'render')){
                             echo $obj->render();
                         };
 
                         break;
-                        case 'Team';
-
-                        if (method_exists($obj, 'render')){
-                            echo $obj->render();
-                        };
-
-                        break;
-                        case 'Deforestation';
+                        case 'Team':
 
                         if (method_exists($obj, 'render')){
                             echo $obj->render();
@@ -318,7 +343,7 @@ class Application
 
                         break;
 
-                        case 'Context';
+                        case 'Deforestation':
 
                         if (method_exists($obj, 'render')){
                             echo $obj->render();
@@ -326,28 +351,7 @@ class Application
 
                         break;
 
-                        case 'Palm_oil';
-
-                        if (method_exists($obj, 'render')){
-                            echo $obj->render();
-                        };
-
-                        break;
-                        case 'Borneo';
-
-                        if (method_exists($obj, 'render')){
-                            echo $obj->render();
-                        };
-
-                        break;
-                        case 'Sumatra';
-
-                        if (method_exists($obj, 'render')){
-                            echo $obj->render();
-                        };
-
-                        break;
-                        case 'Friends';
+                        case 'Context':
 
                         if (method_exists($obj, 'render')){
                             echo $obj->render();
@@ -355,7 +359,28 @@ class Application
 
                         break;
 
-                        case 'Gift';
+                        case 'Palm_oil':
+
+                        if (method_exists($obj, 'render')){
+                            echo $obj->render();
+                        };
+
+                        break;
+                        case 'Borneo':
+
+                        if (method_exists($obj, 'render')){
+                            echo $obj->render();
+                        };
+
+                        break;
+                        case 'Sumatra':
+
+                        if (method_exists($obj, 'render')){
+                            echo $obj->render();
+                        };
+
+                        break;
+                        case 'Friends':
 
                         if (method_exists($obj, 'render')){
                             echo $obj->render();
@@ -363,7 +388,7 @@ class Application
 
                         break;
 
-                        case 'Gift_forest';
+                        case 'Gift':
 
                         if (method_exists($obj, 'render')){
                             echo $obj->render();
@@ -371,13 +396,26 @@ class Application
 
                         break;
 
-                        case 'Gift_dulan';
+                        case 'Gift_forest':
 
                         if (method_exists($obj, 'render')){
                             echo $obj->render();
                         };
 
                         break;
+
+                        case 'Gift_dulan':
+
+                        if (method_exists($obj, 'render')){
+                            echo $obj->render();
+                        };
+
+                        break;
+
+                        case 'Insert_gift':
+                        if (method_exists($obj, 'render')){
+                            echo $obj->render();
+                        };
 
 
                     }

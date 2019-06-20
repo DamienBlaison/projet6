@@ -172,7 +172,7 @@ class Asso_donation
         LEFT JOIN asso_cause as P1 ON P1.cau_id = asso_donation.cau_id
         LEFT JOIN crm_client as P2 ON P2.cli_id = asso_donation.cli_id
 
-        WHERE P2.cli_id = :cli_id AND P1.cau_id != 703 AND P1.cau_id != 700
+        WHERE P2.cli_id = :cli_id AND P1.cau_id != 703 AND P1.cau_id != 700 AND P1.cau_id != 704
 
         ORDER BY
 
@@ -206,6 +206,83 @@ class Asso_donation
         return $return ;
 
     }
+
+    function get_donation_by_member_front(){
+
+        $reqprep = $this->bdd->prepare(
+        "SELECT
+
+        P1.cau_name as Béneficiaire,
+
+        asso_donation.don_mnt as Montant,
+        asso_donation.don_ts as Date_creation
+
+        FROM
+
+        asso_donation
+
+        LEFT JOIN asso_cause as P1 ON P1.cau_id = asso_donation.cau_id
+
+        WHERE asso_donation.cli_id = :cli_id AND P1.cau_id != 703 AND P1.cau_id != 700 AND P1.cau_id != 704
+
+        ORDER BY
+
+        asso_donation.don_ts DESC
+
+        ");
+
+        $prepare = [
+            ":cli_id" => $_GET['cli_id'],
+        ];
+
+        $reqprep->execute($prepare);
+
+        $return = [
+            "content" => $reqprep->fetchAll(\PDO::FETCH_NUM),
+            "head"=>["Bénéficaire","Montant","Date création","Action"]
+        ];
+
+        return $return ;
+
+    }
+
+    function get_donation_by_member_asso_front(){
+
+        $reqprep = $this->bdd->prepare(
+        "SELECT
+
+        asso_donation.don_mnt as Montant,
+        asso_donation.don_ts as Date_creation
+
+        FROM
+
+        asso_donation
+
+        LEFT JOIN asso_cause as P1 ON P1.cau_id = asso_donation.cau_id
+
+        WHERE asso_donation.cli_id = :cli_id AND P1.cau_id = 704
+
+        ORDER BY
+
+        asso_donation.don_ts DESC
+
+        ");
+
+        $prepare = [
+            ":cli_id" => $_GET['cli_id'],
+        ];
+
+        $reqprep->execute($prepare);
+
+        $return = [
+            "content" => $reqprep->fetchAll(\PDO::FETCH_NUM),
+            "head"=>["Montant","Date création","Action"]
+        ];
+
+        return $return ;
+
+    }
+
 
     function get_donation_by_member_card(){
 
@@ -503,6 +580,19 @@ class Asso_donation
 
     }
 
+    function get_mnt_donation_current_year(){
+        $reqprep = $this->bdd->prepare("SELECT SUM(don_mnt) From asso_donation WHERe cau_id = :cau_id and YEAR(don_ts) = :Year_current");
+
+        $prepare = [
+            ":cau_id" => $_GET["cau_id"],
+            ":Year_current" => date("Y")
+        ];
+
+        $reqprep->execute($prepare);
+
+        return $data = $reqprep->fetch(\PDO::FETCH_NUM);
+    }
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                                             //charts management//
@@ -608,6 +698,27 @@ class Asso_donation
         $sum = $this->bdd->query("SELECT SUM(don_mnt) FROM asso_donation WHERE YEAR(don_ts)= $year and cau_id != '703' and cau_id!= '700'");
 
         $return = $sum->fetch(\PDO::FETCH_NUM);
+        if ($return[0] == NULL){ $return[0] = '0';}
+
+        return $return;
+
+    }
+
+    /************************************************/
+
+    public function get_year_sum_by_cause($year,$cau_id){
+
+        $reqprep = $this->bdd->prepare("SELECT SUM(don_mnt) FROM asso_donation WHERE YEAR(don_ts)= :year and cau_id = :cau_id");
+
+        $prepare =[
+            ":year" => $year,
+            ":cau_id" => $cau_id
+        ];
+
+        $reqprep->execute($prepare);
+
+        $return = $reqprep->fetch(\PDO::FETCH_NUM);
+
         if ($return[0] == NULL){ $return[0] = '0';}
 
         return $return;

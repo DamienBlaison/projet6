@@ -29,7 +29,7 @@ class Member_donation
         $p_id = "donation_by_member";
         $p_update = "www/Kalaweit/asso_donation/update?don_id=";
         $p_delete = "www/Kalaweit/asso_donation/delete?don_id=";
-        $p_print = "www/Kalaweit/receipt/get?don_id=";
+        $p_print = "www/Kalaweit/receipt/add?don_id=";
         $p_add = "www/Kalaweit/asso_donation/add?cli_id=".$_GET["cli_id"];
 
         /* Instanciation et application de le methode render de l'objet Table */

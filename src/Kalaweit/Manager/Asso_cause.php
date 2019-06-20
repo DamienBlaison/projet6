@@ -570,4 +570,112 @@ class Asso_cause
 
                                 return $asso_cause;
                             }
-                        }
+
+                            function get_info_gallery(){
+
+                                $url = explode('/',$_SERVER['REQUEST_URI']);
+                        
+                                $page = explode('?',$url[3]);
+
+
+                                $pagination = (($page[0])-1)*15;
+
+                                $having ='';
+
+                                if(isset($_GET["gift_open"]) && $_GET["gift_open"]=='on'){ $having = 'Having tot_don is NULL or tot_don < 280'; } ;
+
+                                $reqprep = $this->bdd->prepare(
+
+                                    "SELECT asso_cause.cau_id,asso_cause.cau_name,asso_cause_media.caum_file,SUM(T3.tot_don) as tot_don, YEAR(T3.don_ts)
+                                    FROM asso_cause
+                                    Left join asso_cause_media on asso_cause_media.cau_id=asso_cause.cau_id
+                                    left join (
+                                        select asso_donation.cau_id,asso_donation.don_ts,sum(asso_donation.don_mnt) as tot_don
+                                        from asso_donation where YEAR(asso_donation.don_ts) = :filter
+                                        group by asso_donation.cau_id,asso_donation.don_ts
+                                    ) as T3 on T3.cau_id = asso_cause.cau_id
+
+                                    WHERE asso_cause_media.caum_code = 'PHOTO1' and asso_cause.cau_site = 1 and asso_cause.cau_name LIKE :cau_name
+
+                                    GROUP BY asso_cause.cau_id,asso_cause.cau_name,asso_cause_media.caum_file,YEAR(T3.don_ts)
+
+                                    $having
+
+                                    ORDER BY asso_cause.cau_name
+
+                                    LIMIT $pagination,15
+
+                                    ");
+
+                                    $reqprep2 = $this->bdd->prepare(
+
+                                        "SELECT asso_cause.cau_id,asso_cause.cau_name,asso_cause_media.caum_file,SUM(T3.tot_don) as tot_don, YEAR(T3.don_ts)
+                                        FROM asso_cause
+                                        Left join asso_cause_media on asso_cause_media.cau_id=asso_cause.cau_id
+                                        left join (
+                                            select asso_donation.cau_id,asso_donation.don_ts,sum(asso_donation.don_mnt) as tot_don
+                                            from asso_donation where YEAR(asso_donation.don_ts) = :filter
+                                            group by asso_donation.cau_id,asso_donation.don_ts
+                                        ) as T3 on T3.cau_id = asso_cause.cau_id
+
+                                        WHERE asso_cause_media.caum_code = 'PHOTO1' and asso_cause.cau_site = 1 and asso_cause.cau_name LIKE :cau_name
+
+                                        GROUP BY asso_cause.cau_id,asso_cause.cau_name,asso_cause_media.caum_file,YEAR(T3.don_ts)
+
+                                        $having
+
+                                        ORDER BY asso_cause.cau_name
+
+                                        ");
+
+                                    if(isset($_GET["search"])){$search = '%'.$_GET["search"].'%';} else {$search = '%%';}
+
+                                    $prepare = [
+                                        ":filter" => date("Y"),
+                                        "cau_name" => $search
+                                    ];
+
+
+                                    $reqprep->execute($prepare);
+                                    $reqprep2->execute($prepare);
+
+                                    $data = [
+                                        "data" => $reqprep->fetchAll(\PDO::FETCH_ASSOC),
+                                        "count" => count($reqprep2->fetchAll(\PDO::FETCH_ASSOC))
+                                    ];
+
+
+                                    return $data;
+
+                                }
+
+                                function get_donator(){
+
+                                    $reqprep = $this->bdd->prepare(
+                                        "SELECT
+
+                                        asso_donation.cau_id,
+                                        crm_client.cli_firstname,
+                                        crm_client.cli_lastname
+
+                                        FROM asso_donation
+
+                                        LEFT JOIN crm_client on crm_client.cli_id = asso_donation.cli_id
+
+                                        WHERE cau_id = :cau_id
+
+                                        Group by cau_id,asso_donation.cli_id"
+                                    );
+
+                                    $prepare = [ ":cau_id" => $_GET["cau_id"]];
+
+                                    $reqprep->execute($prepare);
+
+                                    $data = $reqprep->fetchAll(\PDO::FETCH_ASSOC);
+
+                                    return $data;
+
+
+                                }
+
+                            }

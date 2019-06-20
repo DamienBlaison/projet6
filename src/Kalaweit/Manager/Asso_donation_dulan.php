@@ -150,6 +150,46 @@ class Asso_donation_dulan
                     "count" => $count_return[0]
                 ];
 
+                return $return ;
+
+            }
+
+            function get_donation_dulan_by_member_front(){
+
+                $reqprep = $this->bdd->prepare(
+
+                    "SELECT
+
+                    don_mnt as Montant,
+                    don_ts as Date_creation
+
+                    FROM
+
+                    asso_donation
+
+                    WHERE cli_id = :cli_id
+
+                    AND cau_id = 700
+
+                    ORDER BY
+
+                    don_ts DESC
+
+                    ");
+
+                    $prepare = [
+                        ":cli_id" => $_GET['cli_id']
+                    ];
+
+                    $reqprep->execute($prepare);
+
+
+
+                    $return = [
+                        "content" => $reqprep->fetchAll(\PDO::FETCH_NUM),
+                        "head" => ["Montant","Date de création","Action"]
+                    ];
+
                     return $return ;
 
                 }
@@ -158,140 +198,42 @@ class Asso_donation_dulan
 
                     if(isset( $_GET['cli_id'])){
 
-                    $reqprep = $this->bdd->prepare(
-                    "SELECT SUM(don_mnt)
+                        $reqprep = $this->bdd->prepare(
+                            "SELECT SUM(don_mnt)
 
-                    FROM
+                            FROM
 
-                    asso_donation
+                            asso_donation
 
-                    WHERE cli_id = :cli_id AND cau_id = 700 AND YEAR(don_ts) = YEAR(NOW())
-
-
-                    ");
-
-                    $prepare = [
-                        ":cli_id" => $_GET['cli_id'],
-                    ];
-
-                    $reqprep->execute($prepare);
-
-                    $return = $reqprep->fetch(\Pdo::FETCH_NUM);
-
-                } else { $return = [0]; }
-
-                return $return ;
-
-                }
+                            WHERE cli_id = :cli_id AND cau_id = 700 AND YEAR(don_ts) = YEAR(NOW())
 
 
+                            ");
 
-                function get_list(){
+                            $prepare = [
+                                ":cli_id" => $_GET['cli_id'],
+                            ];
 
-                    $where = '';
+                            $reqprep->execute($prepare);
 
-                    $param_request = $this->Get_param_request();
+                            $return = $reqprep->fetch(\Pdo::FETCH_NUM);
 
-                    foreach ($param_request[0] as $key => $value) {
-                        if($value != ''){
+                        } else { $return = [0]; }
 
-                            switch (substr($key,0,3)) {
+                        return $return ;
 
-                                case 'adh':
-                                $key_table = 'asso_donation_dulan.'.$key;// code...
-                                break;
-                                case 'cli':
-                                $key_table = 'P2.'.$key;// code...
-                                break;
-
-                            }
-
-                            $where .= ' AND '.$key_table.' LIKE :'.$key ;
-
-
-                        }
                     }
 
 
-                    if (isset($param_request[1]) && ($param_request[1] != 'get')){$filter = (($param_request[1])-1)*10;}else{$filter = 0;}
 
-
-                    $reqprep = $this->bdd->prepare(
-                        "SELECT
-
-                        asso_donation.don_id as Id_donation_dulan,
-
-                        asso_donation.cli_id as Id_Parrain,
-                        P2.cli_firstname as Prénom,
-                        P2.cli_lastname as Nom,
-
-                        asso_donation.don_mnt as Montant,
-                        asso_donation.don_ts as Date_creation,
-
-                        P4.rec_number as Receipt
-
-                        FROM
-
-                        asso_donation
-
-                        LEFT JOIN crm_client as P2 ON P2.cli_id = asso_donation.cli_id
-                        LEFT JOIN asso_receipt_donation as P3 ON P3.don_id = asso_donation.don_id
-                        LEFT JOIN asso_receipt as P4 ON P4.rec_id = P3.rec_id
-
-
-                        WHERE
-
-                        asso_donation.cau_id='700'
-
-                        $where
-
-                        ORDER BY
-
-                        asso_donation.don_ts DESC
-
-                        LIMIT $filter,10
-
-                        ");
-
-                        $count_reqprep = $this->bdd->prepare("SELECT COUNT(don_id) FROM asso_donation WHERE cau_id='700' $where ");
-
-                        if($param_request[0] != []){
-
-                            foreach ($param_request[0] as $key => $value) {
-                                if($value != ''){
-
-                                    $reqprep->bindValue(":".$key,$value);
-                                    $count_reqprep->bindValue(":".$key,$value);
-
-                                }
-                            }
-                        }
-
-                        $reqprep->execute();
-
-                        $count_result   = $count_reqprep->execute();
-                        $count_result   = $count_reqprep->fetch(\PDO::FETCH_NUM);
-
-                        $value = [];
-
-
-                        $data = [
-                            "list_donation_dulan"     => $reqprep->fetchAll(\PDO::FETCH_NUM),
-                            "head"              => ["Id","Id_membre","Prénom","Nom","Montant","Date enregistrement"],
-                            "count"             => $count_result
-                        ];
-
-                        return $data;
-                    }
-
-                    function get_list_export(){
+                    function get_list(){
 
                         $where = '';
 
                         $param_request = $this->Get_param_request();
 
                         foreach ($param_request[0] as $key => $value) {
-                            if($value != '' && $key != 'export_name' ){
+                            if($value != ''){
 
                                 switch (substr($key,0,3)) {
 
@@ -306,11 +248,15 @@ class Asso_donation_dulan
 
                                 $where .= ' AND '.$key_table.' LIKE :'.$key ;
 
+
                             }
                         }
 
-                        $reqprep = $this->bdd->prepare(
 
+                        if (isset($param_request[1]) && ($param_request[1] != 'get')){$filter = (($param_request[1])-1)*10;}else{$filter = 0;}
+
+
+                        $reqprep = $this->bdd->prepare(
                             "SELECT
 
                             asso_donation.don_id as Id_donation_dulan,
@@ -343,207 +289,300 @@ class Asso_donation_dulan
 
                             asso_donation.don_ts DESC
 
+                            LIMIT $filter,10
+
                             ");
+
+                            $count_reqprep = $this->bdd->prepare("SELECT COUNT(don_id) FROM asso_donation WHERE cau_id='700' $where ");
 
                             if($param_request[0] != []){
 
                                 foreach ($param_request[0] as $key => $value) {
-                                    if($value != '' && $key != 'export_name' ){
+                                    if($value != ''){
 
                                         $reqprep->bindValue(":".$key,$value);
+                                        $count_reqprep->bindValue(":".$key,$value);
 
                                     }
                                 }
                             }
 
-
                             $reqprep->execute();
 
+                            $count_result   = $count_reqprep->execute();
+                            $count_result   = $count_reqprep->fetch(\PDO::FETCH_NUM);
+
+                            $value = [];
+
+
                             $data = [
-                                "content"     => $reqprep->fetchAll(\PDO::FETCH_NUM),
-                                "head"        => ["Id","Id_membre","Prénom","Nom","Montant","Date enregistrement"],
-                                                        ];
-
-                            return $data;
-                        }
-
-                        public function delete()
-                        {
-                            $reqprep = $this->bdd->prepare(
-                                "DELETE FROM asso_donation
-                                 WHERE don_id = :don_id ");
-                            $prepare = [":don_id" => $_GET["don_id"]];
-
-                            $reqprep->execute($prepare);
-
-                        header("Location: ".$_SERVER['HTTP_REFERER']);
-
-                        }
-
-                        public function update(){
-
-                            $reqprep = $this->bdd->prepare(
-
-                                "UPDATE asso_donation
-
-                                SET
-                                cli_id     = :cli_id,
-                                don_mnt    = :don_mnt,
-                                ptyp_id    = :ptyp_id
-
-                                WHERE   cau_id = '700'
-                                AND     don_id = :don_id "
-                            );
-
-                            $prepare = [
-                                ":cli_id" => $_POST["cli_id"],
-                                ":don_mnt" => $_POST["donation_dulan_mnt"],
-                                ":ptyp_id" => $_POST["ptyp_id"],
-                                ":don_id" => $_GET["don_id"]
+                                "list_donation_dulan"     => $reqprep->fetchAll(\PDO::FETCH_NUM),
+                                "head"              => ["Id","Id_membre","Prénom","Nom","Montant","Date enregistrement"],
+                                "count"             => $count_result
                             ];
 
-                            $reqprep->execute($prepare);
-
-                            switch ($_GET["from"]) {
-                                case 'add':
-                                header("Location: /www/Kalaweit/asso_donation_dulan/add");
-                                break;
-
-                                case 'get':
-                                header( "Location: /www/Kalaweit/member/get?cli_id=".$_POST['cli_id']);
-                                break;
-
-                                default:
-                                header("Location: /www/Kalaweit/asso_donation_dulan/list/1");
-                                break;
-                            }
-
-                        }
-
-                        public function get()
-                        {
-                            $reqprep = $this->bdd->prepare("SELECT * FROM asso_donation WHERE don_id = :don_id AND cau_id='700'");
-
-
-                            $prepare = [ ":don_id" => $_GET['donation_dulan_id'] ];
-
-                            $reqprep->execute($prepare);
-
-                            return $data = $reqprep->fetch(\PDO::FETCH_ASSOC);
-
-                        }
-
-                        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        //charts management//
-                        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-                        public function get_chart_data_count($year){
-
-                            $begin = $year.'-01-01 00:00:00';
-                            $end = $year.'-12-31 23:59:59';
-
-                            $data = [];
-
-                            for ($i=1; $i < 13; $i++) {
-
-                                $sum = $this->bdd->query("SELECT COUNT(don_mnt) FROM asso_donation WHERE cau_id='700' AND YEAR(don_ts)= $year AND MONTH(don_ts)= $i ");
-
-                                array_push($data,$sum->fetch(\PDO::FETCH_NUM ));
-
-                            }
-
                             return $data;
-
                         }
-                        public function get_chart_data_sum($year){
 
-                            $begin = $year.'-01-01 00:00:00';
-                            $end = $year.'-12-31 23:59:59';
+                        function get_list_export(){
 
-                            $data = [];
+                            $where = '';
 
-                            for ($i=1; $i < 13; $i++) {
+                            $param_request = $this->Get_param_request();
 
-                                $sum = $this->bdd->query("SELECT SUM(don_mnt) FROM asso_donation WHERE cau_id='700' AND YEAR(don_ts)= $year and MONTH(don_ts)= $i ");
+                            foreach ($param_request[0] as $key => $value) {
+                                if($value != '' && $key != 'export_name' ){
 
-                                array_push($data,$sum->fetch(\PDO::FETCH_NUM ));
+                                    switch (substr($key,0,3)) {
 
+                                        case 'adh':
+                                        $key_table = 'asso_donation_dulan.'.$key;// code...
+                                        break;
+                                        case 'cli':
+                                        $key_table = 'P2.'.$key;// code...
+                                        break;
+
+                                    }
+
+                                    $where .= ' AND '.$key_table.' LIKE :'.$key ;
+
+                                }
                             }
 
-                            return $data;
+                            $reqprep = $this->bdd->prepare(
 
-                        }
+                                "SELECT
 
-                        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        //resume management//
-                        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                asso_donation.don_id as Id_donation_dulan,
 
-                        public function get_resume_data_sum($year){
+                                asso_donation.cli_id as Id_Parrain,
+                                P2.cli_firstname as Prénom,
+                                P2.cli_lastname as Nom,
 
-                            $begin = $year.'-01-01 00:00:00';
-                            $end = $year.'-12-31 23:59:59';
+                                asso_donation.don_mnt as Montant,
+                                asso_donation.don_ts as Date_creation,
 
-                            $data = [];
+                                P4.rec_number as Receipt
 
-                            for ($i=1; $i < 13; $i++) {
+                                FROM
 
-                                $sum = $this->bdd->query("SELECT SUM(don_mnt) FROM asso_donation WHERE cau_id='700' AND YEAR(don_ts)= $year and MONTH(don_ts)= $i ");
+                                asso_donation
 
-                                $temp = $sum->fetch(\PDO::FETCH_NUM );
+                                LEFT JOIN crm_client as P2 ON P2.cli_id = asso_donation.cli_id
+                                LEFT JOIN asso_receipt_donation as P3 ON P3.don_id = asso_donation.don_id
+                                LEFT JOIN asso_receipt as P4 ON P4.rec_id = P3.rec_id
 
-                                $data[] = $temp[0];
+
+                                WHERE
+
+                                asso_donation.cau_id='700'
+
+                                $where
+
+                                ORDER BY
+
+                                asso_donation.don_ts DESC
+
+                                ");
+
+                                if($param_request[0] != []){
+
+                                    foreach ($param_request[0] as $key => $value) {
+                                        if($value != '' && $key != 'export_name' ){
+
+                                            $reqprep->bindValue(":".$key,$value);
+
+                                        }
+                                    }
+                                }
+
+
+                                $reqprep->execute();
+
+                                $data = [
+                                    "content"     => $reqprep->fetchAll(\PDO::FETCH_NUM),
+                                    "head"        => ["Id","Id_membre","Prénom","Nom","Montant","Date enregistrement"],
+                                ];
+                                return $data;
                             }
 
-                            return $data;
+                            public function delete()
+                            {
+                                $reqprep = $this->bdd->prepare(
+                                    "DELETE FROM asso_donation
+                                    WHERE don_id = :don_id ");
+                                    $prepare = [":don_id" => $_GET["don_id"]];
 
-                        }
+                                    $reqprep->execute($prepare);
 
-                        public function get_resume_data_count($year){
+                                    header("Location: ".$_SERVER['HTTP_REFERER']);
 
-                            $begin = $year.'-01-01 00:00:00';
-                            $end = $year.'-12-31 23:59:59';
+                                }
 
-                            $data = [];
+                                public function update(){
 
-                            for ($i=1; $i < 13; $i++) {
+                                    $reqprep = $this->bdd->prepare(
 
-                                $sum = $this->bdd->query("SELECT COUNT(don_mnt) FROM asso_donation WHERE cau_id='700' AND YEAR(don_ts)= $year and MONTH(don_ts)= $i ");
+                                        "UPDATE asso_donation
 
-                                $temp = $sum->fetch(\PDO::FETCH_NUM );
+                                        SET
+                                        cli_id     = :cli_id,
+                                        don_mnt    = :don_mnt,
+                                        ptyp_id    = :ptyp_id
 
-                                $data[] = $temp[0];
+                                        WHERE   cau_id = '700'
+                                        AND     don_id = :don_id "
+                                    );
+
+                                    $prepare = [
+                                        ":cli_id" => $_POST["cli_id"],
+                                        ":don_mnt" => $_POST["donation_dulan_mnt"],
+                                        ":ptyp_id" => $_POST["ptyp_id"],
+                                        ":don_id" => $_GET["don_id"]
+                                    ];
+
+                                    $reqprep->execute($prepare);
+
+                                    switch ($_GET["from"]) {
+                                        case 'add':
+                                        header("Location: /www/Kalaweit/asso_donation_dulan/add");
+                                        break;
+
+                                        case 'get':
+                                        header( "Location: /www/Kalaweit/member/get?cli_id=".$_POST['cli_id']);
+                                        break;
+
+                                        default:
+                                        header("Location: /www/Kalaweit/asso_donation_dulan/list/1");
+                                        break;
+                                    }
+
+                                }
+
+                                public function get()
+                                {
+                                    $reqprep = $this->bdd->prepare("SELECT * FROM asso_donation WHERE don_id = :don_id AND cau_id='700'");
+
+
+                                    $prepare = [ ":don_id" => $_GET['donation_dulan_id'] ];
+
+                                    $reqprep->execute($prepare);
+
+                                    return $data = $reqprep->fetch(\PDO::FETCH_ASSOC);
+
+                                }
+
+                                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                //charts management//
+                                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                                public function get_chart_data_count($year){
+
+                                    $begin = $year.'-01-01 00:00:00';
+                                    $end = $year.'-12-31 23:59:59';
+
+                                    $data = [];
+
+                                    for ($i=1; $i < 13; $i++) {
+
+                                        $sum = $this->bdd->query("SELECT COUNT(don_mnt) FROM asso_donation WHERE cau_id='700' AND YEAR(don_ts)= $year AND MONTH(don_ts)= $i ");
+
+                                        array_push($data,$sum->fetch(\PDO::FETCH_NUM ));
+
+                                    }
+
+                                    return $data;
+
+                                }
+                                public function get_chart_data_sum($year){
+
+                                    $begin = $year.'-01-01 00:00:00';
+                                    $end = $year.'-12-31 23:59:59';
+
+                                    $data = [];
+
+                                    for ($i=1; $i < 13; $i++) {
+
+                                        $sum = $this->bdd->query("SELECT SUM(don_mnt) FROM asso_donation WHERE cau_id='700' AND YEAR(don_ts)= $year and MONTH(don_ts)= $i ");
+
+                                        array_push($data,$sum->fetch(\PDO::FETCH_NUM ));
+
+                                    }
+
+                                    return $data;
+
+                                }
+
+                                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                //resume management//
+                                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                                public function get_resume_data_sum($year){
+
+                                    $begin = $year.'-01-01 00:00:00';
+                                    $end = $year.'-12-31 23:59:59';
+
+                                    $data = [];
+
+                                    for ($i=1; $i < 13; $i++) {
+
+                                        $sum = $this->bdd->query("SELECT SUM(don_mnt) FROM asso_donation WHERE cau_id='700' AND YEAR(don_ts)= $year and MONTH(don_ts)= $i ");
+
+                                        $temp = $sum->fetch(\PDO::FETCH_NUM );
+
+                                        $data[] = $temp[0];
+                                    }
+
+                                    return $data;
+
+                                }
+
+                                public function get_resume_data_count($year){
+
+                                    $begin = $year.'-01-01 00:00:00';
+                                    $end = $year.'-12-31 23:59:59';
+
+                                    $data = [];
+
+                                    for ($i=1; $i < 13; $i++) {
+
+                                        $sum = $this->bdd->query("SELECT COUNT(don_mnt) FROM asso_donation WHERE cau_id='700' AND YEAR(don_ts)= $year and MONTH(don_ts)= $i ");
+
+                                        $temp = $sum->fetch(\PDO::FETCH_NUM );
+
+                                        $data[] = $temp[0];
+                                    }
+
+                                    return $data;
+
+                                }
+                                public function get_year_count($year){
+
+                                    $sum = $this->bdd->query("SELECT COUNT(don_mnt) FROM asso_donation WHERE YEAR(don_ts)= $year and cau_id='700' ");
+
+                                    $return = $sum->fetch(\PDO::FETCH_NUM);
+                                    if ($return[0] == NULL){ $return[0] = '0';}
+
+                                    return $return;
+
+                                }
+
+                                public function get_year_sum($year){
+
+                                    $sum = $this->bdd->query("SELECT SUM(don_mnt) FROM asso_donation WHERE YEAR(don_ts)= $year and cau_id='700' ");
+
+                                    $return = $sum->fetch(\PDO::FETCH_NUM);
+
+                                    if ($return[0] == NULL){ $return[0] = '0';}
+
+                                    return $return;
+
+                                }
+
+
+
                             }
-
-                            return $data;
-
-                        }
-                        public function get_year_count($year){
-
-                            $sum = $this->bdd->query("SELECT COUNT(don_mnt) FROM asso_donation WHERE YEAR(don_ts)= $year and cau_id='700' ");
-
-                            $return = $sum->fetch(\PDO::FETCH_NUM);
-                            if ($return[0] == NULL){ $return[0] = '0';}
-
-                            return $return;
-
-                        }
-
-                        public function get_year_sum($year){
-
-                            $sum = $this->bdd->query("SELECT SUM(don_mnt) FROM asso_donation WHERE YEAR(don_ts)= $year and cau_id='700' ");
-
-                            $return = $sum->fetch(\PDO::FETCH_NUM);
-
-                            if ($return[0] == NULL){ $return[0] = '0';}
-
-                            return $return;
-
-                        }
-
-
-
-                    }

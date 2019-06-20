@@ -193,6 +193,15 @@ class Asso_cause_info
 
         $box_description_es = (new \Kalaweit\htmlElement\Box('Description en espagnol','box-primary',$content_box_desc_es,[12]));
 
+        //info dons récoltés
+
+        $donation_mnt = (new \Kalaweit\Controller\Component\Asso_cause\Donation_current_year())->get();
+        $p_data2 = $donation_mnt[0].' €';
+        $p_title = 'Dons récoltés cette année';
+        $p_icon = 'fa fa-euro';
+
+        $box_donation_mnt = (new \Kalaweit\htmlElement\Box_info($p_data2,$p_title,$p_icon,$p_color = 'bg-aqua'))->render();
+
 
 
         /***************************************************************************************************************************/
@@ -207,6 +216,7 @@ class Asso_cause_info
             "info_générale" => $box_asso_cause_info,
             "autres_infos"  => $box_asso_cause_autres_infos,
             "pictures"      => $box_pictures,
+            "dons_récoltés" => $box_donation_mnt,
             "description_fr" => $box_description_fr,
             "description_en" => $box_description_en,
             "description_es" => $box_description_es,

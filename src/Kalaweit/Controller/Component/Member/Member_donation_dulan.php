@@ -27,7 +27,7 @@ class Member_donation_dulan
         $p_id = "donation_dulan_by_member";
         $p_update = "www/Kalaweit/asso_donation_dulan/update?don_id=";
         $p_delete = "www/Kalaweit/asso_donation_dulan/delete?don_id=";
-        $p_print = "www/Kalaweit/receipt/get?don_id=";
+        $p_print = "www/Kalaweit/receipt/add?don_id=";
         $p_add = "www/Kalaweit/asso_donation_dulan/add?cli_id=".$_GET["cli_id"];
 
         /* Instanciation et application de le methode render de l'objet Table */

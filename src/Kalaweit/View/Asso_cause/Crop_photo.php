@@ -60,7 +60,7 @@ class Crop_photo
                             enableExif:true,
                             viewport:{
                                 width:320,
-                                height: 180,
+                                height: 250,
                                 type:'square'
                             },
                             boundary:{

@@ -14,10 +14,12 @@ class Box_add
 
         $payment_type = (new \Kalaweit\Manager\Asso_payment_type)->getAll($bdd);
         $cli = (new \Kalaweit\Manager\Member($bdd))->get_select();
+        $status = (new \Kalaweit\Manager\Status())->getAll();
 
         $adhesion_mnt = (new \Kalaweit\htmlElement\Form_group_input('adhesion_mnt','montant de l\'adhésion','','fa fa-euro'));
         $devise  = (new \Kalaweit\htmlElement\Form_group_select('ptyp_id',$payment_type,'','fa fa-internet-explorer',"ptyp_code"));
         $donator = (new \Kalaweit\htmlElement\Form_group_select('cli_id',$cli,'','fa fa-user',"cli_identity" ));
+        $status = (new \Kalaweit\htmlElement\Form_group_select('adhesion_status',$status,'','fa fa-user',"config" ));
 
         $submit  = '';
         $submit .=                      '<div class="form-group">';
@@ -30,10 +32,11 @@ class Box_add
             $donator->render(),
             $adhesion_mnt->render(),
             $devise->render(),
+            $status->render(),
             $submit
         ];
 
-        $col_md = [12,12,12,12];
+        $col_md = [12,12,12,12,12];
 
         $box_adhesion = (new \Kalaweit\htmlElement\Box('Ajouter une adhésion','box-primary',$box_adhesion_content,$col_md))->render();
 

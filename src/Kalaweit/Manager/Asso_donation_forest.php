@@ -152,6 +152,46 @@ class Asso_donation_forest
 
                 }
 
+
+                function get_donation_forest_by_member_front(){
+
+
+                    $reqprep = $this->bdd->prepare(
+
+                        "SELECT
+
+                        don_mnt as Montant,
+                        don_ts as Date_creation
+
+                        FROM
+
+                        asso_donation
+                        WHERE cli_id = :cli_id
+
+                        AND cau_id = 703
+
+                        ORDER BY
+
+                        don_ts DESC
+
+                        ");
+
+                        $prepare = [
+                            ":cli_id" => $_GET['cli_id']
+                        ];
+
+                        $reqprep->execute($prepare);
+
+                        $return = [
+                            "content" => $reqprep->fetchAll(\PDO::FETCH_NUM) ,
+                            "head"=>["Montant","Date création","Action"]
+                        ];
+
+                            return $return ;
+
+                        }
+
+
                 function get_donation_forest_by_member_card(){
 
                 if(isset( $_GET['cli_id'])){

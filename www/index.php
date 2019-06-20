@@ -1,5 +1,6 @@
 <?php
 include ('../vendor/autoload.php');
+
 /**
  * Le fichier php qui permet d'intégrer toutes les sources dont l'autoloader
  * Le but de l'autoloader est de ne plus avoir besoin de faire de include, require
@@ -15,6 +16,13 @@ session_start();
  */
 
 $config = \Kalaweit\Core\Config::getInstance(__DIR__ . '/../config/config.php');
+
+/*$apiContext = new \PayPal\Rest\ApiContext(
+  new \PayPal\Auth\OAuthTokenCredential(
+    'AUBsHJEtebJolooHBXnLMz8sTvBCwnuQsdx01GTPfrSVh44DBw1ZLb57gCm_mCo4N64zZN-mtLAGzxWi',
+    'EDTK8NezcK4mPdYVzPFm685pi2OSVHLO0QpFY-5liFbiIjduLjZMqCqg0cZ1QDdQql8TlnhpoFWdQbNo'
+  )
+);*/
 
 /**
  * On instancie une application qui va se charger de tout gérer, on lui passe la config locale

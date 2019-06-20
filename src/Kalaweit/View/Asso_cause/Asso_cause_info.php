@@ -25,6 +25,10 @@ class Asso_cause_info
         $asso_cause_info .=                 ($param["pictures"])->render();
         $asso_cause_info .=         '</div>';
 
+        $asso_cause_info .=       ' <div id="card_gift" class="col-md-12">';
+        $asso_cause_info .=                 ($param["dons_récoltés"]);
+        $asso_cause_info .=         '</div>';
+
         $asso_cause_info .=       ' <div class="col-md-12">';
         $asso_cause_info .=                 ($param["description_fr"])->render();
         $asso_cause_info .=         '</div>';

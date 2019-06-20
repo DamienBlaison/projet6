@@ -63,7 +63,8 @@ class Asso_adhesion
             P2.cli_lastname as Nom,
 
             asso_adhesion.adhesion_mnt as Montant,
-            asso_adhesion.adhesion_ts as Date_creation
+            asso_adhesion.adhesion_ts as Date_creation,
+            asso_adhesion.adhesion_status as Status
 
             FROM
 
@@ -86,7 +87,7 @@ class Asso_adhesion
 
             $data = [
                 "content"     => $reqprep->fetchAll(\PDO::FETCH_NUM),
-                "head"              => ["Id","Id_membre","Prénom","Nom","Montant","Date enregistrement","Action"],
+                "head"              => ["Id","Id_membre","Prénom","Nom","Montant","Date enregistrement","Status","Action"],
             ];
 
             return $data;
@@ -101,7 +102,8 @@ class Asso_adhesion
                 asso_adhesion.adhesion_id as Id_adhesion,
 
                 asso_adhesion.adhesion_mnt as Montant,
-                asso_adhesion.adhesion_ts as Date_creation
+                asso_adhesion.adhesion_ts as Date_creation,
+                asso_adhesion.adhesion_status as Status
 
                 FROM
 
@@ -140,11 +142,49 @@ class Asso_adhesion
                 $return = [
                     "content" => $list_adhesion_member ,
                     "count" => $count_adhesion_member[0],
-                    "head"=>["Id","Montant","Date création",'Action']];
+                    "head"=>["Id","Montant","Date création","Status",'Action']];
 
                     return $return ;
 
                 }
+
+                function get_adhesion_by_member_front(){
+
+                    $reqprep = $this->bdd->prepare(
+                        "SELECT
+
+                       adhesion_mnt as Montant,
+                       adhesion_ts as Date_creation
+
+
+                        FROM
+
+                        asso_adhesion
+
+                        WHERE cli_id = :cli_id
+
+                        ORDER BY
+
+                        asso_adhesion.adhesion_ts DESC
+
+                        ");
+
+                        $prepare = [
+                            ":cli_id" => $_GET['cli_id']
+                        ];
+
+                        $reqprep->execute($prepare);
+
+                        $list_adhesion_member = $reqprep->fetchAll(\PDO::FETCH_NUM);
+
+                        $return = [
+                            "content" => $list_adhesion_member ,
+                            "head"=>["Montant","Date création",'Action']
+                        ];
+                    
+                        return $return ;
+
+                        }
 
                 function get_list(){
 
@@ -185,7 +225,8 @@ class Asso_adhesion
                         P2.cli_firstname as Prénom,
 
                         asso_adhesion.adhesion_mnt as Montant,
-                        asso_adhesion.adhesion_ts as Date_creation
+                        asso_adhesion.adhesion_ts as Date_creation,
+                        asso_adhesion.adhesion_status as Status
 
                         FROM
 
@@ -230,7 +271,7 @@ class Asso_adhesion
 
                         $data = [
                             "list_adhesion"     => $reqprep->fetchAll(\PDO::FETCH_NUM),
-                            "head"              => ["Id","Nom","Prénom","Montant","Date enregistrement"],
+                            "head"              => ["Id","Nom","Prénom","Montant","Date enregistrement","Status"],
                             "count"             => $count_result
                         ];
 
@@ -259,7 +300,8 @@ class Asso_adhesion
                                 SET
                                 cli_id     = :cli_id,
                                 adhesion_mnt    = :adhesion_mnt,
-                                ptyp_id    = :ptyp_id
+                                ptyp_id    = :ptyp_id,
+                                adhesion_status = :adhesion_status
 
                                 WHERE
                                 adhesion_id = :adhesion_id "
@@ -269,7 +311,8 @@ class Asso_adhesion
                                 ":cli_id" => $_POST["cli_id"],
                                 ":adhesion_mnt" => $_POST["adhesion_mnt"],
                                 ":ptyp_id" => $_POST["ptyp_id"],
-                                ":adhesion_id" => $_GET["adhesion_id"]
+                                ":adhesion_id" => $_GET["adhesion_id"],
+                                ":adhesion_status" =>$_POST["adhesion_status"]
                             ];
 
                             $reqprep->execute($prepare);

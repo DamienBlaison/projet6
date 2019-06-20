@@ -7,9 +7,18 @@ class Gibbon_gallery
 
     function render(){
 
+        $bdd = (new \Kalaweit\Manager\Connexion())->getBdd();
+
         $aside = (new \Site\View\Aside())->render();
 
-        $content = [ "aside" => $aside];
+        $gallery_gibbon = (new \Kalaweit\Manager\Asso_cause($bdd))->get_info_gallery();
+        
+
+        $content = [
+            "aside" => $aside,
+            "gallery" =>$gallery_gibbon
+        ];
+
 
         return (new \Site\View\Gibbon_gallery())->render($content);
     }

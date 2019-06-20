@@ -37,6 +37,7 @@ class Table
     public function render(){
 
     if ($this->n_page == 0) { $this->n_page = 1;};
+
     $url = explode("/",$_SERVER['REQUEST_URI']);
     $temp = $url["4"];
     $from = explode("?",$temp);
@@ -84,7 +85,18 @@ class Table
         $body .=    '<a style="margin-right:5px;"href="/'.$this->delete.$value[0].'" class="btn btn-danger" id="delete_'.$value[0].'" onclick ="return confirm(\'Etes vous sur de vouloir supprimer cet enregistrement\')"><i class="fa  fa-trash"></i></a>';
 
         $bdd = (new \Kalaweit\Manager\Connexion())->getBdd();
-        $name_receipt = (new \Kalaweit\Manager\Receipt($bdd))->name_receipt($value[0]);
+
+        if($this->id == "adhesion_by_member"){
+
+            $name_receipt = (new \Kalaweit\Manager\Receipt($bdd))->name_receipt_adhesion($value[0]);
+
+        } else {
+
+            $name_receipt = (new \Kalaweit\Manager\Receipt($bdd))->name_receipt($value[0]);
+
+        }
+
+
 
         if( $name_receipt != NULL){
 
@@ -92,7 +104,7 @@ class Table
 
         } else {
 
-            $body .=    '<a href="/www/Kalaweit/receipt/add?don_id='.$value[0].'" target="_blank" style="margin-right:5px;" class="btn btn-warning" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
+            $body .=    '<a href="/'.$this->print.$value[0].'" target="_blank" style="margin-right:5px;" class="btn btn-warning" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
         }
 
 

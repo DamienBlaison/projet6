@@ -28,7 +28,7 @@ class Member_donation_forest
         $p_id = "donation_forest_by_member";
         $p_update = "www/Kalaweit/asso_donation_forest/update?don_id=";
         $p_delete = "www/Kalaweit/asso_donation_forest/delete?don_id=";
-        $p_print = "www/Kalaweit/receipt/get?don_id=";
+        $p_print = "www/Kalaweit/receipt/add?don_id=";
         $p_add = "www/Kalaweit/asso_donation_forest/add?cli_id=".$_GET["cli_id"];
 
         /* Instanciation et application de le methode render de l'objet Table */

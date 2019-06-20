@@ -83,13 +83,18 @@ return [
         '2015' => '2015'
 
     ],
-    
+
     'gender' => [
 
         'MISTER' => 'Monsieur',
         'MADAM'  => 'Madame',
         'MISS'   => 'Mademoiselle',
         'OTHER'  => 'Autre'
+    ],
+
+    'status' => [
+        'WAIT' => 'WAIT',
+        'OK'   => 'OK'
     ]
 
 ];

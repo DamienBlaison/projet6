@@ -32,7 +32,15 @@ class Asso_cause_donation
 
         /* instanciation de l'objet Table , on retourne le resultat lors de l'appel de la methode rendre() */
 
-        return (new \Kalaweit\htmlElement\Table($p_name,$p_data,$p_id,$p_update,$p_delete,$p_print,$p_add,$p_nb_by_page))->render();
+        $donation_mnt = (new \Kalaweit\Controller\Component\Asso_cause\Donation_current_year())->get();
+
+        $p_data2 = $donation_mnt[0].' €';
+        $p_title = 'Dons récoltés cette année';
+        $p_icon = 'fa fa-euro';
+
+        $box_donation_mnt = (new \Kalaweit\htmlElement\Box_info($p_data2,$p_title,$p_icon,$p_color = 'bg-aqua'))->render();
+
+        return $box_donation_mnt.(new \Kalaweit\htmlElement\Table($p_name,$p_data,$p_id,$p_update,$p_delete,$p_print,$p_add,$p_nb_by_page))->render();
 
     }
 

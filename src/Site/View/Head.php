@@ -1,3 +1,14 @@
+<?php
+
+if(isset($_SESSION["cli_id"])){
+	$href = '/www/My_account?cli_id='.$_SESSION["cli_id"];
+	$name_nav_item = 'Mon Compte';
+}else{
+	$href = '/www/Connexion';
+	$name_nav_item = 'Connexion';
+}
+?>
+
 <!DOCTYPE HTML>
 <!--
 Telephasic by HTML5 UP
@@ -16,6 +27,7 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
 	<link rel="stylesheet" href="../../../../Css/Animated.css" />
 </head>
 <body class="homepage ">
+
 	<div id="page-wrapper">
 
 		<!-- Header -->
@@ -56,6 +68,11 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
 						<li class="nav-item">
 							<a class="nav-link" href="/www/Sumatra" id="Sumatra" role="button" >
 								Sumatra
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="<?php echo $href ?>" id="Connexion" role="button" >
+								<?php echo $name_nav_item ?>
 							</a>
 						</li>
 						</ul>

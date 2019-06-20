@@ -11,11 +11,8 @@ class Aside
 
         $return ='
 
-        <div class="Wrapper">
+        <div class="">
             <div class="container">
-                <div>
-                    <a href="#" class="image" id="logo-timbre"><img src="/../Documents/Front/logo-timbre.png" alt=""></a>
-                </div>
                 <div>
                     <a href="/www/Friends" class="image"><img src="/../Documents/Front/1-20150114191938.jpg" alt=""></a>
                     <h4 class="lien_aside">Devenir ami</h4>
@@ -25,7 +22,7 @@ class Aside
                     <h4 class="lien_aside">Faire un don</h4>
                 </div>
                 <div>
-                    <a href="/www/Gibbon_gallery" class="image"><img src="/../Documents/Front/2-20180203113327.png" alt=""></a>
+                    <a href="/www/Gibbon_gallery/1" class="image"><img src="/../Documents/Front/2-20180203113327.png" alt=""></a>
                     <h4 class="lien_aside">Parrainer un gibbon</h4>
                 </div>
                 <div>

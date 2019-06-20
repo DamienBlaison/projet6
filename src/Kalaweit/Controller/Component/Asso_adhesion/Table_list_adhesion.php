@@ -26,6 +26,7 @@ class Table_list_adhesion
         if(isset($_GET['cli_id'])){$cli_id = $_GET['cli_id']; } else { $cli_id = '';};
         if(isset($_GET['cli_firstname'])){$cli_firstname = $_GET['cli_firstname']; } else { $cli_firstname = '';};
         if(isset($_GET['cli_lastname'])){$cli_lastname = $_GET['cli_lastname']; } else { $cli_lastname = '';};
+        if(isset($_GET['adhesion_status'])){$adhesion_status= $_GET['adhesion_status']; } else { $adhesion_status = '';};
 
         $fields =
 
@@ -37,7 +38,7 @@ class Table_list_adhesion
                 "type"          => 'text',
                 "name"          => 'cli_firstname',
                 "placeholder"   => 'Prénom',
-                "class"         => '5',
+                "class"         => '4',
                 "value"         =>  $cli_firstname
             ]
 
@@ -49,13 +50,24 @@ class Table_list_adhesion
                 "type"          => 'text',
                 "name"          => 'cli_lastname',
                 "placeholder"   => 'Nom',
-                "class"         => '5',
+                "class"         => '4',
                 "value"         =>  $cli_lastname
+            ]
+            ,
+
+            [
+                "type_balise"   => 'input',
+                "id"            => 'adhesion_status',
+                "type"          => 'text',
+                "name"          => 'adhesion_status',
+                "placeholder"   => 'OK/WAIT',
+                "class"         => '2',
+                "value"         =>  $adhesion_status
             ]
 
         ];
 
-    
+
         $data =[
 
             "table"             => $list["list_adhesion"],

@@ -7,12 +7,16 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Spipu\\Html2Pdf\\' => array($vendorDir . '/spipu/html2pdf/src'),
+    'Site\\' => array($baseDir . '/src/Site'),
+    'Sample\\' => array($vendorDir . '/paypal/paypal-checkout-sdk/samples'),
     'Psr\\SimpleCache\\' => array($vendorDir . '/psr/simple-cache/src'),
+    'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'PhpOffice\\PhpSpreadsheet\\' => array($vendorDir . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet'),
+    'PayPalCheckoutSdk\\' => array($vendorDir . '/paypal/paypal-checkout-sdk/lib/PayPalCheckoutSdk'),
     'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
     'Matrix\\' => array($vendorDir . '/markbaker/matrix/classes/src'),
     'Kalaweit\\' => array($baseDir . '/src/Kalaweit'),
-    'Site\\' => array($baseDir . '/src/Site'),
     'Composer\\Installers\\' => array($vendorDir . '/composer/installers/src/Composer/Installers'),
     'Complex\\' => array($vendorDir . '/markbaker/complex/classes/src'),
+    'BraintreeHttp\\' => array($vendorDir . '/braintree/braintreehttp/lib/BraintreeHttp'),
 );

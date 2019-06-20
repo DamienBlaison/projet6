@@ -23,10 +23,11 @@ class Asso_adhesion
 
     $payment_type = (new \Kalaweit\Manager\Asso_payment_type)->getAll($bdd);
     $cli = (new \Kalaweit\Manager\Member($bdd))->get_select();
-
+    $status = (new \Kalaweit\Manager\Status())->getAll();
     $adhesion_mnt = (new \Kalaweit\htmlElement\Form_group_input('adhesion_mnt','montant de l\'adhésion',$adhesion["adhesion_mnt"],'fa fa-euro'));
     $devise  = (new \Kalaweit\htmlElement\Form_group_select('ptyp_id',$payment_type,$adhesion["ptyp_id"],'fa fa-internet-explorer',"ptyp_code"));
-    $donator = (new \Kalaweit\htmlElement\Form_group_select('cli_id',$cli,$adhesion["cli_id"],'fa fa-user',"cli_identity" ));
+    $donator = (new \Kalaweit\htmlElement\Form_group_select('cli_id',$cli,$adhesion["adhesion_status"],'fa fa-user',"cli_identity" ));
+    $status = (new \Kalaweit\htmlElement\Form_group_select('adhesion_status',$status,$adhesion["adhesion_status"],'fa fa-user',"config" ));
 
     $button  = '';
     $button .=                      '<div class="form-group">';
@@ -38,10 +39,11 @@ class Asso_adhesion
         $donator->render(),
         $adhesion_mnt->render(),
         $devise->render(),
+        $status->render(),
         $button
     ];
 
-    $col_md = [12,12,12,12];
+    $col_md = [12,12,12,12,12];
 
     $box_adhesion = (new \Kalaweit\htmlElement\Box('Modifier une adhésion','box-primary',$box_adhesion_content,$col_md))->render();
 

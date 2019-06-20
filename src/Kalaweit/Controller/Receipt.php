@@ -9,7 +9,7 @@ class Receipt
 
     /* methode de generation des recu */
 
-    function get($rec_id, $open)
+    function get($rec_id, $open, $type)
     {
 
         /* initialisation de tableaux avec la traduction des elements en francais à afficher */
@@ -25,7 +25,7 @@ class Receipt
 
         $receipt_data = (new \Kalaweit\Manager\Receipt($bdd))->get($rec_id);
 
-            $content = [
+        $content = [
 
             "firstname" => $receipt_data["cli_firstname"],
             "lastname" => $receipt_data["cli_lastname"],
@@ -40,7 +40,21 @@ class Receipt
 
         ];
 
-        return (new \Kalaweit\View\Receipt\Receipt($content))->render($open);
+        switch ($type) {
+            case 'adhesion':
+            return (new \Kalaweit\View\Receipt\Receipt_adhesion($content))->render($open);
+            break;
+
+            case 'donation':
+            return (new \Kalaweit\View\Receipt\Receipt($content))->render($open);
+            break;
+
+            default:
+            // code...
+            break;
+        }
+
+
 
     }
 
@@ -66,9 +80,26 @@ class Receipt
     function add(){
 
         $bdd = (new \Kalaweit\Manager\Connexion())->getBdd();
-        $rec_id = ($receipt = new \Kalaweit\Manager\Receipt($bdd))->add($_GET["don_id"]);
 
-        $visu_receipt = (new \Kalaweit\Controller\Receipt($bdd))->get($rec_id[0],"open");
+        $url = $_SERVER["REQUEST_URI"];
+
+        $explode = explode("?" ,$url);
+        $param = explode("=" , $explode[1]);
+
+        if ($param[0] == 'adhesion_id'){
+
+            $rec_id = ($receipt = new \Kalaweit\Manager\Receipt($bdd))->add(["adhesion" => $_GET["adhesion_id"]]);
+            $type = "adhesion";
+
+        } else {
+
+            $rec_id = ($receipt = new \Kalaweit\Manager\Receipt($bdd))->add(["donation"=> $_GET["don_id"]]);
+            $type = "donation";
+
+        }
+
+        $visu_receipt = (new \Kalaweit\Controller\Receipt($bdd))->get($rec_id[0],"open",$type);
+
 
     }
 
