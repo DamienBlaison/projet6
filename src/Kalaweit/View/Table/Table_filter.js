@@ -20,7 +20,7 @@ let target = uri[3];
 
     let    xhttp = new XMLHttpRequest();
 
-    var url = '/www/Kalaweit/ajax_get/export_excel/'+target+'?export_name='+target+search;
+    var url = 'http://localhost:8888/www/Kalaweit/ajax_get/export_excel/'+target+'?export_name='+target+search;
 
     console.log(url);
 

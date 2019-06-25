@@ -92,12 +92,16 @@ class Member_info
         $card1_data = (new \Kalaweit\Manager\Asso_donation($bddM))->get_donation_by_member_card();
         $card2_data = (new \Kalaweit\Manager\Asso_donation_dulan($bddM))->get_donation_dulan_by_member_card();
         $card3_data = (new \Kalaweit\Manager\Asso_donation_forest($bddM))->get_donation_forest_by_member_card();
+        $card4_data = (new \Kalaweit\Manager\Asso_donation_asso($bddM))->get_donation_asso_by_member_card();
+        $card5_data = (new \Kalaweit\Manager\Asso_adhesion($bddM))->get_adhesion_by_member_card();
 
         /* initialisation des composant html box info */
 
         $card1 = (new \Kalaweit\htmlElement\Box_info($card1_data[0]. ' €', 'Dons Animaux', 'fa fa-paw'))->render();
         $card2 = (new \Kalaweit\htmlElement\Box_info($card2_data[0]. ' €', 'Dons Dulan', 'fa fa-map','bg-yellow'))->render();
         $card3 = (new \Kalaweit\htmlElement\Box_info($card3_data[0]. ' €', 'Dons Foret', 'fa fa-tree','bg-green'))->render();
+        $card4 = (new \Kalaweit\htmlElement\Box_info($card4_data[0]. ' €', 'Dons Association', 'fa fa-home','bg-purple'))->render();
+        $card5 = (new \Kalaweit\htmlElement\Box_info($card5_data[0]. ' €', 'Adhésion', 'fa fa-home','bg-red'))->render();
 
         /* synthes des elements à passer à la vue */
 
@@ -111,6 +115,8 @@ class Member_info
             "card1"             => $card1,
             "card2"             => $card2,
             "card3"             => $card3,
+            "card4"             => $card4,
+            "card5"             => $card5,
 
 
         ];

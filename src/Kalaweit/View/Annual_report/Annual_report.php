@@ -26,8 +26,23 @@ class Annual_report
         $render .=          '</form>';
         $render .=      '</div>';
 
+
         $render .=      '<div class="row">';
         $render  .=         '<div class="container-fluid">';
+        $render .=              '<div class="col-md-6">';
+        $render .=                  $data["card7"];
+        $render .=              '</div>';
+        $render .=              '<div class="col-md-6">';
+        $render .=                  $data["card8"];
+        $render .=              '</div>';
+        $render .=          '</div>';
+        $render .=      '</div>';
+        $render .=      '<div class="row">';
+        $render  .=         '<div class="container-fluid">';
+        $render .=              $data["chart7"];
+        $render .=              $data["chart8"];
+        $render .=          '</div>';
+        $render .=      '</div>';
         $render .=              '<div class="col-md-4">';
         $render .=                  $data["card1"];
         $render .=              '</div>';
@@ -37,9 +52,6 @@ class Annual_report
         $render .=              '<div class="col-md-4">';
         $render .=                  $data["card3"];
         $render .=              '</div>';
-        $render .=          '</div>';
-        $render .=      '</div>';
-
         $render .=      '<div class="row">';
         $render  .=     '<div class="container-fluid">';
         $render .=          $data["chart1"];
@@ -55,7 +67,21 @@ class Annual_report
         $render .=      '</div>';
 
         $render .=      '<div class="row">';
+
         $render  .=         '<div class="container-fluid">';
+        $render .=              '<div class="col-md-6">';
+        $render .=                  $data["card9"];
+        $render .=              '</div>';
+        $render .=              '<div class="col-md-6">';
+        $render .=                  $data["card10"];
+        $render .=              '</div>';
+        $render .=          '</div>';
+
+        $render  .=         '<div class="container-fluid">';
+        $render .=              $data["chart9"];
+        $render .=              $data["chart10"];
+        $render .=          '</div>';
+        $render .=         '<div class="container-fluid">';
         $render .=              '<div class="col-md-4">';
         $render .=                  $data["card4"];
         $render .=              '</div>';
@@ -75,10 +101,10 @@ class Annual_report
         $render .=      '</div>';
 
         $render .=      '<div class="col-md-12">';
-
         $render .=          $data["table2"];
-
         $render .=      '</div>';
+
+
 
         ?><script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script><?php
 

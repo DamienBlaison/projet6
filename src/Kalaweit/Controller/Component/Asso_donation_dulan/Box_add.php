@@ -22,10 +22,12 @@ class Box_add
 
         $payment_type = (new \Kalaweit\Manager\Asso_payment_type)->getAll($bdd);
         $cli = (new \Kalaweit\Manager\Member($bdd))->get_select();
+        $status_config = (new \Kalaweit\Manager\Status)->getAll($bdd);
 
         $donation_dulan_mnt = (new \Kalaweit\htmlElement\Form_group_input('donation_dulan_mnt','montant du don Dulan','','fa fa-euro'));
         $devise  = (new \Kalaweit\htmlElement\Form_group_select('ptyp_id',$payment_type,'','fa fa-internet-explorer',"ptyp_code"));
         $donator = (new \Kalaweit\htmlElement\Form_group_select('cli_id',$cli,$cli_id,'fa fa-user',"cli_identity" ));
+        $status =  (new \Kalaweit\htmlElement\Form_group_select('don_status',$status_config,"",'fa fa-check',"config" ));
 
         $submit  = '';
         $submit .=                      '<div class="form-group">';
@@ -39,12 +41,13 @@ class Box_add
             $donator->render(),
             $donation_dulan_mnt->render(),
             $devise->render(),
+            $status->render(),
             $submit
         ];
 
         /* mise en forme des éléments à passer */
 
-        $col_md = [12,12,12,12];
+        $col_md = [12,12,12,12,12,12];
 
         $box_donation_dulan = (new \Kalaweit\htmlElement\Box('Ajouter un don Dulan','box-primary',$box_donation_dulan_content,$col_md))->render();
 

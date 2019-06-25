@@ -5,13 +5,13 @@ class Donation_one_shot
 
 {
 
-    function render($id,$title,$data){
+    function render($id,$title,$data,$col){
 
         $data_json = json_encode($data);
 
         $chartJs  = '';
 
-        $chartJs .= '<section class="col-md-4">';
+        $chartJs .= '<section class="col-md-'.$col.'">';
         $chartJs .= '<div class="box box-primary">';
         $chartJs .= '        <div class="box-header with-border">';
         $chartJs .= '          <h3 class="box-title">'.$title.'</h3>';

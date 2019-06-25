@@ -50,6 +50,7 @@ class Friends
                                             <br>
                                             <form action="" method="post">
                                                 <input id="gift-amount" type="text" name="gift-amount">
+                                                <br>
                                             </form>
                                             <div id="paypal-button-container"></div>
                                         </div>

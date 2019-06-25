@@ -38,13 +38,176 @@ class Ajax_get
 
             foreach ($value as $k => $v) {
 
+                if ($k == 4 && $v == 'OK') { $print = 1; } else { $print = 0;}
+
                 $body .= '<td>'.$v.'</td>';
 
             }
 
-            $body .= '<td style = "width:85px;">';
-            $body .=    '<a style="margin-right:5px;" href="/www/Kalaweit/asso_donation/update?don_id='.$value[0].'" class="btn btn-primary" id="update_'.$value[0].'"><i class="fa fa-edit"></i></a>';
-            $body .=    '<a href="/www/Kalaweit/asso_donation/delete?don_id='.$value[0].'" class="btn btn-danger" id="delete_'.$value[0].'" onclick ="return confirm(\'Etes vous sur de vouloir supprimer cet enregistrement\')"><i class="fa  fa-trash"></i></a>';
+            $body .= '<td style = "width : 135px;">';
+            $body .=    '<a style="margin-right:5px;" href="/www/Kalaweit/asso_donation/update?don_id='.$value[0].'&from=get&cli_id='.$_GET["cli_id"].'}" class="btn btn-primary" id="update_'.$value[0].'"><i class="fa fa-edit"></i></a>';
+            $body .=    '<a style="margin-right:5px;" href="/www/Kalaweit/asso_donation/delete?don_id='.$value[0].'" class="btn btn-danger" id="delete_'.$value[0].'" onclick ="return confirm(\'Etes vous sur de vouloir supprimer cet enregistrement\')"><i class="fa  fa-trash"></i></a>';
+
+
+
+            $name_receipt = (new \Kalaweit\Manager\Receipt($bdd))->name_receipt($value[0]);
+
+
+            switch ($print) {
+                case 1:
+
+                if( $name_receipt != NULL){
+
+                    $body .=    '<a href="/www/Documents/receipt/'.$name_receipt["rec_number"].'.pdf" target="_blank" style="margin-right:5px;" class="btn btn-success" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
+
+                } else {
+
+                    $body .=    '<a href="/www/Kalaweit/receipt/add?adhesion_id='.$value[0].'" target="_blank" style="margin-right:5px;" class="btn btn-warning" id="print_'.$value[0].'"><i class="fa fa-print"></i></a>';
+                }
+
+                    break;
+
+                default:
+                    $body .=    '<a href="#" style="margin-right:5px;" class="btn btn-default" id="print_'.$value[0].'"disabled=disabled><i class="fa fa-print"></i></a>';
+                    break;
+            }
+
+            $body .= '</td>';
+            $body .= '</tr>';
+
+            $body .= '</tr>';
+        };
+
+        $body .= '</tbody>';
+
+        return $body;
+
+    }
+
+    /**** méthode pour appeler une MAJ des dons asso par membre ****/
+
+    function donation_asso_by_member(){
+
+        /* initialisation des variables */
+
+        $p_nb_by_page = $_GET["nb_by_page"];
+        $page = $_GET["p"];
+
+        /* instanciation de la connexion a la bdd */
+
+        $bddM = new \Kalaweit\Manager\Connexion();
+        $bdd = $bddM->getBdd();
+
+        /* récupération des données , retourne un tableau */
+
+        $array = (new \Kalaweit\Manager\Asso_donation_asso($bdd))->get_donation_asso_by_member($p_nb_by_page,$page);
+
+        /* création de l'affichage des résultats dans une chaine de caractere que l'on passera a la vue */
+
+        $body = "<tbody id='table_donation_asso_by_member'>";
+
+
+        foreach ($array['content'] as $key => $value) {
+
+            $body .= '<tr role="row" class="odd">';
+
+            foreach ($value as $k => $v) {
+                if ($k == 3 && $v == 'OK') { $print_access = true; } else { $print_access = false;}
+                $body .= '<td>'.$v.'</td>';
+                // code...
+            }
+
+            $body .= '<td style = "width : 135px;">';
+            $body .=    '<a style="margin-right:5px;" href="/www/Kalaweit/asso_donation_asso/update?don_id='.$value[0].'&from=get" class="btn btn-primary" id="update_'.$value[0].'"><i class="fa fa-edit"></i></a>';
+            $body .=    '<a style="margin-right:5px;" href="/www/Kalaweit/asso_donation_asso/delete?don_id='.$value[0].'" class="btn btn-danger" id="delete_'.$value[0].'" onclick ="return confirm(\'Etes vous sur de vouloir supprimer cet enregistrement\')"><i class="fa  fa-trash"></i></a>';
+
+
+
+            $name_receipt = (new \Kalaweit\Manager\Receipt($bdd))->name_receipt($value[0]);
+
+
+            if($print_access == true){
+
+                if( $name_receipt != NULL){
+
+                    $body .=    '<a href="http://localhost:8888/Documents/receipt/'.$name_receipt["rec_number"].'.pdf" target="_blank" style="margin-right:5px;" class="btn btn-success" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
+
+                } else {
+
+                    $body .=    '<a href="/www/Kalaweit/receipt/add?don_id='.$value[0].'" target="_blank" style="margin-right:5px;" class="btn btn-warning" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
+                }
+
+            } else {
+
+                $body .=    '<a href="#"  style="margin-right:5px;" class="btn btn-default" id="print_'.$value[0].'" disabled=disabled ><i class="fa fa-print"></i></a>';
+            }
+            $body .= '</td>';
+            $body .= '</tr>';
+        };
+
+        $body .= '</tbody>';
+
+
+
+        return $body;
+
+    }
+
+    function adhesion_by_member(){
+
+        /* initialisation des variables */
+
+        $p_nb_by_page = $_GET["nb_by_page"];
+        $page = $_GET["p"];
+
+        /* instanciation de la connexion a la bdd */
+
+        $bddM = new \Kalaweit\Manager\Connexion();
+        $bdd = $bddM->getBdd();
+
+        /* récupération des données , retourne un tableau */
+
+        $array = (new \Kalaweit\Manager\Asso_adhesion($bdd))->get_adhesion_by_member($p_nb_by_page,$page);
+
+        /* création de l'affichage des résultats dans une chaine de caractere que l'on passera a la vue */
+
+        $body = "<tbody id='table_adhesion_by_member'>";
+
+        foreach ($array['content'] as $key => $value) {
+
+            $body .= '<tr role="row" class="odd">';
+
+            foreach ($value as $k => $v) {
+
+                $body .= '<td>'.$v.'</td>';
+
+                if ($k == 3 && $v == 'OK') { $print_access = true; } else { $print_access = false;}
+                    // code...
+                }
+
+            $body .= '<td style = "width : 135px;">';
+            $body .=    '<a style="margin-right:5px;" href="/www/Kalaweit/asso_adhesion/update?adhesion_id='.$value[0].'&from=get&cli_id='.$_GET["cli_id"].'" class="btn btn-primary" id="update_'.$value[0].'"><i class="fa fa-edit"></i></a>';
+            $body .=    '<a style="margin-right:5px;" href="/www/Kalaweit/asso_adhesion/delete?adhesion_id='.$value[0].'" class="btn btn-danger" id="delete_'.$value[0].'" onclick ="return confirm(\'Etes vous sur de vouloir supprimer cet enregistrement\')"><i class="fa  fa-trash"></i></a>';
+
+
+            $name_receipt = (new \Kalaweit\Manager\Receipt($bdd))->name_receipt_adhesion($value[0]);
+
+            if($print_access == true){
+
+                if( $name_receipt != NULL){
+
+                    $body .=    '<a href="http://localhost:8888/Documents/receipt/'.$name_receipt["rec_number"].'.pdf" target="_blank" style="margin-right:5px;" class="btn btn-success" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
+
+                } else {
+
+                    $body .=    '<a href="/www/Kalaweit/receipt/add?adhesion_id='.$value[0].'" target="_blank" style="margin-right:5px;" class="btn btn-warning" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
+                }
+
+            } else {
+
+                $body .=    '<a href="#"  style="margin-right:5px;" class="btn btn-default" id="print_'.$value[0].'" disabled=disabled ><i class="fa fa-print"></i></a>';
+            }
+
             $body .= '</td>';
 
             $body .= '</tr>';
@@ -55,6 +218,7 @@ class Ajax_get
         return $body;
 
     }
+
 
     /**** méthode pour appeler une MAJ des dons foret par membre ****/
 
@@ -85,13 +249,37 @@ class Ajax_get
 
             foreach ($value as $k => $v) {
 
+                if ($k == 3 && $v == 'OK') { $print_access = 1; } else { $print_access = 0;}
+
                 $body .= '<td>'.$v.'</td>';
                 // code...
             }
 
-            $body .= '<td style = "width:85px;">';
-            $body .=    '<a style="margin-right:5px;" href="/www/Kalaweit/asso_donation/update?don_id='.$value[0].'" class="btn btn-primary" id="update_'.$value[0].'"><i class="fa fa-edit"></i></a>';
-            $body .=    '<a href="/www/Kalaweit/asso_donation/delete?don_id='.$value[0].'" class="btn btn-danger" id="delete_'.$value[0].'" onclick ="return confirm(\'Etes vous sur de vouloir supprimer cet enregistrement\')"><i class="fa  fa-trash"></i></a>';
+            $body .= '<td style = "width : 135px;">';
+            $body .=    '<a style="margin-right:5px;" href="/www/Kalaweit/asso_donation/update?don_id='.$value[0].'&from=get&cli_id='.$_GET["cli_id"].'" class="btn btn-primary" id="update_'.$value[0].'"><i class="fa fa-edit"></i></a>';
+            $body .=    '<a style="margin-right:5px;" href="/www/Kalaweit/asso_donation/delete?don_id='.$value[0].'" class="btn btn-danger" id="delete_'.$value[0].'" onclick ="return confirm(\'Etes vous sur de vouloir supprimer cet enregistrement\')"><i class="fa  fa-trash"></i></a>';
+
+
+
+            $name_receipt = (new \Kalaweit\Manager\Receipt($bdd))->name_receipt($value[0]);
+
+
+            if($print_access == true){
+
+                if( $name_receipt != NULL){
+
+                    $body .=    '<a href="http://localhost:8888/Documents/receipt/'.$name_receipt["rec_number"].'.pdf" target="_blank" style="margin-right:5px;" class="btn btn-success" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
+
+                } else {
+
+                    $body .=    '<a href="/www/Kalaweit/receipt/add?don_id='.$value[0].'" target="_blank" style="margin-right:5px;" class="btn btn-warning" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
+                }
+
+            } else {
+
+                $body .=    '<a href="#"  style="margin-right:5px;" class="btn btn-default" id="print_'.$value[0].'" disabled=disabled ><i class="fa fa-print"></i></a>';
+            }
+
             $body .= '</td>';
 
             $body .= '</tr>';
@@ -133,12 +321,36 @@ class Ajax_get
 
             foreach ($value as $k => $v) {
 
+                if ($k == 3 && $v == 'OK') { $print_access = true; } else { $print_access = false;}
+
                 $body .= '<td>'.$v.'</td>';
             }
 
-            $body .= '<td style = "width:85px;">';
-            $body .=    '<a style="margin-right:5px;" href="/www/Kalaweit/asso_donation/update?don_id='.$value[0].'" class="btn btn-primary" id="update_'.$value[0].'"><i class="fa fa-edit"></i></a>';
-            $body .=    '<a href="/www/Kalaweit/asso_donation/delete?don_id='.$value[0].'" class="btn btn-danger" id="delete_'.$value[0].'" onclick ="return confirm(\'Etes vous sur de vouloir supprimer cet enregistrement\')"><i class="fa  fa-trash"></i></a>';
+            $body .= '<td style = "width : 135px;">';
+            $body .=    '<a style="margin-right:5px;" href="/www/Kalaweit/asso_donation/update?don_id='.$value[0].'&from=get&cli_id='.$_GET["cli_id"].'" class="btn btn-primary" id="update_'.$value[0].'"><i class="fa fa-edit"></i></a>';
+            $body .=    '<a style="margin-right:5px;" href="/www/Kalaweit/asso_donation/delete?don_id='.$value[0].'" class="btn btn-danger" id="delete_'.$value[0].'" onclick ="return confirm(\'Etes vous sur de vouloir supprimer cet enregistrement\')"><i class="fa  fa-trash"></i></a>';
+
+
+
+            $name_receipt = (new \Kalaweit\Manager\Receipt($bdd))->name_receipt($value[0]);
+
+
+            if($print_access == true){
+
+                if( $name_receipt != NULL){
+
+                    $body .=    '<a href="http://localhost:8888/Documents/receipt/'.$name_receipt["rec_number"].'.pdf" target="_blank" style="margin-right:5px;" class="btn btn-success" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
+
+                } else {
+
+                    $body .=    '<a href="/www/Kalaweit/receipt/add?don_id='.$value[0].'" target="_blank" style="margin-right:5px;" class="btn btn-warning" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
+                }
+
+            } else {
+
+                $body .=    '<a href="#"  style="margin-right:5px;" class="btn btn-default" id="print_'.$value[0].'" disabled=disabled ><i class="fa fa-print"></i></a>';
+            }
+
             $body .= '</td>';
 
             $body .= '</tr>';
@@ -184,13 +396,34 @@ class Ajax_get
 
             foreach ($value as $k => $v) {
 
+                if ($k == 5 && $v == 'OK') { $print_access = true; } else { $print_access = false;}
                 $body .= '<td>'.$v.'</td>';
                 // code...
             }
 
-            $body .= '<td style = "width:85px;">';
+            $body .= '<td style = "width:135px;">';
             $body .=    '<a style="margin-right:5px;" href="/www/Kalaweit/asso_donation/update?don_id='.$value[0].'" class="btn btn-primary" id="update_'.$value[0].'"><i class="fa fa-edit"></i></a>';
-            $body .=    '<a href="/www/Kalaweit/asso_donation/delete?don_id='.$value[0].'" class="btn btn-danger" id="delete_'.$value[0].'" onclick ="return confirm(\'Etes vous sur de vouloir supprimer cet enregistrement\')"><i class="fa  fa-trash"></i></a>';
+            $body .=    '<a style="margin-right:5px;" href="/www/Kalaweit/asso_donation/delete?don_id='.$value[0].'" class="btn btn-danger" id="delete_'.$value[0].'" onclick ="return confirm(\'Etes vous sur de vouloir supprimer cet enregistrement\')"><i class="fa  fa-trash"></i></a>';
+
+            $name_receipt = (new \Kalaweit\Manager\Receipt($bdd))->name_receipt($value[0]);
+
+
+            if($print_access == true){
+
+                if( $name_receipt != NULL){
+
+                    $body .=    '<a href="http://localhost:8888/Documents/receipt/'.$name_receipt["rec_number"].'.pdf" target="_blank" style="margin-right:5px;" class="btn btn-success" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
+
+                } else {
+
+                    $body .=    '<a href="/www/Kalaweit/receipt/add?don_id='.$value[0].'" target="_blank" style="margin-right:5px;" class="btn btn-warning" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
+                }
+
+            } else {
+
+                $body .=    '<a href="#"  style="margin-right:5px;" class="btn btn-default" id="print_'.$value[0].'" disabled=disabled ><i class="fa fa-print"></i></a>';
+            }
+
             $body .= '</td>';
 
             $body .= '</tr>';
@@ -363,5 +596,26 @@ class Ajax_get
 
                 }
             }
+
+        function export_excel(){
+
+            $bdd = (new \Kalaweit\Manager\Connexion())->getBdd();
+
+            $url = explode('/export_excel/', $_SERVER["REQUEST_URI"]);
+            $export = explode('?', $url[1]);
+
+            $class = '\Kalaweit\Manager\\'.ucfirst($export[0]);
+
+            $data = (new $class($bdd))->get_list_export();
+
+            $p_tab = [
+                "head"=>$data["head"],
+                "content"=> $data["content"]
+            ];
+
+            (new \Kalaweit\Export\Export_Excel())->export_excel($p_tab);
+
+        }
+
 
         }

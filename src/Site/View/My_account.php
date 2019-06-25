@@ -61,7 +61,7 @@ class My_account
                                 <h3>Reçu fiscaux</h3>
                                 <br>
 
-                                <?php echo $content["table"]["table_donation"] ?>
+                                <p>A travailler dessus</p>
 
                                 <h3>Adhésion</h3>
                                 <br>

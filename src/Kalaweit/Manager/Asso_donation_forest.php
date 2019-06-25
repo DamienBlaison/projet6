@@ -64,7 +64,8 @@ class Asso_donation_forest
             P2.cli_lastname as Nom,
 
             asso_donation.don_mnt as Montant,
-            asso_donation.don_ts as Date_creation
+            asso_donation.don_ts as Date_creation,
+            asso_donation.don_status as Statut
 
             FROM
 
@@ -72,24 +73,21 @@ class Asso_donation_forest
 
             LEFT JOIN crm_client as P2 ON P2.cli_id = asso_donation.cli_id
 
-            WHERE asso_donation.cau_id = 703;
+            WHERE asso_donation.cau_id = 703
 
             ORDER BY
 
-            asso_donaation.donation_ts DESC
+            asso_donation.don_ts DESC
 
             LIMIT 0,9
+
             ");
-
-
-
-
 
             //$prepare = [":donation_forest_ts" => $_GET['donation_forest_ts']];
 
             $data = [
                 "content"     => $reqprep->fetchAll(\PDO::FETCH_NUM),
-                "head"              => ["Id","Id_membre","Prénom","Nom","Montant","Date enregistrement","Action"],
+                "head"              => ["Id","Id_membre","Prénom","Nom","Montant","Date enregistrement","Statut","Action"],
             ];
 
             return $data;
@@ -105,8 +103,11 @@ class Asso_donation_forest
 
                 asso_donation.don_id as Id_donation_forest,
 
+
+                asso_donation.don_ts as Date_creation,
+
                 asso_donation.don_mnt as Montant,
-                asso_donation.don_ts as Date_creation
+                asso_donation.don_status as Statut
 
                 FROM
 
@@ -145,7 +146,7 @@ class Asso_donation_forest
                 $return = [
                     "content" => $reqprep->fetchAll(\PDO::FETCH_NUM) ,
                     "count" => $count_return[0],
-                    "head"=>["Id","Montant","Date création","Action"]
+                    "head"=>["Id","Date création","Montant","Statut","Action"]
                 ];
 
                     return $return ;
@@ -159,20 +160,24 @@ class Asso_donation_forest
                     $reqprep = $this->bdd->prepare(
 
                         "SELECT
-
-                        don_mnt as Montant,
-                        don_ts as Date_creation
+                        asso_donation.don_id as Id,
+                        asso_donation.don_mnt as Montant,
+                        asso_donation.don_ts as Date_creation,
+                        asso_donation.don_status as Statut
 
                         FROM
 
                         asso_donation
-                        WHERE cli_id = :cli_id
 
-                        AND cau_id = 703
+                        LEFT JOIN asso_cause as P1 ON P1.cau_id = asso_donation.cau_id
+
+                        WHERE   asso_donation.cli_id = :cli_id
+
+                        AND asso_donation.cau_id = 703
 
                         ORDER BY
 
-                        don_ts DESC
+                        asso_donation.don_ts DESC
 
                         ");
 
@@ -184,7 +189,7 @@ class Asso_donation_forest
 
                         $return = [
                             "content" => $reqprep->fetchAll(\PDO::FETCH_NUM) ,
-                            "head"=>["Montant","Date création","Action"]
+                            "head"=>["Id","Date création","Montant","Statut","Action"]
                         ];
 
                             return $return ;
@@ -234,17 +239,32 @@ class Asso_donation_forest
                             switch (substr($key,0,3)) {
 
                                 case 'adh':
-                                $key_table = 'asso_donation_forest.'.$key;// code...
+                                $key_table = 'asso_donation.'.$key;// code...
+                                $where .= ' AND '.$key_table.' LIKE :'.$key ;// code...
                                 break;
+
                                 case 'cli':
                                 $key_table = 'P2.'.$key;// code...
+                                $where .= ' AND '.$key_table.' LIKE :'.$key ;// code...
+                                break;
+
+                                case 'don':
+                                $key_table = 'asso_donation.'.$key;// code...
+                                $where .= ' AND '.$key_table.' LIKE :'.$key ;// code..                            break;
+                                break;
+
+                                case 'rec':
+                                    $key_table = 'P4.'.$key;
+                                    if ($value == '%1%'){
+                                        $where .= ' AND '.$key_table.' LIKE "%R%"' ;
+
+                                    } else {
+                                        $where .= ' AND '.$key_table.' is null' ;
+
+                                    }
                                 break;
 
                             }
-
-                            $where .= ' AND '.$key_table.' LIKE :'.$key ;
-
-
                         }
                     }
 
@@ -257,11 +277,13 @@ class Asso_donation_forest
 
                         asso_donation.don_id as Id_donation_forest,
 
-                        P2.cli_firstname as Prénom,
                         P2.cli_lastname as Nom,
+                        P2.cli_firstname as Prénom,
+
 
                         asso_donation.don_mnt as Montant,
                         asso_donation.don_ts as Date_creation,
+                        asso_donation.don_status as Statut,
 
                         P4.rec_number as Receipt
 
@@ -293,7 +315,7 @@ class Asso_donation_forest
                         if($param_request[0] != []){
 
                             foreach ($param_request[0] as $key => $value) {
-                                if($value != ''){
+                                if($value != '' && $key!= 'rec_number' ){
 
                                     $reqprep->bindValue(":".$key,$value);
                                     $count_reqprep->bindValue(":".$key,$value);
@@ -312,7 +334,7 @@ class Asso_donation_forest
 
                         $data = [
                             "list_donation_forest"     => $reqprep->fetchAll(\PDO::FETCH_NUM),
-                            "head"              => ["Id","Prénom","Nom","Montant","Date enregistrement"],
+                            "head"              => ["Id","Prénom","Nom","Montant","Date enregistrement","Statut"],
                             "count"             => $count_result
                         ];
 
@@ -326,37 +348,56 @@ class Asso_donation_forest
                         $param_request = $this->Get_param_request();
 
                         foreach ($param_request[0] as $key => $value) {
-                            if($value != '' && $key != 'export_name'){
+                            if($value != ''){
 
                                 switch (substr($key,0,3)) {
 
                                     case 'adh':
-                                    $key_table = 'asso_donation_forest.'.$key;// code...
+                                    $key_table = 'asso_donation.'.$key;// code...
+                                    $where .= ' AND '.$key_table.' LIKE :'.$key ;// code...
                                     break;
+
                                     case 'cli':
                                     $key_table = 'P2.'.$key;// code...
+                                    $where .= ' AND '.$key_table.' LIKE :'.$key ;// code...
+                                    break;
+
+                                    case 'don':
+                                    $key_table = 'asso_donation.'.$key;// code...
+                                    $where .= ' AND '.$key_table.' LIKE :'.$key ;// code..                            break;
+                                    break;
+
+                                    case 'rec':
+                                        $key_table = 'P4.'.$key;
+                                        if ($value == '%1%'){
+                                            $where .= ' AND '.$key_table.' LIKE "%R%"' ;
+
+                                        } else {
+                                            $where .= ' AND '.$key_table.' is null' ;
+
+                                        }
                                     break;
 
                                 }
-
-                                $where .= ' AND '.$key_table.' LIKE :'.$key ;
-
-
                             }
                         }
 
 
-                            $reqprep = $this->bdd->prepare(
+                        if (isset($param_request[1]) && ($param_request[1] != 'get')){$filter = (($param_request[1])-1)*10;}else{$filter = 0;}
+
+
+                        $reqprep = $this->bdd->prepare(
                             "SELECT
 
                             asso_donation.don_id as Id_donation_forest,
 
-                            asso_donation.cli_id as Id_Parrain,
-                            P2.cli_firstname as Prénom,
                             P2.cli_lastname as Nom,
+                            P2.cli_firstname as Prénom,
+
 
                             asso_donation.don_mnt as Montant,
                             asso_donation.don_ts as Date_creation,
+                            asso_donation.don_status as Statut,
 
                             P4.rec_number as Receipt
 
@@ -397,7 +438,7 @@ class Asso_donation_forest
 
                             $data = [
                                 "content"     => $reqprep->fetchAll(\PDO::FETCH_NUM),
-                                "head"              => ["Id","Id_membre","Prénom","Nom","Montant","Date enregistrement"],
+                                "head"              => ["Id","Prénom","Nom","Montant","Date enregistrement","Statut","Numéro de reçu"],
                             ];
 
                             return $data;
@@ -424,9 +465,11 @@ class Asso_donation_forest
                                 "UPDATE asso_donation
 
                                 SET
+
                                 cli_id     = :cli_id,
-                                don_mnt    = :do_mnt,
-                                ptyp_id    = :ptyp_id
+                                don_mnt    = :don_mnt,
+                                ptyp_id    = :ptyp_id,
+                                don_status = :don_status
 
                                 WHERE   cau_id = '703'
                                 AND     don_id = :don_id "
@@ -436,7 +479,8 @@ class Asso_donation_forest
                                 ":cli_id" => $_POST["cli_id"],
                                 ":don_mnt" => $_POST["donation_forest_mnt"],
                                 ":ptyp_id" => $_POST["ptyp_id"],
-                                ":don_id" => $_GET["don_id"]
+                                ":don_id" => $_GET["don_id"],
+                                ':don_status' => $_POST["don_status"]
                             ];
 
                             $reqprep->execute($prepare);
@@ -462,7 +506,7 @@ class Asso_donation_forest
                             $reqprep = $this->bdd->prepare("SELECT * FROM asso_donation WHERE don_id = :don_id AND cau_id='703'");
 
 
-                            $prepare = [ ":don_id" => $_GET['donation_forest_id'] ];
+                            $prepare = [ ":don_id" => $_GET['don_id'] ];
 
                             $reqprep->execute($prepare);
 
@@ -508,6 +552,16 @@ class Asso_donation_forest
                                 array_push($data,$sum->fetch(\PDO::FETCH_NUM ));
 
                             }
+
+                            return $data;
+
+                        }
+
+                        public function get_chart_data_sum_month($year,$month){
+
+                            $sum = $this->bdd->query("SELECT SUM(don_mnt) FROM asso_donation WHERE YEAR(don_ts)= $year and MONTH(don_ts) = $month and cau_id = '703'");
+
+                            $data = $sum->fetch(\PDO::FETCH_NUM);
 
                             return $data;
 

@@ -98,7 +98,7 @@ class Gift
                                 <h3>Faire un don régulier par HelloAsso : </h3>
                                 <br>
 
-                                <a target="_blank" href="https://www.helloasso.com/associations/kalaweit/formulaires/3/fr">
+                                <a target="_blank" href="https://www.helloasso.com/associations/kalaweit/formulaires/1/fr">
                                     <img style="height: 32px; " src="/../Documents/Front/helloasso.png" class="img-responsive">
                                 </a>
 

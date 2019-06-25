@@ -18,6 +18,7 @@ class Member
 
 
         (new  \Kalaweit\Controller\Component\Member\Member_adhesion)->render().
+        (new  \Kalaweit\Controller\Component\Member\Member_donation_asso)->render().
         (new  \Kalaweit\Controller\Component\Member\Member_donation)->render().
         (new  \Kalaweit\Controller\Component\Member\Member_donation_forest)->render().
         (new  \Kalaweit\Controller\Component\Member\Member_donation_dulan)->render(),

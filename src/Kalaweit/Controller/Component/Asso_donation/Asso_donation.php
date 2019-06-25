@@ -30,11 +30,13 @@ class Asso_donation
         $payment_type = (new \Kalaweit\Manager\Asso_payment_type)->getAll($bdd);
         $cli = (new \Kalaweit\Manager\Member($bdd))->get_select();
         $cau = (new \Kalaweit\Manager\Asso_cause($bdd))->get_select();
+        $status_config = (new \Kalaweit\Manager\Status)->getAll($bdd);
 
         $don_mnt = (new \Kalaweit\htmlElement\Form_group_input('don_mnt','montant du don',$donation["don_mnt"],'fa fa-euro'));
         $devise  = (new \Kalaweit\htmlElement\Form_group_select('ptyp_id',$payment_type,$donation["ptyp_id"],'fa fa-internet-explorer',"ptyp_code"));
         $donator = (new \Kalaweit\htmlElement\Form_group_select('cli_id',$cli,$donation["cli_id"],'fa fa-user',"cli_identity" ));
-        $cause     = (new \Kalaweit\htmlElement\Form_group_select('cau_id',$cau,"",'fa fa-paw',"cau_name" ));
+        $cause     = (new \Kalaweit\htmlElement\Form_group_select('cau_id',$cau,$donation["cau_id"],'fa fa-paw',"cau_name" ));
+        $status =  (new \Kalaweit\htmlElement\Form_group_select('don_status',$status_config,$donation["don_status"],'fa fa-check',"config" ));
 
 
         $button  = '';
@@ -50,12 +52,13 @@ class Asso_donation
             $cause->render(),
             $don_mnt->render(),
             $devise->render(),
+            $status->render(),
             $button
         ];
 
         /* mise en forme des éléments à passer */
 
-        $col_md = [12,12,12,12,12];
+        $col_md = [12,12,12,12,12,12];
 
         /* instanciation du composant BOX dans lequel le detail des dons sera affiché */
 

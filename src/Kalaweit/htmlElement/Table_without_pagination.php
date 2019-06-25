@@ -14,6 +14,8 @@ class Table_without_pagination
         $p_link,
         $p_update,
         $p_delete,
+        $p_print,
+        $p_position_status,
         $p_add
 
         )
@@ -26,10 +28,14 @@ class Table_without_pagination
         $this->link = $p_link;
         $this->update = $p_update;
         $this->delete = $p_delete;
+        $this->print = $p_print;
+        $this->position_status = $p_position_status;
         $this->add = $p_add;
 
 
         }
+
+
 
     // fonction pour afficher le contenu de la table avec une pagination en JS
 
@@ -78,25 +84,58 @@ class Table_without_pagination
 
         foreach ($value as $k => $v) {
 
+            if ($k == $this->position_status && $v == 'OK') { $print_access = true; } else { $print_access = false;};
+
             if($k < 2)
 
             {
                 $body .= '<td style = "display:none;">'.$v.'</a></td>';
-            }
+            } else  {
 
-            else
-            {
                 $body .= '<td>'.$v.'</a></td>';
             }
         }
 
-        $body .= '<td style = "width:85px;">';
+        $body .= '<td style = "width:135px;">';
         $body .=    '<a style="margin-right:5px;" href="'.$this->update.$value[0].'&from='.$from.'" class="btn btn-primary" id="update_'.$value[0].'"><i class="fa fa-edit"></i></a>';
-        $body .=    '<a href="'.$this->delete.$value[0].'" class="btn btn-danger" id="delete_'.$value[0].'" onclick ="return confirm(\'Etes vous sur de vouloir supprimer cet enregistrement\')"><i class="fa  fa-trash"></i></a>';
+        $body .=    '<a style="margin-right:5px;"href="'.$this->delete.$value[0].'" class="btn btn-danger" id="delete_'.$value[0].'" onclick ="return confirm(\'Etes vous sur de vouloir supprimer cet enregistrement\')"><i class="fa  fa-trash"></i></a>';
+
+
+        $bdd = (new \Kalaweit\Manager\Connexion())->getBdd();
+
+
+
+        if($this->id == "Table_last_adhesion"){
+
+            $name_receipt = (new \Kalaweit\Manager\Receipt($bdd))->name_receipt_adhesion($value[0]);
+
+        } else {
+
+            $name_receipt = (new \Kalaweit\Manager\Receipt($bdd))->name_receipt($value[0]);
+
+        }
+
+        if($print_access == true){
+
+            if( $name_receipt != NULL){
+
+                $body .=    '<a href="http://localhost:8888/Documents/receipt/'.$name_receipt["rec_number"].'.pdf" target="_blank" style="margin-right:5px;" class="btn btn-success" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
+
+            } else {
+
+                $body .=    '<a href="'.$this->print.$value[0].'" target="_blank" style="margin-right:5px;" class="btn btn-warning" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
+            }
+
+        } else {
+
+            $body .=    '<a href="#"  style="margin-right:5px;" class="btn btn-default" id="print_'.$value[0].'" disabled=disabled ><i class="fa fa-print"></i></a>';
+        }
+
+
         $body .= '</td>';
 
         $body .= '</tr>';
-    };
+    }
 
     $body .= '</tbody>';
     $body .= '</table>';

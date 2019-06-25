@@ -27,7 +27,7 @@ class App_connexion
 
                 $_SESSION["user_login"] = $_POST['login'];
 
-                header("location: /www/Kalaweit/member/list/1");
+                header("location: /www/Kalaweit/dashboard/get");
             }
             else {
 
@@ -56,7 +56,7 @@ class App_connexion
         session_destroy();
 
         /* redirection vers la page de connexion */
-        
+
         header("location:/www/Kalaweit/app_connexion/log_in" );
     }
 }

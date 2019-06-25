@@ -14,7 +14,6 @@ class Receipt
 
     public function add($p_don_id){
 
-
         $type = key($p_don_id);
 
         if($type == 'adhesion'){
@@ -109,6 +108,13 @@ class Receipt
 
                 $req = "SELECT MAX(rec_number) from asso_receipt WHERE rec_number LIKE '%Foret%' ";
                 $prefixe = "R_".date('Y')."_Foret_";
+
+                break;
+
+                case '704':
+
+                $req = "SELECT MAX(rec_number) from asso_receipt WHERE rec_number LIKE '%Asso%' ";
+                $prefixe = "R_".date('Y')."_Asso_";
 
                 break;
 
@@ -332,7 +338,6 @@ class Receipt
 
                     }
                 }
-
 
                 if (isset($param_request[1]) && ($param_request[1] != 'get')){$filter = (($param_request[1])-1)*10;}else{$filter = 0;}
 

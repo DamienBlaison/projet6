@@ -32,10 +32,12 @@ class Table_list_donation_forest
 
         /* vérifcation si des param de request sont passés dans l'url , si oui on initialise les variables pour les afficher dans le formulaire */
 
-        if(isset($_GET['donation_forest_id'])){$donation_forest_id = $_GET['donation_forest_id']; } else { $donation_forest_id = '';};
+        if(isset($_GET['don_status'])){$donation_forest_status = $_GET['don_status']; } else { $donation_forest_status = '';};
         if(isset($_GET['cli_id'])){$cli_id = $_GET['cli_id']; } else { $cli_id = '';};
         if(isset($_GET['cli_firstname'])){$cli_firstname = $_GET['cli_firstname']; } else { $cli_firstname = '';};
         if(isset($_GET['cli_lastname'])){$cli_lastname = $_GET['cli_lastname']; } else { $cli_lastname = '';};
+        if(isset($_GET['dont_ts'])){$donation_forest_ts = $_GET['don_ts']; } else { $donation_forest_ts = '';};
+        if(isset($_GET['rec_number'])){$rec_number = $_GET['rec_number']; } else { $rec_number = '';};
 
         /* définition des champs de recherches sous forme de tableaux que l'on pourra parcourrir */
 
@@ -43,29 +45,6 @@ class Table_list_donation_forest
 
         [
 
-            [
-                "type_balise"   => 'input',
-                "id"            => 'donation_forest_id',
-                "type"          => 'text',
-                "name"          => 'donation_forest_id',
-                "placeholder"   => 'Id_donation_forest',
-                "class"         => '2',
-                "value"         =>  $donation_forest_id
-            ]
-
-            ,
-
-            [
-                "type_balise"   => 'input',
-                "id"            => 'cli_id',
-                "type"          => 'text',
-                "name"          => 'cli_id',
-                "placeholder"   => 'Membre_Id',
-                "class"         => '2',
-                "value"         =>  $cli_id
-            ]
-
-            ,
 
             [
                 "type_balise"   => 'input',
@@ -73,7 +52,7 @@ class Table_list_donation_forest
                 "type"          => 'text',
                 "name"          => 'cli_firstname',
                 "placeholder"   => 'Prénom',
-                "class"         => '3',
+                "class"         => '2',
                 "value"         =>  $cli_firstname
             ]
 
@@ -85,9 +64,43 @@ class Table_list_donation_forest
                 "type"          => 'text',
                 "name"          => 'cli_lastname',
                 "placeholder"   => 'Nom',
-                "class"         => '3',
+                "class"         => '2',
                 "value"         =>  $cli_lastname
             ]
+
+            ,
+
+            [
+                "type_balise"   => 'input',
+                "id"            => 'don_status',
+                "type"          => 'text',
+                "name"          => 'don_status',
+                "placeholder"   => 'Statut',
+                "class"         => '2',
+                "value"         =>  $donation_forest_status
+            ]
+            ,
+            [
+                "type_balise"   => 'input',
+                "id"            => 'don_ts',
+                "type"          => 'text',
+                "name"          => 'don_ts',
+                "placeholder"   => 'Date',
+                "class"         => '2',
+                "value"         =>  $donation_forest_ts
+            ]
+            ,
+            [
+                "type_balise"   => 'input',
+                "id"            => 'rec_number',
+                "type"          => 'text',
+                "name"          => 'rec_number',
+                "placeholder"   => 'Reçu : 0/1',
+                "class"         => '2',
+                "value"         =>  $rec_number
+            ]
+
+
 
         ];
 

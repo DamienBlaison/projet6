@@ -31,10 +31,12 @@ class Member_adhesion
         $p_delete = "www/Kalaweit/asso_adhesion/delete?adhesion_id=";
         $p_print = "www/Kalaweit/receipt/add?adhesion_id=";
         $p_add = "www/Kalaweit/asso_adhesion/add?cli_id=".$_GET["cli_id"];
+        $p_position_status = 3;
+
 
         /* Instanciation et application de le methode render de l'objet Table */
 
-        return (new \Kalaweit\htmlElement\Table($p_name,$p_data,$p_id,$p_update,$p_delete,$p_print,$p_add,$p_nb_by_page))->render();
+        return (new \Kalaweit\htmlElement\Table($p_name,$p_data,$p_id,$p_update,$p_delete,$p_print,$p_position_status,$p_add,$p_nb_by_page))->render();
 
     }
 }

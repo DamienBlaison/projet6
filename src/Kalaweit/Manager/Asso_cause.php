@@ -574,7 +574,7 @@ class Asso_cause
                             function get_info_gallery(){
 
                                 $url = explode('/',$_SERVER['REQUEST_URI']);
-                        
+
                                 $page = explode('?',$url[3]);
 
 
@@ -628,54 +628,54 @@ class Asso_cause
 
                                         ");
 
-                                    if(isset($_GET["search"])){$search = '%'.$_GET["search"].'%';} else {$search = '%%';}
+                                        if(isset($_GET["search"])){$search = '%'.$_GET["search"].'%';} else {$search = '%%';}
 
-                                    $prepare = [
-                                        ":filter" => date("Y"),
-                                        "cau_name" => $search
-                                    ];
-
-
-                                    $reqprep->execute($prepare);
-                                    $reqprep2->execute($prepare);
-
-                                    $data = [
-                                        "data" => $reqprep->fetchAll(\PDO::FETCH_ASSOC),
-                                        "count" => count($reqprep2->fetchAll(\PDO::FETCH_ASSOC))
-                                    ];
+                                        $prepare = [
+                                            ":filter" => date("Y"),
+                                            "cau_name" => $search
+                                        ];
 
 
-                                    return $data;
+                                        $reqprep->execute($prepare);
+                                        $reqprep2->execute($prepare);
+
+                                        $data = [
+                                            "data" => $reqprep->fetchAll(\PDO::FETCH_ASSOC),
+                                            "count" => count($reqprep2->fetchAll(\PDO::FETCH_ASSOC))
+                                        ];
+
+
+                                        return $data;
+
+                                    }
+
+                                    function get_donator(){
+
+                                        $reqprep = $this->bdd->prepare(
+                                            "SELECT
+
+                                            asso_donation.cau_id,
+                                            crm_client.cli_firstname,
+                                            crm_client.cli_lastname
+
+                                            FROM asso_donation
+
+                                            LEFT JOIN crm_client on crm_client.cli_id = asso_donation.cli_id
+
+                                            WHERE cau_id = :cau_id
+
+                                            Group by cau_id,asso_donation.cli_id"
+                                        );
+
+                                        $prepare = [ ":cau_id" => $_GET["cau_id"]];
+
+                                        $reqprep->execute($prepare);
+
+                                        $data = $reqprep->fetchAll(\PDO::FETCH_ASSOC);
+
+                                        return $data;
+
+
+                                    }
 
                                 }
-
-                                function get_donator(){
-
-                                    $reqprep = $this->bdd->prepare(
-                                        "SELECT
-
-                                        asso_donation.cau_id,
-                                        crm_client.cli_firstname,
-                                        crm_client.cli_lastname
-
-                                        FROM asso_donation
-
-                                        LEFT JOIN crm_client on crm_client.cli_id = asso_donation.cli_id
-
-                                        WHERE cau_id = :cau_id
-
-                                        Group by cau_id,asso_donation.cli_id"
-                                    );
-
-                                    $prepare = [ ":cau_id" => $_GET["cau_id"]];
-
-                                    $reqprep->execute($prepare);
-
-                                    $data = $reqprep->fetchAll(\PDO::FETCH_ASSOC);
-
-                                    return $data;
-
-
-                                }
-
-                            }

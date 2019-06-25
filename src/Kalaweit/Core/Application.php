@@ -180,6 +180,20 @@ class Application
 
                             break;
 
+                            case 'donation_asso_by_member':
+
+                            if (method_exists($obj, 'donation_asso_by_member')){
+                                echo $obj->donation_asso_by_member();
+                            };
+                            break;
+
+                            case 'adhesion_by_member':
+
+                            if (method_exists($obj, 'adhesion_by_member')){
+                                echo $obj->adhesion_by_member();
+                            };
+                            break;
+
                             case 'donation_by_member':
 
                             if (method_exists($obj, 'donation_by_member')){
@@ -201,11 +215,15 @@ class Application
                                 echo $obj->donation_dulan_by_member();
                             };
 
+                            break;
+
                             case 'asso_cause_donation':
 
                             if (method_exists($obj, 'asso_cause_donation')){
                                 echo $obj->asso_cause_donation();
                             };
+
+                            break;
 
                             case 'export_excel':
 
@@ -425,7 +443,7 @@ class Application
                 else
 
                 {
-                    header("location:/www/home");
+                    //header("location:/www/home");
                     echo '404.1';
                 };
 
@@ -436,7 +454,7 @@ class Application
         else
 
         {
-            header("location:/www/home");
+            //header("location:/www/home");
             echo '404.0';
         }
 

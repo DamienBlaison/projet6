@@ -5,7 +5,6 @@ namespace Kalaweit\Controller\Component\Asso_donation;
 
 class Table_last_donation
 {
-
     public function render(){
 
     /* instanciation de la connexion à la BDD */
@@ -22,11 +21,13 @@ class Table_last_donation
     $link = '/www/Kalaweit/member/get?cli_id=';
     $update = '/www/Kalaweit/asso_donation/update?don_id=';
     $delete = '/www/Kalaweit/asso_donation/delete?don_id=';
+    $print  = '/www/Kalaweit/receipt/add?don_id=';
+    $position_status = 7;
     $add = '/www/Kalaweit/asso_donation/add';
 
     /* instanciation de l'objet Table_without_pagination en lui passant les elements précedement défini */
 
-    $table_last_donation = (new \Kalaweit\htmlElement\Table_without_pagination("Les derniers dons",$data,'Table_last_donation',$link,$update,$delete,$add))->render();
+    $table_last_donation = (new \Kalaweit\htmlElement\Table_without_pagination("Les derniers dons Animaux",$data,'Table_last_donation',$link,$update,$delete,$print,$position_status,$add))->render();
 
     /* renvoi de l'objet pour affichage */
 

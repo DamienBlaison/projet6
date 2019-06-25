@@ -9,6 +9,7 @@ include ('../vendor/autoload.php');
 
 session_start();
 
+
 /**
  * Récupération de la configuration
  * C'est l'autoloader qui va inclure le fichier

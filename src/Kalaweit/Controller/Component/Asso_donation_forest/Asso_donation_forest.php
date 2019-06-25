@@ -28,10 +28,13 @@ class Asso_donation_forest
 
         $payment_type = (new \Kalaweit\Manager\Asso_payment_type)->getAll($bdd);
         $cli = (new \Kalaweit\Manager\Member($bdd))->get_select();
+        $status_config = (new \Kalaweit\Manager\Status)->getAll($bdd);
 
         $donation_forest_mnt = (new \Kalaweit\htmlElement\Form_group_input('donation_forest_mnt','montant du don',$donation_forest["don_mnt"],'fa fa-euro'));
         $devise  = (new \Kalaweit\htmlElement\Form_group_select('ptyp_id',$payment_type,$donation_forest["ptyp_id"],'fa fa-internet-explorer',"ptyp_code"));
         $donator = (new \Kalaweit\htmlElement\Form_group_select('cli_id',$cli,$donation_forest["cli_id"],'fa fa-user',"cli_identity" ));
+        $status =  (new \Kalaweit\htmlElement\Form_group_select('don_status',$status_config,$donation_forest["don_status"],'fa fa-check',"config" ));
+
 
         $button  = '';
         $button .=                      '<div class="form-group">';
@@ -44,13 +47,14 @@ class Asso_donation_forest
         $box_donation_forest_content = [
             $donator->render(),
             $donation_forest_mnt->render(),
+            $status->render(),
             $devise->render(),
             $button
         ];
 
         /* mise en forme des éléments à passer */
 
-        $col_md = [12,12,12,12];
+        $col_md = [12,12,12,12,12];
 
         /* instanciation du composant BOX dans lequel le detail des dons sera affiché */
 
@@ -63,7 +67,7 @@ class Asso_donation_forest
         ];
 
         return $param;
-        
+
     }
 
 }

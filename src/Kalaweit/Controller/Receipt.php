@@ -40,7 +40,9 @@ class Receipt
 
         ];
 
+
         switch ($type) {
+
             case 'adhesion':
             return (new \Kalaweit\View\Receipt\Receipt_adhesion($content))->render($open);
             break;
@@ -49,9 +51,18 @@ class Receipt
             return (new \Kalaweit\View\Receipt\Receipt($content))->render($open);
             break;
 
-            default:
-            // code...
+            case 'donation_forest':
+            return (new \Kalaweit\View\Receipt\Receipt_forest($content))->render($open);
             break;
+
+            case 'donation_dulan':
+            return (new \Kalaweit\View\Receipt\Receipt_dulan($content))->render($open);
+            break;
+
+            case 'donation_asso':
+            return (new \Kalaweit\View\Receipt\Receipt_asso($content))->render($open);
+            break;
+
         }
 
 
@@ -86,6 +97,7 @@ class Receipt
         $explode = explode("?" ,$url);
         $param = explode("=" , $explode[1]);
 
+
         if ($param[0] == 'adhesion_id'){
 
             $rec_id = ($receipt = new \Kalaweit\Manager\Receipt($bdd))->add(["adhesion" => $_GET["adhesion_id"]]);
@@ -94,7 +106,27 @@ class Receipt
         } else {
 
             $rec_id = ($receipt = new \Kalaweit\Manager\Receipt($bdd))->add(["donation"=> $_GET["don_id"]]);
-            $type = "donation";
+
+            $cau = (new \Kalaweit\Manager\Asso_donation($bdd))->get_type_donation();
+
+            switch ($cau[0]) {
+
+                case '700':
+                    $type = "donation_dulan";
+                break;
+
+                case '703':
+                    $type = "donation_forest";
+                break;
+
+                case '704':
+                    $type = "donation_asso";
+                break;
+
+                default:
+                    $type = "donation";
+                    break;
+            }
 
         }
 

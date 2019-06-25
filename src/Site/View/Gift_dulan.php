@@ -75,7 +75,7 @@ class Gift_dulan
                                 <h3>Par HelloAsso : </h3>
                                 <br>
 
-                                <a target="_blank" href="https://www.helloasso.com/associations/kalaweit/formulaires/3/fr">
+                                <a target="_blank" href="https://www.helloasso.com/associations/kalaweit/collectes/faire-un-don-pour-sauver-la-foret-de-dulan">
                                     <img style="height: 32px; " src="/../Documents/Front/helloasso.png" class="img-responsive">
                                 </a>
 

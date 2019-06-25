@@ -47,20 +47,20 @@
         ];
 
         $info_donation = (new \Kalaweit\Manager\asso_donation($bdd))->get_donation_by_member_front();
-        $info_donation_asso = (new \Kalaweit\Manager\asso_donation($bdd))->get_donation_by_member_asso_front();
+        $info_donation_asso = (new \Kalaweit\Manager\asso_donation_asso($bdd))->get_donation_by_member_asso_front();
         $info_adhesion = (new \Kalaweit\Manager\asso_adhesion($bdd))->get_adhesion_by_member_front();
         $info_donation_dulan = (new \Kalaweit\Manager\asso_donation_dulan($bdd))->get_donation_dulan_by_member_front();
         $info_donation_forest = (new \Kalaweit\Manager\asso_donation_forest($bdd))->get_donation_forest_by_member_front();
 
-
+        $print = 'www/Kalaweit/receipt/';
 
         $table = [
 
-            "table_donation" => (new \Site\htmlElement\Table($info_donation,'donation_table',''))->render(),
-            "table_adhesion" => (new \Site\htmlElement\Table($info_adhesion,'adhesion_table',''))->render(),
-            "table_donation_asso" => (new \Site\htmlElement\Table($info_donation_asso,'donation_asso_table',''))->render(),
-            "table_donation_dulan" => (new \Site\htmlElement\Table($info_donation_dulan,'donation_dulan_table',''))->render(),
-            "table_donation_forest" => (new \Site\htmlElement\Table($info_donation_forest,'donation_forest_table',''))->render()
+            "table_donation" => (new \Site\htmlElement\Table($info_donation,'donation_table',$print))->render(),
+            "table_adhesion" => (new \Site\htmlElement\Table($info_adhesion,'adhesion_table',$print))->render(),
+            "table_donation_asso" => (new \Site\htmlElement\Table($info_donation_asso,'donation_asso_table',$print))->render(),
+            "table_donation_dulan" => (new \Site\htmlElement\Table($info_donation_dulan,'donation_dulan_table',$print))->render(),
+            "table_donation_forest" => (new \Site\htmlElement\Table($info_donation_forest,'donation_forest_table',$print))->render()
         ];
 
         if(empty($info_donation["content"])){ $table["table_donation"] = "<p>Aucun don enregistré </p><br>"; }

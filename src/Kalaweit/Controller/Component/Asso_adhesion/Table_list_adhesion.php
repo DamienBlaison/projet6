@@ -27,6 +27,8 @@ class Table_list_adhesion
         if(isset($_GET['cli_firstname'])){$cli_firstname = $_GET['cli_firstname']; } else { $cli_firstname = '';};
         if(isset($_GET['cli_lastname'])){$cli_lastname = $_GET['cli_lastname']; } else { $cli_lastname = '';};
         if(isset($_GET['adhesion_status'])){$adhesion_status= $_GET['adhesion_status']; } else { $adhesion_status = '';};
+        if(isset($_GET['rec_number'])){$receipt = $_GET['rec_number']; } else { $receipt = '';};
+        if(isset($_GET['adhesion_ts'])){$adhesion_ts = $_GET['adhesion_ts']; } else { $adhesion_ts = '';};
 
         $fields =
 
@@ -38,7 +40,7 @@ class Table_list_adhesion
                 "type"          => 'text',
                 "name"          => 'cli_firstname',
                 "placeholder"   => 'Prénom',
-                "class"         => '4',
+                "class"         => '2',
                 "value"         =>  $cli_firstname
             ]
 
@@ -50,8 +52,19 @@ class Table_list_adhesion
                 "type"          => 'text',
                 "name"          => 'cli_lastname',
                 "placeholder"   => 'Nom',
-                "class"         => '4',
+                "class"         => '2',
                 "value"         =>  $cli_lastname
+            ]
+            ,
+
+            [
+                "type_balise"   => 'input',
+                "id"            => 'adhesion_ts',
+                "type"          => 'text',
+                "name"          => 'adhesion_ts',
+                "placeholder"   => 'Date',
+                "class"         => '2',
+                "value"         =>  $adhesion_ts
             ]
             ,
 
@@ -60,13 +73,22 @@ class Table_list_adhesion
                 "id"            => 'adhesion_status',
                 "type"          => 'text',
                 "name"          => 'adhesion_status',
-                "placeholder"   => 'OK/WAIT',
+                "placeholder"   => 'Statut',
                 "class"         => '2',
                 "value"         =>  $adhesion_status
+            ],
+
+            [
+                "type_balise"   => 'input',
+                "id"            => 'receipt',
+                "type"          => 'text',
+                "name"          => 'rec_number',
+                "placeholder"   => 'Reçu : 0 ou 1',
+                "class"         => '2',
+                "value"         =>  $receipt
             ]
 
         ];
-
 
         $data =[
 

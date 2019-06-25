@@ -27,6 +27,8 @@ function go_next(target_next,nb_result){
 
         let url_next = '/www/Kalaweit/ajax_get/'+target_next+'?cli_id='+cli_id_next+'&p='+start_next+'&nb_by_page='+nb_result;
 
+        console.log(url_next);
+
         xhttp.open("GET", url_next, true);
 
         xhttp.send();
@@ -73,9 +75,17 @@ function go_previous(target,nb_result_by_page){
 
 };
 
+document.getElementById('next_adhesion_by_member').addEventListener('click', function () {go_next("adhesion_by_member",5);});
+document.getElementById('previous_adhesion_by_member').addEventListener('click', function () {go_previous("adhesion_by_member",5);});
+
 document.getElementById('next_donation_by_member').addEventListener('click', function () {go_next("donation_by_member",5);});
 document.getElementById('previous_donation_by_member').addEventListener('click', function () {go_previous("donation_by_member",5);});
+
+document.getElementById('next_donation_asso_by_member').addEventListener('click', function () {go_next("donation_asso_by_member",5);});
+document.getElementById('previous_donation_asso_by_member').addEventListener('click', function () {go_previous("donation_asso_by_member",5);});
+
 document.getElementById('next_donation_forest_by_member').addEventListener('click', function () {go_next("donation_forest_by_member",5);});
 document.getElementById('previous_donation_forest_by_member').addEventListener('click', function () {go_previous("donation_forest_by_member",5);});
+
 document.getElementById('next_donation_dulan_by_member').addEventListener('click', function () {go_next("donation_dulan_by_member",5);});
 document.getElementById('previous_donation_dulan_by_member').addEventListener('click', function () {go_previous("donation_dulan_by_member",5);});

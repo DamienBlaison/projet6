@@ -48,6 +48,8 @@ class Insert_gift
                 ":amount" => $_GET["amount"],
             ];
 
+            $reqprep->execute($prepare);
+
         }
 
 

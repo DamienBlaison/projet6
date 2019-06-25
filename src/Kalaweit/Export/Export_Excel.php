@@ -12,12 +12,14 @@ class Export_Excel
 
     /* methode permettant de renvoyer un tableau excel */
 
-    function render($p_tab)
+    function export_excel($p_tab)
 
     {
         /* initialisation du nom du fichier a créer */
 
         $name = $_GET["export_name"];
+
+        $filename = '/../../../../wwww/'.$name.'.xlsx';
 
         /* instanciation de l'objet Spreadsheet */
 
@@ -38,7 +40,7 @@ class Export_Excel
         $writer = new Xlsx($spreadsheet);
 
         /* ecriture du fichier */
-        
+
         $writer->save($name.'.xlsx');
 
     }

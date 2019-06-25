@@ -75,5 +75,5 @@ function go_previous(target,nb_result_by_page){
 };
 
 
-document.getElementById('next_asso_cause_donation').addEventListener('click', function () {go_next("asso_cause_donation",5);});
-document.getElementById('previous_asso_cause_donation').addEventListener('click', function () {go_previous("asso_cause_donation",5);});
+document.getElementById('next_asso_cause_donation').addEventListener('click', function () {go_next("asso_cause_donation",10);});
+document.getElementById('previous_asso_cause_donation').addEventListener('click', function () {go_previous("asso_cause_donation",10);});

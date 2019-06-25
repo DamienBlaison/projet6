@@ -26,7 +26,7 @@ class Asso_adhesion
     $status = (new \Kalaweit\Manager\Status())->getAll();
     $adhesion_mnt = (new \Kalaweit\htmlElement\Form_group_input('adhesion_mnt','montant de l\'adhésion',$adhesion["adhesion_mnt"],'fa fa-euro'));
     $devise  = (new \Kalaweit\htmlElement\Form_group_select('ptyp_id',$payment_type,$adhesion["ptyp_id"],'fa fa-internet-explorer',"ptyp_code"));
-    $donator = (new \Kalaweit\htmlElement\Form_group_select('cli_id',$cli,$adhesion["adhesion_status"],'fa fa-user',"cli_identity" ));
+    $donator = (new \Kalaweit\htmlElement\Form_group_select('cli_id',$cli,$adhesion["cli_id"],'fa fa-user',"cli_identity" ));
     $status = (new \Kalaweit\htmlElement\Form_group_select('adhesion_status',$status,$adhesion["adhesion_status"],'fa fa-user',"config" ));
 
     $button  = '';

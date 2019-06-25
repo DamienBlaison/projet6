@@ -8,7 +8,7 @@ if (!isset($_SESSION["user_login"])){ header("location:/www/Kalaweit/app_connexi
 if ( (new \Kalaweit\Manager\Users($bdd))->get_id_from_Login($_SESSION['user_login']) == false){header("location:/www/Kalaweit/app_connexion/log_in");}
 
 $user = (new \Kalaweit\Manager\Users($bdd))->get_id_from_Login($_SESSION['user_login']);
-    ?>
+?>
 
 <!DOCTYPE html>
 <html>
@@ -97,9 +97,16 @@ $user = (new \Kalaweit\Manager\Users($bdd))->get_id_from_Login($_SESSION['user_l
                     <li class=" treeview " style="border-left:3px solid #3c8dbc;" >
                         <a href="#"><i class="fa  fa-euro"></i> <span>Adhésion</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
-                            <li><a href="/www/Kalaweit/asso_adhesion/add"><i class="fa  fa-plus-square"></i> Ajouter une ahésion</a></li>
-                            <li><a href="/www/Kalaweit/asso_adhesion/list/1"><i class="fa  fa-folder-open"></i> Toutes les ahésions</a></li>
+                            <li><a href="/www/Kalaweit/asso_adhesion/add"><i class="fa  fa-plus-square"></i> Ajouter une adhésion</a></li>
+                            <li><a href="/www/Kalaweit/asso_adhesion/list/1"><i class="fa  fa-folder-open"></i> Toutes les adhésions</a></li>
 
+                        </ul>
+                    </li>
+                    <li class=" treeview " style="border-left:3px solid #3c8dbc; ">
+                        <a href="#"><i class="fa  fa-gift"></i> <span>Les dons Amis</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
+                        <ul class="treeview-menu">
+                            <li><a href="/www/Kalaweit/asso_donation_asso/add"><i class="fa  fa-plus-square"></i> Ajouter un don</a></li>
+                            <li><a href="/www/Kalaweit/asso_donation_asso/list/1"><i class="fa  fa-folder-open"></i> Tous les dons</a></li>
                         </ul>
                     </li>
                     <li class=" treeview " style="border-left:3px solid #3c8dbc; ">
@@ -107,12 +114,6 @@ $user = (new \Kalaweit\Manager\Users($bdd))->get_id_from_Login($_SESSION['user_l
                         <ul class="treeview-menu">
                             <li><a href="/www/Kalaweit/asso_donation/add"><i class="fa  fa-plus-square"></i> Ajouter un don</a></li>
                             <li><a href="/www/Kalaweit/asso_donation/list/1"><i class="fa  fa-folder-open"></i> Tous les dons</a></li>
-                            <ul class="treeview-menu">
-                                    <li><a href="/www/Kalaweit/Annual_report/list?y=2019"><i class="fa fa-circle-o"></i> Rapport Annuel</a></li>
-                                    <li><a href="monthly_report"><i class="fa fa-circle-o"></i> Rapport Mensuel</a></li>
-                                    <li><a href="gift_search"><i class="fa fa-circle-o"></i> Rechercher</a></li>
-                                </ul>
-                            </li>
                         </ul>
                     </li>
 
@@ -130,15 +131,13 @@ $user = (new \Kalaweit\Manager\Users($bdd))->get_id_from_Login($_SESSION['user_l
                             <li><a href="/www/Kalaweit/asso_donation_dulan/list/1"><i class="fa  fa-folder-open"></i> Tous les dons</a></li>
                         </ul>
                     </li>
-
                     <li class=" treeview " style="border-left:3px solid #3c8dbc; ">
                         <a href="#"><i class="fa  fa-bar-chart"></i> <span>Statistique</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
                             <li class="treeview"><a href="#"><i class="fa fa-thumbs-up"></i> Recapitulatif des dons <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                                 <ul class="treeview-menu">
-                                    <li><a href="/www/Kalaweit/Annual_report/list?y=2019"><i class="fa fa-circle-o"></i> Rapport Annuel</a></li>
-                                    <li><a href="monthly_report"><i class="fa fa-circle-o"></i> Rapport Mensuel</a></li>
-                                    <li><a href="gift_search"><i class="fa fa-circle-o"></i> Rechercher</a></li>
+                                    <li><a href="/www/Kalaweit/Annual_report/list?y=<?php echo date("Y") ?>"><i class="fa fa-circle-o"></i> Rapport Annuel</a></li>
+                                    <li><a href="/www/Kalaweit/Monthly_report/list?y=<?php echo date("Y") ?>&m=<?php echo date("m") ?>"><i class="fa fa-circle-o"></i> Rapport Mensuel</a></li>
                                 </ul>
                             </li>
                         </ul>

@@ -12,11 +12,14 @@ class Donation_current_year {
         $bdd = $bdd->getBdd();
 
         $year = date("Y");
-        $cau_id = $_GET["cau_id"];
+
+        if(isset($_GET["cau_id"])){ $cau_id = $_GET["cau_id"] ;
 
         $donation_mnt =  (new \Kalaweit\Manager\Asso_donation($bdd))->get_year_sum_by_cause($year,$cau_id);
 
         return $donation_mnt;
+
+        } ;
 
     }
 }

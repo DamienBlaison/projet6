@@ -12,11 +12,6 @@ class Dashboard
         $render .= '<div class="container-fluid" style="padding-left:0px;">';
         $render .= '<section class="content">';
 
-
-
-
-
-
         $render .= '   <div class="box box-danger">';
 
         $render .= ' <div class="box-header with-border">';
@@ -24,10 +19,11 @@ class Dashboard
         $render .= '  <h1 id="title_home" class="box-title">KALAWEIT Administration</h1>';
 
         $render .= '   <div class="box-tools pull-right">';
+        $render .= '     <a href="/www/home">';
         $render .= ' <img src="/../Documents/Logo_Kalaweit_Home.jpg">';
         $render .= '   </div>';
+        $render .= '    </a>';
         $render .= ' </div>';
-
 
         $render .= '        </div>';
 
@@ -41,7 +37,6 @@ class Dashboard
         $render .=      '<div class="box-body">';
         $render .=      '<div class="row">';
         $render .=         '<div class="container-fluid">';
-
 
         $render .=
 
@@ -78,7 +73,7 @@ class Dashboard
 
             <div class="info-box-content">
                 <a href="/www/Kalaweit/asso_donation/list/1">
-                <span class="info-box-text">Rechercher un don animal</span>
+                <span class="info-box-text">Rechercher un don Animal</span>
                 </a>
                 <a href="/www/Kalaweit/asso_donation_dulan/list/1">
                 <span class="info-box-text">Rechercher un don Dulan</span>
@@ -86,6 +81,10 @@ class Dashboard
                 <a href="/www/Kalaweit/asso_donation_forest/list/1">
                 <span class="info-box-text">Rechercher un don Foret</span>
                 </a>
+                <a href="/www/Kalaweit/asso_donation_forest/list/1">
+                <span class="info-box-text">Rechercher un don Association</span>
+                </a>
+
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -97,11 +96,6 @@ class Dashboard
         $render .=      '</div>';
         $render .=      '</div>';
         $render .=      '</div>';
-
-
-
-
-
 
         $render .= '   <div class="box box-danger">';
         $render .= ' <div class="box-header with-border">';
@@ -127,7 +121,7 @@ class Dashboard
             <span class="info-box-icon bg-default"><i class="fa fa-users"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">Ajout d\'un nouveau membre</span>
+              <span class="info-box-text">Ajout d\'un membre</span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -163,8 +157,20 @@ class Dashboard
 
 
         $render .= '<div class="col-md-12">';
-        $render .= '<h4>Création de dons</h4><br>';
+        $render .= '<h4>Création de dons/adhésions</h4><br>';
         $render .= '</div>';
+
+        $render .=                  '<a href="/www/Kalaweit/asso_donation_asso/add"> ';
+        $render .=              '<div class="col-md-6">';
+        $render .=                  $data["card7"];
+        $render .=              '</div>';
+        $render .=              '</a>';
+
+        $render .=                  '<a href="/www/Kalaweit/asso_adhesion/add"> ';
+        $render .=              '<div class="col-md-6">';
+        $render .=                  $data["card8"];
+        $render .=              '</div>';
+        $render .=              '</a>';
 
         $render .=                  '<a href="/www/Kalaweit/asso_donation/add"> ';
         $render .=              '<div class="col-md-4">';
