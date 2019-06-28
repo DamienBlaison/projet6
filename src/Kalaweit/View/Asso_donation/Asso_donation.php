@@ -59,7 +59,6 @@ class Asso_donation {
         $asso_donation  = '';
         $asso_donation .= '<div class="container-fluid" style="padding-left:0px;">';
         $asso_donation .= '<form class="content" method="POST">';
-
         $asso_donation .= '<div class=" container-fluid " >'.$param['box_donation'].'</div>';
         $asso_donation .= '<div class=" container-fluid " >'.$param['last_donation'].'</div>';
 

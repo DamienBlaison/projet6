@@ -110,7 +110,7 @@ class Table_filter
             $url = explode('/',$_SERVER['REQUEST_URI']);
 
             switch ($url['3']) {
-                
+
                 case 'member':
                 $key = 'cli_id';
                 $link = '/www/Kalaweit/'.$url['3'].'/get?'.$key.'=';
@@ -214,7 +214,7 @@ class Table_filter
                             $table .= '<td>'.$value.'</td>';
                         }
 
-                        if ($url[3] != 'asso_cause' && $url[3] != 'member'){
+                        if ($url[3] != 'asso_cause' && $url[3] != 'member' && $url[3]!= 'users'){
 
                             if ($key == $position_status && $value == 'WAIT'){
 
@@ -252,7 +252,7 @@ class Table_filter
 
                     else {
 
-                        if ($url[3] != 'asso_cause' && $url[3] != 'member'){
+                        if ($url[3] != 'asso_cause' && $url[3] != 'member' && $url[3]!= 'users'){
 
                             $file = $receipt.'.pdf';
 

@@ -456,7 +456,7 @@ class Asso_cause
 
                                 $key_media = substr($key,4,1);
 
-                                $reqprep_media = $this->bdd->prepare(
+                                    $reqprep_media = $this->bdd->prepare(
 
                                     "DELETE FROM
 
@@ -465,6 +465,9 @@ class Asso_cause
                                     WHERE
 
                                     cau_id = :cau_id
+
+                                    WHERE caum_type != 'PHOTO'
+
                                     "
 
                                 );

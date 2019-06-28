@@ -194,7 +194,7 @@ class Asso_adhesion
                         $param_request = $this->Get_param_request();
 
                         foreach ($param_request[0] as $key => $value) {
-                            if($value != '' && !='export_name' ){
+                            if($value != '' && $key!='export_name' ){
 
                                 switch (substr($key,0,3)) {
 

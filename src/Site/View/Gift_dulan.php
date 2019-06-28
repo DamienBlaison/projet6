@@ -29,7 +29,7 @@ class Gift_dulan
                     <div class="col-md-9 animated slideInLeft" id="aside-left">
 
 
-                        <h2>Faire un don pour la foret</h2>
+                        <h2>Faire un don pour le projet Dulan</h2>
                         <br>
 
                         <p>Le prix d'un hectare de forêt dans cette réserve est de 900 €, soit 9 € pour 100 m² de forêt.</p>

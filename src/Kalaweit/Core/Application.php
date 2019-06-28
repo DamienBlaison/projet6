@@ -261,9 +261,16 @@ class Application
                             };
                             break;
 
+                            case 'gift_current_year':
+
+                                if (method_exists($obj, 'gift_current_year')){
+                                    echo $obj->gift_current_year();
+                                };
+                                break;
+
                             default:
 
-                            header("location:/www/Kalaweit/app_connexion/log_in");
+                            //header("location:/www/Kalaweit/app_connexion/log_in");
                             echo '404';
 
                             break;
@@ -273,7 +280,7 @@ class Application
                     else
 
                     {
-                        header("location:/www/Kalaweit/app_connexion/log_in");
+                        //header("location:/www/Kalaweit/app_connexion/log_in");
                     };
                 }
 
@@ -324,6 +331,14 @@ class Application
                         break;
 
                         case 'Gibbon_gallery':
+
+                        if (method_exists($obj, 'render')){
+                            echo $obj->render();
+                        };
+
+                        break;
+
+                        case 'Gibbon_gallery_thanks':
 
                         if (method_exists($obj, 'render')){
                             echo $obj->render();
@@ -434,7 +449,19 @@ class Application
                         if (method_exists($obj, 'render')){
                             echo $obj->render();
                         };
+                        break;
 
+                        case 'Validate_gift_gibbon':
+                        if (method_exists($obj, 'render')){
+                            echo $obj->render();
+                        };
+                        break;
+
+                        case 'Maintenance':
+                        if (method_exists($obj, 'render')){
+                            echo $obj->render();
+                        };
+                        break;
 
                     }
 
@@ -443,7 +470,7 @@ class Application
                 else
 
                 {
-                    //header("location:/www/home");
+                    header("location:/www/home");
                     echo '404.1';
                 };
 

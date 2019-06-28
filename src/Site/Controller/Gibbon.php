@@ -34,7 +34,6 @@ class Gibbon
 
         $mnt_dispo = (new \Kalaweit\Manager\Asso_donation($bdd))->get_mnt_donation_current_year();
 
-
         $content = [
             "aside" => $aside,
             "info_gibbon" =>$info_gibbon,

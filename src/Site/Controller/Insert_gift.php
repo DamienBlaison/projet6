@@ -40,7 +40,7 @@ class Insert_gift
             $bdd = new \Kalaweit\Manager\Connexion();
             $bdd = $bdd->getBdd();
 
-            $reqprep = $bdd->prepare("INSERT INTO asso_donation (brk_id ,cli_id,cau_id,don_ts,don_status,don_mnt,ptyp_id) VALUES (2,:cli_id,704,:don_ts,'WAIT',:amount,1)");
+            $reqprep = $bdd->prepare("INSERT INTO asso_donation (brk_id ,cli_id,cau_id,don_ts,don_status,don_mnt,ptyp_id) VALUES (2,:cli_id,704,:don_ts,'TEMP',:amount,1)");
 
             $prepare = [
                 ":cli_id" =>$transaction[1],
@@ -58,16 +58,23 @@ class Insert_gift
             $bdd = new \Kalaweit\Manager\Connexion();
             $bdd = $bdd->getBdd();
 
-            $reqprep = $bdd->prepare("INSERT INTO asso_donation (brk_id ,cli_id,cau_id,don_ts,don_status,don_mnt,ptyp_id) VALUES (2,:cli_id,:cau_id,:don_ts,'WAIT',:amount,1)");
+            $reqprep = $bdd->prepare("INSERT INTO asso_donation (brk_id ,cli_id,cau_id,don_ts,don_status,don_mnt,ptyp_id) VALUES (2,:cli_id,:cau_id,:don_ts,'TEMP',:amount,1)");
 
             $prepare = [
                 ":cli_id" =>$transaction[1],
                 ":cau_id" => $transaction[2],
-                ":don_ts" =>date("Y-m-d H:i:s"),
+                ":don_ts" => $ts = date("Y-m-d H:i:s"),
                 ":amount" => $_GET["amount"],
-            ];
+             ];
 
             $reqprep->execute($prepare);
+
+            $recup_id_don = $bdd->prepare("SELECT don_id FROM asso_donation WHERE don_ts = :don_ts AND cli_id = :cli_id");
+            $prepare_recup_id_don = [ "don_ts" => $ts, ":cli_id" => $transaction[1]];
+            $recup_id_don->execute($prepare_recup_id_don);
+
+
+            return json_encode($recup_id_don->fetch(\PDO::FETCH_ASSOC));
 
         }
 

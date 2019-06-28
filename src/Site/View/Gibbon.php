@@ -12,9 +12,9 @@ class Gibbon
         include('Head.php');
 
         if(isset($_SESSION["cli_id"])){
-        	$connected = $_SESSION["cli_id"];
+            $connected = $_SESSION["cli_id"];
         }else{
-        	$connected = 'not connected';
+            $connected = 'not connected';
         }
 
         ?>
@@ -85,6 +85,8 @@ class Gibbon
 
                                 <li>Liste des parrains : <?php echo $content["donator"] ?></li>
                                 <li>Somme collectée poour l'année en cours : <?php if( $content["donation"][0] != NULL){ echo $content["donation"][0];} else { echo '0 ';}?> € / 280 €</li>
+                                <li>Don encore possible à hauteur de <span><?php if( $content["donation"][1] != NULL){ echo $content["donation"][1];} else { echo '0 ';}?></span> €</li>
+
 
                             </ul>
 
@@ -112,7 +114,7 @@ class Gibbon
 
                             <div id="block_gift" class="hidden" >
 
-                                <h2>Comment faire un don ?</h2>
+                                <h2 id="test">Comment faire un don ?</h2>
 
 
                                 <p>Nous sommes enregistrés sur le site de collecte de dons. Benevity. Si votre société (ou employeur) est partenaire de Benevity vous pouvez faire un don à Kalaweit par ce moyen ! Sachez qu'avec le matching fund, votre don à Kalaweit sera multiplié par 2 !</p>
@@ -149,7 +151,7 @@ class Gibbon
 
                                             <br>
 
-                                            <div id="paypal-button-container"></div>
+                                            <div id="paypal-button-container" disabled="disabled"></div>
 
                                         </div>
 
@@ -213,64 +215,64 @@ class Gibbon
 
     <?php if(isset($_SESSION["user_login"])){ ?>
 
-    <script type="text/javascript">
+        <script type="text/javascript">
 
-    function hide_btn_1(){
+        function hide_btn_1(){
 
-        if (document.getElementById("donation_mnt").innerHTML >= 280){
-            document.getElementById("remove_make_gift").removeChild(document.getElementById("make_gift"));
-
-
-            var donationClosed = document.createElement('button');
-            donationClosed.innerHTML = "Don cloturé";
-            donationClosed.className = "make_gift";
-            document.getElementById("remove_make_gift").appendChild(donationClosed);
-        };
-    }
-
-    function hide_btn_2(){
-
-        if (document.getElementById("donation_mnt").innerHTML >= 280){
-            document.getElementById("remove_make_gift2").removeChild(document.getElementById("make_gift2"));
-        };
-    }
-
-    hide_btn_1();
-    hide_btn_2();
-
-    </script>
-
-<?php } else { ?>
-
-    <script type="text/javascript">
-
-    function hide_btn_1(){
-
-        if (document.getElementById("donation_mnt").innerHTML >= 280){
-            document.getElementById("remove_make_gift").removeChild(document.getElementById("make_gift3"));
+            if (document.getElementById("donation_mnt").innerHTML >= 280){
+                document.getElementById("remove_make_gift").removeChild(document.getElementById("make_gift"));
 
 
-            var donationClosed = document.createElement('button');
-            donationClosed.innerHTML = "Don cloturé";
-            donationClosed.className = "make_gift";
-            document.getElementById("remove_make_gift").appendChild(donationClosed);
-        };
-    }
+                var donationClosed = document.createElement('button');
+                donationClosed.innerHTML = "Don cloturé";
+                donationClosed.className = "make_gift";
+                document.getElementById("remove_make_gift").appendChild(donationClosed);
+            };
+        }
 
-    function hide_btn_2(){
+        function hide_btn_2(){
 
-        if (document.getElementById("donation_mnt").innerHTML >= 280){
-            document.getElementById("remove_make_gift2").removeChild(document.getElementById("make_gift4"));
-        };
-    }
+            if (document.getElementById("donation_mnt").innerHTML >= 280){
+                document.getElementById("remove_make_gift2").removeChild(document.getElementById("make_gift2"));
+            };
+        }
 
-    hide_btn_1();
-    hide_btn_2();
+        hide_btn_1();
+        hide_btn_2();
 
-    </script>
+        </script>
+
+    <?php } else { ?>
+
+        <script type="text/javascript">
+
+        function hide_btn_1(){
+
+            if (document.getElementById("donation_mnt").innerHTML >= 280){
+                document.getElementById("remove_make_gift").removeChild(document.getElementById("make_gift3"));
 
 
-<?php } ?>
+                var donationClosed = document.createElement('button');
+                donationClosed.innerHTML = "Don cloturé";
+                donationClosed.className = "make_gift";
+                document.getElementById("remove_make_gift").appendChild(donationClosed);
+            };
+        }
+
+        function hide_btn_2(){
+
+            if (document.getElementById("donation_mnt").innerHTML >= 280){
+                document.getElementById("remove_make_gift2").removeChild(document.getElementById("make_gift4"));
+            };
+        }
+
+        hide_btn_1();
+        hide_btn_2();
+
+        </script>
+
+
+    <?php } ?>
 
     <?php
 
@@ -292,9 +294,6 @@ class Gibbon
             setTimeout( show_gift(), 3000);
 
         }
-        console.log(document.getElementById("donation_mnt").innerHTML);
-
-
 
         </script>
         <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=EUR"></script>
@@ -302,82 +301,148 @@ class Gibbon
 
         var sessionId = document.getElementById("connected").innerHTML;
 
-        paypal.Buttons({
+        var amount_donation = document.getElementById("gift-amount").value;
+        var cau_id = location.search;
 
-            createOrder: function(data, actions) {
-                console.log(data);
-                console.log(actions);
+        function verif(amount_donation){
 
-                var amount_donation = document.getElementById("gift-amount").value;
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
 
-                var search = location.search;
+                if (this.readyState == 4 && this.status == 200) {
 
-                var search = search.replace("?cau_id=", "");
+                    var data = JSON.parse(this.responseText);
+                    var checkOpenGift = data.again;
 
-                console.log(search);
+                    if (document.getElementById('gift-amount').value > checkOpenGift){
+                        alert('Vous ne pouvez plus donner que '+data.again+' € pour ce gibbon');
+                        document.getElementById("gift-amount").value = data.again;
 
-                console.log(amount_donation);
+                    }
 
-                return actions.order.create({
-                    purchase_units: [{
-                        reference_id : "gift_one_shot_gibbon-"+sessionId+'-'+ search,
-                        amount: {
-                            value: amount_donation
-                        }
-                    }]
-                });
-            },
-            onApprove: function(data, actions) {
-                return actions.order.capture().then(function(details) {
-                    alert('Transaction completed by ' + details.payer.name.given_name);
-                    console.log(details);
+                }
+            };
 
-                    var dataString = {
+            let cauId = location.search;
 
-                        "transaction" : details.purchase_units[0].reference_id,
-                        "amount": details.purchase_units[0].amount.value,
-                        "email" : details.payer["email_address"],
-                        "surname" : details.payer.name["surname"],
-                        "given_name" : details.payer.name["given_name"],
-                        "phone" : details.payer.phone.phone_number["national_number"],
-                        "payer_id" : details.payer["payer_id"]
+            let url = "http://localhost:8888/www/Kalaweit/Ajax_get/gift_current_year"+cauId;
 
-                    };
+            xhttp.open("GET", url, true);
+            xhttp.send();
+        }
 
-                    var data2 = 'transaction='+dataString["transaction"]+'&amount='+dataString["amount"]+'&email='+dataString["email"]+'&surname='+dataString["surname"]+'&given_name='+dataString["given_name"]+'&phone='+dataString["phone"];
+        document.getElementById('gift-amount').addEventListener('input', function (){verif();});
 
-                    console.log(details.purchase_units[0].reference_id);
-                    console.log(data2);
+        function insertTempGift(){
 
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('GET', 'http://localhost:8888/www/Insert_gift?'+data2);
-                    xhr.onload = function() {
-                        if (xhr.status === 200) {
-                            alert('Maj ok');
-                        }
-                        else {
-                            alert('Request failed.  Returned status of ' + xhr.status);
-                        }
-                    };
-                    xhr.send(dataString);
+            var amount_temp = '&amount='+document.getElementById('gift-amount').value;
+            var url_temp = 'http://localhost:8888/www/Insert_gift?transaction=gift_one_shot_gibbon-'+sessionId+'-'+(location.search.replace('?cau_id=',''))+amount_temp;
 
-                    return fetch('__DIR__."/../paypal-transaction-complete"', {
-                        method: 'post',
-                        headers: {
-                            'content-type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            orderID: data.orderID
-                        })
-                    });
-                });
+            var xhr1 = new XMLHttpRequest();
+
+            xhr1.onload = function() {
+
+                document.getElementById('paypal-button-container').style.display='none';
+
+                if (xhr1.readyState == 4 && xhr1.status === 200) {
+
+                    answer = JSON.parse(xhr1.responseText);
+
+                }
+
+                else {
+
+                    alert('L\'Enregistrement du don à échoué.  Erreur : ' + xhr1.status);
+                }
+            };
+
+            xhr1.open('GET', url_temp, false); //false car besoin d'une requete synchrone pour récupérer le don_id
+
+            xhr1.send();
+
+            return answer.don_id
+
+        };
+
+        //setInterval(function(){verif()}, 100);
+
+        paypal.Buttons(
+
+            {
+
+                createOrder: function(data, actions) {
+
+                    let donId = insertTempGift();
+
+                    var amount_donation = document.getElementById("gift-amount").value;
+
+                    return actions.order.create(
+
+                        {
+                            purchase_units: [{
+                                reference_id : "gift_one_shot_gibbon-"+donId,
+                                amount: {
+                                    value: amount_donation
+                                }
+                            }]
+                        });
+                    },
+
+
+                    onApprove: function(data, actions) {
+
+                        return actions.order.capture().then(function(details) {
+
+                            var dataString = {
+
+                                "transaction" : details.purchase_units[0].reference_id,
+                                "amount": details.purchase_units[0].amount.value,
+                                "email" : details.payer["email_address"],
+                                "surname" : details.payer.name["surname"],
+                                "given_name" : details.payer.name["given_name"],
+                                "phone" : details.payer.phone.phone_number["national_number"],
+                                "payer_id" : details.payer["payer_id"]
+
+                            };
+
+                            var donId = dataString["transaction"].replace("gift_one_shot_gibbon-", "");
+
+                            var xhr2 = new XMLHttpRequest();
+                            var url2 = 'http://localhost:8888/www/Validate_gift_gibbon?don_id='+donId;
+
+                            xhr2.open('GET', url2);
+
+                            xhr2.onload = function() {
+                                if (xhr2.status === 200) {
+
+
+
+                                    alert('Votre paiement à bien été enregistré, votre reçu sera disponible dans votre espace personnel dès l\'encaissement du virement Paypal');
+
+                                    document.location.href='http://localhost:8888/www/Gibbon_gallery/1';
+
+                                }
+                                else {
+
+                                    alert('Un soucis est apparu lors de l\'enregistrement de votre don , erreur : ' + xhr2.status);
+                                }
+                            };
+                            xhr2.send(dataString);
+
+                            return fetch('__DIR__."/../paypal-transaction-complete"', {
+                                method: 'post',
+                                headers: {
+                                    'content-type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    orderID: data.orderID
+                                })
+                            });
+                        });
+                    }
+                }).render('#paypal-button-container');
+                </script><?php
             }
-        }).render('#paypal-button-container');
-        </script><?php
-    } else {
-
-
+        }
     }
-}
-}
-?>
+    ?>

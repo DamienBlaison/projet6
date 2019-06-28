@@ -168,6 +168,8 @@ $user = (new \Kalaweit\Manager\Users($bdd))->get_id_from_Login($_SESSION['user_l
                                     <li><a href="/www/Kalaweit/users/list/1"><i class="fa fa-edit"></i> Modifier un utilisateur</a></li>
                                 </ul>
                             </li>
+                            <li><a href="/www/Kalaweit/maintenance/update"><i class="fa fa-wrench"></i>Maintenance</a>
+                            </li>
                         </ul>
                     </li>
                 </ul>

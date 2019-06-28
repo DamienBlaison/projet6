@@ -29,7 +29,6 @@ class Box_add
         $devise  = (new \Kalaweit\htmlElement\Form_group_select('ptyp_id',$payment_type,'','fa fa-internet-explorer',"ptyp_code"));
         $donator = (new \Kalaweit\htmlElement\Form_group_select('cli_id',$cli,$cli_id,'fa fa-user',"cli_identity" ));
         $status =  (new \Kalaweit\htmlElement\Form_group_select('don_status',$status,"",'fa fa-check',"config" ));
-        $donator_view ='';
         $cause     = (new \Kalaweit\htmlElement\Form_group_select('cau_id',$cau,"",'fa fa-paw',"cau_name" ));
 
         $submit  = '';

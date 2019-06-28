@@ -472,131 +472,90 @@ class Ajax_get
 
     function upload_photo1(){
 
-        /* vérification si element présent pour import */
+    $recup = $_POST["image"]; // image encodée en base 64;
 
-        if(isset($_POST["image"]))
-        {
-            /* initialisation de la variable $recup avec une image dans le POST */
+    $image_array_1 = explode(";" , $recup);
+    $image_array_2 = explode("," , $image_array_1[1]);
 
-            $recup = $_POST["image"]; // image encodée en base 64;
+    $data = base64_decode($image_array_2[1]);
+
+    $target_file = '/Documents/Asso_cause/p1_'.$_GET['user_id'].'_'.date("YmdHms").'.png';
+
+    $imageName = "..".$target_file;
+
+    file_put_contents($imageName, $data);
+
+    $bddM = new \Kalaweit\Manager\Connexion();
+    $bdd = $bddM->getBdd();
+
+    $reqprep_delete = $bdd->prepare( "DELETE FROM asso_cause_media WHERE cau_id = :cau_id and caum_code = 'PHOTO1'");
+
+    $reqprep_insert = $bdd->prepare(
+        "INSERT INTO asso_cause_media (cau_id,caum_code,caum_type,caum_file,caum_lang)
+        VALUES (:cau_id,'PHOTO1','PHOTO',:caum_file,'__')");
+
+        $prepare_delete = [
+            ":cau_id" => $_GET["cau_id"],
+        ];
+
+        $caum_file = explode('/',$target_file);
+
+        $prepare_insert = [
+            ":cau_id" => $_GET["cau_id"],
+            ":caum_file"=> $caum_file[3]
+        ];
+
+        $reqprep_delete->execute($prepare_delete);
+
+        $reqprep_insert->execute($prepare_insert);
+
+    $reqprep->execute($prepare);
+
+    }
 
 
-            /* $recup sera de la forme :
+    function upload_photo2(){
 
-            data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAMAAAC6V+0/AAAAwFBMVEXm7NK41k3w8fDv7+q01Tyy0zqv0DeqyjOszDWnxjClxC6iwCu11z6y1DvA2WbY4rCAmSXO3JZDTxOiwC3q7tyryzTs7uSqyi6tzTCmxSukwi9aaxkWGga+3FLv8Ozh6MTT36MrMwywyVBziSC01TbT5ZW9z3Xi6Mq2y2Xu8Oioxy7f572qxzvI33Tb6KvR35ilwTmvykiwzzvV36/G2IPw8O++02+btyepyDKvzzifvSmw0TmtzTbw8PAAAADx8fEC59dUAAAA50lEQVQYV13RaXPCIBAG4FiVqlhyX5o23vfVqUq6mvD//1XZJY5T9xPzzLuwgKXKslQvZSG+6UXgCnFePtBE7e/ivXP/nRvUUl7UqNclvO3rpLqofPDAD8xiu2pOntjamqRy/RqZxs81oeVzwpCwfyA8A+8mLKFku9XfI0YnSKXnSYZ7ahSII+AwrqoMmEFKriAeVrqGM4O4Z+ADZIhjg3R6LtMpWuW0ERs5zunKVHdnnnMLNQqaUS0kyKkjE1aE98b8y9x9JYHH8aZXFMKO6JFMEvhucj3Wj0kY2D92HlHbE/9Vk77mD6srRZqmVEAZAAAAAElFTkSuQmCC
+    $recup = $_POST["image"]; // image encodée en base 64;
 
-            */
+    $image_array_1 = explode(";" , $recup);
+    $image_array_2 = explode("," , $image_array_1[1]);
 
-            /* traitement de la variable $recup pour récupération et creation du fichier image */
+    $data = base64_decode($image_array_2[1]);
 
-            $image_array_1 = explode(";" , $recup);
-            $image_array_2 = explode("," , $image_array_1[1]);
+    $target_file = '/Documents/Asso_cause/p2_'.$_GET['user_id'].'_'.date("YmdHms").'.png';
 
-            /* réencodage du fichier */
+    $imageName = "..".$target_file;
 
-            $data = base64_decode($image_array_2[1]);
+    file_put_contents($imageName, $data);
 
-            /* définition du nom et du dossier de stockage du fichier */
+    $bddM = new \Kalaweit\Manager\Connexion();
+    $bdd = $bddM->getBdd();
 
-            $target_file = '/Documents/Asso_cause/p1_'.$_GET['cau_id'].'.png';
-            $imageName = "..".$target_file;
+    $reqprep_delete = $bdd->prepare( "DELETE FROM asso_cause_media WHERE cau_id = :cau_id and caum_code = 'PHOTO2'");
 
-            /* création et enregistrement du fichier sur le serveur */
+    $reqprep_insert = $bdd->prepare(
+        "INSERT INTO asso_cause_media (cau_id,caum_code,caum_type,caum_file,caum_lang)
+        VALUES (:cau_id,'PHOTO2','PHOTO',:caum_file,'__')");
 
-            file_put_contents($imageName, $data);
+        $prepare_delete = [
+            ":cau_id" => $_GET["cau_id"],
+        ];
 
-            /* instanciation de la connexion a la bdd */
+        $caum_file = explode('/',$target_file);
 
-            $bddM = new \Kalaweit\Manager\Connexion();
-            $bdd = $bddM->getBdd();
+        $prepare_insert = [
+            ":cau_id" => $_GET["cau_id"],
+            ":caum_file"=> $caum_file[3]
+        ];
 
-            /* suppression de l'ancien chemin et écriture du nouveau chemin du fichier en bdd */
+        $reqprep_delete->execute($prepare_delete);
 
-            $reqprep_delete = $bdd->prepare( "DELETE FROM asso_cause_media WHERE cau_id = :cau_id and caum_code = 'PHOTO1'");
+        $reqprep_insert->execute($prepare_insert);
 
-            $reqprep_insert = $bdd->prepare(
-                "INSERT INTO asso_cause_media (cau_id,caum_code,caum_type,caum_file,caum_lang)
-                VALUES (:cau_id,'PHOTO1','PHOTO',:caum_file,'__')");
+    $reqprep->execute($prepare);
 
-                $prepare_delete = [
-                    ":cau_id" => $_GET["cau_id"],
-                ];
-
-                $prepare_insert = [
-                    ":cau_id" => $_GET["cau_id"],
-                    ":caum_file"=> 'p1_'.$_GET['cau_id'].'.png'
-                ];
-
-                $reqprep_delete->execute($prepare_delete);
-
-                $reqprep_insert->execute($prepare_insert);
-
-            }
-        }
-
-        function upload_photo2(){
-
-            /* vérification si element présent pour import */
-
-            if(isset($_POST["image"]))
-            {
-                /* initialisation de la variable $recup avec une image dans le POST */
-
-                $recup = $_POST["image"]; // image encodée en base 64;
-
-                /* $recup sera de la forme :
-
-                data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAMAAAC6V+0/AAAAwFBMVEXm7NK41k3w8fDv7+q01Tyy0zqv0DeqyjOszDWnxjClxC6iwCu11z6y1DvA2WbY4rCAmSXO3JZDTxOiwC3q7tyryzTs7uSqyi6tzTCmxSukwi9aaxkWGga+3FLv8Ozh6MTT36MrMwywyVBziSC01TbT5ZW9z3Xi6Mq2y2Xu8Oioxy7f572qxzvI33Tb6KvR35ilwTmvykiwzzvV36/G2IPw8O++02+btyepyDKvzzifvSmw0TmtzTbw8PAAAADx8fEC59dUAAAA50lEQVQYV13RaXPCIBAG4FiVqlhyX5o23vfVqUq6mvD//1XZJY5T9xPzzLuwgKXKslQvZSG+6UXgCnFePtBE7e/ivXP/nRvUUl7UqNclvO3rpLqofPDAD8xiu2pOntjamqRy/RqZxs81oeVzwpCwfyA8A+8mLKFku9XfI0YnSKXnSYZ7ahSII+AwrqoMmEFKriAeVrqGM4O4Z+ADZIhjg3R6LtMpWuW0ERs5zunKVHdnnnMLNQqaUS0kyKkjE1aE98b8y9x9JYHH8aZXFMKO6JFMEvhucj3Wj0kY2D92HlHbE/9Vk77mD6srRZqmVEAZAAAAAElFTkSuQmCC
-
-                */
-
-                /* traitement de la variable $recup pour récupération et creation du fichier image */
-
-                $image_array_1 = explode(";" , $recup);
-                $image_array_2 = explode("," , $image_array_1[1]);
-
-                /* réencodage du fichier */
-
-                $data = base64_decode($image_array_2[1]);
-
-                /* définition du nom et du dossier de stockage du fichier */
-
-                $target_file = '/Documents/Asso_cause/p2_'.$_GET['cau_id'].'.png';
-                $imageName = "..".$target_file;
-
-                /* création et enregistrement du fichier sur le serveur */
-
-                file_put_contents($imageName, $data);
-
-                /* instanciation de la connexion a la bdd */
-
-                $bddM = new \Kalaweit\Manager\Connexion();
-                $bdd = $bddM->getBdd();
-
-                /* suppression de l'ancien chemin et écriture du nouveau chemin du fichier en bdd */
-
-                $reqprep_delete = $bdd->prepare( "DELETE FROM asso_cause_media WHERE cau_id = :cau_id and caum_code = 'PHOTO2'");
-
-                $reqprep_insert = $bdd->prepare(
-                    "INSERT INTO asso_cause_media (cau_id,caum_code,caum_type,caum_file,caum_lang)
-                    VALUES (:cau_id,'PHOTO2','PHOTO',:caum_file,'__')");
-
-                    $prepare_delete = [
-                        ":cau_id" => $_GET["cau_id"],
-                    ];
-
-                    $prepare_insert = [
-                        ":cau_id" => $_GET["cau_id"],
-                        ":caum_file"=> 'p2_'.$_GET['cau_id'].'.png'
-                    ];
-
-                    $reqprep_delete->execute($prepare_delete);
-
-                    $reqprep_insert->execute($prepare_insert);
-
-                }
-            }
-
+    }
         function export_excel(){
 
             $bdd = (new \Kalaweit\Manager\Connexion())->getBdd();
@@ -617,5 +576,13 @@ class Ajax_get
 
         }
 
+        function gift_current_year(){
 
+            $bdd = (new \Kalaweit\Manager\Connexion())->getBdd();
+
+            $data = (new \Kalaweit\Manager\Asso_donation($bdd))->get_mnt_donation_current_year();
+
+            return json_encode(["done"=>$data[0],"again"=>$data[1]]);
         }
+
+    }

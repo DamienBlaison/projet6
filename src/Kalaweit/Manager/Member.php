@@ -379,11 +379,38 @@ class Member
 
                     foreach ($array_param_post["array_param_post_clid"] as $key => $value) {
 
+                        $reqprep_check_data = $this->bdd->prepare("SELECT cld_id from crm_client_data where clitd_id = :clitd_id and cli_id = :cli_id");
+
+                        $reqprep_check_data_prepare = [
+                            ":clitd_id" => $value["clitd_id"],
+                            ":cli_id" => $_GET["cli_id"]
+                        ];
+
+                        $reqprep_check_data->execute($reqprep_check_data_prepare);
+                        $return  = $reqprep_check_data->fetch(\PDO::FETCH_NUM);
+
+                        if ($return[0] == NULL) {
+
+                            $reqprep_data_insert = $this->bdd->prepare("INSERT INTO crm_client_data (cli_id, clitd_id, cld_valc) VALUES (:id_client, :clitd_id, :cld_valc)");
+                            $prepare_data_insert = [
+
+                                ":id_client" => $_GET["cli_id"],
+                                ":clitd_id"  => $value["clitd_id"],
+                                ":cld_valc"  => $value["cld_valc"]
+                            ];
+
+                        $reqprep_data_insert->execute($prepare_data_insert);
+
+                        } else {
+
                         $reqprep_data = $this->bdd->prepare("UPDATE crm_client_data SET cld_valc = :cld_valc WHERE cli_id = :cli_id AND clitd_id = :clitd_id");
 
                         $prepare_data = [":cld_valc" =>$value["cld_valc"], ":cli_id" => $_GET['cli_id'], "clitd_id" => $value["clitd_id"] ] ;
 
+                        $reqprep_data;
                         $reqprep_data->execute($prepare_data);
+
+                        }
 
                     }
 

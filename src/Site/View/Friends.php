@@ -99,6 +99,8 @@ class Friends
 
             var sessionId = document.getElementById("connected").innerHTML;
 
+
+
             paypal.Buttons({
 
                 createOrder: function(data, actions) {
@@ -145,10 +147,10 @@ class Friends
                         xhr.open('GET', 'http://localhost:8888/www/Insert_gift?'+data2);
                         xhr.onload = function() {
                             if (xhr.status === 200) {
-                                alert('Maj ok');
+                                alert('Votre don a bien été enregistré, votre reçu sera disponible dès que nous aurrons la confirmation du paiement.');
                             }
                             else {
-                                alert('Request failed.  Returned status of ' + xhr.status);
+                                alert('Nous avons rencontrez un soucis , merci de renouveler votre don utlérieurement');
                             }
                         };
                         xhr.send(dataString);
@@ -165,6 +167,7 @@ class Friends
                     });
                 }
             }).render('#paypal-button-container');
+
             </script>
 
 

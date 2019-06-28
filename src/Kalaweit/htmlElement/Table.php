@@ -100,11 +100,7 @@ class Table
                         $print_access = false;
 
                     } else { $print_access = true ;}
-
-
-                $body .= '<td style = "width : 135px;">';
-                $body .=    '<a style="margin-right:5px;" href="/'.$this->update.$value[0].'&from='.$from.'" class="btn btn-primary" id="update_'.$value[0].'"><i class="fa fa-edit"></i></a>';
-                $body .=    '<a style="margin-right:5px;"href="/'.$this->delete.$value[0].'" class="btn btn-danger" id="delete_'.$value[0].'" onclick ="return confirm(\'Etes vous sur de vouloir supprimer cet enregistrement\')"><i class="fa  fa-trash"></i></a>';
+                }
 
                 $bdd = (new \Kalaweit\Manager\Connexion())->getBdd();
 
@@ -116,6 +112,22 @@ class Table
 
                     $name_receipt = (new \Kalaweit\Manager\Receipt($bdd))->name_receipt($value[0]);
                 }
+
+
+                    $body .= '<td style = "width : 135px;">';
+
+
+                    if($name_receipt != NULL  && $print_access == true){
+
+                        $body .=    '<a style="margin-right:5px;"  class="btn btn-default" id="update_desactivated_'.$value[0].'"disabled=disabled><i class="fa fa-edit"></i></a>';
+                        $body .=    '<a style="margin-right:5px;" class="btn btn-default" id="delete_desactivated_'.$value[0].'" disabled=disabled ><i class="fa  fa-trash"></i></a>';
+
+                    } else {
+
+                        $body .=    '<a style="margin-right:5px;" href="/'.$this->update.$value[0].'&from='.$from.'" class="btn btn-primary" id="update_'.$value[0].'"><i class="fa fa-edit"></i></a>';
+                        $body .=    '<a style="margin-right:5px;"href="/'.$this->delete.$value[0].'" class="btn btn-danger" id="delete_'.$value[0].'" onclick ="return confirm(\'Etes vous sur de vouloir supprimer cet enregistrement\')"><i class="fa  fa-trash"></i></a>';
+
+                    }
 
                     if($print_access == true){
 
@@ -133,7 +145,7 @@ class Table
                         $body .=    '<a href="#"  style="margin-right:5px;" class="btn btn-default" id="print_'.$value[0].'" disabled=disabled ><i class="fa fa-print"></i></a>';
                     }
 
-                }
+
 
                 $body .= '</td>';
 

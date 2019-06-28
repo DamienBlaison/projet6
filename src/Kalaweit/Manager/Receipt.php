@@ -198,11 +198,11 @@ class Receipt
 
         } else {
 
-        $reqprep3 = $this->bdd->prepare("INSERT INTO asso_receipt_donation (rec_id,don_id) VALUES (:rec_id,:don_id)");
-        $prepare3 = [
-            ":rec_id" => $return[0],
-            ":don_id" => $p_don_id["donation"]
-        ];
+            $reqprep3 = $this->bdd->prepare("INSERT INTO asso_receipt_donation (rec_id,don_id) VALUES (:rec_id,:don_id)");
+            $prepare3 = [
+                ":rec_id" => $return[0],
+                ":don_id" => $p_don_id["donation"]
+            ];
 
         }
 
@@ -311,129 +311,149 @@ class Receipt
 
                 }
 
-            function get_list(){
+                function get_list(){
 
-                $where = " ";
+                    $where = " ";
 
-                $param_request = $this->Get_param_request();
+                    $param_request = $this->Get_param_request();
 
-                foreach ($param_request[0] as $key => $value) {
-                    if($value != ''){
+                    foreach ($param_request[0] as $key => $value) {
+                        if($value != ''){
 
-                        switch (substr($key,0,3)) {
+                            switch (substr($key,0,3)) {
 
-                            case 'cau':
-                            $key_table = 'P1.'.$key;
-                            break;
-                            case 'don':
-                            $key_table = 'asso_donation.'.$key;// code...
-                            break;
-                            case 'cli':
-                            $key_table = 'P2.'.$key;// code...
-                            break;
-
-                        }
-
-                        $where .= ' AND '.$key_table.' LIKE :'.$key ;
-
-                    }
-                }
-
-                if (isset($param_request[1]) && ($param_request[1] != 'get')){$filter = (($param_request[1])-1)*10;}else{$filter = 0;}
-
-
-                $reqprep = $this->bdd->prepare(
-                    "SELECT
-
-                    asso_receipt.rec_ts as 'Date du reçu',
-                    asso_receipt.rec_number as 'Référence',
-                    asso_receipt.rec_mnt as 'Montant',
-
-                    crm_client.cli_firstname as 'Prénom',
-                    crm_client.cli_lastname as 'Nom'
-
-                    FROM
-
-                    asso_receipt
-
-                    LEFT JOIN crm_client  ON crm_client.cli_id = asso_receipt.cli_id
-
-                    WHERE
-
-                    1=1
-
-                    $where
-
-                    ORDER BY
-
-                    asso_receipt.rec_ts DESC
-
-                    LIMIT $filter,10
-
-                    ");
-
-                    $count_reqprep = $this->bdd->prepare("SELECT COUNT(don_id) FROM asso_donation WHERE 1=1 $where ");
-
-                    if($param_request[0] != []){
-
-                        foreach ($param_request[0] as $key => $value) {
-                            if($value != ''){
-
-                                $reqprep->bindValue(":".$key,$value);
-                                $count_reqprep->bindValue(":".$key,$value);
+                                case 'cau':
+                                $key_table = 'P1.'.$key;
+                                break;
+                                case 'don':
+                                $key_table = 'asso_donation.'.$key;// code...
+                                break;
+                                case 'cli':
+                                $key_table = 'P2.'.$key;// code...
+                                break;
 
                             }
+
+                            $where .= ' AND '.$key_table.' LIKE :'.$key ;
+
                         }
                     }
 
-                    $reqprep->execute();
-
-                    $count_result   = $count_reqprep->execute();
-                    $count_result   = $count_reqprep->fetch(\PDO::FETCH_NUM);
-
-                    $value = [];
-
-                    $result = $reqprep->fetchAll(\PDO::FETCH_NUM);
+                    if (isset($param_request[1]) && ($param_request[1] != 'get')){$filter = (($param_request[1])-1)*10;}else{$filter = 0;}
 
 
-                    $data = [
-                        "content"     => $result,
-                        "head"              => ["Id","Prénom","Nom","Animal","Montant","Date enregistrement"],
-                        "count"             => $count_result,
-                    ];
+                    $reqprep = $this->bdd->prepare(
+                        "SELECT
 
-                    return $data;
-                }
+                        asso_receipt.rec_ts as 'Date du reçu',
+                        asso_receipt.rec_number as 'Référence',
+                        asso_receipt.rec_mnt as 'Montant',
 
-                function generate(){
+                        crm_client.cli_firstname as 'Prénom',
+                        crm_client.cli_lastname as 'Nom'
 
-                    $req = $this->bdd->query("SELECT don_id From asso_donation");
+                        FROM
 
-                    $list = $req->fetchAll(\PDO::FETCH_NUM);
+                        asso_receipt
 
-                    foreach ($list as $key => $value) {
+                        LEFT JOIN crm_client  ON crm_client.cli_id = asso_receipt.cli_id
 
-                        $don_id = $value[0];
+                        WHERE
 
-                        $reqprep = $this->bdd->query("SELECT * FROM asso_receipt_donation WHERE don_id = $don_id " );
+                        1=1
 
-                        $response = $reqprep->fetch();
+                        $where
 
-                        if ($response === false){
+                        ORDER BY
 
-                            $this->add($don_id);
+                        asso_receipt.rec_ts DESC
 
-                            $recup_rec_id = $this->bdd->query("SELECT MAX(rec_id) FROM asso_receipt");
+                        LIMIT $filter,10
 
-                            $rec_id = $recup_rec_id->fetch(\PDO::FETCH_NUM);
+                        ");
+
+                        $count_reqprep = $this->bdd->prepare("SELECT COUNT(don_id) FROM asso_donation WHERE 1=1 $where ");
+
+                        if($param_request[0] != []){
+
+                            foreach ($param_request[0] as $key => $value) {
+                                if($value != ''){
+
+                                    $reqprep->bindValue(":".$key,$value);
+                                    $count_reqprep->bindValue(":".$key,$value);
+
+                                }
+                            }
+                        }
+
+                        $reqprep->execute();
+
+                        $count_result   = $count_reqprep->execute();
+                        $count_result   = $count_reqprep->fetch(\PDO::FETCH_NUM);
+
+                        $value = [];
+
+                        $result = $reqprep->fetchAll(\PDO::FETCH_NUM);
 
 
-                            (new \Kalaweit\Controller\Receipt)->get($rec_id[0],'close');
+                        $data = [
+                            "content"     => $result,
+                            "head"              => ["Id","Prénom","Nom","Animal","Montant","Date enregistrement"],
+                            "count"             => $count_result,
+                        ];
+
+                        return $data;
+                    }
+
+                    function generate(){
+
+                        $req = $this->bdd->query("SELECT don_id From asso_donation");
+
+                        $list = $req->fetchAll(\PDO::FETCH_NUM);
+
+                        foreach ($list as $key => $value) {
+
+                            $don_id = $value[0];
+
+                            $reqprep = $this->bdd->query("SELECT * FROM asso_receipt_donation WHERE don_id = $don_id " );
+
+                            $response = $reqprep->fetch();
+
+                            if ($response === false){
+
+                                $this->add($don_id);
+
+                                $recup_rec_id = $this->bdd->query("SELECT MAX(rec_id) FROM asso_receipt");
+
+                                $rec_id = $recup_rec_id->fetch(\PDO::FETCH_NUM);
+
+
+                                (new \Kalaweit\Controller\Receipt)->get($rec_id[0],'close');
+
+                            }
 
                         }
 
                     }
 
-                }
+                    function delete($receipt_name){
 
-            }
+                        $name_receipt = explode('.', $receipt_name);
+
+                        $prepare = [":rec_number" => $name_receipt[0]];
+
+                        $reqprep = $this->bdd->prepare("SELECT rec_id from asso_receipt WHERE rec_number = :rec_number");
+                        $reqprep->execute($prepare);
+
+                        $rec_id = $reqprep->fetch(\PDO::FETCH_NUM);
+
+                        $this->bdd->exec("DELETE FROM asso_receipt_donation WHERE rec_id = $rec_id[0] ");
+                        $this->bdd->exec("DELETE FROM asso_receipt_adhesion WHERE rec_id = $rec_id[0] ");
+
+                        $reqprep2= $this->bdd->prepare("DELETE FROM asso_receipt WHERE rec_number = :rec_number ");
+                        $reqprep2->execute($prepare);
+
+                        unlink( __DIR__ .'/../../../Documents/Receipt/'.$receipt_name);
+
+                    }
+                }

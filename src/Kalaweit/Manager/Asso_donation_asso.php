@@ -479,8 +479,6 @@ class Asso_donation_asso
             }
         }
 
-        var_dump($reqprep);
-
         $reqprep->execute();
 
             $data = [

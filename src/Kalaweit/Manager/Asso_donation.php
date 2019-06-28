@@ -479,9 +479,6 @@ class Asso_donation
 
 
         ");
-        echo'<pre>';
-        var_dump($reqprep);
-        echo'</pre>';
 
         if($param_request[0] != []){
 
@@ -493,10 +490,6 @@ class Asso_donation
                 }
             }
         }
-
-        echo'<pre>';
-        var_dump($reqprep->execute());
-        echo'</pre>';
 
         $reqprep->execute();
 
@@ -600,7 +593,28 @@ class Asso_donation
 
         $reqprep->execute($prepare);
 
-        return $data = $reqprep->fetch(\PDO::FETCH_NUM);
+        $data = $reqprep->fetch(\PDO::FETCH_NUM);
+
+        $return = [$data[0], 280 - $data[0]];
+
+        return $return ;
+    }
+
+    function get_mnt_donation_current_year_post(){
+        $reqprep = $this->bdd->prepare("SELECT SUM(don_mnt) From asso_donation WHERe cau_id = :cau_id and YEAR(don_ts) = :Year_current");
+
+        $prepare = [
+            ":cau_id" => $_POST["cau_id"],
+            ":Year_current" => date("Y")
+        ];
+
+        $reqprep->execute($prepare);
+
+        $data = $reqprep->fetch(\PDO::FETCH_NUM);
+
+        $return = [$data[0], 280 - $data[0]];
+
+        return $return ;
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

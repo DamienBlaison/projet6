@@ -31,16 +31,11 @@ class Gift_forest
                         <h2>Faire un don pour la foret</h2>
                         <br>
 
-
-                        <p>Le prix d'un hectare de forêt pour agrandir nos réserves de forêt à Bornéo et Sumatra est de 1 350 €, soit 13,50 € pour 100 m² de forêt. </p>
-                        <p>Ce prix est une moyenne car il varie suivant la situation géographique des hectares (Bornéo, Sumatra, près d'un point d'eau, d'un accès etc.) </p>
-
-                        <p>Vous recevrez un certificat de propriété symbolique, avec votre nom, le montant de votre don et le nombre de m² financés. </p>
-
-                        <p>Merci de renseigner votre adresse postale afin que le reçu fiscal soit accepté par votre centre des impôts. Sans votre adresse postale il ne sera pas valable.</p>
-                        <p> Ce reçu fiscal vous permet de déduire de vos impôts 66% du montant de votre don dans la limite de 20% de vos revenus.</p>
-                        <br>
-                        <br>
+                        <p>Le prix d'un hectare de forêt pour agrandir nos réserves de forêt à Bornéo et Sumatra est de 1 350 €, soit 13,50 € pour 100 m² de forêt.</p>
+                        <p> Ce prix est une moyenne car il varie suivant la situation géographique des hectares (Bornéo, Sumatra, près d'un point d'eau, d'un accès etc.)</p>
+                        <p>Vous recevrez un certificat de propriété symbolique, avec votre nom, le montant de votre don et le nombre de m² financés.</p>
+                        <p>Merci de renseigner votre adresse postale afin que le reçu fiscal soit accepté par votre centre des impôts. </p>
+                        <p>Sans votre adresse postale il ne sera pas valable. Ce reçu fiscal vous permet de déduire de vos impôts 66% du montant de votre don dans la limite de 20% de vos revenus.<br>
 
                         <?php if(isset($_SESSION["user_login"])){?>
 

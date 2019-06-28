@@ -85,15 +85,14 @@ class Crop_photo
                     });
 
                     var cau_id = window.location.search;
+                    console.log(cau_id);
+
                     var cau_id_return = cau_id.split('&');
                     console.log(cau_id_return);
                     console.log(cau_id_return[1]);
                     var num_picture = cau_id_return[1].split('=');
                     console.log(num_picture);
 
-
-
-                    console.log(cau_id);
                     console.log('/www/Kalaweit/Ajax_get/upload_photo'+num_picture[1]+cau_id);
 
 
@@ -104,9 +103,12 @@ class Crop_photo
                             size: 'viewport'
                         }).then(function(response){
 
+                            console.log('http://localhost:8888/www/Kalaweit/Ajax_get/upload_photo'+num_picture[1]+cau_id);
+
                             $.ajax({
 
                                 url: '/www/Kalaweit/Ajax_get/upload_photo'+num_picture[1]+cau_id,
+
                                 method:'POST',
                                 data:{
                                     "image": response,

@@ -15,15 +15,27 @@ class Asso_donation
         $bdd = new \Kalaweit\Manager\Connexion();
         $bdd = $bdd->getBdd();
 
+
+
         /* verification de la présence des données d'entrée et appel de la methode d'ajout du manager */
 
 
-        if (
-            isset($_POST['donation_mnt']) &&  $_POST['donation_mnt'] > 0
-            )
+        if ( isset($_POST['donation_mnt']) &&  $_POST['donation_mnt'] > 0 )
         {
 
-            (new \Kalaweit\Manager\Asso_donation($bdd))->add();
+            $check_don_mnt = (new \Kalaweit\Manager\Asso_donation($bdd))->get_mnt_donation_current_year_post();
+
+            if ( ($check_don_mnt[1] - $_POST['donation_mnt']) >= 0) {
+
+                (new \Kalaweit\Manager\Asso_donation($bdd))->add();
+
+            }
+
+            else {
+
+                echo '<script>alert("Le don peut etre de '.$check_don_mnt[1].' € maximum");</script>';
+            }
+
 
         }
 
