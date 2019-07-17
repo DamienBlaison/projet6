@@ -19,14 +19,14 @@ class Member
         $render .= '    <ul class="nav nav-tabs">';
         $render .= '        <li id="tab_pane_1" class="active"><a href="#tab1" data-toggle="tab" aria-expanded="true">Informations générales</a></li>';
         $render .= '        <li id="tab_pane_2" class=""><a href="#tab2" data-toggle="tab" aria-expanded="false">Adhésion/Dons</a></li>';
-        $render .= '        <li id="tab_pane_3" class=""><a href="#tab3" data-toggle="tab" aria-expanded="false">Envoyer un Email</a></li>';
+        $render .= '        <li id="tab_pane_3" class=""><a href="#tab3" data-toggle="tab" aria-expanded="false">Reçu annuel</a></li>';
+        $render .= '        <li id="tab_pane_4" class=""><a href="#tab4" data-toggle="tab" aria-expanded="false">Envoyer un Email</a></li>';
         $render .= '    </ul>';
         $render .= '<div class="tab-content col-md-12">';
         $render .= '    <div class="tab-pane active" id="tab1">'.$p_render["content_tab1"].' </div>';
-        $render .= '    <div class="tab-pane " id="tab2">';
-        $render .=          $p_render["content_tab2"];
-        $render .= '    </div>';
+        $render .= '    <div class="tab-pane " id="tab2">'.$p_render["content_tab2"].'</div>';
         $render .= '    <div class="tab-pane " id="tab3">'.$p_render["content_tab3"].'</div>';
+        $render .= '    <div class="tab-pane " id="tab4">'.$p_render["content_tab4"].'</div>';
         $render .= '</div>';
         $render .= '</section>';
         $render .= '</div>';

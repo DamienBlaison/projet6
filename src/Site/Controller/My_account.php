@@ -46,6 +46,8 @@
 
         ];
 
+        $info_receipt_annual = (new \Kalaweit\Manager\Receipt($bdd))->get_receipt_by_member_front();
+
         $info_donation = (new \Kalaweit\Manager\asso_donation($bdd))->get_donation_by_member_front();
         $info_donation_asso = (new \Kalaweit\Manager\asso_donation_asso($bdd))->get_donation_by_member_asso_front();
         $info_adhesion = (new \Kalaweit\Manager\asso_adhesion($bdd))->get_adhesion_by_member_front();
@@ -56,6 +58,7 @@
 
         $table = [
 
+            "table_receipt_annual" => (new \Site\htmlElement\Table($info_receipt_annual,'receipt_table',$print))->render(),
             "table_donation" => (new \Site\htmlElement\Table($info_donation,'donation_table',$print))->render(),
             "table_adhesion" => (new \Site\htmlElement\Table($info_adhesion,'adhesion_table',$print))->render(),
             "table_donation_asso" => (new \Site\htmlElement\Table($info_donation_asso,'donation_asso_table',$print))->render(),

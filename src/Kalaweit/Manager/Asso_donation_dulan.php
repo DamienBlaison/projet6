@@ -163,9 +163,12 @@ class Asso_donation_dulan
 
                     "SELECT
 
+                    asso_receipt.rec_number,
+
                     asso_donation.don_id as Id,
-                    asso_donation.don_mnt as Montant,
                     asso_donation.don_ts as Date_creation,
+                    asso_donation.don_mnt as Montant,
+
                     asso_donation.don_status as Statut
 
                     FROM
@@ -173,6 +176,8 @@ class Asso_donation_dulan
                     asso_donation
 
                     LEFT JOIN asso_cause as P1 ON P1.cau_id = asso_donation.cau_id
+                    LEFT JOIN asso_receipt_donation on asso_receipt_donation.don_id = asso_donation.don_id
+                    LEFT JOIN asso_receipt on asso_receipt.rec_id = asso_receipt_donation.rec_id
 
                     WHERE asso_donation.cli_id = :cli_id
 
@@ -194,7 +199,7 @@ class Asso_donation_dulan
 
                     $return = [
                         "content" => $reqprep->fetchAll(\PDO::FETCH_NUM),
-                        "head" => ["Id","Montant","Date de création","Action"]
+                        "head" => ["rec_num","Id","Date de création","Montant","Statut","Action"]
                     ];
 
                     return $return ;

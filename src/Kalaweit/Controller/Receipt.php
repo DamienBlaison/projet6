@@ -63,6 +63,11 @@ class Receipt
             return (new \Kalaweit\View\Receipt\Receipt_asso($content))->render($open);
             break;
 
+            case 'receipt_annual':
+            return (new \Kalaweit\View\Receipt\Receipt_annual($content))->render($open);
+            break;
+
+
         }
 
 

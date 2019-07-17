@@ -16,16 +16,15 @@ class Member
 
         "content_tab2" => $content_tab2 =
 
-
         (new  \Kalaweit\Controller\Component\Member\Member_adhesion)->render().
         (new  \Kalaweit\Controller\Component\Member\Member_donation_asso)->render().
         (new  \Kalaweit\Controller\Component\Member\Member_donation)->render().
         (new  \Kalaweit\Controller\Component\Member\Member_donation_forest)->render().
         (new  \Kalaweit\Controller\Component\Member\Member_donation_dulan)->render(),
 
-        "content_tab3" => $content_tab3 =
+        "content_tab3" => $content_tab3 = (new  \Kalaweit\Controller\Component\Member\Member_receipt_annual)->render(),
 
-        (new \Kalaweit\Controller\Component\Member\Member_send_mail)->render()
+        "content_tab4" => $content_tab4 = (new \Kalaweit\Controller\Component\Member\Member_send_mail)->render()
 
     ];
 
@@ -51,7 +50,9 @@ class Member
 
         "content_tab1" => $content_tab1 = (new  \Kalaweit\Controller\Component\Member\Member_info)->render(),
         "content_tab2" => $content_tab2 = '',
-        "content_tab3" => $content_tab3 = ''
+        "content_tab3" => $content_tab3 = '',
+        "content_tab4" => $content_tab4 = ''
+
 
     ];
 

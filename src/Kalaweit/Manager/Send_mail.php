@@ -15,14 +15,17 @@ $mail->setLanguage($langcode = 'fr', $lang_path = '../vendor/phpmailer/phpmailer
 
 try {
     //Server settings
-    //$mail->SMTPDebug = 2;                                   // Enable verbose debug output
+    //$mail->SMTPDebug = 2;
+
+    $mail->CharSet = "UTF-8";
+                                    // Enable verbose debug output
     $mail->isSMTP();                                        // Set mailer to use SMTP
     $mail->Host = 'smtp.gmail.com';                         // Specify main and backup SMTP servers
     //$mail->Host = 'smtp.ionos.fr';                         // Specify main and backup SMTP servers
     $mail->SMTPAuth = true;                                 // Enable SMTP authentication
     $mail->Username = 'kalaweit.backoffice@gmail.com';      // SMTP username
     //$mail->Username ='damien.blaison@projet-bd-open-classroom.fr';
-    $mail->Password = '**************';                      // SMTP password
+    $mail->Password = 'kalaweit.backoffice57';                      // SMTP password
     //$mail->Password = '**************';                      // SMTP password
 
     $mail->SMTPSecure = 'ssl';                              // Enable TLS encryption, `ssl` also accepted
@@ -53,6 +56,8 @@ try {
     $mail->send();
     echo '<script>alert("Le message a bien été envoyé")</script>';
 } catch ( \PHPMailer\PHPMailer\Exception $e) {
-    echo '<script> alert("Le Message n\'a pas pu être envoyé. \nErreur:\n'. $mail->ErrorInfo.'")</script>';
+    echo '<script>
+    alert("Le Message n\'a pas pu être envoyé. \nErreur:\n'. $mail->ErrorInfo.'");
+    </script>';
 }
 }

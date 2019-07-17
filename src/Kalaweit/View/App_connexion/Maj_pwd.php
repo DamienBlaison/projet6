@@ -2,7 +2,7 @@
 
 namespace Kalaweit\View\App_connexion;
 
-class Log_in
+class Maj_pwd
 {
 
     function render(){
@@ -18,7 +18,7 @@ class Log_in
         <head>
             <meta charset="utf-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <title>Kalaweit_friends_administration| Log in</title>
+            <title>Kalaweit_friends_administration| Forgotten_pwd</title>
             <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
             <link rel="stylesheet" href="/vendor/almasaeed2010/adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css">
             <link rel="stylesheet" href="/vendor/almasaeed2010/adminlte/dist/css/AdminLTE.min.css">
@@ -28,34 +28,33 @@ class Log_in
         <body class="hold-transition login-page">
             <div class="login-box">
                 <div class="login-logo">
-                    <h1><b>KALAWEIT</b><br>admin</h1>
+                    <h1><b>KALAWEIT</b><br>Admin</h1>
                 </div>
                 <div class="login-box-body">
-                    <p class="login-box-msg">Veuillez vous identifier pour commencer</p>
+                    <p class="login-box-msg">Veuillez renseigner <br>votre nouveau mot de passe
+                    <p>Ce dernier doit respecter les conditions suivantes :</p>
+                    <ul>
+                        <li>Minimum huit caractères</li>
+                        <li>Au moins une lettre majuscule</li>
+                        <li>Une lettre minuscule </li>
+                        <li>Un chiffre</li>
+                        <li>Un caractère spécial: @$!%*?&</li>
+                    </ul>
+                    <br>
                     <form action="" method="post">
                         <div class="form-group has-feedback">
-                            <input class="form-control" placeholder="Login" name="login">
+                            <input type="password" class="form-control" placeholder="Nouveau mot de passe" name="new_password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
                             <span class="glyphicon glyphicon-user form-control-feedback"></span>
                         </div>
                         <div class="form-group has-feedback">
-                            <input type="password" class="form-control" placeholder="Password" name="password">
-                            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                            <input type="password" class="form-control" placeholder="Confirmation mot de passe" name="new_password_confirm" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
+                            <span class="glyphicon glyphicon-user form-control-feedback"></span>
                         </div>
-
-                            <button type="submit" class="btn btn-primary btn-block btn-flat">Se connecter</button>
-                            <br>
-                            <div style=" display: flex; justify-content: center;">
-                                <a href="/www/Kalaweit/app_connexion/forgotten_pwd">Mot de passe oublié ?</a>
-                            </div>
-
+                        <br>
+                            <button type="submit" class="btn btn-success btn-block btn-flat">Enregistrement du nouveau mot de passe</button>
 
                     </form>
 
-                    <!--
-                        <div class="social-auth-links text-center">
-                            <a href="#">Mot de passe oublié</a><br>
-                        </div>
-                    -->
                 </div>
 
                 <?php echo ob_get_clean() ;

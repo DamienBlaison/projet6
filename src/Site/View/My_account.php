@@ -61,7 +61,7 @@ class My_account
                                 <h3>Reçu fiscaux</h3>
                                 <br>
 
-                                <p>A travailler dessus</p>
+                                <?php echo $content["table"]["table_receipt_annual"] ?>
 
                                 <h3>Adhésion</h3>
                                 <br>

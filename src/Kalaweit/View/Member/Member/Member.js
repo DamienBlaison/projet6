@@ -75,6 +75,19 @@ function go_previous(target,nb_result_by_page){
 
 };
 
+function check_add_rf(){
+
+    if (document.getElementById("ad_Receipt_annual").firstChild.href == document.location.href){
+
+        alert('Génération de reçu fiscal non disponible : \nAucun don enregistré pour l\'année précédente, \nou un recu existe déjà pour cette année');
+
+    };
+
+}
+
+
+document.getElementById("ad_Receipt_annual").addEventListener('click', function() {check_add_rf();});
+
 document.getElementById('next_adhesion_by_member').addEventListener('click', function () {go_next("adhesion_by_member",5);});
 document.getElementById('previous_adhesion_by_member').addEventListener('click', function () {go_previous("adhesion_by_member",5);});
 

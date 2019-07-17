@@ -40,7 +40,7 @@ class Insert_gift
             $bdd = new \Kalaweit\Manager\Connexion();
             $bdd = $bdd->getBdd();
 
-            $reqprep = $bdd->prepare("INSERT INTO asso_donation (brk_id ,cli_id,cau_id,don_ts,don_status,don_mnt,ptyp_id) VALUES (2,:cli_id,704,:don_ts,'TEMP',:amount,1)");
+            $reqprep = $bdd->prepare("INSERT INTO asso_donation (brk_id ,cli_id,cau_id,don_ts,don_status,don_mnt,ptyp_id) VALUES (2,:cli_id,704,:don_ts,'WAIT',:amount,1)");
 
             $prepare = [
                 ":cli_id" =>$transaction[1],

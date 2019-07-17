@@ -58,9 +58,7 @@ class User
                                 <div class="col-md-12">
                                     <?php echo $param["box_init_avatar"]?>
                                 </div>
-                                <form method="post" action="" class="col-md-12">
-                                    <?php echo $param["box_init_password"] ?>
-                                </form>
+                                  
                                 <form class="col-md-12" action="" method="post">
 
                                     <?php echo $param["box_activation"] ?>

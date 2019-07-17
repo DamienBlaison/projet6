@@ -204,10 +204,10 @@ class Asso_donation_asso
         $reqprep = $this->bdd->prepare(
         "SELECT
 
+        asso_receipt.rec_number as rec_num,
         asso_donation.don_id as Id,
-        P1.cau_name as Béneficiaire,
-        asso_donation.don_mnt as Montant,
         asso_donation.don_ts as Date_creation,
+        asso_donation.don_mnt as Montant,
         asso_donation.don_status as Statut
 
         FROM
@@ -215,6 +215,8 @@ class Asso_donation_asso
         asso_donation
 
         LEFT JOIN asso_cause as P1 ON P1.cau_id = asso_donation.cau_id
+        LEFT JOIN asso_receipt_donation on asso_receipt_donation.don_id = asso_donation.don_id
+        LEFT JOIN asso_receipt on asso_receipt.rec_id = asso_receipt_donation.rec_id
 
         WHERE asso_donation.cli_id = :cli_id AND P1.cau_id = 704
 
@@ -232,7 +234,7 @@ class Asso_donation_asso
 
         $return = [
             "content" => $reqprep->fetchAll(\PDO::FETCH_NUM),
-            "head"=>["Id","Bénéficaire","Montant","Date création","Statut","Action"]
+            "head"=>["rec_num","Id","Date création","Montant","Statut","Action"]
         ];
 
         return $return ;

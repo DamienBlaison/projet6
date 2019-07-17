@@ -46,6 +46,9 @@ class Application
     */
     public function handle()
     {
+        $bdd = (new \Kalaweit\Manager\Connexion())->getBdd();
+        (new \Kalaweit\Manager\Sso_token("","",$bdd))->clean();
+
         $request = $this->getRequest();
         // Je récupère l'url pour la décomposer et j'enlève le 1er / pour éviter [0] == ''
 
@@ -56,6 +59,7 @@ class Application
         $parts   = explode('/', $parts[0]);
 
         if (is_array($parts) && count($parts) > 1) {
+
             array_shift($parts);
 
             switch ($parts[0]) {
@@ -85,6 +89,24 @@ class Application
                                 echo $obj->log_out();
                             };
 
+                            break;
+
+                            case 'forgotten_pwd':
+                            if (method_exists($obj, 'forgotten_pwd')){
+                                echo $obj->forgotten_pwd();
+                            };
+                            break;
+
+                            case 'maj_pwd':
+                            if (method_exists($obj, 'maj_pwd')){
+                                echo $obj->maj_pwd();
+                            };
+                            break;
+
+                            case 'Link_dead':
+                            if (method_exists($obj, 'Link_dead')){
+                                echo $obj->render();
+                            };
                             break;
 
                             default:
@@ -458,6 +480,17 @@ class Application
                         break;
 
                         case 'Maintenance':
+                        if (method_exists($obj, 'render')){
+                            echo $obj->render();
+                        };
+                        break;
+
+                        case 'Forgotten_password':
+                        if (method_exists($obj, 'render')){
+                            echo $obj->render();
+                        };
+                        break;
+                        case 'Maj_password':
                         if (method_exists($obj, 'render')){
                             echo $obj->render();
                         };

@@ -82,6 +82,29 @@ class Table
             $body ='';
 
             $body .= '<tbody id="table_'.$this->id.'">';
+        
+
+            if ($this->name == 'Receipt_annual'){
+
+                foreach ($this->data['content'] as $key => $value) {
+
+                    $body .= '<tr role="row" class="odd">';
+
+                    foreach ($value as $k => $v) {
+
+                        $body .= '<td>'.$v.'</td>';
+
+                    };
+
+                    $body .= '<td style = "width : 47px;">';
+
+                    $body .=    '<a href="/Documents/receipt/'.$value[1].'.pdf" class="btn btn-primary" target="_blank"><i class="fa  fa-print"></i></a>';
+
+                    $body .= '</td>';
+                }
+
+            } else {
+
 
             foreach ($this->data['content'] as $key => $value) {
 
@@ -111,6 +134,7 @@ class Table
                 } else {
 
                     $name_receipt = (new \Kalaweit\Manager\Receipt($bdd))->name_receipt($value[0]);
+
                 }
 
 
@@ -152,6 +176,7 @@ class Table
                 $body .= '</tr>';
             };
 
+        };
             $body .= '</tbody>';
             $body .= '</table>';
 

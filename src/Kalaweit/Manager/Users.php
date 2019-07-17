@@ -22,7 +22,7 @@ class Users
 
                 "INSERT INTO
 
-                sso_user (user_login,user_password,user_email,user_first_name,user_last_name,user_title,user_preferred_language,user_avatar)
+                sso_user (user_login,user_password,user_email,user_first_name,user_last_name,user_title,user_preferred_language,user_avatar,user_active)
 
                 VALUES
 
@@ -33,14 +33,15 @@ class Users
                     :user_last_name,
                     :user_title,
                     :user_preferred_language,
-                    '/Documents/Avatar/Unknown_PersonH.png')
+                    '/Documents/Avatar/Unknown_PersonH.png',
+                    1);
 
             ");
 
             $prepare =[
 
                 ":user_login" => $_POST["user_login"],
-                ":user_password" => $_POST["user_password"],
+                ":user_password" => password_hash('temp',PASSWORD_BCRYPT),
                 ":user_email" => $_POST["user_email"],
                 ":user_first_name" => $_POST["user_first_name"],
                 ":user_last_name" => $_POST["user_last_name"],
@@ -48,7 +49,7 @@ class Users
                 ":user_preferred_language" => $_POST["user_preferred_language"]
 
             ];
-
+        
             $reqprep->execute($prepare);
 
             $max_user = $this->bdd->query("SELECT MAX(user_id) FROM sso_user");
@@ -245,21 +246,35 @@ class Users
 
     function log_in($login,$password){
 
-        $reqprep = $this->bdd->prepare("SELECT  count(*) FROM sso_user WHERE user_login = :login AND user_password = :password AND user_active = 1");
+        $reqprep = $this->bdd->prepare("SELECT  user_password FROM sso_user WHERE user_login = :login AND user_active = 1");
 
         $prepare = [
 
             ":login" => $login,
-            ":password" => $password
         ];
 
         $reqprep->execute($prepare);
 
-        $check = $reqprep->fetch(\PDO::FETCH_NUM);
+        $pwd = $reqprep->fetch(\PDO::FETCH_NUM);
 
-        if($check[0] == 1) { $data = 1 ;} else { $data = 0    ;};
 
-        return $data;
+        if(isset($pwd[0])){
+
+            $check = password_verify($password, $pwd[0]);
+
+            if($check == true) { $data = 1 ;}
+
+            else { $data = 0 ;};
+
+            return $data;
+
+        } else {
+
+            $data = 'login_nok';
+
+            return $data;
+
+        }
     }
 
     function delete(){
@@ -275,6 +290,35 @@ class Users
         $reqprep->execute($prepare);
 
         header("location:".$_SERVER['HTTP_REFERER']);
+
+    }
+
+    function maj_pwd($user_mail,$password){
+
+        $reqprep = $this->bdd->prepare("UPDATE sso_user SET user_password =:password WHERE user_login= :email ");
+        $prepare =[
+            ":password" => password_hash($password,PASSWORD_BCRYPT),
+            ":email" => $user_mail
+    ];
+
+        $reqprep->execute($prepare);
+
+    }
+
+    function check_login($login){
+
+        $reqprep = $this->bdd->prepare("SELECT user_id FROM sso_user WHERE user_login = :user_login");
+        $prepare =[
+            ":user_login" => $login,
+        ];
+
+        $reqprep->execute($prepare);
+
+        $check = $reqprep->fetch(\PDO::FETCH_NUM);
+
+        if (isset($check[0])){ $return = 1;} else { $return = 0;};
+
+        return $return;
 
     }
 

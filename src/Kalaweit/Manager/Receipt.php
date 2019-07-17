@@ -67,8 +67,6 @@ class Receipt
 
             $recup_don_info = $this->bdd->prepare(" SELECT * FROM asso_donation WHERE don_id = :don_id ");
 
-
-
             $prepare = [
 
                 ":don_id" => $p_don_id["donation"]
@@ -456,4 +454,61 @@ class Receipt
                         unlink( __DIR__ .'/../../../Documents/Receipt/'.$receipt_name);
 
                     }
+
+                    function get_receipt_annual_by_member(){
+
+                        $prepare = [":cli_id" => $_GET['cli_id']];
+
+                        $reqprep = $this->bdd->prepare("SELECT rec_year,rec_number,rec_mnt FROM asso_receipt WHERE cli_id = :cli_id AND rec_number LIKE 'RF_%'");
+
+                        $reqprep->execute($prepare);
+
+                        $reqprep2 = $this->bdd->prepare(" SELECT COUNT(rec_mnt) from asso_receipt WHERE cli_id = :cli_id ");
+
+                        $reqprep2->execute($prepare);
+
+                        $count =$reqprep2->fetch(\PDO::FETCH_NUM);
+
+                        return $data = [
+                            "head" => ["Année","Numéro du recu","Montant","Action"],
+                            "content" =>  $reqprep->fetchAll(\PDO::FETCH_NUM),
+                            "count" => $count[0]
+                        ];
+
+                    }
+
+                    function details_donations_year_by_member($id){
+
+                        $reqprep = $this->bdd->prepare("SELECT * FROM asso_donation WHERE cli_id = :id AND YEAR(don_ts) = :year AND don_status='OK");
+                        $prepare = [":id" => $id,":year" => date("Y") - 1 ];
+                        $reqprep->execute($prepare);
+
+                    return $reqprep->fetchAll(\Pdo::FETCH_ASSOC);
+
+                    }
+
+                    function resume_donations_year_by_member($id){
+
+                        $reqprep = $this->bdd->prepare("SELECT sum(don_mnt) FROM asso_donation WHERE cli_id = :id AND YEAR(don_ts) = :year AND don_status='OK'");
+                        $prepare = [":id"=>$id,":year"=> date("Y") - 1 ];
+                        $reqprep->execute($prepare);
+
+                    return $reqprep->fetchAll(\Pdo::FETCH_ASSOC);
+
+                    }
+
+                    function get_receipt_by_member_front(){
+
+                        $reqprep = $this->bdd->prepare("SELECT rec_id,rec_year,rec_number, rec_mnt FROM asso_receipt WHERE cli_id = :cli_id AND rec_number LIKE 'RF_%'");
+                        $prepare = ["cli_id" => $_GET["cli_id"]];
+                        $reqprep->execute($prepare);
+
+                        return  [
+                            "content" => $reqprep->fetchAll(\PDO::FETCH_NUM),
+                            "head"=>["Id","Année","Nom du reçu","Montant","Action"]
+                        ];
+
+
+                    }
+
                 }

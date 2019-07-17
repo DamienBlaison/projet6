@@ -24,4 +24,15 @@ class Crm_country
 
         return $country ;
      }
+
+     public function get($bdd,$id){
+
+         $country = $bdd->query("SELECT cnty_name FROM crm_country  WHERE cnty_id  = $id" );
+
+         $country  = $country ->fetch(\PDO::FETCH_ASSOC);
+
+         return $country ;
+
+
+     }
 }

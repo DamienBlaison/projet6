@@ -154,11 +154,13 @@ class Asso_adhesion
                     $reqprep = $this->bdd->prepare(
                         "SELECT
 
-                        asso_adhesion.adhesion_id,
-                        asso_receipt_adhesion.rec_id,
                         asso_receipt.rec_number,
+
+                        asso_adhesion.adhesion_id,
+                        asso_adhesion.adhesion_ts,
                         asso_adhesion.adhesion_mnt,
                         asso_adhesion.adhesion_status
+
 
                         from
 
@@ -180,7 +182,7 @@ class Asso_adhesion
 
                         $return = [
                             "content" => $list_adhesion_member ,
-                            "head"=>["Id","Montant","Référence","Montant","Statut paiement",'Action']
+                            "head"=>["Rec_num","Id","Date de création","Montant","Statut",'Action']
                         ];
 
                         return $return ;
