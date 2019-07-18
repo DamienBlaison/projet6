@@ -66,6 +66,7 @@
             "table_donation_forest" => (new \Site\htmlElement\Table($info_donation_forest,'donation_forest_table',$print))->render()
         ];
 
+        if(empty($info_receipt_annual["content"])){ $table["table_receipt_annual"] = "<p>Aucun reçu disponible</p><br>"; }
         if(empty($info_donation["content"])){ $table["table_donation"] = "<p>Aucun don enregistré </p><br>"; }
         if(empty($info_donation_asso["content"])){ $table["table_donation_asso"] = "<p>Aucun don enregistré </p><br>"; }
         if(empty($info_adhesion["content"])){ $table["table_adhesion"] = "<p>Aucune adhésion enregistrée </p><br>"; }

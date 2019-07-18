@@ -503,7 +503,7 @@ class Application
                 else
 
                 {
-                    header("location:/www/home");
+                    //header("location:/www/home");
                     echo '404.1';
                 };
 

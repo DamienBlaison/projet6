@@ -74,7 +74,7 @@ class Friends
                                     <br><br>
                                     <h3>Information</h3>
                                     <p>Kalaweit a l'agrément ministériel permettant d'établir des reçus fiscaux.</p>
-                                    <p>Ce reçu fiscal vous permet de déduire de vos impôts 66% du montant du don dans la limite de 20% de vos revenus.)</p>
+                                    <p>Ce reçu fiscal vous permet de déduire de vos impôts 66% du montant du don dans la limite de 20% de vos revenus.</p>
                                 <?php } else { ?>
                                     <div class="clo-md-12">
                                         <div class="d-flex justify-content-end">
