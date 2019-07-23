@@ -479,7 +479,7 @@ class Receipt
 
                     function details_donations_year_by_member($id){
 
-                        $reqprep = $this->bdd->prepare("SELECT * FROM asso_donation WHERE cli_id = :id AND YEAR(don_ts) = :year AND don_status='OK");
+                        $reqprep = $this->bdd->prepare("SELECT * FROM asso_donation WHERE cli_id = :id AND YEAR(don_ts) = :year AND don_status='OK'");
                         $prepare = [":id" => $id,":year" => date("Y") - 1 ];
                         $reqprep->execute($prepare);
 

@@ -11,8 +11,7 @@ class Aside
 
         $return ='
 
-        <div class="">
-            <div class="container">
+
                 <div>
                     <a href="/www/Friends" class="image"><img src="/../Documents/Front/1-20150114191938.jpg" alt=""></a>
                     <h4 class="lien_aside">Devenir ami</h4>
@@ -52,9 +51,9 @@ class Aside
                     <p> </p>
                     <h4 class="lien_aside">Liens réseaux/boutique</h4>
                 </div>
-                </div>
-            </div>
-        </div>';
+                </div>';
+
+
 
 
         return $return;

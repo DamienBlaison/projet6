@@ -33,9 +33,9 @@ class Maintenance
             'name_receipt',
             'nom du reçu',
             '',
-            'col-md-10',
+            '',
             'delete_receipt',
-            'col-md-2 btn btn-danger',
+            'btn btn-danger w100',
             'Supprimer le reçu'
 
         ));
@@ -46,7 +46,7 @@ class Maintenance
 
         ];
 
-        $box_maintenance = (new \Kalaweit\htmlElement\Box('Opérations de maintenance','box-primary',$box_maintenance_content,12));
+        $box_maintenance = (new \Kalaweit\htmlElement\Box('Opérations de maintenance','box-primary',$box_maintenance_content,''));
 
 
         $param = [

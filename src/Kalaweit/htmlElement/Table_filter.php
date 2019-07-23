@@ -85,7 +85,8 @@ class Table_filter
         $content .=                     '<h3 class="box-title">'.$data["title"].'</h3>';
         $content .=                 '</div>';
 
-        $table  = '<table class="table table-bordered table-striped dataTable" role="grid" aria-describedby="table_info">';
+        $table = '<div class="table-responsive">';
+        $table .= '<table class="table table-bordered table-striped dataTable" role="grid" aria-describedby="table_info">';
         $table .= '<thead>';
         $table .= '<tr role="row">';
 
@@ -240,7 +241,7 @@ class Table_filter
 
                             if($receipt != NULL){
 
-                                $table .=    '<a href="http://localhost:8888/Documents/Receipt/'.$file.'" target="_blank" style="margin-right:5px;" class="btn btn-success" id="print_'.$d_v[0].'" ><i class="fa fa-print"></i></a>';
+                                $table .=    '<a href="/Documents/Receipt/'.$file.'" target="_blank" style="margin-right:5px;" class="btn btn-success" id="print_'.$d_v[0].'" ><i class="fa fa-print"></i></a>';
 
                             } else {
 
@@ -260,7 +261,7 @@ class Table_filter
 
                                 if($receipt != NULL){
 
-                                    $table .=    '<a href="http://localhost:8888/Documents/Receipt/'.$file.'" target="_blank" style="margin-right:5px;" class="btn btn-success" id="print_'.$d_v[0].'" ><i class="fa fa-print"></i></a>';
+                                    $table .=    '<a href="/Documents/Receipt/'.$file.'" target="_blank" style="margin-right:5px;" class="btn btn-success" id="print_'.$d_v[0].'" ><i class="fa fa-print"></i></a>';
 
                                 } else {
 
@@ -285,29 +286,36 @@ class Table_filter
 
                 $table .= '</table>';
                 $table .= '</div>';
+                $table .= '</div>';
 
 
                 $content .= $table;
 
-                $content .='<div class="container-fluid">';
-                $content .=   '<div id="nav1"aria-label="Page navigation example" class="col-sm-4">';
+                $content .='<div class="container-fluid text-center">';
+
+                $content .=   '<div id="nav1"aria-label="Page navigation example" class="col-sm-4 text-center">';
                 $content .=       '<ul class="pagination">';
                 $content .=            '<li class="page-item disabled" id="previous_member"><a href = " '.$url_previous.'" class="page-link" >Previous</a></li>';
                 $content .=            '<li class="page-item"><a class="page-link" id="current_member">'.$page_current.'</a></li>';
                 $content .=            '<li class="page-item" id="next_member"><a href = " '.$url_next.'" class="page-link" >Next</a></li>';
                 $content .=        '</ul>';
                 $content .=    '</div>';
-                $content .=    '<div class="col-sm-5" style="margin-top: 30px;">';
-                $content .=         'Nombre de résultats : '.$data["count"].' soit '.ceil($data["count"]/10).' pages';
+
+                $content .=    '<div class="col-sm-4" style="margin-top: 16px;">';
+                $content .=         'Nombre de résultats :</br> '.$data["count"].' soit '.ceil($data["count"]/10).' pages';
                 $content .=   '</div>';
+
+                $content .=    '<div class="col-sm-4" style="margin-top: 30px; margin-bottom:15px;">';
+                $content .=    '<button id="export_table_'.$url[3].'" class="btn btn-success fa fa-bar-chart btn-export" style="margin-top:-10px;"> <b> Export Excel</button></b>';
+                $content .=    '</div>';
+
+                $content .=    '</div>';
+                $content .=' </div>';
+
                 $content .=    '<div id="nb_page" class="" style="display:none">';
                 $content .=        ceil($data["count"]/10);
                 $content .=   '</div>';
-                $content .=    '<div class="col-sm-3 " style="margin-top: 30px;">';
-                $content .=    '<button id="export_table_'.$url[3].'" class="btn btn-success pull-right fa fa-bar-chart" style="margin-top:-10px;"> <b> Export Excel</button></b>';
-                $content .=    '</div>';
-                $content .=    '</div>';
-                $content .=' </div>';
+
                 $content .=  '</div>';
                 $content .=  '</div>';
 

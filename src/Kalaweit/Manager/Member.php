@@ -85,7 +85,7 @@ class Member
                         $_SESSION["user_login"] = $_POST['login'];
                         $_SESSION["cli_id"] = $cli_id[0];
 
-                        header("location: /www/site");
+                        header("Location: /www/site");
                     }
 
                 }

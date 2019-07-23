@@ -17,14 +17,10 @@ class Cli_lang
 
      public function getAll()
      {
-        // $ret    = [];
-         $config = \Kalaweit\Core\Config::getInstance();
-         $cli_lang   = $config->get('cli_lang');
 
-         //foreach ($cli_lang as $key => $value) {
-             //$ret[] = new \Kalaweit\Model\Cli_lang($key, $value);
-            // ($key);
-         //}
-         return $cli_lang;
+        include( './config/config.php');
+
+        return $config['cli_lang'];
+
      }
 }

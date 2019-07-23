@@ -61,7 +61,7 @@ class Table
 
             // head du tableau
 
-            $head = '';
+            $head = '<div class ="table-responsive">';
 
 
 
@@ -82,7 +82,7 @@ class Table
             $body ='';
 
             $body .= '<tbody id="table_'.$this->id.'">';
-        
+
 
             if ($this->name == 'Receipt_annual'){
 
@@ -98,7 +98,7 @@ class Table
 
                     $body .= '<td style = "width : 47px;">';
 
-                    $body .=    '<a href="/Documents/receipt/'.$value[1].'.pdf" class="btn btn-primary" target="_blank"><i class="fa  fa-print"></i></a>';
+                    $body .=    '<a href="/Documents/Receipt/'.$value[1].'.pdf" class="btn btn-primary" target="_blank"><i class="fa  fa-print"></i></a>';
 
                     $body .= '</td>';
                 }
@@ -106,36 +106,36 @@ class Table
             } else {
 
 
-            foreach ($this->data['content'] as $key => $value) {
+                foreach ($this->data['content'] as $key => $value) {
 
-                $body .= '<tr role="row" class="odd">';
+                    $body .= '<tr role="row" class="odd">';
 
-                foreach ($value as $k => $v) {
+                    foreach ($value as $k => $v) {
 
-                    $body .= '<td>'.$v.'</td>';
+                        $body .= '<td>'.$v.'</td>';
 
-                }
+                    }
 
-                if ($url[3] == 'asso_cause' || $url[3] == 'member'){
+                    if ($url[3] == 'asso_cause' || $url[3] == 'member'){
 
-                    if ($k == $this->position_status && $v == 'WAIT'){
+                        if ($k == $this->position_status && $v == 'WAIT'){
 
-                        $print_access = false;
+                            $print_access = false;
 
-                    } else { $print_access = true ;}
-                }
+                        } else { $print_access = true ;}
+                    }
 
-                $bdd = (new \Kalaweit\Manager\Connexion())->getBdd();
+                    $bdd = (new \Kalaweit\Manager\Connexion())->getBdd();
 
-                if($this->id == "adhesion_by_member"){
+                    if($this->id == "adhesion_by_member"){
 
-                    $name_receipt = (new \Kalaweit\Manager\Receipt($bdd))->name_receipt_adhesion($value[0]);
+                        $name_receipt = (new \Kalaweit\Manager\Receipt($bdd))->name_receipt_adhesion($value[0]);
 
-                } else {
+                    } else {
 
-                    $name_receipt = (new \Kalaweit\Manager\Receipt($bdd))->name_receipt($value[0]);
+                        $name_receipt = (new \Kalaweit\Manager\Receipt($bdd))->name_receipt($value[0]);
 
-                }
+                    }
 
 
                     $body .= '<td style = "width : 135px;">';
@@ -157,7 +157,7 @@ class Table
 
                         if( $name_receipt != NULL){
 
-                            $body .=    '<a href="http://localhost:8888/Documents/receipt/'.$name_receipt["rec_number"].'.pdf" target="_blank" style="margin-right:5px;" class="btn btn-success" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
+                            $body .=    '<a href="/Documents/Receipt/'.$name_receipt["rec_number"].'.pdf" target="_blank" style="margin-right:5px;" class="btn btn-success" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
 
                         } else {
 
@@ -171,14 +171,15 @@ class Table
 
 
 
-                $body .= '</td>';
+                    $body .= '</td>';
 
-                $body .= '</tr>';
+                    $body .= '</tr>';
+                };
+
             };
-
-        };
             $body .= '</tbody>';
             $body .= '</table>';
+            $body .= '</div>';
 
             //pagination
 
@@ -186,24 +187,28 @@ class Table
 
             $pagination .='<div>';
 
-            $pagination .=   '<div id="nav_'.$this->id.'" style="display:flex;justify-content:space-between;">';
+            $pagination .=   '<div id="nav_'.$this->id.'"class="text-center">';
+            $pagination .=  '<div class="col-12 col-sm-4">';
             $pagination .=       '<ul class="pagination">';
             $pagination .=            '<li class="page-item " id="previous_'.$this->id.'"><a class="page-link" >Previous</a></li>';
             $pagination .=            '<li class="page-item" id="ad_'.$this->id.'"><a class="page-link" href="/'.$this->add.'"><i class="fa fa-plus"></i></a></li>';
             $pagination .=            '<li class="page-item" id="next_'.$this->id.'"><a class="page-link" >Next</a></li>';
             $pagination .=        '</ul>';
-
+            $pagination .=' </div>';
+            $pagination .=  '<div class="col-12 col-sm-4">';
             $pagination .=              '<ul class="pagination">';
             $pagination .=                  '<li class="page-item"><a class="page-link">Page </a></li>';
             $pagination .=                  '<li class="page-item"><a class="page-link" id="current_'.$this->id.'">1</a></li>';
             $pagination .=                  '<li class="page-item"><a class="page-link">/</a></li>';
             $pagination .=                  '<li class="page-item"><a class="page-link" id="nb_'.$this->id.'">'.ceil(intval($this->data["count"]) / (intval($this->n_page))).'</a></li>';
             $pagination .=              '</ul>';
-
+            $pagination .=' </div>';
+            $pagination .=  '<div class="col-12 col-sm-4">';
             $pagination .=              '<ul class="pagination">';
             $pagination .=                  '<li class="page-item"><a class="page-link">Nombre de resultat :  </a></li>';
             $pagination .=                  '<li class="page-item"><a class="page-link" id= "nb_page_'.$this->id.'" >'.$this->data["count"].'</a></li>';
             $pagination .=              '</ul>';
+            $pagination .=' </div>';
 
             $pagination .=     '</div>';
 

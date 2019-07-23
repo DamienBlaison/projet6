@@ -17,7 +17,7 @@ class Donation_one_shot_table
 
         $head = ['Adhésion','Association','Animaux','Dulan','Forêt','Total'];
 
-        $table  = '<div class="container-fluid">';
+        $table  = '<div class="container-fluid table-responsive">';
         $table .=   '<table class="table table-bordered table-striped dataTable" role="grid">';
         $table .=       '<thead class="">';
         $table .=           '<tr role="row">';
@@ -68,7 +68,7 @@ class Donation_one_shot_table
                 }
             }
         }
-        
+
         $table .=       '<td>'.$sum.' €</td>';
         $table .=       '</tr>';
 

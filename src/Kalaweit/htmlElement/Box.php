@@ -39,7 +39,7 @@ class Box
                 $class = '' ;
             };
 
-            $box_content.= '<div class="col-md-'.$class.'">'.$value.'</div>';
+            $box_content.= '<div class="col-md-'.$this->col_md.'">'.$value.'</div>';
         }
 
         $box.='    <div class="box '.$this->box_statut.'">';
@@ -51,9 +51,9 @@ class Box
         $box.='         </div><!-- /.box-header -->';
 
         $box.='         <div class="box-body">';
-        $box.='             <div>';
+    
         $box.=                  $box_content;
-        $box.='             </div>';
+
         $box.='         </div><!-- /.box-body -->';
         $box.='    </div>';
 

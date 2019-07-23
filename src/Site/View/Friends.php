@@ -85,7 +85,7 @@ class Friends
                                     </div>
                                 <?php } ?>
                             </div>
-                            <div class="col-md-3 animated slideInRight">
+                            <div  class="col-md-3 animated slideInRight asideK">
                                 <?php
                                 echo $content["aside"];
                                 ?>
@@ -144,7 +144,7 @@ class Friends
                         console.log(data2);
 
                         var xhr = new XMLHttpRequest();
-                        xhr.open('GET', 'http://localhost:8888/www/Insert_gift?'+data2);
+                        xhr.open('GET', '/www/Insert_gift?'+data2);
                         xhr.onload = function() {
                             if (xhr.status === 200) {
                                 alert('Votre don a bien été enregistré, votre reçu sera disponible dès que nous aurrons la confirmation du paiement.');

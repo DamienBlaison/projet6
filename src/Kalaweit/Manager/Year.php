@@ -15,10 +15,8 @@ class Year
      */
     public function getAll()
     {
-        $ret    = [];
-        $config = \Kalaweit\Core\Config::getInstance();
-        $year   = $config->get('year');
+        include( './config/config.php');
 
-        return $year;
+        return $config['year'];
     }
 }

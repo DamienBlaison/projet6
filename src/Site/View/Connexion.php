@@ -17,7 +17,14 @@ class Connexion
                     <form action="" method="post" class="col-md-9 animated slideInLeft" id="aside-left" >
                         <div class="row">
                             <div class="col-md-6">
-                                <h2>Connexion</h2>
+                                <div class="d-flex justify-content-between">
+
+                                    <h2 class="title_connexion">Connexion </h2>
+                                    <a  href="/www/Kalaweit/App_connexion"><i class="fa fa-gear btn_connexion_admin"></i></a>
+
+
+                                </div>
+                                </h2>
                                 <br>
                                 <div class="row">
                                     <div class="col-md-12">
@@ -41,7 +48,7 @@ class Connexion
                             </div>
                         </div>
                     </form>
-                    <div class="col-md-3 animated slideInRight">
+                    <div  class="col-md-3 animated slideInRight asideK">
                         <?php
                         echo $content["aside"];
                         ?>

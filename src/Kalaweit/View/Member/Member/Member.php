@@ -10,7 +10,7 @@ class Member
 
     function render($p_render){
 
-        require_once( __DIR__ .'/../../head.php');
+        require_once( __DIR__ .'/../../Head.php');
 
         $render  = '';
         $render .= '<div class="container-fluid" style="padding-left:0px;">';
@@ -49,6 +49,7 @@ class Member
                     document.getElementById('tab_pane_2').className = \"active\";
                     document.getElementById('tab1').className = \"tab-pane\";
                     document.getElementById('tab2').className = \"tab-pane active\";
+
                 </script>";
 
             }

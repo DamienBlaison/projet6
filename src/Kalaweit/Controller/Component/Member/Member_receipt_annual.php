@@ -31,6 +31,7 @@ class Member_receipt_annual
             // code...
         };
 
+
         /* initialisation des paramètres nécessaire à la composition de la vue du composant Table */
 
         $receipt_resume = (new \Kalaweit\Manager\Receipt($bdd))->resume_donations_year_by_member($_GET["cli_id"]);
@@ -43,13 +44,14 @@ class Member_receipt_annual
 
         if($receipt_resume[0]["sum(don_mnt)"] == NULL){
 
-                $p_add = '/localhost:8888'.$_SERVER['REQUEST_URI'];
+                $p_add = substr($_SERVER['REQUEST_URI'],1);
 
         } else {
 
             if($check_rf != 0){
 
-                $p_add = '/localhost:8888'.$_SERVER['REQUEST_URI'];
+                $p_add = substr($_SERVER['REQUEST_URI'],1);
+
             } else {
 
             $p_add = "www/Kalaweit/Receipt_annual/add?cli_id=".$_GET["cli_id"];

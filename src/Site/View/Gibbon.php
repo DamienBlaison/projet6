@@ -199,7 +199,7 @@ class Gibbon
 
 
                 </div>
-                <div class="col-md-3 animated slideInRight">
+                <div  class="col-md-3 animated slideInRight asideK">
                     <?php
                     echo $content["aside"];
                     ?>
@@ -325,7 +325,7 @@ class Gibbon
 
             let cauId = location.search;
 
-            let url = "http://localhost:8888/www/Kalaweit/Ajax_get/gift_current_year"+cauId;
+            let url = "/www/Kalaweit/Ajax_get/gift_current_year"+cauId;
 
             xhttp.open("GET", url, true);
             xhttp.send();
@@ -336,7 +336,7 @@ class Gibbon
         function insertTempGift(){
 
             var amount_temp = '&amount='+document.getElementById('gift-amount').value;
-            var url_temp = 'http://localhost:8888/www/Insert_gift?transaction=gift_one_shot_gibbon-'+sessionId+'-'+(location.search.replace('?cau_id=',''))+amount_temp;
+            var url_temp = '/www/Insert_gift?transaction=gift_one_shot_gibbon-'+sessionId+'-'+(location.search.replace('?cau_id=',''))+amount_temp;
 
             var xhr1 = new XMLHttpRequest();
 
@@ -408,7 +408,7 @@ class Gibbon
                             var donId = dataString["transaction"].replace("gift_one_shot_gibbon-", "");
 
                             var xhr2 = new XMLHttpRequest();
-                            var url2 = 'http://localhost:8888/www/Validate_gift_gibbon?don_id='+donId;
+                            var url2 = '/www/Validate_gift_gibbon?don_id='+donId;
 
                             xhr2.open('GET', url2);
 
@@ -419,7 +419,7 @@ class Gibbon
 
                                     alert('Votre paiement à bien été enregistré, votre reçu sera disponible dans votre espace personnel dès l\'encaissement du virement Paypal');
 
-                                    document.location.href='http://localhost:8888/www/Gibbon_gallery/1';
+                                    document.location.href='/www/Gibbon_gallery/1';
 
                                 }
                                 else {

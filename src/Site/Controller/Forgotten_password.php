@@ -34,7 +34,7 @@
                     </p>
                     Merci de cliquer sur le lien ci dessous :
                     </p>
-                    <p><a href='http://localhost:8888/www/Maj_password?token=$token'>http://localhost:8888/www/Maj_password?token=$token</a>
+                    <p><a href='/www/Maj_password?token=$token'>/www/Maj_password?token=$token</a>
                     </p>
                     <br>
                     <p>Ce lien sera valable 24 heures.</p>
@@ -49,7 +49,7 @@
 
                     send_mail($p_to,$p_subject,$p_body);
 
-                    //header("location: /www/Connexion");
+                    //header("Location: /www/Connexion");
 
                     }
 

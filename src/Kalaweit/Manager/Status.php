@@ -17,14 +17,8 @@ class Status
 
      public function getAll()
      {
-        // $ret    = [];
-         $config = \Kalaweit\Core\Config::getInstance();
-         $status   = $config->get('status');
+         include( './config/config.php');
 
-         //foreach ($cli_lang as $key => $value) {
-             //$ret[] = new \Kalaweit\Model\Cli_lang($key, $value);
-            // ($key);
-         //}
-         return $status;
+         return $config['status'];
      }
 }

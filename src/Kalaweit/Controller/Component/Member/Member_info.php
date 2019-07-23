@@ -10,6 +10,8 @@ class Member_info
 
         /* récupération des elements du fichier de config*/
 
+
+
         $config = \Kalaweit\Core\Config::getInstance();
 
         /* instanciation de la connexion a la bdd */
@@ -21,6 +23,7 @@ class Member_info
 
         $crm_countryM = new \Kalaweit\Manager\Crm_country();
         $cli_langM  = new \Kalaweit\Manager\Cli_lang();
+
         $crm_client_categoryM  = new \Kalaweit\Manager\Crm_client_category();
 
         $member         = new \Kalaweit\Model\Member();
@@ -51,7 +54,9 @@ class Member_info
 
         /* autres infos */
 
+
         $cli_lang           = new \Kalaweit\htmlElement\Form_group_select('cli_lang',$cli_langM->getAll($bddM),$desc_member['cli_lang'],'fa fa-user',"config");
+
         $box_other_info     = new \Kalaweit\htmlElement\Box('Autres informations','box-primary',[$cli_lang->render()],[12]);
 
         /* data client divers */

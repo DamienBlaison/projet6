@@ -46,6 +46,8 @@ class Member
 
     function add(){
 
+
+
         $p_render = [
 
         "content_tab1" => $content_tab1 = (new  \Kalaweit\Controller\Component\Member\Member_info)->render(),

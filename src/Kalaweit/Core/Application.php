@@ -46,12 +46,19 @@ class Application
     */
     public function handle()
     {
-        $bdd = (new \Kalaweit\Manager\Connexion())->getBdd();
-        (new \Kalaweit\Manager\Sso_token("","",$bdd))->clean();
+
+        $bddM = new \Kalaweit\Manager\Connexion();
+
+
+        $bdd = $bddM->getBdd();
+
+        $sso_token = (new \Kalaweit\Manager\Sso_token("","",$bdd));
+
+        $sso_token->clean();
 
         $request = $this->getRequest();
-        // Je récupère l'url pour la décomposer et j'enlève le 1er / pour éviter [0] == ''
 
+        // Je récupère l'url pour la décomposer et j'enlève le 1er / pour éviter [0] == ''
 
         $uri     = ltrim($request->getUri(), '/');
 
@@ -111,8 +118,8 @@ class Application
 
                             default:
 
-                            header("location:/www/Kalaweit/app_connexion/log_in");
-                            //echo '404';
+                            header("Location:http://projet-bd-open-classroom.fr/www/Kalaweit/app_connexion/log_in");
+                            echo '404';
 
                             break;
 
@@ -122,7 +129,8 @@ class Application
 
                     else
                     {
-                        header("location:/www/Kalaweit/app_connexion/log_in");
+                        header("Location:http://projet-bd-open-classroom.fr/www/Kalaweit/app_connexion/log_in");
+                        echo '404.1';
                     }
                 }
 
@@ -154,7 +162,9 @@ class Application
                             break;
 
                             case 'add':
+
                             if (method_exists($obj, 'add')){
+
                                 echo $obj->add();
                             };
 
@@ -179,6 +189,7 @@ class Application
                                     break;
                                 };
                             };
+
                             break;
 
                             case 'list':
@@ -292,7 +303,7 @@ class Application
 
                             default:
 
-                            //header("location:/www/Kalaweit/app_connexion/log_in");
+                            header("Location:/www/Kalaweit/app_connexion/log_in");
                             echo '404';
 
                             break;
@@ -302,7 +313,8 @@ class Application
                     else
 
                     {
-                        //header("location:/www/Kalaweit/app_connexion/log_in");
+                        header("Location:/www/Kalaweit/app_connexion/log_in");
+                        echo '404.2';
                     };
                 }
 
@@ -327,6 +339,7 @@ class Application
                         };
 
                         break;
+
                         case 'Account_creation':
 
                         if (method_exists($obj, 'render')){
@@ -344,7 +357,15 @@ class Application
                         break;
 
 
-                        case 'home';
+                        case 'home':
+
+                        if (method_exists($obj, 'render')){
+                            echo $obj->render();
+                        };
+
+                        break;
+
+                        case 'Make_gift':
 
                         if (method_exists($obj, 'render')){
                             echo $obj->render();
@@ -383,6 +404,7 @@ class Application
                         };
 
                         break;
+
                         case 'History':
 
                         if (method_exists($obj, 'render')){
@@ -390,6 +412,7 @@ class Application
                         };
 
                         break;
+
                         case 'Team':
 
                         if (method_exists($obj, 'render')){
@@ -421,6 +444,7 @@ class Application
                         };
 
                         break;
+
                         case 'Borneo':
 
                         if (method_exists($obj, 'render')){
@@ -428,6 +452,7 @@ class Application
                         };
 
                         break;
+
                         case 'Sumatra':
 
                         if (method_exists($obj, 'render')){
@@ -435,6 +460,7 @@ class Application
                         };
 
                         break;
+
                         case 'Friends':
 
                         if (method_exists($obj, 'render')){
@@ -490,6 +516,7 @@ class Application
                             echo $obj->render();
                         };
                         break;
+
                         case 'Maj_password':
                         if (method_exists($obj, 'render')){
                             echo $obj->render();
@@ -503,7 +530,8 @@ class Application
                 else
 
                 {
-                    //header("location:/www/home");
+                    //header("Location:http://projet-bd-open-classroom.fr/www/home");
+                    header("Location:/www/home");
                     echo '404.1';
                 };
 
@@ -514,7 +542,8 @@ class Application
         else
 
         {
-            //header("location:/www/home");
+            //echo '<script>document.location.href="http://projet-bd-open-classroom.fr/www/home";</script>';
+            header("Location:/www/home");
             echo '404.0';
         }
 

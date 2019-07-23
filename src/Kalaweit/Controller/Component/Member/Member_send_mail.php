@@ -22,7 +22,7 @@ class Member_send_mail
 
             /* import de la clase gérant l'envoi de mail */
 
-            require '../src/Kalaweit/Manager/Send_mail.php';
+            require(__DIR__ .'/../../../Manager/Send_mail.php');
 
             /* envoi du mail en passant les infos de destinatiares de sujet et de contenu */
 

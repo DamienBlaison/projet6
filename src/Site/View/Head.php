@@ -17,66 +17,72 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
 -->
 <html>
 <head>
+
 	<title>Telephasic by HTML5 UP</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="../../../../vendor/html5up-telephasic/assets/css/main.css" />
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="/vendor/html5up-telephasic/assets/css/main.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<link rel="stylesheet" href="../../../../vendor/almasaeed2010/adminLte/bower_components/font-awesome/css/font-awesome.min.css">
-	<link rel="stylesheet" href="../../../../Css/Front.css" />
-	<link rel="stylesheet" href="../../../../Css/Animated.css" />
+	<link rel="stylesheet" href="/vendor/almasaeed2010/adminLte/bower_components/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/Css/Front.css">
+	<link rel="stylesheet" href="/Css/Animated.css">
 </head>
 <body class="homepage ">
 
-	<div id="page-wrapper">
 
-		<!-- Header -->
-		<div id="header-wrapper">
-			<div id="header" class="container">
-				<div id="brand" >
-					<a href="/www/home">WWW.KALAWEIT.ORG</a>
-				</div>
-				<!-- Nav -->
-				<nav id="nav" class="justify-content-end fixed-top">
-					<ul class="nav justify-content-end">
+				<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+					<a class="navbar-brand" <a href="/www/home">WWW.KALAWEIT.ORG</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="width:auto">
+						<span class="navbar-toggler-icon"></span>
+					</button>
 
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Présentation
-							</a>
-							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-								<a class="dropdown-item" href="/www/Gibbons">Le Gibbon</a>
-								<a class="dropdown-item" href="/www/History">Historique</a>
-								<a class="dropdown-item" href="/www/Team">L'équipe</a>
-							</div>
-						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Déforestation
-							</a>
-							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-								<a class="dropdown-item" href="/www/Context">Contexte environnemental</a>
-								<a class="dropdown-item" href="/www/Deforestation">Déforestation</a>
-								<a class="dropdown-item" href="/www/Palm_oil">Huile de Palme</a>
-							</div>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="/www/Borneo" id="Borneo" role="button">
-								Bornéo
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="/www/Sumatra" id="Sumatra" role="button" >
-								Sumatra
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="<?php echo $href ?>" id="Connexion" role="button" >
-								<?php echo $name_nav_item ?>
-							</a>
-						</li>
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav mr-auto nav justify-content-end ">
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Présentation
+								</a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+									<a class="dropdown-item" href="/www/Gibbons">Le Gibbon</a>
+									<a class="dropdown-item" href="/www/History">Historique</a>
+									<a class="dropdown-item" href="/www/Team">L'équipe</a>
+								</div>
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Déforestation
+								</a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+									<a class="dropdown-item" href="/www/Context">Contexte environnemental</a>
+									<a class="dropdown-item" href="/www/Deforestation">Déforestation</a>
+									<a class="dropdown-item" href="/www/Palm_oil">Huile de Palme</a>
+								</div>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/www/Borneo" id="Borneo" role="button">
+									Bornéo
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/www/Sumatra" id="Sumatra" role="button" >
+									Sumatra
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="<?php echo $href ?>" id="Connexion" role="button" >
+									<?php echo $name_nav_item ?>
+								</a>
+							</li>
 						</ul>
+
+					</div>
 				</nav>
+
+				<div id="page-wrapper">
+
+					<!-- Header -->
+					<div id="header-wrapper">
+						<div id="header" class="container">
 			</div>
 
 			<section id="hero" class="container animated fadeIn">

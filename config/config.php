@@ -1,6 +1,6 @@
 <?php
 
-return [
+return  $config = [
     'type_paiement' =>[
 
         '1' => 'Cheque',

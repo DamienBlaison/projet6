@@ -47,7 +47,7 @@ class Sumatra
                                 <p>Quatre patrouilles équestres sont effectuées quotidiennement dans la réserve, afin de lutter contre le braconnage et les coupes illégales de bois.</p>
                             </div>
 
-                            <div class="col-md-3 animated slideInRight">
+                            <div  class="col-md-3 animated slideInRight asideK">
                                 <?php
                                     echo $content["aside"];
                                  ?>

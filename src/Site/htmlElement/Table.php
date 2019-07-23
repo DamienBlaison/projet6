@@ -106,7 +106,7 @@ class Table
 
                 if($wait == 'OK'){
 
-                    $body .=    '<a href="http://localhost:8888/Documents/receipt/'.$name_receipt.'.pdf" target="_blank" style="margin-right:5px;" class="btn btn-success" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
+                    $body .=    '<a href="/Documents/Receipt/'.$name_receipt.'.pdf" target="_blank" style="margin-right:5px;" class="btn btn-success" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
 
                 } else {
 

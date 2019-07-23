@@ -36,14 +36,14 @@ class Form_group_input_submit{
     public function render(){
 
     $form_group_input_submit= '';
-    $form_group_input_submit.= '<div class = "'.$this->class.'"';
-    $form_group_input_submit.= '<div class ="input-group">';
-    $form_group_input_submit.=     '<input type="text" class="form-control" placeholder="'.$this->placeholder.'" name="'.$this->name.'" value="'.$this->value.'"></input>';
+    $form_group_input_submit.= '<div class = "col-md-9 mb10 mt10">';
+    $form_group_input_submit.=      '<div class ="input-group">';
+    $form_group_input_submit.=           '<input type="text" class="form-control" placeholder="'.$this->placeholder.'" name="'.$this->name.'" value="'.$this->value.'"></input>';
+    $form_group_input_submit.=      '</div>';
     $form_group_input_submit.= '</div>';
+    $form_group_input_submit.= '<div class="col-md-3 mt10">';
+    $form_group_input_submit.=      '<input type="submit" class="'.$this->class_submit.'" value="'.$this->value_submit.'" name="'.$this->name_submit.'">';
     $form_group_input_submit.= '</div>';
-
-    $form_group_input_submit .='<input type="submit" class="'.$this->class_submit.'" value="'.$this->value_submit.'" name="'.$this->name_submit.'">';
-
 
     return $form_group_input_submit;
 

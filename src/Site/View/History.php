@@ -16,16 +16,10 @@ class History
             <div class="container-fluid">
 
                 <div class="row">
-
-
                     <div class="col-md-9 animated slideInLeft" id="aside-left">
-
                         <h2>Historique</h2>
                         <br>
-
                         <ul>
-
-
                             <li>1997 : Création de l’association Etho-Passion, ensuite renommée Kalaweit qui signifie « gibbon » en langue dayak (peuple d’Indonésie).
                             </li>
                             <li>1998 : Grâce à une aide financière de la comédienne Muriel Robin, Chanee arrive en Asie.
@@ -84,10 +78,8 @@ class History
                             <li>2017 : création de la Magkolisoi reserve sur Bornéo.
                             </li>
                         </ul>
-
                     </div>
-
-                    <div class="col-md-3 animated slideInRight">
+                    <div  class="col-md-3 animated slideInRight asideK">
                         <div class="Wrapper">
                             <?php
                                 echo $content["aside"];

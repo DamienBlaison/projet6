@@ -25,7 +25,7 @@ class Users
 
         $table_user2 = (new \Kalaweit\htmlElement\Table_filter())->render($fields,$data);
 
-        require_once( __DIR__ .'/../head.php');
+        require_once( __DIR__ .'/../Head.php');
 
         ?>
         <div class="container-fluid">

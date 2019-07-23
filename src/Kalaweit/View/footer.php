@@ -5,7 +5,7 @@
 <script src="<?php echo $adminlte ?>/bower_components/select2/dist/js/select2.full.min.js"></script>
 <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=z3qrbn82jvuqr9727jayyaywqeq57qc2tzvidct7bzzrnt6t"></script>
 <script> tinymce.init({ selector:'.mytextarea' }); </script>
-<script> document.getElementById("return").addEventListener("click", function(){document.location.href='http://localhost:8888/www/home';})</script>
+<script> document.getElementById("return").addEventListener("click", function(){document.location.href='/www/home';})</script>
 
 <?php
 
@@ -16,4 +16,24 @@ if(isset($_SESSION["info"]) && $_SESSION["info"] != ''){
     $_SESSION["info"] = '';
 }
 
+
+
 ?>
+<script>
+
+function showMenu(){
+    if(document.getElementById("main_sidebar").style.transform == 'translate(0px, 0px)'){
+
+        document.getElementById("main_sidebar").style.transform = 'translate(-100%, 0px)';
+
+    } else {
+        document.getElementById("main_sidebar").style.width = '100%';
+        document.getElementById("main_sidebar").style.transform = 'translate(0px, 0px)';
+    }
+
+};
+
+document.getElementById("show-menu").addEventListener('click', function(){ showMenu(); });
+
+</script>
+<?php

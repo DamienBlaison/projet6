@@ -9,7 +9,7 @@ class Asso_adhesion {
 
     function render_list($param)
     {
-        require_once( __DIR__ .'/../head.php');
+        require_once( __DIR__ .'/../Head.php');
 
         $asso_adhesion  = '';
         $asso_adhesion .= '<div class="container-fluid" style="padding-left:0px;">';
@@ -34,7 +34,7 @@ class Asso_adhesion {
     function render_update($param){
 
 
-        require_once( __DIR__ .'/../head.php');
+        require_once( __DIR__ .'/../Head.php');
 
         $asso_adhesion  = '';
         $asso_adhesion .= '<div class="container-fluid" style="padding-left:0px;">';
@@ -55,7 +55,7 @@ class Asso_adhesion {
 
     function render_add($param){
 
-        require_once( __DIR__ .'/../head.php');
+        require_once( __DIR__ .'/../Head.php');
 
         $asso_adhesion  = '';
         $asso_adhesion .= '<div class="container-fluid" style="padding-left:0px;">';

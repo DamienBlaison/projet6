@@ -9,7 +9,7 @@ class Asso_donation_forest {
 
     function render_list($param)
     {
-        require_once( __DIR__ .'/../head.php');
+        require_once( __DIR__ .'/../Head.php');
 
         $asso_donation_forest  = '';
         $asso_donation_forest .= '<div class="container-fluid" style="padding-left:0px;">';
@@ -34,7 +34,7 @@ class Asso_donation_forest {
     function render_update($param){
 
 
-        require_once( __DIR__ .'/../head.php');
+        require_once( __DIR__ .'/../Head.php');
 
         $asso_donation_forest  = '';
         $asso_donation_forest .= '<div class="container-fluid" style="padding-left:0px;">';
@@ -55,7 +55,7 @@ class Asso_donation_forest {
 
     function render_add($param){
 
-        require_once( __DIR__ .'/../head.php');
+        require_once( __DIR__ .'/../Head.php');
 
         $asso_donation_forest  = '';
         $asso_donation_forest .= '<div class="container-fluid" style="padding-left:0px;">';

@@ -6,7 +6,7 @@ class Crop_avatar
 
     function render(){
 
-        require_once( __DIR__ .'/../head.php');
+        require_once( __DIR__ .'/../Head.php');
 
         ?>
 
@@ -88,6 +88,8 @@ class Crop_avatar
 
                     console.log(user_id);
 
+                    console.log('http://projet-bd-open-classroom.fr/www/Kalaweit/Ajax_get/upload_avatar'+user_id,);
+
 
                     $('#updload_cropped_image').click(function(event){
 
@@ -97,7 +99,7 @@ class Crop_avatar
                         }).then(function(response){
                             $.ajax({
 
-                                url: '/www/Kalaweit/Ajax_get/upload_avatar'+user_id,
+                                url: 'http://projet-bd-open-classroom.fr/www/Kalaweit/Ajax_get/upload_avatar'+user_id,
                                 method:'POST',
                                 data:{
                                     "image": response,

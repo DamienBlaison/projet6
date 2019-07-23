@@ -15,10 +15,8 @@ class Ile
      */
     public function getAll()
     {
-        $ret    = [];
-        $config = \Kalaweit\Core\Config::getInstance();
-        $iles   = $config->get('islands');
+        include( './config/config.php');
 
-        return $iles;
+        return $config['islands'];
     }
 }

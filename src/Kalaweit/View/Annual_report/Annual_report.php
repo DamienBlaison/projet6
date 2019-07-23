@@ -6,9 +6,10 @@ class Annual_report
 
     function render($data){
 
-        require_once( __DIR__ .'/../head.php');
+        require_once( __DIR__ .'/../Head.php');
 
-        $render  = '<div class="content">';
+        $render  = '<div class="content" style="padding-left:0px;">';
+        $render .=         '<div class="content">';
         $render  .=     '<div class="container-fluid">';
 
         $render .=      '<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>';
@@ -18,9 +19,9 @@ class Annual_report
         $render .=              $data["list"];
 
         $render .=              '</div>';
-        $render .=              '<div class="col-md-1">';
+        $render .=              '<div class="col-md-1 col-12">';
 
-        $render .=              '<input value="Actualiser" type="submit" class="btn btn-primary btn-sm"></input>';
+        $render .=              '<input id="actualise-report" value="Actualiser" type="submit" class="btn btn-primary btn-sm"></input>';
 
         $render .=              '</div>';
         $render .=          '</form>';
@@ -28,7 +29,7 @@ class Annual_report
 
 
         $render .=      '<div class="row">';
-        $render  .=         '<div class="container-fluid">';
+        $render .=         '<div class="container-fluid">';
         $render .=              '<div class="col-md-6">';
         $render .=                  $data["card7"];
         $render .=              '</div>';
@@ -102,6 +103,7 @@ class Annual_report
 
         $render .=      '<div class="col-md-12">';
         $render .=          $data["table2"];
+        $render .=      '</div>';
         $render .=      '</div>';
 
 

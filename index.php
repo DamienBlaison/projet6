@@ -1,11 +1,13 @@
 <?php
-include ('../vendor/autoload.php');
+include ('./vendor/autoload.php');
 
 /**
  * Le fichier php qui permet d'intégrer toutes les sources dont l'autoloader
  * Le but de l'autoloader est de ne plus avoir besoin de faire de include, require
  * Par contre il faut préfixer les classes par le chemin
  */
+
+
 
 session_start();
 
@@ -23,7 +25,10 @@ $config = \Kalaweit\Core\Config::getInstance(__DIR__ . '/../config/config.php');
  * @var \Kalaweit\Core\Application $application
  */
 
+
 $application = new \Kalaweit\Core\Application($config);
+
+
 
 /**
  * Lancement autour d'une exception pour gérer les erreurs
@@ -36,6 +41,8 @@ try {
 
     $application->handle();
 
+
 } catch (\Exception $ex) {
     ($ex);
+
 }

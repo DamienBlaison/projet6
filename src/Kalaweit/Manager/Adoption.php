@@ -16,9 +16,8 @@ class Adoption
     public function getAll()
     {
 
-        $config = \Kalaweit\Core\Config::getInstance();
-        $adoption   = $config->get('adoption');
+        include( './config/config.php');
 
-        return $adoption;
+        return $config['adoption'];
     }
 }

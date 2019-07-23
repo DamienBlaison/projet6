@@ -6,10 +6,8 @@ class User
 
     function render($param){
 
-        require_once( __DIR__ .'/../head.php');
+        require_once( __DIR__ .'/../Head.php');
         ?>
-
-
 
         <div class="content">
             <div class="container-fluid" style="padding-left:0px;">
@@ -58,7 +56,7 @@ class User
                                 <div class="col-md-12">
                                     <?php echo $param["box_init_avatar"]?>
                                 </div>
-                                  
+
                                 <form class="col-md-12" action="" method="post">
 
                                     <?php echo $param["box_activation"] ?>

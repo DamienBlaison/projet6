@@ -16,9 +16,9 @@ class Captivity
     public function getAll()
     {
 
-        $config = \Kalaweit\Core\Config::getInstance();
-        $captivity  = $config->get('captivity');
+        include( './config/config.php');
 
-        return $captivity;
+        return $config['captivity'];
+        
     }
 }

@@ -1,6 +1,8 @@
     RewriteEngine On
+    # RewriteBase /
 
     # For web
+
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} !\.(xml|txt|js|css|scss|less|jpg|gif|jpeg|png|ico|ttf|yml)$

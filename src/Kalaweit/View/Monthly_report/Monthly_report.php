@@ -20,16 +20,17 @@ class Monthly_report
 
         $array_month = ['01','02','03','04','05','06','07','08','09','10','11','12'];
 
-        require_once( __DIR__ .'/../head.php');
+        require_once( __DIR__ .'/../Head.php');
 
-        $render  = '<div class="content">';
+        $render  = '<div class="content" style="padding-left:0px;margin-top:0px;">';
+        $render  .= '<div class="content">';
         $render  .=     '<div class="container-fluid">';
 
         $render .=      '<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>';
 
         $render .=          '<form name="Annual_report" class="row" action="" method="get">';
 
-        $render .=     '<div class="col-md-6">';
+        $render .=     '<div class="col-md-5">';
         $render .=          '<div class="input-group">';
         $render .=              '<span class="input-group-addon">';
         $render .=                 '<i class="fa fa-calendar"></i>';
@@ -79,20 +80,21 @@ class Monthly_report
         $render .=      '<br>';
 
         $render .=              '</div>';
-        $render .=              '<div class="col-md-1">';
+        $render .=              '<div class="col-md-2">';
 
-        $render .=              '<input value="Actualiser" type="submit" class="btn btn-primary btn-sm"></input>';
+        $render .=              '<input id="actualise-monthly-report" value="Actualiser" type="submit" class="btn btn-primary" style="width:100%;"></input>';
 
         $render .=              '</div>';
         $render .=          '</form>';
         $render .=      '</div>';
 
-        $render .=         '<div class="container-fluid">';
+        $render .=         '<div class="container-fluid" id="card-title-monthly-report">';
         $render .=              $data["card1"];
         $render .=      '</div>';
         $render .=              $data["chart"];
         $render .=         '<div class=col-md-6> ';
         $render .=              $data["table"];
+        $render .=      '</div>';
         $render .=      '</div>';
         $render .=      '</div>';
 

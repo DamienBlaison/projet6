@@ -31,7 +31,7 @@ class Gibbon_gallery
                 <div class="row">
 
 
-                    <div class="col-md-9 animated slideInLeft" style="padding-left:70px;">
+                    <div class="col-md-9 animated slideInLeft" ">
 
                         <div id="wrapper-gallery">
 

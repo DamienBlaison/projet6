@@ -19,10 +19,9 @@ class Specie
      public function getAll()
      {
 
-         $config = \Kalaweit\Core\Config::getInstance();
-         $specie   = $config->get('especes');
+         include( './config/config.php');
 
-         return $specie;
+         return $config['especes'];
 
      }
 }

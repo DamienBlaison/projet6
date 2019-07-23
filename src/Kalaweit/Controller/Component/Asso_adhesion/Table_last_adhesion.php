@@ -13,7 +13,7 @@ class Table_last_adhesion
     $bdd = new \Kalaweit\Manager\Connexion();
     $bdd = $bdd->getBdd();
 
-    $data   = (new \Kalaweit\Manager\asso_adhesion($bdd))->get_last();
+    $data   = (new \Kalaweit\Manager\Asso_adhesion($bdd))->get_last();
 
     $link = '/www/Kalaweit/member/get?cli_id=';
     $update = '/www/Kalaweit/asso_adhesion/update?adhesion_id=';

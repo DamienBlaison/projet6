@@ -16,10 +16,8 @@ class Visibility
     public function getAll()
     {
 
-        $config = \Kalaweit\Core\Config::getInstance();
+        include( './config/config.php');
 
-        $visibility  = $config->get('visibility');
-
-        return $visibility;
+        return $config['visibility'];
     }
 }

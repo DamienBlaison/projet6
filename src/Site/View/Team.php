@@ -62,7 +62,7 @@ class Team
 
                     </div>
 
-                    <div class="col-md-3 animated slideInRight">
+                    <div  class="col-md-3 animated slideInRight asideK">
                         <?php
                             echo $content["aside"];
                          ?>

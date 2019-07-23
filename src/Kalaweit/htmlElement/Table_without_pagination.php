@@ -48,9 +48,7 @@ class Table_without_pagination
 
     // head du tableau
 
-    $head = '';
-
-
+    $head = '<div class="table-responsive">';
 
     $head .= '<table id="table_'.$this->id.'" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="table_info">';
     $head .= '<thead>';
@@ -119,7 +117,7 @@ class Table_without_pagination
 
             if( $name_receipt != NULL){
 
-                $body .=    '<a href="http://localhost:8888/Documents/receipt/'.$name_receipt["rec_number"].'.pdf" target="_blank" style="margin-right:5px;" class="btn btn-success" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
+                $body .=    '<a href="/Documents/Receipt/'.$name_receipt["rec_number"].'.pdf" target="_blank" style="margin-right:5px;" class="btn btn-success" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
 
             } else {
 
@@ -139,6 +137,7 @@ class Table_without_pagination
 
     $body .= '</tbody>';
     $body .= '</table>';
+    $body .= '</div>';
 
     // view
 

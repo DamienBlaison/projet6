@@ -66,7 +66,7 @@ class Users
                     Merci d'initialiser votre mot de passe en suivant le lien ci dessous .
                     </p>
                     <p> <strong>Votre login de connexion sera : ".$_POST['user_login']." </strong></p>
-                    <p><a href='http://localhost:8888/www/Kalaweit/app_connexion/maj_pwd?token=$token'>http://localhost:8888/www//Kalaweit/app_connexion/maj_pwd?token=$token</a>
+                    <p><a href='/www/Kalaweit/app_connexion/maj_pwd?token=$token'>/www//Kalaweit/app_connexion/maj_pwd?token=$token</a>
                     </p>
                     <br>
                     <p>Ce lien sera valable 24 heures.</p>
@@ -162,18 +162,15 @@ function update(){
 
     $box_download_avatar_content =
     [
-        $avatar_img = (new \Kalaweit\htmlElement\Img($user["user_avatar"],$user["user_first_name"],'avatar_user_admin'))->render(),
+        $avatar_img = (new \Kalaweit\htmlElement\Img('/Documents/Avatar/'.$user["user_avatar"],$user["user_first_name"],'avatar_user_admin'))->render(),
         $avatar_link = '<a href="/www/Kalaweit/users/crop?user_id='.$_GET['user_id'].'" class="btn btn-primary col-md-12">Modifier l\'Avatar</a>'
     ];
 
     /* création d'un tableau d'élément HTML à passer à la vue */
 
-    $box_avatar_img_content = [
+    //$box_avatar_img_content = [
 
-        $avatar_img = (new \Kalaweit\htmlElement\Img('/Documents/Avatar/GRENADINE_2018_00473.JPG','Damien Blaison','avatar_user_admin', ' max-width:250px;max-height: 250px;'))->render()
-
-
-    ];
+        //];
 
     /* création d'un tableau d'élément HTML à passer à la vue */
 

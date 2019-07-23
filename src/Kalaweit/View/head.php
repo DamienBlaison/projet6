@@ -3,9 +3,9 @@
 $bdd = new \Kalaweit\Manager\Connexion();
 $bdd = $bdd->getBdd();
 
-if (!isset($_SESSION["user_login"])){ header("location:/www/Kalaweit/app_connexion/log_in");};
+if (!isset($_SESSION["user_login"])){ header("Location:/www/Kalaweit/app_connexion/log_in");};
 
-if ( (new \Kalaweit\Manager\Users($bdd))->get_id_from_Login($_SESSION['user_login']) == false){header("location:/www/Kalaweit/app_connexion/log_in");}
+if ( (new \Kalaweit\Manager\Users($bdd))->get_id_from_Login($_SESSION['user_login']) == false){header("Location:/www/Kalaweit/app_connexion/log_in");}
 
 $user = (new \Kalaweit\Manager\Users($bdd))->get_id_from_Login($_SESSION['user_login']);
 ?>
@@ -42,7 +42,7 @@ $user = (new \Kalaweit\Manager\Users($bdd))->get_id_from_Login($_SESSION['user_l
 
 <body class="hold-transition skin-blue sidebar-mini" style="min-height:auto;">
     <div class="wrapper" style="height: auto; min-height:2000px;">
-        <aside class="main-sidebar">
+        <aside class="main-sidebar" id="main_sidebar">
             <section class="sidebar" style="min-height: 100%; height:100%;">
                 <div class="">
                     <img src="/../Documents/Front/logo-timbre.png" id="brand" alt="">
@@ -176,3 +176,20 @@ $user = (new \Kalaweit\Manager\Users($bdd))->get_id_from_Login($_SESSION['user_l
             </section>
         </aside>
         <div class="content-wrapper row" action="" method="post" style="min-height: 1100px;">
+
+
+
+
+
+            <div class="" id="box-menu-mobile">
+                <div class="box-header with-border">
+                    <h3 id="h3-menu-mobile" class="box-title">Kalaweit Administration</h3>
+                    <div class="box-tools pull-right">
+                        <button id="show-menu" type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-bars"></i></button>
+                    </div>
+                </div>
+
+
+
+
+        </div>

@@ -39,7 +39,7 @@ class Maj_password
 
                     (new \Kalaweit\Manager\Member($bdd))->maj_password($login["ptok_email"],$_POST["new_password"]);
 
-                    header("location: /www/Connexion");
+                    header("Location: /www/Connexion");
 
                     $sso_token->delete();
 

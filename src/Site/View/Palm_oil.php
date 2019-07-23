@@ -24,7 +24,7 @@ class Palm_oil
                         <br>
 
 
-                        <h3>Le palmier à huiule</h3>
+                        <h3>Le palmier à huile</h3>
 
                         <p>Le palmier à huile est originaire de l’Afrique de l’Ouest, il est largement cultivé pour ses fruits et ses graines riches en huile à usage alimentaire et industriel. Le palmier à huile mesure 20 à 25 m de haut, mais dans les palmeraies de culture les élaeis ne dépassent pas 15 mètres. Les feuilles, pennées (= feuilles composées dont les  folioles sont disposées comme les barbes d'une plume) mesurent de 5 à 7 m de long, à pétiole très robuste et épineux.
                         </p>
@@ -102,7 +102,7 @@ class Palm_oil
                                 </ul>
                             </div>
 
-                            <div class="col-md-3 animated slideInRight">
+                            <div  class="col-md-3 animated slideInRight asideK">
                                 <?php
                                     echo $content["aside"];
                                  ?>

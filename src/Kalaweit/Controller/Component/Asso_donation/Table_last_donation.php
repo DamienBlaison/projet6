@@ -14,7 +14,7 @@ class Table_last_donation
 
     /* récupéraiton des données via le manager asso_donation dans un array */
 
-    $data   = (new \Kalaweit\Manager\asso_donation($bdd))->get_last();
+    $data   = (new \Kalaweit\Manager\Asso_donation($bdd))->get_last();
 
     /* définition des éléménts de paramétrage à passer au composant TABLE WITHOUT PAGINATION */
 

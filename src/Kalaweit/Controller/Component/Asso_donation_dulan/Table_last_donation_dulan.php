@@ -14,7 +14,7 @@ class Table_last_donation_dulan
 
     /* récupéraiton des données via le manager asso_donation_dulan dans un array */
 
-    $data   = (new \Kalaweit\Manager\asso_donation_dulan($bdd))->get_last();
+    $data   = (new \Kalaweit\Manager\Asso_donation_dulan($bdd))->get_last();
 
     /* définition des éléménts de paramétrage à passer au composant TABLE WITHOUT PAGINATION */
 

@@ -6,7 +6,7 @@ class Crop_photo
 
     function render($num_picture){
 
-        require_once( __DIR__ .'/../head.php');
+        require_once( __DIR__ .'/../Head.php');
 
         ?>
 
@@ -27,12 +27,15 @@ class Crop_photo
                                     <div id="image_demo" class=""></div>
 
                                 </div>
+
                                 <div class="">
+
                                     <label for="upload_image" class="btn btn-default ">Choisir un fichier</label>
 
                                     <input id="upload_image" type="file" name="upload_image"style="display:none;">
 
-                                    <button  id="updload_cropped_image"class="btn btn-primary pull-right "> Enregistrer la photo </button>
+                                    <button  id="updload_cropped_image" class="btn btn-primary pull-right "> Enregistrer la photo </button>
+
                                 </div>
 
                             </div>
@@ -85,15 +88,19 @@ class Crop_photo
                     });
 
                     var cau_id = window.location.search;
+
                     console.log(cau_id);
 
                     var cau_id_return = cau_id.split('&');
+
                     console.log(cau_id_return);
                     console.log(cau_id_return[1]);
+
                     var num_picture = cau_id_return[1].split('=');
+
                     console.log(num_picture);
 
-                    console.log('/www/Kalaweit/Ajax_get/upload_photo'+num_picture[1]+cau_id);
+                    console.log('http://projet-bd-open-classroom.fr/www/Kalaweit/Ajax_get/upload_photo'+num_picture[1]+cau_id);
 
 
                     $('#updload_cropped_image').click(function(event){
@@ -103,22 +110,18 @@ class Crop_photo
                             size: 'viewport'
                         }).then(function(response){
 
-                            console.log('http://localhost:8888/www/Kalaweit/Ajax_get/upload_photo'+num_picture[1]+cau_id);
-
                             $.ajax({
-
-                                url: '/www/Kalaweit/Ajax_get/upload_photo'+num_picture[1]+cau_id,
-
+                                url: 'http://projet-bd-open-classroom.fr/www/Kalaweit/Ajax_get/upload_photo'+num_picture[1]+cau_id,
                                 method:'POST',
-                                data:{
-                                    "image": response,
-                                },
+                                data: { "image" :response },
+
                                 success:function()
                                 {
                                      window.location.href = "/www/Kalaweit/asso_cause/get"+cau_id_return[0];
                                 }
 
-                            });
+                            })
+                            ;
                         })
                     });
 

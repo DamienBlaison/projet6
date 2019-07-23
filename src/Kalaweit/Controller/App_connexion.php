@@ -38,7 +38,7 @@ class App_connexion
 
                     $_SESSION["user_login"] = $_POST['login'];
 
-                    header("location: /www/Kalaweit/dashboard/get");
+                    header("Location: /www/Kalaweit/dashboard/get");
 
                     break;
 
@@ -83,7 +83,7 @@ class App_connexion
 
         /* redirection vers la page de connexion */
 
-        header("location:/www/Kalaweit/app_connexion/log_in" );
+        header("Location:/www/Kalaweit/app_connexion/log_in" );
     }
 
     function forgotten_pwd(){
@@ -112,7 +112,7 @@ class App_connexion
                 </p>
                 Merci de cliquer sur le lien ci dessous :
                 </p>
-                <p><a href='http://localhost:8888/www/Kalaweit/app_connexion/maj_pwd?token=$token'>http://localhost:8888/www//Kalaweit/app_connexion/maj_pwd?token=$token</a>
+                <p><a href='/www/Kalaweit/app_connexion/maj_pwd?token=$token'>/www//Kalaweit/app_connexion/maj_pwd?token=$token</a>
                 </p>
                 <br>
                 <p>Ce lien sera valable 24 heures.</p>
@@ -127,7 +127,7 @@ class App_connexion
 
                 send_mail($p_to,$p_subject,$p_body);
 
-                header("location: /www/Kalaweit/app_connexion/log_in");
+                header("Location: /www/Kalaweit/app_connexion/log_in");
 
             }
 
@@ -164,7 +164,7 @@ class App_connexion
 
                     (new \Kalaweit\Manager\Users($bdd))->maj_pwd($login["ptok_email"],$_POST["new_password"]);
 
-                    header("location: /www/Kalaweit/app_connexion/log_in");
+                    header("Location: /www/Kalaweit/app_connexion/log_in");
 
                 } else {
 

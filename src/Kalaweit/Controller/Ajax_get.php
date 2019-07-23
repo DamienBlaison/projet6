@@ -58,7 +58,7 @@ class Ajax_get
 
                 if( $name_receipt != NULL){
 
-                    $body .=    '<a href="/www/Documents/receipt/'.$name_receipt["rec_number"].'.pdf" target="_blank" style="margin-right:5px;" class="btn btn-success" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
+                    $body .=    '<a href="/www/Documents/Receipt/'.$name_receipt["rec_number"].'.pdf" target="_blank" style="margin-right:5px;" class="btn btn-success" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
 
                 } else {
 
@@ -130,7 +130,7 @@ class Ajax_get
 
                 if( $name_receipt != NULL){
 
-                    $body .=    '<a href="http://localhost:8888/Documents/receipt/'.$name_receipt["rec_number"].'.pdf" target="_blank" style="margin-right:5px;" class="btn btn-success" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
+                    $body .=    '<a href="/Documents/Receipt/'.$name_receipt["rec_number"].'.pdf" target="_blank" style="margin-right:5px;" class="btn btn-success" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
 
                 } else {
 
@@ -196,7 +196,7 @@ class Ajax_get
 
                 if( $name_receipt != NULL){
 
-                    $body .=    '<a href="http://localhost:8888/Documents/receipt/'.$name_receipt["rec_number"].'.pdf" target="_blank" style="margin-right:5px;" class="btn btn-success" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
+                    $body .=    '<a href="/Documents/Receipt/'.$name_receipt["rec_number"].'.pdf" target="_blank" style="margin-right:5px;" class="btn btn-success" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
 
                 } else {
 
@@ -268,7 +268,7 @@ class Ajax_get
 
                 if( $name_receipt != NULL){
 
-                    $body .=    '<a href="http://localhost:8888/Documents/receipt/'.$name_receipt["rec_number"].'.pdf" target="_blank" style="margin-right:5px;" class="btn btn-success" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
+                    $body .=    '<a href="/Documents/Receipt/'.$name_receipt["rec_number"].'.pdf" target="_blank" style="margin-right:5px;" class="btn btn-success" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
 
                 } else {
 
@@ -339,7 +339,7 @@ class Ajax_get
 
                 if( $name_receipt != NULL){
 
-                    $body .=    '<a href="http://localhost:8888/Documents/receipt/'.$name_receipt["rec_number"].'.pdf" target="_blank" style="margin-right:5px;" class="btn btn-success" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
+                    $body .=    '<a href="/Documents/Receipt/'.$name_receipt["rec_number"].'.pdf" target="_blank" style="margin-right:5px;" class="btn btn-success" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
 
                 } else {
 
@@ -412,7 +412,7 @@ class Ajax_get
 
                 if( $name_receipt != NULL){
 
-                    $body .=    '<a href="http://localhost:8888/Documents/receipt/'.$name_receipt["rec_number"].'.pdf" target="_blank" style="margin-right:5px;" class="btn btn-success" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
+                    $body .=    '<a href="/Documents/Receipt/'.$name_receipt["rec_number"].'.pdf" target="_blank" style="margin-right:5px;" class="btn btn-success" id="print_'.$value[0].'" ><i class="fa fa-print"></i></a>';
 
                 } else {
 
@@ -442,28 +442,39 @@ class Ajax_get
 
     function upload_avatar(){
 
-        if(isset($_POST["image"]))
-        {
+        //if(isset($_POST["image"]))
+        //{
             $recup = $_POST["image"]; // image encodée en base 64;
+
+            var_dump($_POST);
 
             $image_array_1 = explode(";" , $recup);
             $image_array_2 = explode("," , $image_array_1[1]);
 
             $data = base64_decode($image_array_2[1]);
-            $target_file = '/Documents/Avatar/Avatar'.$_GET['user_id'].'.png';
-            $imageName = "..".$target_file;
+
+            $target_file = __DIR__ .'/../../../Documents/Avatar/Avatar'.$_GET['user_id'].'_'.date("YmdHms").'.png';
+
+            $imageName = $target_file;
+
+            $name_file = explode('/',$target_file);
 
             file_put_contents($imageName, $data);
+
+            $prep_file = array_pop($name_file);
 
             $bddM = new \Kalaweit\Manager\Connexion();
             $bdd = $bddM->getBdd();
 
-            $reqprep = $bdd->prepare( " UPDATE sso_user SET user_avatar = '$target_file' WHERE user_id = :id");
-            $prepare = [ ":id" => $_GET["user_id"]];
+            $reqprep = $bdd->prepare( " UPDATE sso_user SET user_avatar = :target_file WHERE user_id = :id");
+            $prepare = [
+                ":id" => $_GET["user_id"],
+                ":target_file" => $prep_file
+            ];
 
             $reqprep->execute($prepare);
 
-        }
+    //    }
     }
 
     /************************************************************/
@@ -479,9 +490,9 @@ class Ajax_get
 
     $data = base64_decode($image_array_2[1]);
 
-    $target_file = '/Documents/Asso_cause/p1_'.$_GET['user_id'].'_'.date("YmdHms").'.png';
+    $target_file = __DIR__ .'/../../../Documents/Asso_cause/p1_'.$_GET['cau_id'].'_'.date("YmdHms").'.png';
 
-    $imageName = "..".$target_file;
+    $imageName = $target_file;
 
     file_put_contents($imageName, $data);
 
@@ -502,17 +513,14 @@ class Ajax_get
 
         $prepare_insert = [
             ":cau_id" => $_GET["cau_id"],
-            ":caum_file"=> $caum_file[3]
+            ":caum_file"=> array_pop($caum_file)
         ];
 
         $reqprep_delete->execute($prepare_delete);
 
         $reqprep_insert->execute($prepare_insert);
 
-    $reqprep->execute($prepare);
-
     }
-
 
     function upload_photo2(){
 
@@ -523,9 +531,9 @@ class Ajax_get
 
     $data = base64_decode($image_array_2[1]);
 
-    $target_file = '/Documents/Asso_cause/p2_'.$_GET['user_id'].'_'.date("YmdHms").'.png';
+    $target_file = __DIR__ .'/../../../Documents/Asso_cause/p2_'.$_GET['cau_id'].'_'.date("YmdHms").'.png';
 
-    $imageName = "..".$target_file;
+    $imageName = $target_file;
 
     file_put_contents($imageName, $data);
 
@@ -546,14 +554,12 @@ class Ajax_get
 
         $prepare_insert = [
             ":cau_id" => $_GET["cau_id"],
-            ":caum_file"=> $caum_file[3]
+            ":caum_file"=> array_pop($caum_file)
         ];
 
         $reqprep_delete->execute($prepare_delete);
 
         $reqprep_insert->execute($prepare_insert);
-
-    $reqprep->execute($prepare);
 
     }
         function export_excel(){

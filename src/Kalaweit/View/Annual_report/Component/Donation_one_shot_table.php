@@ -17,7 +17,7 @@ class Donation_one_shot_table
 
         $head = ['Type de don','janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre', 'Total'];
 
-        $table  = '<div class="container-fluid">';
+        $table  = '<div class=" table-responsive">';
         $table .=   '<table class="table table-bordered table-striped dataTable" role="grid">';
         $table .=       '<thead class="">';
         $table .=           '<tr role="row">';
@@ -86,7 +86,7 @@ class Donation_one_shot_table
         //////////////////////////////////////////////////////////////////////////////////
 
         return (new \Kalaweit\htmlElement\Box($title,'box-primary',[$table],''))->render();
-        
+
     }
 
 }

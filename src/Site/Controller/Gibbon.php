@@ -17,7 +17,7 @@ class Gibbon
 
         } else {
 
-            header("location:/www/home");
+            header("Location:/www/home");
         };
 
         $list_donator = (new \Kalaweit\Manager\Asso_cause($bdd))->get_donator();

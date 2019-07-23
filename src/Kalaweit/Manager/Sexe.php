@@ -15,10 +15,8 @@ class Sexe
      */
     public function getAll()
     {
-        $ret    = [];
-        $config = \Kalaweit\Core\Config::getInstance();
-        $sexe   = $config->get('sexe');
+        include( './config/config.php');
 
-        return $sexe;
+        return $config['sexe'];
     }
 }

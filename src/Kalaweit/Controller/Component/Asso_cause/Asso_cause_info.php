@@ -119,22 +119,22 @@ class Asso_cause_info
 
         if ($url[4]!=='add'){
 
-            $pictures1 = new \Kalaweit\htmlElement\Img('/Documents/Asso_cause/'.$picture1["caum_file"],$picture1["caum_file"],"col-md-12 img_cau",$p_style ="");
-            $pictures2 = new \Kalaweit\htmlElement\Img('/Documents/Asso_cause/'.$picture2["caum_file"],$picture2["caum_file"],"col-md-12 img_cau",$p_style ="");
+            $pictures1 = new \Kalaweit\htmlElement\Img('/Documents/Asso_cause/'.$picture1["caum_file"],$picture1["caum_file"],"img_cau",$p_style ="");
+            $pictures2 = new \Kalaweit\htmlElement\Img('/Documents/Asso_cause/'.$picture2["caum_file"],$picture2["caum_file"],"img_cau",$p_style ="");
 
         } else {
 
-            $pictures1 = new \Kalaweit\htmlElement\Img('/Documents/Asso_cause/unknown.png','unknown.png',"col-md-12 img_cau",$p_style ="");
-            $pictures2 = new \Kalaweit\htmlElement\Img('/Documents/Asso_cause/unknown.png','unknown.png',"col-md-12 img_cau",$p_style ="");
+            $pictures1 = new \Kalaweit\htmlElement\Img('/Documents/Asso_cause/unknown.png','unknown.png',"img_cau",$p_style ="");
+            $pictures2 = new \Kalaweit\htmlElement\Img('/Documents/Asso_cause/unknown.png','unknown.png',"img_cau",$p_style ="");
 
         }
 
         if ($url[4]!=='add'){
             $content_box_pictures = [
                 $pictures1->render(),
-                '<a href="/www/Kalaweit/asso_cause/crop?cau_id='.$_GET["cau_id"].'&picture=1" class="btn btn-primary col-md-12">Modifier photo 1</a>',
+                '<a href="/www/Kalaweit/asso_cause/crop?cau_id='.$_GET["cau_id"].'&picture=1" class="btn btn-primary col-md-12 w100">Modifier photo 1</a>',
                 $pictures2->render(),
-                '<a href="/www/Kalaweit/asso_cause/crop?cau_id='.$_GET["cau_id"].'&picture=2" class="btn btn-primary col-md-12">Modifier photo 2</a>',
+                '<a href="/www/Kalaweit/asso_cause/crop?cau_id='.$_GET["cau_id"].'&picture=2" class="btn btn-primary col-md-12 w100">Modifier photo 2</a>',
             ];
 
             $bootstrap_pictures = [12,12,12,12];

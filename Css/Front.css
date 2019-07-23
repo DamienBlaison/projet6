@@ -1,3 +1,12 @@
+body{
+    font-size: 0.8rem;
+    margin-bottom: 50px;
+
+}
+
+body p{
+    text-align: justify;
+}
 
 #header-wrapper, .homepage #header-wrapper{
     width: 100%;
@@ -27,14 +36,17 @@ h2{
     border-bottom-style:solid;
     border-width: 1px;
     border-color:#679F5A;
+    font-size:1.3rem;
+    margin-top:30px;
 
 }
 
 h3{
-    font-size: 1.25rem;
+    font-size: 1rem;
     border-bottom-style:solid;
     border-width: 1px;
     border-color: orange;
+    margin-top: 20px;
 
 }
 
@@ -56,21 +68,21 @@ h3{
 
 #logo a {
 
-display: block;
-width: 50%;
-height: 2em;
-line-height: 2em;
-background: rgba(255, 255, 255, 0.15);
-border: solid 1px;
-border-color: #fff;
-border-color: rgba(255, 255, 255, 0.75);
-border-top: 0;
-border-radius: 0 0 0.35em 0.35em;
-color: #fff;
-display: inline-block;
-font-weight: 400;
-letter-spacing: 4px;
-text-align: center;
+    display: block;
+    width: 50%;
+    height: 2em;
+    line-height: 2em;
+    background: rgba(255, 255, 255, 0.15);
+    border: solid 1px;
+    border-color: #fff;
+    border-color: rgba(255, 255, 255, 0.75);
+    border-top: 0;
+    border-radius: 0 0 0.35em 0.35em;
+    color: #fff;
+    display: inline-block;
+    font-weight: 400;
+    letter-spacing: 4px;
+    text-align: center;
 
 }
 
@@ -138,118 +150,195 @@ text-align: center;
 }
 
 #aside-left{
-    padding-left:70px;
+    /*padding-left:70px;*/
 }
 
 a {
     border-bottom-width: 0px;
     color: orange;
     font-weight: bold
-;}
-a:hover{
-    color: green;
-}
-.make_gift{
-    color: green;
-    border-style:solid;
-    border-width:1px;
-    border-color:green;
-}
+    ;}
+    a:hover{
+        color: green;
+    }
+    .make_gift{
+        color: green;
+        border-style:solid;
+        border-width:1px;
+        border-color:green;
+    }
 
-.make_gift:hover{
-    color: orange;
-    border-style:solid;
-    border-width:1px;
-    border-color:orange;
-}
+    .make_gift:hover{
+        color: orange;
+        border-style:solid;
+        border-width:1px;
+        border-color:orange;
+    }
 
-.hidden
-{
-    display: none;
-}
+    .hidden
+    {
+        display: none;
+    }
 
-#block_gift p{
-    /*padding-left:15px;*/
-}
+    #block_gift p{
+        /*padding-left:15px;*/
+    }
 
-.pl20{
-    /*padding: 0px 20px !important;*/
-}
-.media_link .fas, .media_link .fab{
-    font-size:60px;
-}
+    .pl20{
+        /*padding: 0px 20px !important;*/
+    }
+    .media_link .fas, .media_link .fab{
+        font-size:60px;
+    }
 
 
-.gallery_img{
-    margin:0px;
-    padding:0px;
-    width:100%;
-}
-.gallery_item
-{
-    padding: 0px 0px;
-    width:100%;
-    box-shadow: 0px 0px 6px #555;
-}
+    .gallery_img{
+        margin:0px;
+        padding:0px;
+        width:100%;
+    }
+    .gallery_item
+    {
+        padding: 0px 0px;
+        width:100%;
+        box-shadow: 0px 0px 6px #555;
+    }
 
-.caption{
-    padding: 20px;
-}
+    .caption{
+        padding: 20px;
+    }
 
-.caption p{
-    margin-bottom: 0px;
-}
+    .caption p{
+        margin-bottom: 0px;
+    }
 
-ul li{
+    ul li{
 
-    padding-left:0px;
+        padding-left:0px;
 
-}
+    }
 
-.nav_gibbons{
+    .nav_gibbons{
 
-    padding: 0px;
-}
-nav .pagination{
+        padding: 0px;
+    }
+    nav .pagination{
 
-    margin-bottom:0px;
-    border-color: #ced4da;
-    border-style:solid;
-    border-width:0,5px;
-    font-weight: normal;
-}
-.page-link{
-    font-weight: normal;
-    color: black;
-}
-.page-link:hover{
-    font-weight: normal;
-    color: orange;
-    border-color: orange !important;
-}
+        margin-bottom:0px;
+        border-color: #ced4da;
+        border-style:solid;
+        border-width:0,5px;
+        font-weight: normal;
+    }
+    .page-link{
+        font-weight: normal;
+        color: black;
+    }
+    .page-link:hover{
+        font-weight: normal;
+        color: orange;
+        border-color: orange !important;
+    }
 
-.btn-form{
-    height:calc(1.5em + .75rem + 2px);
-    padding:0em 2em 0em 2em !important;
-    color:orange !important;
-    border : solid 1px orange !important;
-}
-.btn-form:hover{
-    background-color: orange;
-    color: white !important;
-    border-color: :orange !important;
-}
-.mt20{
-    margin-top:20px;
-}
+    .btn-form{
+        height:calc(1.5em + .75rem + 2px);
+        padding:0em 2em 0em 2em !important;
+        color:orange !important;
+        border : solid 1px orange !important;
+    }
+    .btn-form:hover{
+        background-color: orange;
+        color: white !important;
+        border-color: :orange !important;
+    }
+    .mt20{
+        margin-top:20px;
+    }
 
-.btn-form a:hover{
-    text-decoration: none;
-    color: white;
+    .btn-form a:hover{
+        text-decoration: none;
+        color: white;
 
-}
+    }
 
-#history{
-    margin-top:50px;
-    padding-top:0px;
-}
+    #history{
+        margin-top:50px;
+        padding-top:0px;
+    }
+
+    .bg-dark{
+        /*background-color: rgba(0,0,0,0.5)!important;*/
+
+    }
+    @media (max-width:767px){
+        #header-wrapper{
+            display: none;
+        }
+        #carouselExampleIndicators{
+            margin-top:60px;
+        }
+        .asideK{
+            display:none;
+        }
+        .other{
+            display:none;
+        }
+        .slideInLeft{
+            padding-left: 0px;
+            padding-right:0px;
+        }
+    }
+
+    @media (min-width:768px){
+        .mobile{
+            display:none;
+        }
+        .fadeInLeft,.slideInLeft{
+            padding-left: 70px;
+            padding-right:70px;
+        }
+        .fadeInRight,.slideInRight{
+
+            padding-right:70px;
+        }
+    }
+    #promo{
+        border-width:0px;
+        background:rgba(255,255,255,0)
+    }
+    #promo-wrapper{
+        position:fixed;
+        bottom:0px;
+        width: 100%;
+        padding:1em;
+
+    }
+    #promo-wrapper a:hover {
+        color:orange;
+        background-color: white;
+        border-color:white;
+        text-decoration:none;
+    }
+
+    .mt50{
+        margin-top:50px;
+    }
+
+    .input-group>.form-control:not(:first-child){
+        font-size:1em;
+    }
+
+    .title_connexion{
+        flex:1
+    }
+
+    .btn_connexion_admin{
+        font-size:2em;
+        background-color: white;
+        color: #d2d7dc;
+        border-color:#d2d7dc;
+        border-width:1px;
+        padding-top:30px;
+        padding-left:30px;
+        padding-right:15px;
+    }
