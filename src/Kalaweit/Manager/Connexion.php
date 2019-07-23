@@ -6,7 +6,7 @@ class Connexion
 {
     function getBdd(){
 
-        $online = 1;// 0 ou 1
+        $online = 0;// 0 ou 1
 
         if($online == 0){
 
