@@ -8,6 +8,7 @@ if (!isset($_SESSION["user_login"])){ header("Location:/www/Kalaweit/app_connexi
 if ( (new \Kalaweit\Manager\Users($bdd))->get_id_from_Login($_SESSION['user_login']) == false){header("Location:/www/Kalaweit/app_connexion/log_in");}
 
 $user = (new \Kalaweit\Manager\Users($bdd))->get_id_from_Login($_SESSION['user_login']);
+
 ?>
 
 <!DOCTYPE html>
@@ -15,9 +16,12 @@ $user = (new \Kalaweit\Manager\Users($bdd))->get_id_from_Login($_SESSION['user_l
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | General Form Elements</title>
+    
+    <title>Kalaweit Administration</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    <link rel="icon" type="image/png" href="/Documents/favicon-96.png">
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="<?php echo $adminlte ?>/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <!-- Font Awesome -->
@@ -50,7 +54,7 @@ $user = (new \Kalaweit\Manager\Users($bdd))->get_id_from_Login($_SESSION['user_l
                 <div class="user-panel">
 
                     <div class="pull-left image">
-                        <img src="<?php echo $user['user_avatar'] ?>" id="return" class="img-circle" alt="User Image" onclick="">
+                        <img src="<?php echo '/Documents/Avatar/'.$user['user_avatar'] ?>" id="return" class="img-circle" alt="User Image" onclick="">
                     </div>
 
                     <div class="pull-left info">
