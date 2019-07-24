@@ -31,7 +31,7 @@ class Gibbon_gallery
                 <div class="row">
 
 
-                    <div class="col-md-9 animated slideInLeft" ">
+                    <div class="col-md-9 animated slideInLeft">
 
                         <div id="wrapper-gallery">
 
@@ -102,25 +102,26 @@ class Gibbon_gallery
                                         </div>
                                     </div>
                                 </form>
-
-                                <div class="tz-gallery">
-
-                                    <div class="row">
+                                    <div class="gallery row">
 
                                         <?php foreach ($content["gallery"]["data"] as $key => $value): ?>
 
-                                            <div class="col-sm-6 col-md-4">
-                                                <div class="gallery_item">
+                                            <!--<div class="flex-gallery">-->
+                                                <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                                    <div class="gallery_item">
+
 
                                                     <a href="/www/Gibbon?cau_id=<?php echo $value["cau_id"] ?>">
-                                                        <img src="/../Documents/Asso_cause/<?php echo $value["caum_file"] ?>" style="height:250px;" class="gallery_img" alt="<?php echo $value["cau_name"] ?>">
+                                                        <img src="/../Documents/Asso_cause/<?php echo $value["caum_file"] ?>" class="gallery_img" alt="<?php echo $value["cau_name"] ?>">
                                                     </a>
                                                     <div class="caption">
                                                         <h3><?php echo $value["cau_name"] ?></h3>
                                                         <p>Dons collectés : <?php if($value["tot_don"] == NULL){ echo '0';} else { echo $value["tot_don"] ;}?> € / 280 €</p>
                                                     </div>
 
-                                                </div>
+                                                    </div>
+
+                                            <!--    </div> -->
 
 
                                             </div>
@@ -130,7 +131,7 @@ class Gibbon_gallery
 
                                     </div>
 
-                                </div>
+
                                 <br>
                                 <br>
 
