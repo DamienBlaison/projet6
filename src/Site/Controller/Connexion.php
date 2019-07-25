@@ -16,7 +16,7 @@
 
                 /* verification de la presence du login et du mdp dans le formulaire lors de l envoi de la demande de connexion*/
 
-                if ( isset($_POST['login']) && isset($_POST['password']) ) {
+                if ( isset($_POST['login']) && isset($_POST['password'] )) {
 
                     /* appelle de la methode de verification */
 

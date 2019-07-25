@@ -262,8 +262,8 @@ class Asso_cause
 
                 $prepare = [
 
-                    ":cau_name"=> $_POST["ac_name"],
-                    ":cau_site"=> $_POST["ac_site"],
+                    ":cau_name"=> htmlspecialchars($_POST["ac_name"]),
+                    ":cau_site"=> htmlspecialchars($_POST["ac_site"]),
                     ":brk_id"  => "2",
                     ":caut_id" => "1"
                 ];
@@ -284,7 +284,7 @@ class Asso_cause
 
                         $key_data = substr($key,5,3);
 
-                        $insert_data_loop = ["$key_data" => $value];
+                        $insert_data_loop = ["$key_data" => htmlspecialchars($value)];
 
                         $insert_data = array_merge($insert_data,$insert_data_loop);
 
@@ -297,7 +297,7 @@ class Asso_cause
                         //    ($key_media);
 
                         //    $insert_media_loop = ["$key_media" => $value];
-                        $insert_media_loop = ["$key" => $value];
+                        $insert_media_loop = ["$key" => htmlspecialchars($value)];
 
                         $insert_media = array_merge($insert_media,$insert_media_loop);
 
@@ -325,7 +325,7 @@ class Asso_cause
 
                             ":cau_id"    => $recup_id,
                             ":cautd_id"  => $key,
-                            ":caud_vals" => $value
+                            ":caud_vals" => htmlspecialchars($value)
                         ];
 
                         $reqprep_asso_cause_data->execute($prepare);
@@ -353,7 +353,7 @@ class Asso_cause
                                 ":cau_id"    => $recup_id,
                                 ":caum_code" => $media_config[$key]["caum_code"],
                                 ":caum_type" => $media_config[$key]["caum_type"],
-                                ":caum_file" => $value,
+                                ":caum_file" => htmlspecialchars($value),
                                 ":caum_lang" => $media_config[$key]["caum_lang"]
                             ];
 
@@ -387,9 +387,9 @@ class Asso_cause
                             ");
 
                             $prepare = [
-                                ":cau_id"   => $_GET["cau_id"],
-                                ":cau_name" => $_POST["ac_name"],
-                                ":cau_site" => $_POST["ac_site"]
+                                ":cau_id"   => htmlspecialchars($_GET["cau_id"]),
+                                ":cau_name" => htmlspecialchars($_POST["ac_name"]),
+                                ":cau_site" => htmlspecialchars($_POST["ac_site"])
                             ];
 
 
@@ -409,7 +409,7 @@ class Asso_cause
                                 $key_data = substr($key,5,3);
 
                                 $prepare_data =[
-                                    ":cau_id" => $_GET['cau_id'],
+                                    ":cau_id" => htmlspecialchars($_GET['cau_id']),
                                 ];
 
 
@@ -428,8 +428,8 @@ class Asso_cause
                                 $reqprep_data->execute($prepare_data);
 
                                 $prepare_data =[
-                                    ":cau_id" => $_GET['cau_id'],
-                                    ":caud_vals" => $_POST["actd_".$key_data],
+                                    ":cau_id" => htmlspecialchars($_GET['cau_id']),
+                                    ":caud_vals" => htmlspecialchars($_POST["actd_".$key_data]),
                                     ":cautd_id" => $key_data
                                 ];
 
@@ -473,13 +473,13 @@ class Asso_cause
                                 );
 
                                 $prepare_media = [
-                                    ':cau_id' => $_GET['cau_id']
+                                    ':cau_id' => htmlspecialchars($_GET['cau_id'])
                                 ];
 
                                 $reqprep_media->execute($prepare_media);
 
 
-                                $insert_media_loop = ["$key" => $value];
+                                $insert_media_loop = ["$key" => htmlspecialchars($value)];
 
                                 $insert_media = array_merge($insert_media,$insert_media_loop);
 
@@ -502,10 +502,10 @@ class Asso_cause
 
                                         $prepare_media = [
 
-                                            ":cau_id"    => $_GET['cau_id'],
+                                            ":cau_id"    => htmlspecialchars($_GET['cau_id']),
                                             ":caum_code" => $media_config[$key]["caum_code"],
                                             ":caum_type" => $media_config[$key]["caum_type"],
-                                            ":caum_file" => $value,
+                                            ":caum_file" => htmlspecialchars($value),
                                             ":caum_lang" => $media_config[$key]["caum_lang"]
                                         ];
 
@@ -670,7 +670,7 @@ class Asso_cause
                                             Group by cau_id,asso_donation.cli_id"
                                         );
 
-                                        $prepare = [ ":cau_id" => $_GET["cau_id"]];
+                                        $prepare = [ ":cau_id" => htmlspecialchars($_GET["cau_id"])];
 
                                         $reqprep->execute($prepare);
 

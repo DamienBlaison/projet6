@@ -18,7 +18,7 @@ trait Get_param_request
 
         foreach ($param_request as $key => $value) {
 
-            $data_param_request = explode('=' , $value);
+            $data_param_request = explode('=' , htmlspecialchars($value));
 
             if(isset($data_param_request[1]) && $data_param_request[1] != NULL){
 

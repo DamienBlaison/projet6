@@ -30,7 +30,7 @@ class Asso_cause_media
 
             $reqprep = $bdd->prepare("SELECT * FROM asso_cause_media WHERE cau_id= :cau_id && caum_code = 'PHOTO1' ");
 
-            $prepare = [":cau_id" => $_GET["cau_id"]];
+            $prepare = [":cau_id" => htmlspecialchars($_GET["cau_id"])];
             $reqprep->execute($prepare);
 
             return $data = $reqprep->fetch(\PDO::FETCH_ASSOC);
@@ -50,7 +50,7 @@ class Asso_cause_media
         if($url[4] !== "add"){
 
         $reqprep = $bdd->prepare("SELECT * FROM asso_cause_media WHERE cau_id= :cau_id && caum_code = 'PHOTO2' ");
-        $prepare = [":cau_id" => $_GET["cau_id"]];
+        $prepare = [":cau_id" => htmlspecialchars($_GET["cau_id"])];
         $reqprep->execute($prepare);
         return $data = $reqprep->fetch(\PDO::FETCH_ASSOC);
 

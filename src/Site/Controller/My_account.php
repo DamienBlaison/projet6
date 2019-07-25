@@ -19,9 +19,9 @@
             $member         = new \Kalaweit\Model\Member();
             $memberM        = new \Kalaweit\Manager\Member($bdd);
 
-            if(isset($_POST)){$memberM->update($member,$_GET['cli_id']); }
+            if(isset($_POST)){$memberM->update($member,htmlspecialchars($_GET['cli_id'])); }
 
-            $desc_member    = $memberM->get($member,$_GET['cli_id']);
+            $desc_member    = $memberM->get($member,htmlspecialchars($_GET['cli_id']));
 
             $aside = (new \Site\View\Aside())->render();
 

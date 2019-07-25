@@ -12,7 +12,7 @@ class Users
     function add(){
 
         $check_account = $this->bdd->prepare("SELECT user_login FROM sso_user WHERE user_login= :user_login");
-        $prepare_check = [":user_login"=>$_POST["user_login"]];
+        $prepare_check = [":user_login"=>htmlspecialchars($_POST["user_login"])];
         $check_account->execute($prepare_check);
         $check = $check_account->fetch();
 
@@ -40,16 +40,16 @@ class Users
 
             $prepare =[
 
-                ":user_login" => $_POST["user_login"],
+                ":user_login" => htmlspecialchars($_POST["user_login"]),
                 ":user_password" => password_hash('temp',PASSWORD_BCRYPT),
-                ":user_email" => $_POST["user_email"],
-                ":user_first_name" => $_POST["user_first_name"],
-                ":user_last_name" => $_POST["user_last_name"],
-                ":user_title" => $_POST["user_title"],
-                ":user_preferred_language" => $_POST["user_preferred_language"]
+                ":user_email" => htmlspecialchars($_POST["user_email"]),
+                ":user_first_name" => htmlspecialchars($_POST["user_first_name"]),
+                ":user_last_name" => htmlspecialchars($_POST["user_last_name"]),
+                ":user_title" => htmlspecialchars($_POST["user_title"]),
+                ":user_preferred_language" => htmlspecialchars($_POST["user_preferred_language"])
 
             ];
-        
+
             $reqprep->execute($prepare);
 
             $max_user = $this->bdd->query("SELECT MAX(user_id) FROM sso_user");
@@ -86,7 +86,7 @@ class Users
                 $p_extension = ['png','jpeg','jpg','gif','png'];
                 $p_size = 10000000;
 
-                (new \Kalaweit\Manager\File($p_dir,$p_file_to_upload,$p_extension,$p_size))->upload_file("sso_user","user_avatar","user_id",$_GET["user_id"]);
+                (new \Kalaweit\Manager\File($p_dir,$p_file_to_upload,$p_extension,$p_size))->upload_file("sso_user","user_avatar","user_id",htmlspecialchars($_GET["user_id"]));
 
                 break;
 
@@ -98,7 +98,7 @@ class Users
                     foreach ($_POST as $key => $value) {
 
                         $param = [
-                            ':'.$key => $value
+                            ':'.$key => htmlspecialchars($value)
 
                         ];
 
@@ -110,7 +110,7 @@ class Users
 
                     $set = substr($set, 0 , -2);
 
-                    $prepare = array_merge($prepare,[":user_id" => $_GET["user_id"]]);
+                    $prepare = array_merge($prepare,[":user_id" => htmlspecialchars($_GET["user_id"])]);
 
                     $reqprep = $this->bdd->prepare("UPDATE sso_user SET $set WHERE user_id = :user_id");
 
@@ -130,14 +130,14 @@ class Users
                     $to = $this->get();
 
 
-                    send_mail($to['user_email'],$_POST["subject"],$_POST["mail_body"]);
+                    send_mail($to['user_email'],htmlspecialchars($_POST["subject"]),htmlspecialchars($_POST["mail_body"]));
 
                     break;
 
                     case 'Désactiver le compte':
 
                     $reqprep = $this->bdd->prepare("UPDATE sso_user SET user_active = 0 WHERE user_id= :user_id" );
-                    $prepare = [":user_id" => $_GET["user_id"]];
+                    $prepare = [":user_id" => htmlspecialchars($_GET["user_id"])];
                     $reqprep->execute($prepare);
 
                     echo '<script> alert("Ce compte a bien été désactivé")</script>';
@@ -147,7 +147,7 @@ class Users
                     case 'Activer le compte':
 
                     $reqprep = $this->bdd->prepare("UPDATE sso_user SET user_active = 1 WHERE user_id= :user_id" );
-                    $prepare = [":user_id" => $_GET["user_id"]];
+                    $prepare = [":user_id" => htmlspecialchars($_GET["user_id"])];
                     $reqprep->execute($prepare);
 
                     echo '<script> alert("Ce compte a bien été activé")</script>';
@@ -171,7 +171,7 @@ class Users
     {
         $reqprep = $this->bdd->prepare("SELECT * FROM sso_user WHERE user_id = :user_id");
 
-        $prepare = [":user_id" => $_GET["user_id"]];
+        $prepare = [":user_id" => htmlspecialchars($_GET["user_id"])];
 
         $reqprep->execute($prepare);
 
@@ -216,7 +216,7 @@ class Users
             foreach ($param_request[0] as $key => $value) {
                 if($value != ''){
                     $where .= ' AND '.$key.' LIKE :'.$key ;
-                    $prepare = array_merge($prepare,[':'.$key => '%'.$_GET["$key"].'%']);
+                    $prepare = array_merge($prepare,[':'.$key => '%'.htmlspecialchars($_GET["$key"]).'%']);
 
                 }
             }
@@ -283,7 +283,7 @@ class Users
 
         $prepare =[
 
-            ":user_id" => $_GET["user_id"]
+            ":user_id" => htmlspecialchars($_GET["user_id"])
 
         ];
 

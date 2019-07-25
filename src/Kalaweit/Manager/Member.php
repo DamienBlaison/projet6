@@ -50,7 +50,7 @@ class Member
 
             $prepare = [
 
-                ":login" => $_POST["login"]
+                ":login" => htmlspecialchars($_POST["login"])
 
             ];
 
@@ -78,11 +78,11 @@ class Member
                     $check = 0;
 
 
-                    if(password_verify($_POST["password"], $hash[0]) == false ){ $check = 1; echo "<script>alert('Mot de passe eronné')</script>";};
+                    if(password_verify(htmlspecialchars($_POST["password"]), $hash[0]) == false ){ $check = 1; echo "<script>alert('Mot de passe eronné')</script>";};
 
                     if($check == 0){
 
-                        $_SESSION["user_login"] = $_POST['login'];
+                        $_SESSION["user_login"] = htmlspecialchars($_POST['login']);
                         $_SESSION["cli_id"] = $cli_id[0];
 
                         header("Location: /www/site");
@@ -122,7 +122,7 @@ class Member
 
                 if($value != ''){
                     $where .= ' AND '.$key.' LIKE :'.$key ;
-                    $prepare = array_merge($prepare,[':'.$key => '%'.$_GET["$key"].'%']);
+                    $prepare = array_merge($prepare,[':'.$key => '%'.htmlspecialchars($_GET["$key"]).'%']);
 
                 }
             }
@@ -160,7 +160,7 @@ class Member
 
                 if($value != '' && $key != 'export_name'){
                     $where .= ' AND '.$key.' LIKE :'.$key ;
-                    $prepare = array_merge($prepare,[':'.$key => '%'.$_GET["$key"].'%']);
+                    $prepare = array_merge($prepare,[':'.$key => '%'.htmlspecialchars($_GET["$key"]).'%']);
 
                 }
             }
@@ -284,7 +284,7 @@ class Member
         $reqprep = $this->bdd->prepare("DELETE FROM crm_client WHERE cli_id = :cli_id");
 
         $prepare = [
-            ":cli_id" => $_GET["cli_id"]
+            ":cli_id" => htmlspecialchars($_GET["cli_id"])
         ];
 
         $check = $checkprep->execute($prepare);
@@ -337,7 +337,7 @@ class Member
 
         $set = rtrim($set,", ");
 
-        $prepare =  array_merge($array_param_post["array_param_post_cli"]["p_prepare_cli"],[":cli_id"=>$_GET['cli_id']]);
+        $prepare =  array_merge($array_param_post["array_param_post_cli"]["p_prepare_cli"],[":cli_id"=>htmlspecialchars($_GET['cli_id'])]);
 
         $reqprep = $this->bdd->prepare("UPDATE crm_client SET $set WHERE cli_id = :cli_id");
 
@@ -351,7 +351,7 @@ class Member
 
             $reqprep_check_data_prepare = [
                 ":clitd_id" => $value["clitd_id"],
-                ":cli_id" => $_GET["cli_id"]
+                ":cli_id" => htmlspecialchars($_GET["cli_id"])
             ];
 
             $reqprep_check_data->execute($reqprep_check_data_prepare);
@@ -362,7 +362,7 @@ class Member
                 $reqprep_data_insert = $this->bdd->prepare("INSERT INTO crm_client_data (cli_id, clitd_id, cld_valc) VALUES (:id_client, :clitd_id, :cld_valc)");
                 $prepare_data_insert = [
 
-                    ":id_client" => $_GET["cli_id"],
+                    ":id_client" => htmlspecialchars($_GET["cli_id"]),
                     ":clitd_id"  => $value["clitd_id"],
                     ":cld_valc"  => $value["cld_valc"]
                 ];
@@ -373,7 +373,7 @@ class Member
 
                 $reqprep_data = $this->bdd->prepare("UPDATE crm_client_data SET cld_valc = :cld_valc WHERE cli_id = :cli_id AND clitd_id = :clitd_id");
 
-                $prepare_data = [":cld_valc" =>$value["cld_valc"], ":cli_id" => $_GET['cli_id'], "clitd_id" => $value["clitd_id"] ] ;
+                $prepare_data = [":cld_valc" =>$value["cld_valc"], ":cli_id" => htmlspecialchars($_GET['cli_id']), "clitd_id" => $value["clitd_id"] ] ;
 
                 $reqprep_data;
                 $reqprep_data->execute($prepare_data);
@@ -467,7 +467,7 @@ class Member
     function get_mail(){
 
         $reqprep = $this->bdd->prepare("SELECT cld_valc from crm_client_data WHERE cli_id = :cli_id and clitd_id = 3 ");
-        $prepare =[ ":cli_id" => $_GET["cli_id"]];
+        $prepare =[ ":cli_id" => htmlspecialchars($_GET["cli_id"])];
         $reqprep->execute($prepare);
         $return = $reqprep->fetch();
         return $return;

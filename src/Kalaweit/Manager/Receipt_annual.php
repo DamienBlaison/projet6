@@ -19,11 +19,11 @@ class Receipt_annual
         // indexation des numeros de recus
 
         $member = (new \Kalaweit\Model\Member());
-        $cli_info = (new \Kalaweit\Manager\Member($bdd))->get($member,$_GET["cli_id"]);
+        $cli_info = (new \Kalaweit\Manager\Member($bdd))->get($member,htmlspecialchars($_GET["cli_id"]));
         $country = (new \Kalaweit\Manager\Crm_country())->get($bdd,$cli_info["cnty_id"]);
 
-        $receipt_details = (new \Kalaweit\Manager\Receipt($bdd))->details_donations_year_by_member($_GET["cli_id"]);
-        $receipt_resume = (new \Kalaweit\Manager\Receipt($bdd))->resume_donations_year_by_member($_GET["cli_id"]);
+        $receipt_details = (new \Kalaweit\Manager\Receipt($bdd))->details_donations_year_by_member(htmlspecialchars($_GET["cli_id"]));
+        $receipt_resume = (new \Kalaweit\Manager\Receipt($bdd))->resume_donations_year_by_member(htmlspecialchars($_GET["cli_id"]));
 
         /* initialisation de tableaux avec la traduction des elements en francais à afficher */
 
@@ -57,7 +57,7 @@ class Receipt_annual
 
         $prepare2 =[
 
-            ":cli_id" => $_GET["cli_id"],
+            ":cli_id" => htmlspecialchars($_GET["cli_id"]),
             ":rec_ts" => date('Y-m-d G:i:s'),
             ":rec_year" => date('Y'),
             ":rec_number" => $rec_number,

@@ -40,9 +40,9 @@ class Asso_adhesion
             $prepare = [
 
                 ":brk_id" => 2,
-                ":cli_id" => $_POST['cli_id'],
-                ":adhesion_mnt"=> $_POST['adhesion_mnt'],
-                ":ptyp_id"=> $_POST['ptyp_id'],
+                ":cli_id" => htmlspecialchars($_POST['cli_id']),
+                ":adhesion_mnt"=> htmlspecialchars($_POST['adhesion_mnt']),
+                ":ptyp_id"=> htmlspecialchars($_POST['ptyp_id']),
                 ":adhesion_ts" => date('Y-m-d G:i:s')//, mktime(0, 0, 0, $_timestamp["M"], $_timestamp["D"], $_timestamp["Y"]))
             ];
 
@@ -123,7 +123,7 @@ class Asso_adhesion
                 ");
 
                 $prepare = [
-                    ":cli_id" => $_GET['cli_id']
+                    ":cli_id" => htmlspecialchars($_GET['cli_id'])
                 ];
 
                 $reqprep->execute($prepare);
@@ -131,7 +131,7 @@ class Asso_adhesion
                 $count_reqprep = $this->bdd->prepare("SELECT COUNT(adhesion_id) FROM asso_adhesion WHERE 1=1 and cli_id = :cli_id ");
 
                 $count_prepare = [
-                    ":cli_id" => $_GET['cli_id']
+                    ":cli_id" => htmlspecialchars($_GET['cli_id'])
                 ];
 
                 $count_reqprep->execute($count_prepare );
@@ -173,7 +173,7 @@ class Asso_adhesion
                         ");
 
                         $prepare = [
-                            ":cli_id" => $_GET['cli_id']
+                            ":cli_id" => htmlspecialchars($_GET['cli_id'])
                         ];
 
                         $reqprep->execute($prepare);
@@ -301,7 +301,7 @@ class Asso_adhesion
                             $reqprep = $this->bdd->prepare(
                                 "DELETE FROM asso_adhesion
                                 WHERE adhesion_id=:adhesion_id ");
-                                $prepare = [":adhesion_id" => $_GET["adhesion_id"]];
+                                $prepare = [":adhesion_id" => htmlspecialchars($_GET["adhesion_id"])];
 
                                 $reqprep->execute($prepare);
 
@@ -326,11 +326,11 @@ class Asso_adhesion
                                 );
 
                                 $prepare = [
-                                    ":cli_id" => $_POST["cli_id"],
-                                    ":adhesion_mnt" => $_POST["adhesion_mnt"],
-                                    ":ptyp_id" => $_POST["ptyp_id"],
-                                    ":adhesion_id" => $_GET["adhesion_id"],
-                                    ":adhesion_status" =>$_POST["adhesion_status"]
+                                    ":cli_id" => htmlspecialchars($_POST["cli_id"]),
+                                    ":adhesion_mnt" => htmlspecialchars($_POST["adhesion_mnt"]),
+                                    ":ptyp_id" => htmlspecialchars($_POST["ptyp_id"]),
+                                    ":adhesion_id" => htmlspecialchars($_GET["adhesion_id"]),
+                                    ":adhesion_status" =>htmlspecialchars($_POST["adhesion_status"])
                                 ];
 
                                 $reqprep->execute($prepare);
@@ -342,7 +342,7 @@ class Asso_adhesion
                                     break;
 
                                     case 'get':
-                                    header("Location: /www/Kalaweit/member/get?cli_id=".$_POST["cli_id"]);
+                                    header("Location: /www/Kalaweit/member/get?cli_id=".htmlspecialchars($_POST["cli_id"]));
                                     break;
 
                                     default:
@@ -357,7 +357,7 @@ class Asso_adhesion
                                 $reqprep = $this->bdd->prepare("SELECT * FROM asso_adhesion WHERE adhesion_id = :adhesion_id");
 
 
-                                $prepare = [ ":adhesion_id" => $_GET['adhesion_id'] ];
+                                $prepare = [ ":adhesion_id" => htmlspecialchars($_GET['adhesion_id']) ];
 
                                 $reqprep->execute($prepare);
 
@@ -591,7 +591,7 @@ class Asso_adhesion
                                     ");
 
                                     $prepare = [
-                                        ":cli_id" => $_GET['cli_id'],
+                                        ":cli_id" => htmlspecialchars($_GET['cli_id']),
                                     ];
 
                                     $reqprep->execute($prepare);

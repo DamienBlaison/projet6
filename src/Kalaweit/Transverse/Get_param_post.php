@@ -16,7 +16,7 @@ trait Get_param_post
             if ($value != NULL){
 
                 $param_post .= $key.' = :'.$key.' , ' ;
-                $set_array = [ ":$key" => $value ];
+                $set_array = [ ":$key" => htmlspecialchars($value) ];
 
                 $array_prepare = array_merge($array_prepare ,$set_array);
 
@@ -34,10 +34,10 @@ trait Get_param_post
 
         $param_post = substr($param_post, 0 , -2);
 
-        $id = ["id" => $_GET["id"]];
+        $id = ["id" => htmlspecialchars($_GET["id"])];
 
 
-        $array_prepare = array_merge($array_prepare, [":id" => $_GET["id"]]);
+        $array_prepare = array_merge($array_prepare, [":id" => htmlspecialchars($_GET["id"])]);
 
         $array_param_post = [$param_post,$array_prepare];
 
@@ -65,7 +65,7 @@ trait Get_param_post
                 $clitd_id = explode('_',$key);
 
                 $field_clitd_id = $clitd_id[1];
-                $field_cld_valc = $value;
+                $field_cld_valc = htmlspecialchars($value);
 
                 $set_cli_data = ["clitd_id" =>$field_clitd_id, "cld_valc"=>$field_cld_valc];
                 $array_set_cli_data []= $set_cli_data;
@@ -76,7 +76,7 @@ trait Get_param_post
 
                     $into_cli .= $key.', ';
                     $set_cli  .= ':'.$key.', ';
-                    $set_array_cli = [ ":$key" => $value ];
+                    $set_array_cli = [ ":$key" => htmlspecialchars($value) ];
                     $prepare_cli = array_merge($prepare_cli ,$set_array_cli);
                 }
             }
@@ -117,7 +117,7 @@ trait Get_param_post
                 $clitd_id = explode('_',$key);
 
                 $field_clitd_id = $clitd_id[1];
-                $field_cld_valc = $value;
+                $field_cld_valc = htmlspecialchars($value);
 
                 $set_cli_data = ["clitd_id" =>$field_clitd_id, "cld_valc"=>$field_cld_valc];
                 $array_set_cli_data []= $set_cli_data;
@@ -128,7 +128,7 @@ trait Get_param_post
 
                     $into_cli .= $key.', ';
                     $set_cli  .= ':'.$key.', ';
-                    $set_array_cli = [ ":$key" => $value ];
+                    $set_array_cli = [ ":$key" => htmlspecialchars($value) ];
                     $prepare_cli = array_merge($prepare_cli ,$set_array_cli);
 
                 }

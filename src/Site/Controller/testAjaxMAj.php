@@ -11,7 +11,7 @@ class Insert_gift
         $bdd = $bdd->getBdd();
 
         $amount = $_POST["amount"];
-        $id = $_POST["id"];
+        $id = htmlspecialchars($_POST["id"]);
 
         $reqprep = $bdd->prepare("INSERT INTO wf_theme (thm_name , thm_description) VALUES (:amount,:id)");
 

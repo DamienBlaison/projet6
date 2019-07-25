@@ -13,7 +13,7 @@ class Gibbon
 
         if(isset($_GET["cau_id"])){
 
-            $info_gibbon = (new \Kalaweit\Manager\Asso_cause($bdd))->get($_GET["cau_id"]);
+            $info_gibbon = (new \Kalaweit\Manager\Asso_cause($bdd))->get(htmlspecialchars($_GET["cau_id"]));
 
         } else {
 

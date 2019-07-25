@@ -40,9 +40,9 @@ class Asso_donation_dulan
             $prepare = [
 
                 ":brk_id" => 2,
-                ":cli_id" => $_POST['cli_id'],
-                ":donation_dulan_mnt"=> $_POST['donation_dulan_mnt'],
-                ":ptyp_id"=> $_POST['ptyp_id'],
+                ":cli_id" => htmlspecialchars($_POST['cli_id']),
+                ":donation_dulan_mnt"=> htmlspecialchars($_POST['donation_dulan_mnt']),
+                ":ptyp_id"=> htmlspecialchars($_POST['ptyp_id']),
                 ":donation_dulan_ts" => date('Y-m-d G:i:s'),
                 "cau_id" => '700'
             ];
@@ -132,7 +132,7 @@ class Asso_donation_dulan
                 ");
 
                 $prepare = [
-                    ":cli_id" => $_GET['cli_id']
+                    ":cli_id" => htmlspecialchars($_GET['cli_id'])
                 ];
 
                 $reqprep->execute($prepare);
@@ -140,7 +140,7 @@ class Asso_donation_dulan
                 $count_reqprep = $this->bdd->prepare("SELECT COUNT(don_id) FROM asso_donation WHERE cau_id= 700 and cli_id = :cli_id ");
 
                 $count_prepare = [
-                    ":cli_id" => $_GET['cli_id']
+                    ":cli_id" => htmlspecialchars($_GET['cli_id'])
                 ];
 
                 $count_reqprep->execute($count_prepare );
@@ -190,7 +190,7 @@ class Asso_donation_dulan
                     ");
 
                     $prepare = [
-                        ":cli_id" => $_GET['cli_id']
+                        ":cli_id" => htmlspecialchars($_GET['cli_id'])
                     ];
 
                     $reqprep->execute($prepare);
@@ -223,7 +223,7 @@ class Asso_donation_dulan
                             ");
 
                             $prepare = [
-                                ":cli_id" => $_GET['cli_id'],
+                                ":cli_id" => htmlspecialchars($_GET['cli_id']),
                             ];
 
                             $reqprep->execute($prepare);
@@ -450,7 +450,7 @@ class Asso_donation_dulan
                                 $reqprep = $this->bdd->prepare(
                                     "DELETE FROM asso_donation
                                     WHERE don_id = :don_id ");
-                                    $prepare = [":don_id" => $_GET["don_id"]];
+                                    $prepare = [":don_id" => htmlspecialchars($_GET["don_id"])];
 
                                     $reqprep->execute($prepare);
 
@@ -475,18 +475,18 @@ class Asso_donation_dulan
                                     );
 
                                     $prepare = [
-                                        ":cli_id" => $_POST["cli_id"],
-                                        ":don_mnt" => $_POST["donation_dulan_mnt"],
-                                        ":ptyp_id" => $_POST["ptyp_id"],
-                                        ":don_id" => $_GET["don_id"],
-                                        "don_status" => $_POST["don_status"]
+                                        ":cli_id" => htmlspecialchars($_POST["cli_id"]),
+                                        ":don_mnt" => htmlspecialchars($_POST["donation_dulan_mnt"]),
+                                        ":ptyp_id" => htmlspecialchars($_POST["ptyp_id"]),
+                                        ":don_id" => htmlspecialchars($_GET["don_id"]),
+                                        "don_status" => htmlspecialchars($_POST["don_status"])
                                     ];
 
                                     $reqprep->execute($prepare);
 
                                     switch ($_GET["from"]) {
                                         case 'get':
-                                        header( "Location: /www/Kalaweit/member/get?cli_id=".$_POST['cli_id']);
+                                        header( "Location: /www/Kalaweit/member/get?cli_id=".htmlspecialchars($_POST['cli_id']));
                                         break;
 
                                         case 'add':

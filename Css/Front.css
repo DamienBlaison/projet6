@@ -276,7 +276,18 @@ a {
         /*background-color: rgba(0,0,0,0.5)!important;*/
 
     }
-    @media (max-width:767px){
+
+    @media (max-width: 425px){
+        .nav_gibbons nav{
+            flex-flow: column;
+            align-items: center;
+        }
+        .nav_gibbons nav ul{
+            margin-bottom: 15px;
+        }
+    }
+
+    @media (max-width:768px){
         #header-wrapper{
             display: none;
         }
@@ -291,11 +302,20 @@ a {
         }
         .slideInLeft{
             padding-left: 0px;
-            padding-right:0px;
+            padding-right: 0px;
         }
+
+        #make_gift, #make_gift3{
+            display:none;
+        }
+
+        #aside-left{
+            padding-top: 66px;
+        }
+
     }
 
-    @media (min-width:768px){
+    @media (min-width:767px){
         .mobile{
             display:none;
         }

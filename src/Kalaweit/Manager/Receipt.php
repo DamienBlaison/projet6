@@ -457,7 +457,7 @@ class Receipt
 
                     function get_receipt_annual_by_member(){
 
-                        $prepare = [":cli_id" => $_GET['cli_id']];
+                        $prepare = [":cli_id" => htmlspecialchars($_GET['cli_id'])];
 
                         $reqprep = $this->bdd->prepare("SELECT rec_year,rec_number,rec_mnt FROM asso_receipt WHERE cli_id = :cli_id AND rec_number LIKE 'RF_%'");
 
@@ -500,7 +500,7 @@ class Receipt
                     function get_receipt_by_member_front(){
 
                         $reqprep = $this->bdd->prepare("SELECT rec_id,rec_year,rec_number, rec_mnt FROM asso_receipt WHERE cli_id = :cli_id AND rec_number LIKE 'RF_%'");
-                        $prepare = ["cli_id" => $_GET["cli_id"]];
+                        $prepare = ["cli_id" => htmlspecialchars($_GET["cli_id"])];
                         $reqprep->execute($prepare);
 
                         return  [

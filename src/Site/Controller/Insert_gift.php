@@ -28,7 +28,7 @@ class Insert_gift
             $prepare = [
                 ":cli_id" =>$transaction[1],
                 ":adhesion_ts" =>date("Y-m-d H:i:s"),
-                ":amount" => $_GET["amount"],
+                ":amount" => htmlspecialchars($_GET["amount"]),
             ];
 
             $reqprep->execute($prepare);
@@ -45,7 +45,7 @@ class Insert_gift
             $prepare = [
                 ":cli_id" =>$transaction[1],
                 ":don_ts" =>date("Y-m-d H:i:s"),
-                ":amount" => $_GET["amount"],
+                ":amount" => htmlspecialchars($_GET["amount"]),
             ];
 
             $reqprep->execute($prepare);
@@ -64,7 +64,7 @@ class Insert_gift
                 ":cli_id" =>$transaction[1],
                 ":cau_id" => $transaction[2],
                 ":don_ts" => $ts = date("Y-m-d H:i:s"),
-                ":amount" => $_GET["amount"],
+                ":amount" => htmlspecialchars($_GET["amount"]),
              ];
 
             $reqprep->execute($prepare);
@@ -88,7 +88,7 @@ class Insert_gift
             $prepare = [
                 ":cli_id" =>$transaction[1],
                 ":don_ts" =>date("Y-m-d H:i:s"),
-                ":amount" => $_GET["amount"],
+                ":amount" => htmlspecialchars($_GET["amount"]),
             ];
 
             $reqprep->execute($prepare);
@@ -105,7 +105,7 @@ class Insert_gift
             $prepare = [
                 ":cli_id" =>$transaction[1],
                 ":don_ts" =>date("Y-m-d H:i:s"),
-                ":amount" => $_GET["amount"],
+                ":amount" => htmlspecialchars($_GET["amount"]),
             ];
 
             $reqprep->execute($prepare);

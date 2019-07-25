@@ -79,22 +79,22 @@ class Gibbon_gallery
 
                                     <form class="" action="/www/Gibbon_gallery/1#anchor" method="get">
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-12 col-md-6 col-lg-5">
                                                 <div class="input-group">
                                                     <input type="text" class="form-control" placeholder="Tapez votre recherche ici" name="search">
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-12 col-md-6 col-lg-4">
                                                 <div class="input-group ">
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text">
                                                             <input type="checkbox" aria-label="Checkbox for following text input" name="gift_open" <?php echo $checked ?> >
                                                         </div>
                                                     </div>
-                                                    <div type="text" class="form-control" aria-label="Text input with checkbox">Uniquement les dons ouverts</div>
+                                                    <div type="text" class="form-control" aria-label="Text input with checkbox">Les dons ouverts</div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-12 col-md-12 col-lg-3">
                                                 <div class="input-group ">
                                                     <button class="btn btn-outline-secondary col-md-12" type="submit" id="button-addon2">Rechercher</button>
                                                 </div>
@@ -136,28 +136,31 @@ class Gibbon_gallery
                                 <br>
 
                                 <div class="col-md-12 nav_gibbons">
-                                    <nav class="d-flex justify-content-between">
-                                        <ul class="pagination">
+                                    <nav id="nav_list_gibbon" class="d-flex justify-content-between">
+                                        <ul class="pagination ">
                                             <li class="page-item " id="previous"><a class="page-link" href="/www/Gibbon_gallery/<?php echo $previous ?>">Previous</a></li>
 
                                             <li class="page-item" id="next"><a class="page-link" href="/www/Gibbon_gallery/<?php echo $next?>">Next</a></li>
                                         </ul>
-                                        <ul class="pagination">
+                                        <ul class="pagination ">
                                             <li class="page-item"><a class="page-link">Page </a></li>
                                             <li class="page-item"><a class="page-link"><?php echo $current_page ?></a></li>
                                             <li class="page-item"><a class="page-link">/</a></li>
                                             <li class="page-item"><a class="page-link" id="nb_page"><?php echo ceil(intval($content["gallery"]["count"])/15)?></a></li>
                                         </ul>
-                                        <ul class="pagination">
+
+                                        </nav>
+                                        <!--
+                                        <ul class="pagination ">
                                             <li class="page-item"><a class="page-link">Nombre de resultat(s) :  </a></li>
                                             <li class="page-item"><a class="page-link" id= "" ><?php echo $content["gallery"]["count"]?></a></li>
                                         </ul>
-                                    </nav>
+                                        -->
 
 </nav>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 asideK">
                                 <?php
                                 echo $content["aside"];
                                 ?>

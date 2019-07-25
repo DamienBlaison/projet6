@@ -14,15 +14,15 @@
 
                     $bdd = (new \Kalaweit\Manager\Connexion())->getBdd();
 
-                    $check = (new \Kalaweit\Manager\Member($bdd))->get_id_from_Login($_POST['login']);
+                    $check = (new \Kalaweit\Manager\Member($bdd))->get_id_from_Login(htmlspecialchars($_POST['login']));
 
                     if(isset($check['cld_valc'])){
 
-                    $p_to = $_POST["login"];
+                    $p_to = htmlspecialchars($_POST["login"]);
                     $p_subject = 'Reintialisation du mot de passe';
                     $token = md5(uniqid());
 
-                    (new \Kalaweit\Manager\Sso_token($_POST["login"],$token,$bdd))->add();
+                    (new \Kalaweit\Manager\Sso_token(htmlspecialchars($_POST["login"]),$token,$bdd))->add();
 
                     $p_body = "
                     <p>

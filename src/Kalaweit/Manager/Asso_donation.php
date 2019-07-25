@@ -40,10 +40,10 @@ class Asso_donation
         $prepare = [
 
             ":brk_id" => 2,
-            ":cli_id" => $_POST['cli_id'],
-            ":cau_id" => $_POST['cau_id'],
-            ":don_mnt"=> $_POST['donation_mnt'],
-            ":ptyp_id"=> $_POST['ptyp_id'],
+            ":cli_id" => htmlspecialchars($_POST['cli_id']),
+            ":cau_id" => htmlspecialchars($_POST['cau_id']),
+            ":don_mnt"=> htmlspecialchars($_POST['donation_mnt']),
+            ":ptyp_id"=> htmlspecialchars($_POST['ptyp_id']),
             ":don_ts" => date('Y-m-d G:i:s')//, mktime(0, 0, 0, $_timestamp["M"], $_timestamp["D"], $_timestamp["Y"]))
         ];
 
@@ -128,7 +128,7 @@ class Asso_donation
             LIMIT $start, $p_nb_by_page");
 
         if (isset($_GET["cau_id"])){
-            $cau_id = $_GET["cau_id"];
+            $cau_id = htmlspecialchars($_GET["cau_id"]);
         }
         else
         {
@@ -184,7 +184,7 @@ class Asso_donation
         ");
 
         $prepare = [
-            ":cli_id" => $_GET['cli_id'],
+            ":cli_id" => htmlspecialchars($_GET['cli_id']),
         ];
 
         $reqprep->execute($prepare);
@@ -192,7 +192,7 @@ class Asso_donation
         $count_reqprep = $this->bdd->prepare("SELECT COUNT(don_id) FROM asso_donation WHERE 1=1 and cli_id = :cli_id AND cau_id != 703 AND cau_id != 700 and cau_id!=704");
 
         $count_prepare = [
-            ":cli_id" => $_GET['cli_id']
+            ":cli_id" => htmlspecialchars($_GET['cli_id'])
         ];
 
         $count_reqprep->execute($count_prepare);
@@ -237,7 +237,7 @@ class Asso_donation
         ");
 
         $prepare = [
-            ":cli_id" => $_GET['cli_id'],
+            ":cli_id" => htmlspecialchars($_GET['cli_id']),
         ];
 
         $reqprep->execute($prepare);
@@ -268,7 +268,7 @@ class Asso_donation
         ");
 
         $prepare = [
-            ":cli_id" => $_GET['cli_id'],
+            ":cli_id" => htmlspecialchars($_GET['cli_id']),
         ];
 
         $reqprep->execute($prepare);
@@ -511,7 +511,7 @@ class Asso_donation
         $reqprep = $this->bdd->prepare(
             "DELETE FROM asso_donation
              WHERE don_id=:don_id ");
-        $prepare = [":don_id" => $_GET["don_id"]];
+        $prepare = [":don_id" => htmlspecialchars($_GET["don_id"])];
 
         $reqprep->execute($prepare);
 
@@ -537,12 +537,12 @@ class Asso_donation
              don_id=:don_id ");
 
         $prepare = [
-            ":don_id" => $_GET["don_id"],
-            ":cli_id" => $_POST['cli_id'],
-            ":cau_id" => $_POST['cau_id'],
-            ":don_mnt"=> $_POST['don_mnt'],
-            ":ptyp_id"=> $_POST['ptyp_id'],
-            ":don_status"=> $_POST['don_status']
+            ":don_id" => htmlspecialchars($_GET["don_id"]),
+            ":cli_id" => htmlspecialchars($_POST['cli_id']),
+            ":cau_id" => htmlspecialchars($_POST['cau_id']),
+            ":don_mnt"=> htmlspecialchars($_POST['don_mnt']),
+            ":ptyp_id"=> htmlspecialchars($_POST['ptyp_id']),
+            ":don_status"=> htmlspecialchars($_POST['don_status'])
         ];
 
         $reqprep->execute($prepare);
@@ -551,9 +551,9 @@ class Asso_donation
 
             case 'get':
 
-            if(isset($_GET["cli_id"])) { $to = '/www/Kalaweit/member/get?cli_id='.$_GET['cli_id'];}
+            if(isset($_GET["cli_id"])) { $to = '/www/Kalaweit/member/get?cli_id='.htmlspecialchars($_GET['cli_id']);}
 
-            if(isset($_GET["cau_id"])) { $to = '/www/Kalaweit/asso_cause/get?cau_id='.$_GET['cau_id'];}
+            if(isset($_GET["cau_id"])) { $to = '/www/Kalaweit/asso_cause/get?cau_id='.htmlspecialchars($_GET['cau_id']);}
 
             header( "Location: ".$to);
 
@@ -578,7 +578,7 @@ class Asso_donation
         $reqprep = $this->bdd->prepare("SELECT * FROM asso_donation WHERE don_id = :don_id");
 
 
-        $prepare = [ ":don_id" => $_GET['don_id'] ];
+        $prepare = [ ":don_id" => htmlspecialchars($_GET['don_id'])];
 
         $reqprep->execute($prepare);
 
@@ -590,7 +590,7 @@ class Asso_donation
         $reqprep = $this->bdd->prepare("SELECT SUM(don_mnt) From asso_donation WHERe cau_id = :cau_id and YEAR(don_ts) = :Year_current");
 
         $prepare = [
-            ":cau_id" => $_GET["cau_id"],
+            ":cau_id" => htmlspecialchars($_GET["cau_id"]),
             ":Year_current" => date("Y")
         ];
 
@@ -607,7 +607,7 @@ class Asso_donation
         $reqprep = $this->bdd->prepare("SELECT SUM(don_mnt) From asso_donation WHERe cau_id = :cau_id and YEAR(don_ts) = :Year_current");
 
         $prepare = [
-            ":cau_id" => $_POST["cau_id"],
+            ":cau_id" => htmlspecialchars($_POST["cau_id"]),
             ":Year_current" => date("Y")
         ];
 
@@ -763,7 +763,7 @@ class Asso_donation
 
         $reqprep = $this->bdd->prepare("SELECT cau_id FROM asso_donation WHERE don_id = :don_id");
         $prepare =[
-            ":don_id" => $_GET["don_id"]
+            ":don_id" => htmlspecialchars($_GET["don_id"])
         ];
         $reqprep->execute($prepare);
 

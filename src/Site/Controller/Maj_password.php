@@ -20,7 +20,7 @@ class Maj_password
 
         $bdd = (new \Kalaweit\Manager\Connexion())->getBdd();
 
-        $token = $_GET['token'];
+        $token = htmlspecialchars($_GET['token']);
 
         $sso_token = new \Kalaweit\Manager\Sso_token('',$token,$bdd);
 
@@ -35,9 +35,9 @@ class Maj_password
 
             if(isset($_POST['new_password']) && isset($_POST["new_password_confirm"])){
 
-                if($_POST['new_password'] === $_POST["new_password_confirm"]){
+                if(htmlspecialchars($_POST['new_password']) === htmlspecialchars($_POST["new_password_confirm"])){
 
-                    (new \Kalaweit\Manager\Member($bdd))->maj_password($login["ptok_email"],$_POST["new_password"]);
+                    (new \Kalaweit\Manager\Member($bdd))->maj_password(htmlspecialchars($login["ptok_email"]),htmlspecialchars($_POST["new_password"]));
 
                     header("Location: /www/Connexion");
 
