@@ -17,13 +17,17 @@ class Export_Excel
     {
         /* initialisation du nom du fichier a créer */
 
-        $name = $_GET["export_name"];
+        $name = htmlspecialchars($_GET["export_name"]);
 
-        $filename = '/../../../../wwww/'.$name.'.xlsx';
+        //$filename = '/www/'.$name.'.xlsx';
 
         /* instanciation de l'objet Spreadsheet */
 
         $spreadsheet = new Spreadsheet();
+
+        //echo'<pre>';
+        //var_dump($spreadsheet);
+        //echo'</pre>';
 
         /* application de la méthode getActiveSheet()->fromArray permmettant de remplir le fichier excel à partir d'un tableau */
 
@@ -31,17 +35,30 @@ class Export_Excel
 
         $spreadsheet->getActiveSheet()->fromArray($p_tab["head"],NULL,'A1');
 
+        //echo'<pre>';
+        //var_dump($spreadsheet);
+        //echo'</pre>';
+
         /* cretaion du corps du tableau */
 
         $spreadsheet->getActiveSheet()->fromArray($p_tab["content"],NULL,'A2');
 
+        //echo'<pre>';
+        //var_dump($spreadsheet);
+        //echo'</pre>';
+
+
         /* instanciation d'un objet XLSX en parametre */
+
 
         $writer = new Xlsx($spreadsheet);
 
+        //var_dump($writer);
+
         /* ecriture du fichier */
 
-        $writer->save($name.'.xlsx');
+        //$writer->save($name.'.xlsx');
+        $writer->save('./Documents/Export_Excel/Export_'.$name.'.xlsx');
 
     }
 }

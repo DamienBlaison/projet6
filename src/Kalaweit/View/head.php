@@ -16,7 +16,7 @@ $user = (new \Kalaweit\Manager\Users($bdd))->get_id_from_Login($_SESSION['user_l
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
+
     <title>Kalaweit Administration</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -147,7 +147,7 @@ $user = (new \Kalaweit\Manager\Users($bdd))->get_id_from_Login($_SESSION['user_l
                         </ul>
                     </li>
 
-                    <li class=" treeview" style="border-left:3px solid #3c8dbc; ">
+                    <!--<li class=" treeview" style="border-left:3px solid #3c8dbc; ">
                         <a href="#"><i class="fa  fa-euro"></i> <span>Paiements et reçus</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
                             <li class="treeview"><a href="#"><i class="fa  fa-eur"></i> Gestion des paiements <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
@@ -162,7 +162,8 @@ $user = (new \Kalaweit\Manager\Users($bdd))->get_id_from_Login($_SESSION['user_l
                                 </ul>
                             </li>
                         </ul>
-                    </li>
+                    </li>-->
+
                     <li class=" treeview" style="border-left:3px solid #3c8dbc; ">
                         <a href="#"><i class="fa  fa-cog"></i> <span>Administration</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">

@@ -20,13 +20,15 @@ let target = uri[3];
 
     let    xhttp = new XMLHttpRequest();
 
-    var url = '/www/Kalaweit/ajax_get/export_excel/'+target+'?export_name='+target+search;
+    var url = '/www/Kalaweit/Ajax_get/Export_Excel/'+target+'?export_name='+target+search;
 
     console.log(url);
 
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            window.location='/www/'+target+'.xlsx';
+            let open = '/Documents/Export_Excel/Export_'+target+'.xlsx';
+            console.log(open);
+            window.location = open;
         }
     };
 

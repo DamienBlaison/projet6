@@ -566,7 +566,7 @@ class Ajax_get
 
             $bdd = (new \Kalaweit\Manager\Connexion())->getBdd();
 
-            $url = explode('/export_excel/', $_SERVER["REQUEST_URI"]);
+            $url = explode('/Export_Excel/', $_SERVER["REQUEST_URI"]);
             $export = explode('?', $url[1]);
 
             $class = '\Kalaweit\Manager\\'.ucfirst($export[0]);
@@ -578,7 +578,9 @@ class Ajax_get
                 "content"=> $data["content"]
             ];
 
-            (new \Kalaweit\Export\Export_Excel())->export_excel($p_tab);
+            var_dump($p_tab["head"]);
+
+        (new \Kalaweit\Export\Export_Excel())->export_excel($p_tab);
 
         }
 

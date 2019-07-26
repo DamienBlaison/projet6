@@ -258,7 +258,7 @@ class Application
 
                             break;
 
-                            case 'export_excel':
+                            case 'Export_Excel':
 
                             if (method_exists($obj, 'export_excel')){
                                 echo $obj->export_excel($parts[3]);
@@ -531,7 +531,7 @@ class Application
 
                 {
                     //header("Location:http://projet-bd-open-classroom.fr/www/home");
-                    header("Location:/www/home");
+                    //header("Location:/www/home");
                     echo '404.1';
                 };
 
@@ -543,7 +543,7 @@ class Application
 
         {
             //echo '<script>document.location.href="http://projet-bd-open-classroom.fr/www/home";</script>';
-            header("Location:/www/home");
+            //header("Location:/www/home");
             echo '404.0';
         }
 

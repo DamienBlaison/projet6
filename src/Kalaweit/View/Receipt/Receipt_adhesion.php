@@ -107,7 +107,7 @@ class Receipt_adhesion
                 <table style="width:100%;padding-left:10mm;padding-right:10mm;">
                     <tr style="width:100%;">
                         <td style="width:33%;vertical-align:top;"><b>Détail des dons :</b></td>
-                        <td style="width:67%;"> <?php echo $this->content["tot_don_mnt"]?> € le 30 décembre 2018 - (Carte Bancaire)</td>
+                        <td style="width:67%;"> <?php echo $this->content["tot_don_mnt"]?> € <?php echo $this->content["date"]?></td>
                     </tr>
                 </table>
 

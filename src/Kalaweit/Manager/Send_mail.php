@@ -13,10 +13,6 @@ function send_mail($p_to,$p_subject,$p_body){
 
     $mail->CharSet = "UTF-8";
 
-    //echo '<pre>';
-    //var_dump($mail);
-    //echo '</pre>';
-
     //Set who the message is to be sent from
     $mail->setFrom('kalaweit.backoffice@gmail.com', 'Kalaweit-admin');
 
@@ -37,10 +33,6 @@ function send_mail($p_to,$p_subject,$p_body){
     //Replace the plain text body with one created manually
     $mail->AltBody = $p_body;
 
-
-    //echo '<pre>';
-    //var_dump($mail);
-    //echo '</pre>';
     //Attach an image file
     //$mail->addAttachment('images/phpmailer_mini.png');
 
