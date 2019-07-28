@@ -54,7 +54,7 @@ class Application
 
         $sso_token = (new \Kalaweit\Manager\Sso_token("","",$bdd));
 
-        $sso_token->clean();
+        //$sso_token->clean();
 
         $request = $this->getRequest();
 
@@ -78,6 +78,8 @@ class Application
                 $class = '\\' . ucfirst($parts[0]) . '\\Controller\\' . ucfirst($parts[1]);
 
                 if ($parts[1] == "app_connexion"){
+
+
 
                     if (class_exists($class)) {
                         // J'instancie un nouvel élément de la classe
@@ -116,8 +118,8 @@ class Application
                             };
                             break;
 
-                            default:
 
+                            default:
                             header("Location:http://projet-bd-open-classroom.fr/www/Kalaweit/app_connexion/log_in");
                             echo '404';
 
@@ -141,14 +143,21 @@ class Application
                     if (class_exists($class)) {
 
                         // J'instancie un nouvel élément de la classe
+                        
                         $obj = new $class();
 
                         switch ($parts[2]) {
 
-                            case 'generate':
+                            case 'test_donation':
+                            if (method_exists($obj, 'test_donation')){
+                                echo $obj->test_donation();
+                            };
+                            break;
 
-                            if (method_exists($obj, 'generate')){
-                                echo $obj->generate();
+                            case 'dashboard':
+
+                            if (method_exists($obj, 'dashboard')){
+                                echo $obj->dashboard();
                             };
 
                             break;
@@ -296,10 +305,24 @@ class Application
 
                             case 'gift_current_year':
 
-                                if (method_exists($obj, 'gift_current_year')){
-                                    echo $obj->gift_current_year();
-                                };
-                                break;
+                            if (method_exists($obj, 'gift_current_year')){
+                                echo $obj->gift_current_year();
+                            };
+                            break;
+
+                            case 'Receipt_annual_generation_progress':
+
+                            if (method_exists($obj, 'Receipt_annual_generation_progress')){
+                                echo $obj->Receipt_annual_generation_progress();
+                            };
+                            break;
+
+                            case 'run':
+
+                            if (method_exists($obj, 'run')){
+                                echo $obj->run();
+                            };
+                            break;
 
                             default:
 
@@ -530,8 +553,8 @@ class Application
                 else
 
                 {
-                    //header("Location:http://projet-bd-open-classroom.fr/www/home");
-                    //header("Location:/www/home");
+                    header("Location:http://projet-bd-open-classroom.fr/www/home");
+                    header("Location:/www/home");
                     echo '404.1';
                 };
 
@@ -543,7 +566,7 @@ class Application
 
         {
             //echo '<script>document.location.href="http://projet-bd-open-classroom.fr/www/home";</script>';
-            //header("Location:/www/home");
+            header("Location:/www/home");
             echo '404.0';
         }
 

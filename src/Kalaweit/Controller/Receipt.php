@@ -151,7 +151,4 @@ class Receipt
 
     }
 
-    function generate(){
-        $p_render = (new \Kalaweit\Controller\Component\Receipt\Generate)->render();
-    }
 }

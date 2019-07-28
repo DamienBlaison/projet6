@@ -163,6 +163,13 @@ class Receipt_annual
 
             $html2pdf->output( __DIR__ . '/../../../../Documents/Receipt/'.$this->content["receipt_number"].'.pdf', 'F');
 
+            echo "\n";
+            echo '_______________________________________________________________________________________________';
+            echo "\n";
+            
+            echo "\e[32mRecu ".$this->content['receipt_number'].".pdf créé avec succès";
+
+
             $url = explode("/",$_SERVER['REQUEST_URI']);
 
             if ($open !== "close" ){

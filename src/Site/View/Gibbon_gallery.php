@@ -116,7 +116,7 @@ class Gibbon_gallery
                                                     </a>
                                                     <div class="caption">
                                                         <h3><?php echo $value["cau_name"] ?></h3>
-                                                        <p>Dons collectés : <?php if($value["tot_don"] == NULL){ echo '0';} else { echo $value["tot_don"] ;}?> € / 280 €</p>
+                                                        <p>Dons collectés :<br> <?php if($value["tot_don"] == NULL){ echo '0';} else { echo $value["tot_don"] ;}?> € / 280 €</p>
                                                     </div>
 
                                                     </div>

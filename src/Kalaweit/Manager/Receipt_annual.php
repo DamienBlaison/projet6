@@ -12,18 +12,20 @@ class Receipt_annual
         $this->bdd = $bdd;
     }
 
-    public function add(){
+    public function add($id){
+
+        $check_id = htmlspecialchars($id);
 
         $bdd = (new \Kalaweit\Manager\Connexion())->getBdd();
 
         // indexation des numeros de recus
 
         $member = (new \Kalaweit\Model\Member());
-        $cli_info = (new \Kalaweit\Manager\Member($bdd))->get($member,htmlspecialchars($_GET["cli_id"]));
+        $cli_info = (new \Kalaweit\Manager\Member($bdd))->get($member,$check_id);
         $country = (new \Kalaweit\Manager\Crm_country())->get($bdd,$cli_info["cnty_id"]);
 
-        $receipt_details = (new \Kalaweit\Manager\Receipt($bdd))->details_donations_year_by_member(htmlspecialchars($_GET["cli_id"]));
-        $receipt_resume = (new \Kalaweit\Manager\Receipt($bdd))->resume_donations_year_by_member(htmlspecialchars($_GET["cli_id"]));
+        $receipt_details = (new \Kalaweit\Manager\Receipt($bdd))->details_donations_year_by_member($check_id);
+        $receipt_resume = (new \Kalaweit\Manager\Receipt($bdd))->resume_donations_year_by_member($check_id);
 
         /* initialisation de tableaux avec la traduction des elements en francais à afficher */
 
@@ -48,6 +50,14 @@ class Receipt_annual
 
         } else { $receipt_num = 1000; };
 
+        $check = $this->bdd->prepare(" SELECT rec_number From asso_receipt WHERE cli_id = :cli_id");
+        $prepare_check = [":cli_id"=> htmlspecialchars($check_id)];
+        $check->execute($prepare_check);
+
+        $check_receipt = $check->fetch();
+
+        if($check_receipt == NULL){
+
 
         $insert = $this->bdd->prepare(" INSERT INTO asso_receipt (brk_id,cli_id,rec_ts,rec_year,rec_number,rec_mnt) VALUES (2,:cli_id,:rec_ts,:rec_year,:rec_number,:rec_mnt)");
 
@@ -57,7 +67,7 @@ class Receipt_annual
 
         $prepare2 =[
 
-            ":cli_id" => htmlspecialchars($_GET["cli_id"]),
+            ":cli_id" => $check_id,
             ":rec_ts" => date('Y-m-d G:i:s'),
             ":rec_year" => date('Y'),
             ":rec_number" => $rec_number,
@@ -79,7 +89,71 @@ class Receipt_annual
             "country" => $country
         ];
 
-            return (new \Kalaweit\View\Receipt\Receipt_annual($content))->render("open");
+            //return (new \Kalaweit\View\Receipt\Receipt_annual($content))->render("open");
+            return (new \Kalaweit\View\Receipt\Receipt_annual($content))->render("close");
+
+        } else {
+
+            echo "\n";
+            echo '_______________________________________________________________________________________________';
+            echo "\n";
+
+            echo "\e[31mRecu ".$check_receipt[0].'.pdf déja créé';
+
+
+        }
 
     }
+
+    function get_all_ids_to_receipt(){
+
+        $reqprep = $this->bdd->prepare(" SELECT crm_client.cli_id FROM crm_client LEFT JOIN asso_donation on asso_donation.cli_id = crm_client.cli_id WHERE YEAR(asso_donation.don_ts) = :year_receipt AND asso_donation.don_status = 'OK' GROUP BY crm_client.cli_id");
+        $prepare = [":year_receipt"=> date('Y') - 1];
+        $reqprep->execute($prepare);
+
+        $array_ids_to_receipt = $reqprep->FetchAll(\PDO::FETCH_ASSOC);
+
+        return $array_ids_to_receipt;
+    }
+
+    function create_counter($count){
+        $reqprep  = $this->bdd->prepare("INSERT INTO asso_job (job_type , job_count) VALUES ('RECEIPT_ANNUAL', :count)");
+        $prepare = [":count" => $count];
+        $reqprep->execute($prepare);
+    }
+    function maj_counter($counter){
+
+        $reqprep  = $this->bdd->prepare("UPDATE asso_job SET job_ok = :counter WHERE job_type = 'RECEIPT_ANNUAL'");
+        $prepare = [":counter" => $counter];
+        $reqprep->execute($prepare);
+
+    }
+
+
+    function get_achievment(){
+
+        $reqprep  = $this->bdd->prepare("SELECT job_ok, job_count FROM asso_job WHERE job_type = 'RECEIPT_ANNUAL'");
+        $prepare =[];
+        $reqprep->execute($prepare);
+        $data = $reqprep->FetchAll(\PDO::FETCH_ASSOC);
+
+        if(isset($data[0]["job_count"])){
+
+            if( $data[0]["job_count"] > 0){
+
+                $achievment = ($data[0]["job_ok"]/$data[0]["job_count"]) * 100;
+
+                $achievment = round($achievment,0);
+
+            } else { $achievment = 0; }
+
+        } else {
+
+            $achievment = 0;
+        }
+
+        return $achievment;
+
+    }
+
 }

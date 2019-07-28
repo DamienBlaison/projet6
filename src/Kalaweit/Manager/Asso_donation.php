@@ -54,6 +54,43 @@ class Asso_donation
         }
     }
 
+    function add_random($id,$cau,$mnt,$status,$year){
+
+        $reqprep = $this->bdd->prepare(
+
+            "INSERT INTO
+            asso_donation
+
+            ( brk_id , cli_id , cau_id , don_mnt , ptyp_id, don_ts ,don_status )
+
+            VALUES
+
+            ( :brk_id, :cli_id, :cau_id, :don_mnt, :ptyp_id , :don_ts, :don_status)
+
+            "
+
+        );
+
+        $min_stamp = mktime(0,0,0,1,1,$year);
+        $max_stamp = $min_stamp + (1546214400 - 1515715200);
+
+        $date = rand($min_stamp,$max_stamp);
+
+        $prepare = [
+
+            ":brk_id" => 2,
+            ":cli_id" => $id,
+            ":cau_id" => $cau,
+            ":don_mnt"=> $mnt,
+            ":don_status"=> $status,
+            ":ptyp_id"=> 1,
+            ":don_ts" => date('Y-m-d G:i:s',$date)//, mktime(0, 0, 0, $_timestamp["M"], $_timestamp["D"], $_timestamp["Y"]))
+        ];
+
+        $insert = $reqprep->execute($prepare);
+
+    }
+
     function get_last(){
 
         $reqprep = $this->bdd->query(

@@ -681,4 +681,12 @@ class Asso_cause
 
                                     }
 
+                                    function get_all_id(){
+                                        $reqprep = $this->bdd->prepare("SELECT cau_id FROM asso_cause ORDER BY cau_id");
+                                        $prepare =[];
+                                        $reqprep->execute($prepare);
+                                        $data = $reqprep->fetchAll(\PDO::FETCH_NUM);
+                                        return $data;
+                                    }
+
                                 }

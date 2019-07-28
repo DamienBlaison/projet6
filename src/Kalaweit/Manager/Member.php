@@ -454,6 +454,14 @@ class Member
         return $return;
     }
 
+    function get_all_id(){
+
+        $reqprep = $this->bdd->query("SELECT cli_id FROM crm_client ORDER BY cli_id ");
+        $reqprep->execute();
+        $return = $reqprep->fetchAll(\PDO::FETCH_NUM);
+        return $return;
+    }
+
     function get_count(){
 
         $reqprep = $this->bdd->query("SELECT Count(cli_id) FROM crm_client");
@@ -509,4 +517,5 @@ class Member
         $reqprep2->execute($prepare2);
 
     }
+
 }

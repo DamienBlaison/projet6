@@ -54,7 +54,7 @@ $user = (new \Kalaweit\Manager\Users($bdd))->get_id_from_Login($_SESSION['user_l
                 <div class="user-panel">
 
                     <div class="pull-left image">
-                        <img src="<?php echo '/Documents/Avatar/'.$user['user_avatar'] ?>" id="return" class="img-circle" alt="User Image" onclick="">
+                        <img src="<?php echo '/'.$user['user_avatar'] ?>" id="return" class="img-circle" alt="User Image" onclick="">
                     </div>
 
                     <div class="pull-left info">
@@ -147,22 +147,22 @@ $user = (new \Kalaweit\Manager\Users($bdd))->get_id_from_Login($_SESSION['user_l
                         </ul>
                     </li>
 
-                    <!--<li class=" treeview" style="border-left:3px solid #3c8dbc; ">
+                    <li class=" treeview" style="border-left:3px solid #3c8dbc; ">
                         <a href="#"><i class="fa  fa-euro"></i> <span>Paiements et reçus</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
-                            <li class="treeview"><a href="#"><i class="fa  fa-eur"></i> Gestion des paiements <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
+                            <!--<li class="treeview"><a href="#"><i class="fa  fa-eur"></i> Gestion des paiements <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                                 <ul class="treeview-menu">
                                     <li><a href="monthly_deduction"><i class="fa fa-circle-o"></i> Les prélèvements mensuels</a></li>
                                     <li><a href="payment_history"><i class="fa fa-circle-o"></i> Historique des prélèvements</a></li>
                                 </ul>
-                            </li>
+                            </li>-->
                             <li class="treeview"><a href="index3.html"><i class="fa fa-file-text"></i> Reçus Fiscaux <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                                 <ul class="treeview-menu">
-                                    <li><a href="/www/Kalaweit/receipt/generate"><i class="fa fa-circle-o"></i> Génération des reçus</a></li>
+                                    <li><a href="/www/Kalaweit/Receipt_annual_dashboard/dashboard"><i class="fa fa-circle-o"></i> Génération des reçus</a></li>
                                 </ul>
                             </li>
                         </ul>
-                    </li>-->
+                    </li>
 
                     <li class=" treeview" style="border-left:3px solid #3c8dbc; ">
                         <a href="#"><i class="fa  fa-cog"></i> <span>Administration</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>

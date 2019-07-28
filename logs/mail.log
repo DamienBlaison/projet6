@@ -1,0 +1,6 @@
+2019-07-22 14:58:25 u94089386 zRlso9-1iOsa214Md-00a05h |< REMOTE=185.156.173.0 SCRIPT=/clickandbuilds/associationdespharmacienshospitaliersduLuxembourg/index.php -- /usr/sbin/sendmail -t -i
+2019-07-22 14:58:25 u94089386 zRlso9-1iOsa214Md-00a05h <= S=wordpress@aphl.projet-bd-open-classroom.fr SZ=2517 D=0 SID=744344652
+2019-07-22 14:58:25 u94089386 zRlso9-1iOsa214Md-00a05h => d.blaison@live.fr msmtp.kundenserver.de[172.19.35.7] 250 Requested mail action okay, completed: id=1MRTAj-1i1QVY1JCf-00NRI4
+2019-07-25 17:56:47 u94089386 zQtEkg-1i1bHT2hiK-00OWRs |< REMOTE=45.81.0.0 SCRIPT=/clickandbuilds/associationdespharmacienshospitaliersduLuxembourg/index.php -- /usr/sbin/sendmail -t -i
+2019-07-25 17:56:47 u94089386 zQtEkg-1i1bHT2hiK-00OWRs <= S=wordpress@aphl.projet-bd-open-classroom.fr SZ=1434 D=0 SID=744344652
+2019-07-25 17:56:47 u94089386 zQtEkg-1i1bHT2hiK-00OWRs => d.blaison@live.fr msmtp.kundenserver.de[172.19.35.7] 250 Requested mail action okay, completed: id=1MfHQp-1iJPHQ2pn1-00gq0X

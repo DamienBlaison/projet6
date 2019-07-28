@@ -169,3 +169,7 @@ h4
 .mb10{
     margin-bottom:10px;
 }
+
+.progress{
+    height: 35px;
+}
